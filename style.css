@@ -1,5 +1,5 @@
 #main-container {
-    background-image: url('pets-image-2.jpg'), linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
+    background-image: url('images/pets-image-2.jpg'), linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
     background-blend-mode: overlay;
     background-size: cover; 
     background-repeat: no-repeat;
@@ -7,7 +7,7 @@
 }
 
 #become-pet-shelter{
-    background-image: url('cat-image-3.jpg');
+    background-image: url('images/cat-image-3.jpg');
     background-blend-mode: overlay;
     background-size: cover; 
     background-repeat: no-repeat;
