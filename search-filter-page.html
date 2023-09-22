@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        
+
+    </style>
+    <link rel="stylesheet" href="search-filter-page.css">
+    
+    <title>search-filter-page</title>
+</head>
+<body>
+    <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          
+          <a class="navbar-brand" href="index.html"><img src="images/temp_logo.png" width="100px"></a>
+    
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto">
+    
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+            <div class="ms-auto">
+                            
+              <button class="btn btn btn-outline-primary me-2" type="button">Login</button>
+              <button class="btn btn-primary" type="button">Sign up</button>
+            </div>
+          </div>
+        </div>
+      </nav> 
+
+    
+    <!-- The top section of the page with the carousel display -->
+
+    <section class="section-top mb-2 mt-3 pb-4 pt-4">
+
+      
+        <div class="container slider-container-cus w-100">
+          <!-- Reference: https://getbootstrap.com/docs/5.3/components/carousel/ -->
+          <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="3000">
+                <!-- Reference: https://unsplash.com/photos/dxTYr7do8tM?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink  -->
+                <img src="anna-dudkova-dxTYr7do8tM-unsplash.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item" data-bs-interval="2000">
+                <!-- Reference: https://unsplash.com/photos/RKj8f4odYTM?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink  -->
+                <img src="anna-dudkova-RKj8f4odYTM-unsplash.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <!-- Reference: https://unsplash.com/photos/urs_y9NwFcc?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink -->
+                <img src="anna-dudkova-urs_y9NwFcc-unsplash.jpg" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+
+          </div>
+
+    </section>
+
+
+     
+    <!-- Search Result Message Section -->
+    <section class="section-search-res-message mb-1 mt-1 pb-1 pt-1">
+      <!-- Reference: https://getbootstrap.com/docs/5.3/components/alerts/ -->
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+            <div>
+              <p class="p-0 m-0"><img class="pr-1" src="check2-circle.svg" alt="">
+                <span class="pr-1">
+                    Found <strong>117</strong>  matching results for <strong class="text-primary">Dogs </strong>category!</p>
+            </div>
+          </div>
+    </section>
+
+
+      <div class="container-fluid mb-4 mt-2">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-1 col-sm-1 ">
+                </div>
+                <div class="col-lg-5 col-sm-5 "><nav class="navbar bg-body-tertiary">
+                  <div class="container-fluid">
+                    <form class="d-flex" role="search">
+                      <input class="form-control me-2" type="search" placeholder="Search by name..." aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                  </div>
+                </nav></div>
+                <div class="col-lg-3 col-sm-2"></div>
+                <div class="col-lg-3 col-sm-4 ml-4">
+                  <!-- Reference: https://getbootstrap.com/docs/5.3/components/button-group/ -->
+                    <div class="btn-group-vertical">
+                        
+                        <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle border-primary sort-selector" data-bs-toggle="dropdown" aria-expanded="false" >
+                            Sort by default
+                          </button>
+                        
+                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li><div class="btn-group-vertical w-100" role="group" aria-label="Vertical radio toggle button group">
+                                <input type="radio" class="btn-check sort-option"
+                                value="Name" name="vbtn-radio" id="vbtn-radio1" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="vbtn-radio1">Name</label>
+                                <input type="radio" class="btn-check sort-option" value="Age"
+                                name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="vbtn-radio2">Age</label>
+                                <input type="radio" class="btn-check sort-option" 
+                                value= "Size"name="vbtn-radio" id="vbtn-radio3" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="vbtn-radio3">Size</label>
+                              </div>
+                          </ul>
+                      
+                      </div>
+
+                      <!-- Reference: https://getbootstrap.com/docs/5.3/components/offcanvas/ -->
+                      <button class="btn btn-light border-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                        <img src="filter-right.svg" alt="">Filter by
+                      </button>
+                      
+                      <div  class="offcanvas offcanvas-start" tabindex="-1"  id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" data-bs-scroll="true">
+                        <div class="offcanvas-header blue-100">
+                          <h3 class="offcanvas-title" id="offcanvasExampleLabel">Dream Pet Access</h3>
+                          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                          <div class="category-filter-container">
+                            <ul>
+                                <li><a href="" class="navbar-type-link">PetType1</a></li>
+                                <li><a href="" class="navbar-type-link">PetType2</a></li>
+                                <li><a href="" class="navbar-type-link">PetType3</a></li>
+                                <li><a href="" class="navbar-type-link">PetType4</a></li>
+                                <li><a href="" class="navbar-type-link">PetType5</a></li>
+                            </ul>
+                          </div>
+                          <hr>
+                          <div class="filter-container">
+                            <form action="">
+                                <h3>Apply Filters</h3>
+                                <details open>
+                                    <summary>
+                                        Breed
+                                    </summary>
+                                    <div class="checkbox-group">
+                                        <input class="checkbox-control" type="checkbox" name="breed1" value="breed1">
+                                        <label for="breed1">b1</label>
+                                        <br>
+                                        <input class="checkbox-control" type="checkbox" 
+                                        name="breed2">
+                                        <label for="breed2">b2</label>
+                                        <br>
+                                        <input class="checkbox-control" type="checkbox" 
+                                        name="breed2">
+                                        <label for="breed2">b3</label>
+                                        <br>
+                                        <input class="checkbox-control" type="checkbox" 
+                                        name="breed2">
+                                        <label for="breed2">b4</label>
+                                    </div>
+                                </details>
+                                <hr>
+                                <details open>
+                                    <summary>
+                                        Age
+                                    </summary>
+                                    <div class="checkbox-group">
+                                        <input class="checkbox-control" type="checkbox" name="age" value="age1">
+                                        <label for="age"> &lt;1</label>
+                                        <br>
+                                        <input class="checkbox-control" type="checkbox" name="age">
+                                        <label for="breed1">1-3</label>
+                                        <br>
+                                        <input class="checkbox-control" type="checkbox" 
+                                        name="breed2">
+                                        <label for="breed2">3-7</label>
+                                        <br>
+                                        <input class="checkbox-control" type="checkbox" 
+                                        name="breed2">
+                                        <label for="breed2">8-12</label>
+                                        <br>
+                                        <input class="checkbox-control" type="checkbox" 
+                                        name="breed2">
+                                        <label for="breed2">12+</label>
+                                    </div>
+                                </details>
+                                <hr>
+
+                                <details open>
+                                    <summary>
+                                        Size
+                                    </summary>
+                                    <div class="checkbox-group">
+                                        <input class="checkbox-control" type="checkbox" name="age">
+                                        <label for="breed1"> XS(&lt;5kg)</label>
+
+                                        <br>
+
+                                        <input class="checkbox-control" type="checkbox" name="age">
+                                        <label for="breed1">S(5kg-12kg)</label>
+                                        
+                                        <br>
+                                        <input class="checkbox-control" type="checkbox" 
+                                        name="breed2">
+                                        <label for="breed2">M(12kg-21kg)</label>
+                                        <br>
+                                        <input class="checkbox-control" type="checkbox" 
+                                        name="breed2">
+                                        <label for="breed2">L(21kg-40kg)</label>
+
+                                        <br>
+                                        <input class="checkbox-control" type="checkbox" 
+                                        name="breed2">
+                                        <label for="breed2">XL(45kg+)</label>
+                                    </div>
+                                </details>
+                                <hr>
+                                <details open>
+                                    <summary>
+                                        Gender
+                                    </summary>
+                                    <div class="checkbox-group">
+                                        <input class="checkbox-control" type="checkbox" name="age">
+                                        <label for="breed1"> Male </label>
+                                        <br>
+                                        <input class="checkbox-control" type="checkbox" name="age">
+                                        <label for="breed1"> Female</label>                      
+                                    </div>
+                                </details>
+                                <hr>
+                                <details open>
+                                    <summary>
+                                        Color
+                                    </summary>
+                                    <div class="checkbox-group">
+                                        <input class="checkbox-control" type="checkbox" name="age">
+                                        <label for="breed1"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="lightgrey" class="bi bi-circle-half pl-2" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                              </svg>
+                                            
+                                        </label>
+
+                                        <input class="checkbox-control" type="checkbox" name="age">
+                                        <label for="breed1"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="lemonchiffon" class="bi bi-circle-half pl-2" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                              </svg>
+                                            
+                                        </label>
+
+
+                                        <input class="checkbox-control" type="checkbox" name="age">
+                                        <label for="breed1"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="darkgrey" class="bi bi-circle-half pl-2" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                              </svg>
+                                            
+                                        </label>
+
+                                        <input class="checkbox-control" type="checkbox" name="age">
+                                        <label for="breed1"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="aliceblue" class="bi bi-circle-half pl-2" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                              </svg>
+                                            
+                                        </label>
+
+                                        <br> 
+
+                                        <input class="checkbox-control" type="checkbox" name="age">
+                                        <label for="breed1"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="grey" class="bi bi-circle-half" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                              </svg>
+                                            
+                                        </label>
+
+                                        <br> 
+
+                                        <input class="checkbox-control" type="checkbox" name="age">
+                                        <label for="breed1"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-circle-half" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                              </svg>
+                                            
+                                        </label>
+
+
+                                        <input class="checkbox-control" type="checkbox" name="age">
+                                        <label for="breed1"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="brown" class="bi bi-circle-half" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                              </svg>
+                                            
+                                        </label>
+
+                                        <br> 
+
+                                        <input class="checkbox-control" type="checkbox" name="age">
+                                        <label for="breed1"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="darkyellow" class="bi bi-circle-half" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                              </svg>
+                                            
+                                        </label>
+
+
+                                      
+                                    </div>
+
+
+                                </details>
+                                <!-- Reference: https://getbootstrap.com/docs/5.3/components/buttons/ -->
+                                <button class="btn-primary" type="submit">Apply</button>
+                            </form>                  
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+      </div>
+      
+
+
+
+      <!-- All the search and filter result -->
+      <section class="section-bottom me-auto mb-4">
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
+          <!-- Reference: https://getbootstrap.com/docs/5.3/components/card/ -->
+            <div class="col">
+                <div class="card">
+                    <img src="pic4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Lalo</h5>
+                      <p class="card-text">
+                        breed: America Bobtail
+                        <br>
+                        age: 5 months
+                        <br>
+                        <a href="">view details</a>
+                      </p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="col">
+                <div class="card">
+                    <img src="pic4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Lalo</h5>
+                      <p class="card-text">
+                        breed: America Bobtail
+                        <br>
+                        age: 5 months
+                        <br>
+                        <a href="">view details</a>
+                      </p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                    <img src="pic4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Lalo</h5>
+                      <p class="card-text">
+                        breed: America Bobtail
+                        <br>
+                        age: 5 months
+                        <br>
+                        <a href="">view details</a>
+                      </p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                    <img src="pic4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Lalo</h5>
+                      <p class="card-text">
+                        breed: America Bobtail
+                        <br>
+                        age: 5 months
+                        <br>
+                        <a href="">view details</a>
+                      </p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                    <img src="pic4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Lalo</h5>
+                      <p class="card-text">
+                        breed: America Bobtail
+                        <br>
+                        age: 5 months
+                        <br>
+                        <a href="">view details</a>
+                      </p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                    <img src="pic4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Lalo</h5>
+                      <p class="card-text">
+                        breed: America Bobtail
+                        <br>
+                        age: 5 months
+                        <br>
+                        <a href="">view details</a>
+                      </p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                    <img src="pic4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Lalo</h5>
+                      <p class="card-text">
+                        breed: America Bobtail
+                        <br>
+                        age: 5 months
+                        <br>
+                        <a href="">view details</a>
+                      </p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="col">
+                <div class="card">
+                    <img src="pic4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Lalo</h5>
+                      <p class="card-text">
+                        breed: America Bobtail
+                        <br>
+                        age: 5 months
+                        <br>
+                        <a href="">view details</a>
+                      </p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+              </div>
+
+           
+
+          </div>
+
+
+
+      </section>
+
+
+      <!-- Pagination: -->
+      <!-- Reference: https://getbootstrap.com/docs/5.3/components/pagination/ -->
+      <div class="pagination-container mt-2 mb-2">
+        <nav aria-label="...">
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+
+      </div>
+
+      
+
+
+      <footer class="d-flex flex-column justify-content-center" style="height: 8vh; background-color: #87CEEB;">
+        <p class="m-auto text-white">
+          © 2023 PetPal Inc. 
+        </p>
+      </footer>
+      </body>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+      </script>
+      <script>
+        const sortSelecter = document.querySelector(".sort-selector");
+        const sortOptions = document.querySelectorAll('.sort-option');
+        
+
+        console.log(sortOptions);
+
+        sortOptions.forEach((elem) => {
+            
+            elem.addEventListener('click', (e) => {
+                console.log(elem.value);
+                if (e.target === elem) {
+                    console.log(`${e.value} has been selected`);
+                    sortSelecter.innerHTML = `Sort by ${elem.value}`;
+                }
+                
+            })
+        })
+      </script>
+      
+        
+      </body>
+
+</html>
