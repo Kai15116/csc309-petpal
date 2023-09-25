@@ -1,9 +1,41 @@
-.account_banner {
-	width: 100%;
-	height: 20%;
-	object-fit: cover;
+body, html {
+  height: 100%;
+  margin: 0;
 }
-
-.banner_pic {
-
+.profile-banner {
+  position: relative;
+  background-image: url('example_images/yosemite_banner.jpg');
+  background-size: cover;
+  height: 30%;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Adjust the alpha (last value) to control the darkness of the overlay */
+}
+.overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+.profile-picture {
+  position: absolute;
+  bottom: -100px;
+  left: 50px;
+  width: 200px; 
+  height: 200px; 
+  border-radius: 50%; 
+  border: 4px solid white;
+  overflow: hidden; 
+}
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
