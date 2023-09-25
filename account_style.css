@@ -2,6 +2,32 @@ body, html {
   height: 100%;
   margin: 0;
 }
+.bg-blue {
+	background-color: #C8F4FF;
+}
+.navbar-logo {
+  width: 150px; 
+  height: 50px; 
+  padding-left: 10px;
+}
+.navbar-logo img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.nav-link {
+	color: #755ba5;
+}
+.current-nav {
+	color: #333333;
+}
+.other-nav {
+
+}
+.nav-links {
+	padding-left: 10px;
+}
+
 .profile-banner {
   position: relative;
   background-image: url('example_images/yosemite_banner.jpg');
@@ -14,7 +40,7 @@ body, html {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* Adjust the alpha (last value) to control the darkness of the overlay */
+  background: rgba(0, 0, 0, 0.5); /* Last value Darkness */
 }
 .overlay-content {
   position: absolute;
