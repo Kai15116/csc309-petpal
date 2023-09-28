@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adoption page</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- Boostrap Requirements -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+        <div class="page-container">
+        <header>
+            <div class="logo-container">
+                <img src="PetPalLogo.png" alt="logo" class="logo-img">
+            </div>
+            <div class="button-container">
+                <!-- Bootstrap buttons -->
+                <button type="button" class="btn btn-light btn-lg">Shelter Reviews</button>
+                <button type="button" class="btn btn-secondary btn-lg">Login</button>
+                <button type="button" class="btn btn-secondary btn-lg">Sign Up</button>
+            </div>
+        </header>
+        <main class="page-content">
+            <div class="background-adoption">
+                <div class="container">
+                    <div class="pet-details">
+                        <h1>Just One More Step To Adoption!</h1>
+
+                        <div class="col-lg-12">
+                            <h2>Terms and Conditions for Pet Adoption:</h2>
+                            <p>The Tenant acknowledges and agrees to the following terms:</p>
+                            <ol>
+                                <li>The Landlord has agreed to permit pet/s at the Premises as specified in the Tenancy Agreement and this Pet Agreement.</li>
+                                <li>Any pet/s other than the approved pet/s specified in the Tenancy Agreement and this Pet Agreement must first be requested by the Tenant in writing via a separate Pet Application giving full details and then be approved in writing by the Landlord PRIOR to the pet/s being allowed onto the Premises. Pet approval may be subject to specific criteria and must be complied with. Approval is NOT guaranteed.</li>
+                                <li>The Tenant shall be liable for any damage or injury whatsoever caused by the pet/s on the Property, whether they are the Tenant’s pets or their guests pets and regardless of their approval status.</li>
+                                <li>The Tenant accepts full responsibility and indemnifies the Landlord for any claims by or injuries to third parties or their Property caused by, or as result of actions by their pet/s or their guests pet/s, and regardless of their approval status.</li>
+                                <li>The Tenant agrees to arrange for Flea Fumigation at the end of the Tenancy or at a time during the Tenancy as required or requested by the Landlord / Landlord’s Agent to be carried out by a Company complying with Australian Standards.</li>
+                                <li>The pet/s are to be outside at all times unless specified otherwise in the Tenancy Agreement or this Pet Agreement. Guide dogs are an exception.</li>
+                                <li>If the pet is a dog, the Tenant agrees to restrain or remove the dog from the premises for the duration of inspections arranged by the Agent with the required notice given.</li>
+                                <li>By signing below you are only asking for approval of the above-mentioned pet/s to be accepted at the Property for which you are applying.</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <h2>Fill Out The Following Information</h2>
+                            <form>
+                                <div class="form-group">
+                                    <label for="over18">Are you over 18?</label>
+                                    <input type="checkbox" id="over18" name="over18" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address:</label>
+                                    <input type="text" id="address" name="address" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="suitability">Why are you suitable owners for Lalo?</label>
+                                    <textarea id="suitability" name="suitability" class="form-control" rows="4" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signature">Signature:</label>
+                                    <input type="text" id="signature" name="signature" class="form-control" required>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-lg">Submit Application</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+
+    </div>
+    <footer>
+        Copyright 2023 by The Salamancas.
+    </footer>
+    
+</body>
+</html>

@@ -1,0 +1,213 @@
+/*
+ * style.css
+ *
+ * CSC309 P1
+ * 
+ * University of Toronto
+ * Fall 2023
+ *
+ */
+
+/* header and footer styles */
+header {
+    display: flex;
+    justify-content: space-between; /* Distribute content evenly between logo and buttons */
+    align-items: center; /* Center items vertically within the header */
+    background-color: #C8F4FF;
+    color: #ffffff;
+    padding: 20px;
+    border-bottom: 2px solid #000000;
+}
+
+.logo-container {
+    display: flex; /* Allow logo to align horizontally */
+    align-items: center; /* Center logo vertically */
+}
+
+.button-container {
+    display: flex; /* Allow buttons to align horizontally */
+    gap: 30px; /* Add some spacing between buttons */
+}
+
+footer {
+    background-color: #000000; 
+    color: #ffffff; 
+    padding: 10px;
+    text-align: center; 
+    position: absolute;
+    bottom: 0; 
+    width: 100%;
+    position: absolute;
+    height: 2.5rem;
+    margin-top: 100px;
+}
+
+/* page styles */
+.page-container {
+    background-color: #F5F5F5; 
+    position: fixed;
+    top: 0; 
+    left: 0;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+    overflow-y: auto;
+}
+
+.page-content {
+    flex: 1; 
+    justify-content: flex-start; 
+    text-align: left; 
+    align-items: flex-start; 
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.logo-img {
+    max-height: 80px;
+    width: auto;
+}
+
+.pet-main-img {
+    object-fit: contain; /* Change from 'cover' to 'contain' */
+    max-width: 100%; /* Allow the image to adjust its width */
+    max-height: 100%; 
+    width: auto; /* Automatically adjust the width */
+    height: auto; /* Automatically adjust the height */
+}
+
+.pet-details h1 {
+    font-weight: bold;
+}
+
+.pet-side-img {
+    max-height: 100px;
+    width: 130px;
+}
+
+.carousel {
+    height: 100%;
+    min-height: 600px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-inner {
+    height: 100%;
+    min-height: 600px;
+}
+
+.carousel-item {
+    min-height: 600px;
+    height: 100%;
+}
+
+.pet-main-img {
+    object-fit: cover;
+    width: 100%;
+    min-height: 600px;
+    height: 100%;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Adjust the horizontal position as needed */
+.carousel-control-prev {
+    left: 0; /* Place the previous button at the left edge */
+    margin-top: 50px;
+}
+
+.carousel-control-next {
+    right: 0; /* Place the next button at the right edge */
+}
+
+.background-details {
+    background-image: url('backgroundImage1.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center center;
+    background-color: #ffffff;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-adoption {
+    background-image: url('backgroundImage1.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center center;
+    background-color: #ffffff;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.pet-details {
+    background-color: #f2f8fe; /* Gray background color */
+    padding: 30px;
+    gap: 10px;
+    width: 900px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    flex-direction: column;
+}
+
+ul {
+    list-style-type: disc !important; /* Add bullet points */
+    margin-left: 20px; /* Adjust the margin for proper spacing */
+  }
+
+.pet-details h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.pet-details ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.pet-details ul li {
+    margin-bottom: 10px;
+}
+
+/* Apply Button Styles */
+.btn-primary {
+    background-color: #007bff; /* Blue color for primary button */
+    color: #fff;
+    border: none;
+    margin-bottom: 2.5rem;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+    /* padding: 10px; */
+}
+
+
+
