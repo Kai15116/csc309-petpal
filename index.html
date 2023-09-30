@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Petpal prototype</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="navbar.css">
 </head>
+
 <body>
 
   <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
   <nav class="navbar navbar-expand-lg bg-white shadow-sm">
     <div class="container-fluid">
-      
+
       <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150px"></a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -24,42 +29,36 @@
 
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-          </li> 
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Adoption Process</a>
+          </li>
+          <hr>
+          <li class="nav-item mobile-nav-item">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+          <li class="nav-item mobile-nav-item">
+            <a class="nav-link" href="#">Sign up</a>
           </li>
         </ul>
         <div class="ms-auto">
-          <!-- <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-bell me-2 text-secondary" viewBox="0 0 16 16">
-            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
-          </svg>           -->
-          <button class="btn btn btn-outline-primary me-2" type="button">Login</button>
-          <button class="btn btn-primary" type="button">Sign up</button>
+          <button class="nav-item btn btn btn-outline-primary me-2 def-nav-item" type="button">Login</button>
+          <button class="nav-item btn btn-primary def-nav-item" type="button">Sign up</button>
         </div>
       </div>
     </div>
-  </nav> 
+  </nav>
 
   <!-- Main content -->
   <div class="d-flex flex-column justify-content-center text-center" id="main-container">
-      <h1 class="text-light pb-3">Find your lovely pets!</h1>
-      <form class="mx-auto" style="width: 35%;">
-        <div class="input-group">
-          <input type="search" class="form-control" placeholder="Search here..." aria-label="Search" aria-describedby="basic-addon1">
-          <button class="btn btn-primary" type="button" id="basic-addon1">Search</button>
-        </div>
-      </form>
+    <h1 class="text-light pb-3">Find your lovely pets!</h1>
+    <form class="mx-auto" style="width: 35%;">
+      <div class="input-group">
+        <input type="search" class="form-control" placeholder="Search here..." aria-label="Search"
+          aria-describedby="basic-addon1">
+        <button class="btn btn-primary" type="button" id="basic-addon1">Search</button>
+      </div>
+    </form>
   </div>
 
   <div class="d-flex flex-column" style="background-color: rgb(209, 209, 209);">
@@ -71,7 +70,8 @@
         <img src="images/pets-image-3.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
           <a href="details.html" class="stretched-link"></a>
         </div>
       </div>
@@ -80,7 +80,8 @@
         <img src="images/pets-image-3.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
           <a href="details.html" class="stretched-link"></a>
         </div>
       </div>
@@ -88,7 +89,8 @@
         <img src="images/pets-image-3.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
           <a href="details.html" class="stretched-link"></a>
         </div>
       </div>
@@ -96,7 +98,8 @@
         <img src="images/pets-image-3.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
           <a href="details.html" class="stretched-link"></a>
         </div>
       </div>
@@ -104,7 +107,8 @@
         <img src="images/pets-image-3.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
           <a href="details.html" class="stretched-link"></a>
         </div>
       </div>
@@ -121,7 +125,8 @@
         <img src="images/cat-image-2.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
           <a href="details.html" class="stretched-link"></a>
         </div>
       </div>
@@ -130,7 +135,8 @@
         <img src="images/cat-image-2.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
           <a href="details.html" class="stretched-link"></a>
         </div>
       </div>
@@ -138,7 +144,8 @@
         <img src="images/cat-image-2.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
           <a href="details.html" class="stretched-link"></a>
         </div>
       </div>
@@ -146,7 +153,8 @@
         <img src="images/cat-image-2.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
           <a href="details.html" class="stretched-link"></a>
         </div>
       </div>
@@ -154,7 +162,8 @@
         <img src="images/cat-image-2.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
           <a href="details.html" class="stretched-link"></a>
         </div>
       </div>
@@ -162,19 +171,28 @@
   </div>
 
   <div class="d-flex" id="become-pet-shelter">
-    <div class="ms-5 p-2 my-auto" style="background-image: linear-gradient(rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4)); width: 40%;">
+    <div class="ms-5 p-2 my-auto"
+      style="background-image: linear-gradient(rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4)); width: 40%;">
       <h1 class="mb-2" style="color: #87CEEB;">Are you willing to become a pet shelter?</h1>
-      <p class="text-light"> At our pet adoption website, we believe in the power of compassion and love to change lives—both for animals in need and for those seeking a faithful companion. By considering the noble role of becoming a pet shelter, you open your heart and your home to animals longing for a second chance at happiness. It's a commitment that requires dedication, patience, and a profound love for animals. Together, we can make a difference in the lives of countless furry friends, providing them with the love and care they deserve while bringing joy and fulfillment to your own life. Join us on this heartwarming journey of saving lives and forging lifelong bonds."</p>  
+      <p class="text-light"> At our pet adoption website, we believe in the power of compassion and love to change
+        lives—both for animals in need and for those seeking a faithful companion. By considering the noble role of
+        becoming a pet shelter, you open your heart and your home to animals longing for a second chance at happiness.
+        It's a commitment that requires dedication, patience, and a profound love for animals. Together, we can make a
+        difference in the lives of countless furry friends, providing them with the love and care they deserve while
+        bringing joy and fulfillment to your own life. Join us on this heartwarming journey of saving lives and forging
+        lifelong bonds."</p>
       <button class="btn btn-light" type="button">Become a pet shelter!</button>
     </div>
   </div>
-  
+
   <footer class="d-flex flex-column justify-content-center" style="height: 8vh; background-color: #87CEEB;">
     <p class="m-auto text-white">
-      © 2023 PetPal Inc. 
+      © 2023 PetPal Inc.
     </p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
 </body>
 </html>
