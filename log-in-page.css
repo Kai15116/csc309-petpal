@@ -1,0 +1,115 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.mains-container {
+    display: grid;
+    grid-template-columns: 1fr, 1fr;
+}
+
+.image-container {
+    width: 80%;
+    
+}
+
+
+img {
+    object-fit: cover;
+    width: 100%;
+    max-width: 250px;
+    min-width: 200px;
+}
+
+.company-name {
+    font-family:Georgia, 'Times New Roman';
+    color:rgb(73, 161, 161);
+}
+
+body {
+    background: url('login-signup-images/robert-murdock-PHNvtz8H4WU-unsplash.jpg');
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
+
+}
+
+.login-section {
+    width: 45vw;
+    opacity: 95%;
+
+    background-color: aliceblue;
+    height: 100vh;
+    overflow-y: scroll;
+    animation: slideFromRight 1s;
+}
+
+.sign-up-button-1:hover{
+    transition: .1s;
+    color: black;
+    background-color: aqua;
+}
+
+.section-center {
+    width: 80%;
+    margin: 0 auto;
+    
+}
+
+@media screen and (max-width: 1250px) {
+    .login-section {
+        width: 55%;
+    }
+}
+
+@media screen and (max-width: 870px) {
+    .login-section {
+        width: 65%;
+    }
+}
+
+
+
+@media screen and (max-width: 770px) {
+    .login-section {
+        opacity: 1;
+        width: 100%;
+        
+    }
+}
+
+
+
+@keyframes slideFromRight {
+    0% {
+        
+        opacity: 0;
+        transform: scale(50%);
+
+    }
+
+    100% {
+        
+        opacity: 80%;
+        transform: scale(100%);
+    }
+
+    
+}
+
+.section-right {
+    z-index: 5;
+}
+
+.pet-seeker-header-text {
+    font-family:Georgia, 'Times New Roman';
+    font-weight: bold;
+    color:rgb(73, 161, 161);
+}
+
+.pet-shelter-header-text {
+    font-family:Georgia, 'Times New Roman';
+    color:rgb(114, 65, 19);
+    font-weight: bold;
+}
