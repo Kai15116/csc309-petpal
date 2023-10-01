@@ -32,7 +32,7 @@ img {
 
 body {
     /* Reference:  // reference petSeeker Image: https://unsplash.com/ja/写真/PHNvtz8H4WU */
-    background: url('login-signup-images/robert-murdock-PHNvtz8H4WU-unsplash.jpg');
+    background: url('images/login-signup-images/robert-murdock-PHNvtz8H4WU-unsplash.jpg');
     background-size: cover;
     background-position: center; 
     background-repeat: no-repeat; 

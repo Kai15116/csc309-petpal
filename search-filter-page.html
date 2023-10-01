@@ -10,51 +10,48 @@
 
     </style>
     <link rel="stylesheet" href="search-filter-page.css">
-    
+    <link rel="stylesheet" href="navbar.css">
+
     <title>search-filter-page</title>
 </head>
-<body>
+<body class="bg-body-tertiary d-flex flex-column" style="min-height: 100vh;">
 
   </div>
     <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          
-          <a class="navbar-brand" href="index.html"><img src="search-filter-images/logo-1.png" width="100px"></a>
-    
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-    
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto">
-    
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-              </li> 
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="sign-up-page.html">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-            </ul>
-            <div class="ms-auto">
-                            
-              <button class="btn btn btn-outline-primary me-2" type="button">Login</button>
-              <button class="btn btn-primary" type="button">Sign up</button>
-            </div>
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+      <div class="container-fluid">
+  
+        <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150px"></a>
+  
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto">
+  
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">Adoption Process</a>
+            </li>
+            <hr>
+            <li class="nav-item mobile-nav-item">
+              <a class="nav-link" href="log-in-page.html">Login</a>
+            </li>
+            <li class="nav-item mobile-nav-item">
+              <a class="nav-link" href="sign-up-page.html">Sign up</a>
+            </li>
+          </ul>
+          <div class="ms-auto">
+            <a class="nav-item btn btn btn-outline-primary me-2 def-nav-item" role="button" href="log-in-page.html">Login</a>
+            <a class="nav-item btn btn-primary def-nav-item" role="button" href="sign-up-page.html">Sign up</a>
           </div>
         </div>
-      </nav> 
+      </div>
+    </nav>
 
     
     <!-- The top section of the page with the carousel display -->
@@ -88,30 +85,26 @@
         
         <div class="">
           
-          <!-- Reference: https://getbootstrap.com/docs/5.3/components/select/ -->
-          <!-- <div>
-            <label for="sort-method">Sort:</label> -->
-
-          <!-- <select name="sort-method" class="form-select d-inline-block w-75" aria-label="Default select example">
-            <option selected>relavence</option>
-            <option value="name">Name</option>
-            <option value="name">Name</option>
-            <option value="age">Age</option>
-            <option value="age">Age</option>
-            <option value="size">Size</option>
-            <option value="size">Size</option>
-          </select>
-
-          </div> -->
-          
           <!-- Reference: https://getbootstrap.com/docs/5.3/components/button-group/ -->
             <div class="btn-group-vertical">
-                
-                <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle border-primary sort-selector" data-bs-toggle="dropdown" aria-expanded="false" >
+
+                <!-- Reference: https://getbootstrap.com/docs/5.3/components/select/ -->
+                <div class="d-flex align-items-center me-1">
+                  <div class="me-2" style="white-space: nowrap;">Sort By:</div>
+                  <select name="sort-method" class="form-select border-primary">
+                    <option selected>Relavence</option>
+                    <option value="name">Name</option>
+                    <option value="name">Name</option>
+                    <option value="age">Age</option>
+                    <option value="age">Age</option>
+                    <option value="size">Size</option>
+                    <option value="size">Size</option>
+                  </select>
+                </div>
+
+                <!-- <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle border-primary sort-selector" data-bs-toggle="dropdown" aria-expanded="false" >
                     Sort by default
-                  </button>
-
-
+                </button> 
                 
                 <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                     <li><div class="btn-group-vertical w-100" role="group" aria-label="Vertical radio toggle button group">
@@ -128,7 +121,7 @@
                         value= "Default"name="vbtn-radio" id="vbtn-radio3" autocomplete="off">
                         <label class="btn btn-outline-primary" for="vbtn-radio3">Default</label>
                       </div>
-                  </ul>
+                  </ul> -->
               
               </div>
 
@@ -407,7 +400,7 @@
       
 
 
-      <footer class="d-flex flex-column justify-content-center" style="height: 8vh; background-color: #87CEEB;">
+      <footer class="d-flex flex-column justify-content-center mt-auto" style="height: 8vh; background-color: #87CEEB; ">
         <p class="m-auto text-white">
           © 2023 PetPal Inc. 
         </p>
@@ -425,19 +418,19 @@
         const filterForm = document.querySelector('#filter-form');
         
         demo_list = [
-          {img: "search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "0.5"},
-          {img: "search-filter-images/cat-image-1.jpg", breed: "Canada Bobtail", age: "13"},
-          {img: "search-filter-images/cat-image-1.jpg", breed: "China Bobtail", age: "2"},
-          {img: "search-filter-images/cat-image-1.jpg", breed: "Japan Bobtail", age: "9"},
-          {img: "search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "8"},
-          {img: "search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "3"},
-          {img: "search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "8"},
-          {img: "search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "7"},
-          {img: "search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "9"},
-          {img: "search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "1"},
-          {img: "search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "5"},
-          {img: "search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "6"},
-          {img: "search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "2"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "0.5"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "Canada Bobtail", age: "13"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "China Bobtail", age: "2"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "Japan Bobtail", age: "9"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "8"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "3"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "8"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "7"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "9"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "1"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "5"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "6"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "2"},
         ]
 
         function createDemoView(demo_list, demo_status){
@@ -447,7 +440,7 @@
           const searchResHtml = demo_list.map((item) => `
           <div class="col">
                 <div class="card">
-                    <img src="${item.img}" style="height: 100px; object-fit: cover;" class="card-img-top" alt="...">
+                    <img src="${item.img}" style="height: 180px; object-fit: cover;" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">Lalo</h5>
                       <p class="card-text">
@@ -455,7 +448,7 @@
                         <br>
                         age: ${item.age} year
                         <br>
-                        <a href="">view details</a>
+                        <a href="details.html" class="stretched-link">view details</a>
                       </p>
                     </div>
                     <div class="card-footer">
