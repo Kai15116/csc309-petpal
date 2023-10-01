@@ -91,14 +91,14 @@
                 <!-- Reference: https://getbootstrap.com/docs/5.3/components/select/ -->
                 <div class="d-flex align-items-center me-1">
                   <div class="me-2" style="white-space: nowrap;">Sort By:</div>
-                  <select name="sort-method" class="form-select border-primary">
+                  <select name="sort-method sort-selector" id= "sort-selector"class="form-select border-primary">
                     <option selected>Relavence</option>
-                    <option value="name">Name</option>
-                    <option value="name">Name</option>
-                    <option value="age">Age</option>
-                    <option value="age">Age</option>
-                    <option value="size">Size</option>
-                    <option value="size">Size</option>
+                    <option value="name" class="sort-option">Name</option>
+                    <option value="name" class="sort-option">Name</option>
+                    <option value="age" class="sort-option">Age</option>
+                    <option value="age" class="sort-option">Age</option>
+                    <option value="size" class="sort-option">Size</option>
+                    <option value="size" class="sort-option">Size</option>
                   </select>
                 </div>
 
@@ -410,7 +410,7 @@
       </script>
       <script>
         // javascript for a better demo purpose.
-        const sortSelecter = document.querySelector(".sort-selector");
+        const sortSelecter = document.querySelector("#sort-selector");
         const sortOptions = document.querySelectorAll('.sort-option');
         const loadingScreen = document.querySelector(".loader-container");
         const loader = document.querySelector("#loader");
@@ -504,21 +504,24 @@
 
         const sortByAgeDemoViewDESC = demo_list.sort((x, y) => y.age - x.age);
         const sortByAgeDemoView = demo_list.sort((x, y) => x.age - y.age);
-        console.log(sortOptions);
 
-        sortOptions.forEach((elem) => {
-            
-            elem.addEventListener('click', (e) => {
-                console.log(elem.value);
-                if (e.target === elem) {
-                  
-                    console.log(`${e.target.value} has been selected`);
-                    sortSelecter.innerHTML = `Sort by ${elem.value}`;
-                    // loader.classList.toggle('loader-customize-show');      
-                      createDemoView(sortByAgeDemoView, "sort_success");
-                }
-            })
+        // console.log(sortOptions);
+        sortSelecter.addEventListener('change', () => {
+          createDemoView(sortByAgeDemoView, "sort_success");
         });
+        // sortOptions.forEach((elem) => {
+            
+        //     elem.addEventListener('select', (e) => {
+        //         console.log(elem.value);
+                // if (e.currentTarget === elem) {
+                  
+                    // console.log(`${e.currentTarget.value} has been selected`);
+                    // sortSelecter.innerHTML = `Sort by ${elem.value}`;
+                    // loader.classList.toggle('loader-customize-show');      
+                      // createDemoView(sortByAgeDemoView, "sort_success");
+                // }
+        //     })
+        // });
       </script>
       
         
