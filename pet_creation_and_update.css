@@ -44,7 +44,7 @@ footer {
 
 /* page styles */
 .page-container {
-    background-color: #F5F5F5; 
+    background-color: #f0eeec; 
     position: fixed;
     top: 0; 
     left: 0;
@@ -58,12 +58,14 @@ footer {
 .page-content {
     flex: 1; 
     justify-content: flex-start; 
-    text-align: left; 
-    align-items: flex-start; 
+    text-align: center; 
+    align-items: center; 
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
+    background-color: #f0eeec;
+    padding-top: 20px;
 }
 
 .logo-img {
@@ -131,15 +133,17 @@ footer {
 }
 
 .background-details {
-    background-image: url('images/backgroundImage1.jpg'); 
+    /* background-image: url('images/backgroundImage1.jpg');  */
     background-size: cover;
     background-repeat: no-repeat; 
     background-position: center center;
-    background-color: #ffffff;
+    background-color: #f0eeec;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    /* margin-top: 400px; */
 }
 
 .background-adoption {
@@ -158,18 +162,45 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    flex: 1; 
+    width: 100%;
+    height: 100%;
 
 }
 
+.form-inputs{
+    width: 100%;
+}
+
 .pet-details {
-    background-color: #f2f8fe; /* gray background color */
+    background-color: #F5F5F5; /* gray background color */
     padding: 30px;
     gap: 10px;
     width: 900px;
     display: flex;
-    justify-content: flex-start;
-    align-items: start;
     flex-direction: column;
+    align-items: start;
+}
+
+.form-group {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* adjust alignment as needed */
+    align-items: center; /* center vertically */
+    gap: 5px;
+    width: 100%;
+}
+
+.form-group label {
+    flex: 1; /* allow label to expand to fill available space */
+    margin-right: 10px; /* add some space between label and input */
+    white-space: nowrap; /* prevent label from wrapping */
+}
+
+.form-group input, .form-group select {
+    flex: 2; /* allow input/select to expand to fill available space */
 }
 
 ul {
@@ -196,7 +227,7 @@ ul {
     margin-right: 20px; /* adjust this value as needed for spacing */
 }
 
-/* Apply Button Styles */
+/* apply Button Styles */
 .btn-primary {
     background-color: #007bff; /* blue color for primary button */
     color: #fff;
@@ -208,11 +239,27 @@ ul {
     background-color: #0056b3; /* darker blue on hover */
 }
 
-
-.form-group {
-    margin-bottom: 20px;
-    /* padding: 10px; */
+.custom-padding {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
+.confirm-button {
+    margin-top: 40px;
+}
 
+.space-bottom {
+    margin-bottom: 100px;
+}
 
+.pet-creation-graphic{
+    min-height: calc(100vh - 2.5rem);
+}
+
+#post-pet{
+    background-image: url('images/pet-creation-image.jpg');
+    background-blend-mode: overlay;
+    background-size: cover; 
+    background-repeat: no-repeat;
+    height: 70vh;
+}
