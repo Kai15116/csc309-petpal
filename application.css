@@ -1,0 +1,84 @@
+/*
+ * style.css
+ *
+ * CSC309 P1
+ * 
+ * University of Toronto
+ * Fall 2023
+ *
+ */
+
+
+/* page styles */
+
+
+.background-color {
+    background-color: #f0eeec;
+}
+
+.application-form {
+    font-family: sans-serif;
+    background-color: #f2f8fe; /* gray background color */
+    padding: 30px;
+    gap: 10px;
+    width: 900px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    flex-direction: column;
+    min-height: 120vh;
+}
+
+.application-form h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.application-form ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.application-form ul li {
+    margin-bottom: 10px;
+}
+
+.application-form .form-group {
+    margin-bottom: 20px;
+}
+
+/* https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp */
+.messages-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+.messages-container {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  
+}
+
+
+/* https://stackoverflow.com/questions/62122687/straight-line-in-html */
+.system-message {
+    display: block;
+}
+.system-message > div:before,
+.system-message > div:after {
+    content: "";
+    display: inline-block;
+    border-top: 2px solid black;
+    width: 20%;
+    vertical-align: middle;
+    margin: 0 0.5em;
+}
+
+.accepted-message > div:before, 
+.accepted-message > div:after {
+    border-color: var(--bs-success);
+}
+
+.rejected-message > div:before, 
+.rejected-message > div:after {
+    width: 21%;
+    border-color: var(--bs-danger);
+}
