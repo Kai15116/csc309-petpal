@@ -5,6 +5,11 @@ body, html {
 .bg-blue {
 	background-color: #C8F4FF;
 }
+
+/* Replace Nav with Standardize */ 
+.sp-nav-container {
+  
+}
 .navbar-logo {
   width: 150px; 
   height: 50px; 
@@ -28,6 +33,8 @@ body, html {
 	padding-left: 10px;
 }
 
+/* Profile Banner and Circle*/
+
 .profile-banner {
   position: relative;
   background-image: url('example_images/yosemite_banner.jpg');
@@ -36,8 +43,6 @@ body, html {
 }
 .overlay {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5); /* Last value Darkness */
@@ -52,11 +57,11 @@ body, html {
 }
 .profile-picture {
   position: absolute;
-  bottom: -100px;
-  left: 50px;
+  bottom: -70px;
+  left: 80px;
   width: 200px; 
   height: 200px; 
-  border-radius: 50%; 
+  border-radius: 50%;
   border: 4px solid white;
   overflow: hidden; 
 }
@@ -64,4 +69,13 @@ body, html {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Shelter Details*/
+.shelter-details {
+	margin: 30px;
+	position: relative;
+	top: 70px;
+}
+.shelter-about {
 }
