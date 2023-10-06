@@ -6,42 +6,44 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="account_style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </head>
-  <body>
 
-<div>
-<nav class="navbar navbar-expand-lg navbar-light bg-blue">
+  
+<body>
+<div class="sp-nav-container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-blue">
 
-  <!-- Change href to HOME PAGE-->
-  <div class="navbar-logo">
-    <a class="navbar-brand" href="#">
-      <img src="petpal_logo.png" alt="Pet Pal Logo">
-    </a>
-  </div>
+    <!-- Change href to HOME PAGE-->
+    <div class="navbar-logo">
+      <a class="navbar-brand" href="#">
+        <img src="petpal_logo.png" alt="Pet Pal Logo">
+      </a>
+    </div>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link current-nav" href="#">Home<span class="visually-hidden">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link other_nav" href="#">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link other_nav" href="#">Contact</a>
-      </li>
-    </ul>
-  </div>
-
-</nav>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link current-nav" href="#">Home<span class="visually-hidden">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link other_nav" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link other_nav" href="#">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </div>
 
-
-<div class="card-img-top profile-banner">
+<div class="profile-banner">
   <div class="overlay">
     <div class="overlay-content">
       <h1>Toronto Zoo Escapees</h1>
@@ -53,9 +55,47 @@
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-  </body>
+
+<div class="container shelter-details">
+  <div class="row no-gutters">
+
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Toronto Zoo Escapees</h5>
+          <h6 class="card-subtitle mb-2 text-muted" style="font-size: 12px; ">Main Street, Toronto ON M3V 0N1</h6>
+          <p class="card-text">Small description of the shelter Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.</p>
+          <a href="#" class="card-link">Email</a>
+          <a href="#" class="card-link">Contact</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="carousel slide" data-interval="5000">
+        <div class="carousel-item active">
+          <img class="d-block w-100 img-fluid" src="example_images/shelter_banner1.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+          2 bruh
+        </div>
+        <div class="carousel-item">
+          what 3 three??
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Reviews</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
 </html>
