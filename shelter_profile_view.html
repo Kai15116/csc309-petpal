@@ -10,7 +10,7 @@
   </head>
 
   
-<body>
+<body class="">
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
@@ -63,38 +63,15 @@
 <!--Shelter details grid-->
 <div class="container shelter-details mb-4">
   <div class="row gx-2">
-    <!--Profile Circle-->
-    <div class="col mt-2">
-      <div class="profile-picture">
+
+    <div class="col">
+      <!--Profile Circle-->
+      <div class="profile-picture mt-2">
         <img src="example_images/shelter_portrait.jpg" alt="Profile Picture">
       </div>
-    </div>  
 
-    <!--Mission Statement-->
-    <div class="col-6 mt-2">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Our Mission</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.</p>
-        </div>
-      </div>
-    </div>
-
-    <!--Overall Ratings Card-->
-    <div class="col mt-2">
-      <div class="card w-100 h-100">
-        <div class="card-body">
-          <h5 class="card-title">Ratings</h5>
-          <img class="" src="example_images/4halfstars.png" height="50px"/> 
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row gx-2">
-    <!--Shelter Intro Card-->
-    <div class="col mt-2">
-      <div class="card">
+      <!--Shelter Intro Card-->
+      <div class="card" style="margin-top: 6em;">
         <div class="card-body">
           <h5 class="card-title">Toronto Zoo Escapees</h5>
           <h6 class="card-subtitle mb-2 text-muted" style="font-size: 12px; ">Main Street, Toronto ON M3V 0N1</h6>
@@ -103,11 +80,20 @@
           <a href="#" class="card-link">Contact</a>
         </div>
       </div>
-    </div>
+    </div>  
 
-    <!--Pet Carousel-->
-    <div class="col-6 mt-2">
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    
+    <div class="col-6">
+      <!--Mission Statement-->
+      <div class="card mt-2">
+        <div class="card-body">
+          <h5 class="card-title">Our Mission</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.</p>
+        </div>
+      </div>
+
+      <!--Pet Carousel-->
+      <div id="carouselExampleControls" class="carousel slide mt-2" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="card pet-card">
@@ -177,12 +163,27 @@
       </div>
     </div>
 
-    <!--Reviews Card-->
-    <div class="col mt-2">
-      <div class="card">
+    
+    <div class="col">
+      <!--Reviews Card-->
+      <div class="card mt-2">
         <div class="card-body">
           <h5 class="card-title">Reviews</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <img style="margin-left: 0.5em;" src="example_images/4halfstars.png" height="50px"/> 
+            </li>
+            <li class="list-group-item">
+              <div class="card review-card">
+                <div class="card-body">
+                  
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          See more reviews
         </div>
       </div>
     </div>
