@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        
+
+    </style>
+    <link rel="stylesheet" href="search-filter-page.css">
+    <link rel="stylesheet" href="navbar.css">
+
+    <title>search-filter-page</title>
+</head>
+<body class="bg-body-tertiary d-flex flex-column" style="min-height: 100vh;">
+
+  </div>
+    <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+      <div class="container-fluid">
+  
+        <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150px"></a>
+  
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto">
+  
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">Adoption Process</a>
+            </li>
+            <hr>
+            <li class="nav-item mobile-nav-item">
+              <a class="nav-link" href="log-in-page.html">Login</a>
+            </li>
+            <li class="nav-item mobile-nav-item">
+              <a class="nav-link" href="sign-up-page.html">Sign up</a>
+            </li>
+          </ul>
+          <div class="ms-auto">
+            <a class="nav-item btn btn btn-outline-primary me-2 def-nav-item" role="button" href="log-in-page.html">Login</a>
+            <a class="nav-item btn btn-primary def-nav-item" role="button" href="sign-up-page.html">Sign up</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    
+    <!-- The top section of the page with the carousel display -->
+    <section class="section-search-res-message mb-1 mt-1 pb-1 pt-1">
+      <!-- Reference: https://getbootstrap.com/docs/5.3/components/alerts/ -->
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+            <div>
+              <p class="p-0 m-0"><img class="pr-1" src="check2-circle.svg" alt="">
+                <span class="pr-1">
+                    Found <strong>2</strong> results with <strong class="text-primary">1 </strong>Filter Applied.</p>
+            </div>
+          </div>
+    </section>
+
+
+
+    <div class="container w-80 sort-filter-section">
+      <div class="d-flex flex-lg-col mb-4 mt-2 ml-auto mr-auto justify-content-between align-items-center flex-wrap">
+        
+                
+        <div class=""><nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search by name..." aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </nav></div>
+        
+        <div class="">
+          
+          <!-- Reference: https://getbootstrap.com/docs/5.3/components/button-group/ -->
+            <div class="btn-group-vertical">
+
+                <!-- Reference: https://getbootstrap.com/docs/5.3/components/select/ -->
+                <div class="d-flex align-items-center me-1">
+                  <div class="me-2" style="white-space: nowrap;">Sort By:</div>
+                  <select name="sort-method sort-selector" id= "sort-selector"class="form-select border-primary">
+                    <option selected> none </option>
+                    <option value="name" class="sort-option">Name(a->z)</option>
+                    <option value="name" class="sort-option">Name(z->a)</option>
+                    <option value="age" class="sort-option">Age(0->10+)</option>
+                    <option value="age" class="sort-option">Age(10+->0)</option>
+                    <option value="size" class="sort-option">Size(s->l)</option>
+                    <option value="size" class="sort-option">Size(l->s)</option>
+                  </select>
+                </div>
+
+                <!-- <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle border-primary sort-selector" data-bs-toggle="dropdown" aria-expanded="false" >
+                    Sort by default
+                </button> 
+                
+                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <li><div class="btn-group-vertical w-100" role="group" aria-label="Vertical radio toggle button group">
+                        <input type="radio" class="btn-check sort-option"
+                        value="Name" name="vbtn-radio" id="vbtn-radio1" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="vbtn-radio1">Name</label>
+                        <input type="radio" class="btn-check sort-option" value="Age"
+                        name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="vbtn-radio2">Age</label>
+                        <input type="radio" class="btn-check sort-option" 
+                        value= "Size"name="vbtn-radio" id="vbtn-radio3" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="vbtn-radio3">Size</label>
+                        <input type="radio" class="btn-check sort-option" 
+                        value= "Default"name="vbtn-radio" id="vbtn-radio3" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="vbtn-radio3">Default</label>
+                      </div>
+                  </ul> -->
+              
+              </div>
+
+              <!-- Reference: https://getbootstrap.com/docs/5.3/components/offcanvas/ -->
+              <button class="btn btn-light border-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                <img src="filter-right.svg" alt="">Filter by
+              </button>
+              
+              <div  class="offcanvas offcanvas-start" tabindex="-1"  id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" data-bs-scroll="true">
+                <div class="offcanvas-header blue-100 shadow">
+                  <h2 class="offcanvas-title text-center filter-title-font" id="offcanvasExampleLabel">Dream Pet Access</h2>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                  
+                  <h4>Category Selector</h4>
+                  <div class="category-filter-container">
+                    <ul>
+                        <li class="filter-active-type px-2"><a href="" class="navbar-type-link ">Cats      <svg class="cat-svg" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>.cat-svg{fill:#b97331}</style><path d="M320 192h17.1c22.1 38.3 63.5 64 110.9 64c11 0 21.8-1.4 32-4v4 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V339.2L280 448h56c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-53 0-96-43-96-96V192.5c0-16.1-12-29.8-28-31.8l-7.9-1c-17.5-2.2-30-18.2-27.8-35.7s18.2-30 35.7-27.8l7.9 1c48 6 84.1 46.8 84.1 95.3v85.3c34.4-51.7 93.2-85.8 160-85.8zm160 26.5v0c-10 3.5-20.8 5.5-32 5.5c-28.4 0-54-12.4-71.6-32h0c-3.7-4.1-7-8.5-9.9-13.2C357.3 164 352 146.6 352 128v0V32 12 10.7C352 4.8 356.7 .1 362.6 0h.2c3.3 0 6.4 1.6 8.4 4.2l0 .1L384 21.3l27.2 36.3L416 64h64l4.8-6.4L512 21.3 524.8 4.3l0-.1c2-2.6 5.1-4.2 8.4-4.2h.2C539.3 .1 544 4.8 544 10.7V12 32v96c0 17.3-4.6 33.6-12.6 47.6c-11.3 19.8-29.6 35.2-51.4 42.9zM432 128a16 16 0 1 0 -32 0 16 16 0 1 0 32 0zm48 16a16 16 0 1 0 0-32 16 16 0 1 0 0 32z"/></svg></a></li>
+                        <li><a href="" class="navbar-type-link">Dogs <svg class="dog-svg" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>.dog-svg{fill:#0eaf94}</style><path d="M309.6 158.5L332.7 19.8C334.6 8.4 344.5 0 356.1 0c7.5 0 14.5 3.5 19 9.5L392 32h52.1c12.7 0 24.9 5.1 33.9 14.1L496 64h56c13.3 0 24 10.7 24 24v24c0 44.2-35.8 80-80 80H464 448 426.7l-5.1 30.5-112-64zM416 256.1L416 480c0 17.7-14.3 32-32 32H352c-17.7 0-32-14.3-32-32V364.8c-24 12.3-51.2 19.2-80 19.2s-56-6.9-80-19.2V480c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V249.8c-28.8-10.9-51.4-35.3-59.2-66.5L1 167.8c-4.3-17.1 6.1-34.5 23.3-38.8s34.5 6.1 38.8 23.3l3.9 15.5C70.5 182 83.3 192 98 192h30 16H303.8L416 256.1zM464 80a16 16 0 1 0 -32 0 16 16 0 1 0 32 0z"/></svg></a></li>
+                        <li><a href="" class="navbar-type-link">Birds <svg class="bird-svg"xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>.bird-svg{fill:#2c66ed}</style><path d="M160.8 96.5c14 17 31 30.9 49.5 42.2c25.9 15.8 53.7 25.9 77.7 31.6V138.8C265.8 108.5 250 71.5 248.6 28c-.4-11.3-7.5-21.5-18.4-24.4c-7.6-2-15.8-.2-21 5.8c-13.3 15.4-32.7 44.6-48.4 87.2zM320 144v30.6l0 0v1.3l0 0 0 32.1c-60.8-5.1-185-43.8-219.3-157.2C97.4 40 87.9 32 76.6 32c-7.9 0-15.3 3.9-18.8 11C46.8 65.9 32 112.1 32 176c0 116.9 80.1 180.5 118.4 202.8L11.8 416.6C6.7 418 2.6 421.8 .9 426.8s-.8 10.6 2.3 14.8C21.7 466.2 77.3 512 160 512c3.6 0 7.2-1.2 10-3.5L245.6 448H320c88.4 0 160-71.6 160-160V128l29.9-44.9c1.3-2 2.1-4.4 2.1-6.8c0-6.8-5.5-12.3-12.3-12.3H400c-44.2 0-80 35.8-80 80zm80-16a16 16 0 1 1 0 32 16 16 0 1 1 0-32z"/></svg></a></li>
+                        <li><a href="" class="navbar-type-link">Bunnies <svg class="bunny-svg" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>.bunny-svg{fill:#db6a1f}</style><path d="M346.7 6C337.6 17 320 42.3 320 72c0 40 15.3 55.3 40 80s40 40 80 40c29.7 0 55-17.6 66-26.7c4-3.3 6-8.2 6-13.3s-2-10-6-13.2c-11.4-9.1-38.3-26.8-74-26.8c-32 0-40 8-40 8s8-8 8-40c0-35.7-17.7-62.6-26.8-74C370 2 365.1 0 360 0s-10 2-13.3 6zM244.6 136c-40 0-77.1 18.1-101.7 48.2l60.5 60.5c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-55.3-55.3 0 .1L2.2 477.9C-2 487-.1 497.8 7 505s17.9 9 27.1 4.8l134.7-62.4-52.1-52.1c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L199.7 433l100.2-46.4c46.4-21.5 76.2-68 76.2-119.2C376 194.8 317.2 136 244.6 136z"/></svg></a></li>
+                        <li><a href="" class="navbar-type-link">Other <svg  class="pet-svg" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>.pet-svg{fill:#bd30c0}</style><path d="M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z"/></svg></a></li>
+                    </ul>
+                  </div>
+                  <hr>
+                  <div class="filter-container">
+                    <form action="search-filter-page-filter.html" id="filter-form">
+                        <h4>Apply Filters</h4>
+                        <details open>
+                            <summary>
+                                Breed
+                            </summary>
+                            <div class="checkbox-group mt-2 mb-2">
+                                <input class="checkbox-control" type="checkbox" name="breed1" value="breed1">
+                                <label for="breed1">Abyssinian</label>
+                                <br>
+                                <input class="checkbox-control" type="checkbox" 
+                                name="breed2">
+                                <label for="breed2">American Bobtail</label>
+                                <br>
+                                <input class="checkbox-control" type="checkbox" 
+                                name="breed2">
+                                <label for="breed2">Birman</label>
+                                <br>
+                                <input class="checkbox-control" type="checkbox" 
+                                name="breed2">
+                                <label for="breed2">Bombay</label>
+                            </div>
+                        </details>
+                        <hr>
+                        <details open>
+                            <summary>
+                                Age
+                            </summary>
+                            <div class="checkbox-group mt-2 mb-2">
+                                <input class="checkbox-control" type="checkbox" name="age" value="age1">
+                                <label for="age"> &lt;1</label>
+                                <br>
+                                <input class="checkbox-control" type="checkbox" name="age">
+                                <label for="breed1">1-3</label>
+                                <br>
+                                <input class="checkbox-control" type="checkbox" 
+                                name="breed2">
+                                <label for="breed2">3-7</label>
+                                <br>
+                                <input class="checkbox-control" type="checkbox" 
+                                name="breed2">
+                                <label for="breed2">8-12</label>
+                                <br>
+                                <input class="checkbox-control" type="checkbox" 
+                                name="breed2">
+                                <label for="breed2">12+</label>
+                            </div>
+                        </details>
+                        <hr>
+
+                        <details open>
+                            <summary>
+                                Size
+                            </summary>
+                            <div class="checkbox-group mt-2 mb-2">
+                                <input class="checkbox-control" type="checkbox" name="age">
+                                <label for="breed1"> XS(&lt;5kg)</label>
+
+                                <br>
+
+                                <input class="checkbox-control" type="checkbox" name="age">
+                                <label for="breed1">S(5kg-12kg)</label>
+                                
+                                <br>
+                                <input class="checkbox-control" type="checkbox" 
+                                name="breed2">
+                                <label for="breed2">M(12kg-21kg)</label>
+                                <br>
+                                <input class="checkbox-control" type="checkbox" 
+                                name="breed2">
+                                <label for="breed2">L(21kg-40kg)</label>
+
+                                <br>
+                                <input class="checkbox-control" type="checkbox" 
+                                name="breed2">
+                                <label for="breed2">XL(45kg+)</label>
+                            </div>
+                        </details>
+                        <hr>
+                        <details open>
+                            <summary>
+                                Gender
+                            </summary>
+                            <div class="checkbox-group mt-2 mb-2">
+                                <input class="checkbox-control" type="checkbox" name="age">
+                                <label for="breed1"> Male </label>
+                                <br>
+                                <input class="checkbox-control" type="checkbox" name="age">
+                                <label for="breed1"> Female</label>                      
+                            </div>
+                        </details>
+                        <hr>
+                        <details open>
+                            <summary>
+                                Color
+                            </summary>
+                            <div class="checkbox-group mt-2 mb-2">
+                                <input class="checkbox-control" type="checkbox" name="age">
+                                <label for="breed1"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="lightgrey" class="bi bi-circle-half pl-2" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                      </svg>
+                                    
+                                </label>
+
+                                <input class="checkbox-control" type="checkbox" name="age">
+                                <label for="breed1"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="lemonchiffon" class="bi bi-circle-half pl-2" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                      </svg>
+                                    
+                                </label>
+
+
+                                <input class="checkbox-control" type="checkbox" name="age">
+                                <label for="breed1"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="darkgrey" class="bi bi-circle-half pl-2" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                      </svg>
+                                    
+                                </label>
+
+                                <input class="checkbox-control" type="checkbox" name="age">
+                                <label for="breed1"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="aliceblue" class="bi bi-circle-half pl-2" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                      </svg>
+                                    
+                                </label>
+
+                                <br> 
+
+                                <input class="checkbox-control" type="checkbox" name="age">
+                                <label for="breed1"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="grey" class="bi bi-circle-half" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                      </svg>
+                                    
+                                </label>
+
+                               
+
+                                <input class="checkbox-control" type="checkbox" name="age">
+                                <label for="breed1"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-circle-half" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                      </svg>
+                                    
+                                </label>
+
+
+                                <input class="checkbox-control" type="checkbox" name="age">
+                                <label for="breed1"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="brown" class="bi bi-circle-half" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                      </svg>
+                                    
+                                </label>
+
+                                
+
+                                <input class="checkbox-control" type="checkbox" name="age">
+                                <label for="breed1"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="darkyellow" class="bi bi-circle-half" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+                                      </svg>
+                                    
+                                </label>
+
+                                <br> 
+
+
+                              
+                            </div>
+
+
+                        </details>
+                        <!-- Reference: https://getbootstrap.com/docs/5.3/components/buttons/ -->
+
+                        <button class="btn btn-primary mb-4 mt-4" type="submit">Apply</button>
+
+
+                    </form>                  
+                  </div>
+                </div>
+              </div>
+        </div>
+    
+
+</div>
+      
+    </div>
+
+      
+
+
+
+      <!-- All the search and filter result -->
+      <section class="section-bottom me-auto mb-4">
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3" id="search-result-container">
+          <!-- Reference: https://getbootstrap.com/docs/5.3/components/card/ -->
+            <!-- <div class="col">
+                <div class="card">
+                    <img src="pic4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Lalo</h5>
+                      <p class="card-text">
+                        breed: America Bobtail
+                        <br>
+                        age: 5 months
+                        <br>
+                        <a href="">view details</a>
+                      </p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+              </div> -->
+              
+
+              
+             
+
+              
+
+          </div>
+
+
+
+      </section>
+
+
+
+      <!-- Pagination: -->
+      <!-- Reference: https://getbootstrap.com/docs/5.3/components/pagination/ -->
+      <div class="pagination-container mt-2 mb-2" id="pagination-control">
+        <nav aria-label="...">
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+
+      </div>
+
+      
+
+
+      <footer class="d-flex flex-column justify-content-center mt-auto" style="height: 8vh; background-color: #87CEEB; ">
+        <p class="m-auto text-white">
+          © 2023 PetPal Inc. 
+        </p>
+      </footer>
+      </body>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+      </script>
+      <script>
+        // javascript for a better demo purpose.
+        const sortSelecter = document.querySelector("#sort-selector");
+        const sortOptions = document.querySelectorAll('.sort-option');
+        const loadingScreen = document.querySelector(".loader-container");
+        const loader = document.querySelector("#loader");
+        const sortFilterResult = document.querySelector('#sort-filter-result');
+        const filterForm = document.querySelector('#filter-form');
+        
+        demo_list = [
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "America Bobtail", age: "5 month"},
+          {img: "images/search-filter-images/cat-image-1.jpg", breed: "Canada Bobtail", age: "7 month"},
+,
+        ]
+
+        function createDemoView(demo_list, demo_status){
+          const searchResultDiv = document.querySelector("#search-result-container");
+          const paginationControl = document.querySelector("#pagination-control");
+          paginationControl.classList.toggle('d-none');
+          const searchResHtml = demo_list.map((item) => `
+          <div class="col">
+                <div class="card">
+                    <img src="${item.img}" style="height: 180px; object-fit: cover;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Lalo</h5>
+                      <p class="card-text">
+                        breed: ${item.breed}
+                        <br>
+                        age: ${item.age} 
+                        <br>
+                        <a href="details.html" class="stretched-link">view details</a>
+                      </p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+              </div>
+        `).join("");
+          searchResultDiv.innerHTML = `<div class="d-flex align-items-center">
+  <strong role="status">Loading...</strong>
+  <div class="spinner-border ms-auto" aria-hidden="true"></div>
+</div>`;
+
+          const sortResultSuccessHtml = `<div class="alert alert-success d-flex align-items-center" role="alert" >
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+            <div>
+              <p class="p-0 m-0"><img class="pr-1" src="check2-circle.svg" alt="">
+                We have prepared the result for "Sort By Age"</p>
+            </div>
+          </div>`;
+
+
+          setTimeout(() => {
+            paginationControl.classList.toggle('d-none');
+            searchResultDiv.innerHTML = searchResHtml;
+            if (demo_status === "sort_success") {
+              sortFilterResult.innerHTML = sortResultSuccessHtml;
+            } 
+
+          }, 1200);
+            };
+            createDemoView(demo_list, "normal");
+
+        const sortByAgeDemoViewDESC = demo_list.sort((x, y) => y.age - x.age);
+        const sortByAgeDemoView = demo_list.sort((x, y) => x.age - y.age);
+
+        // console.log(sortOptions);
+        sortSelecter.addEventListener('change', () => {
+          createDemoView(sortByAgeDemoView, "sort_success");
+        });
+        // sortOptions.forEach((elem) => {
+            
+        //     elem.addEventListener('select', (e) => {
+        //         console.log(elem.value);
+                // if (e.currentTarget === elem) {
+                  
+                    // console.log(`${e.currentTarget.value} has been selected`);
+                    // sortSelecter.innerHTML = `Sort by ${elem.value}`;
+                    // loader.classList.toggle('loader-customize-show');      
+                      // createDemoView(sortByAgeDemoView, "sort_success");
+                // }
+        //     })
+        // });
+      </script>
+      
+        
+      </body>
+
+</html>
