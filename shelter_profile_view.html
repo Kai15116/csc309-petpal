@@ -3,64 +3,97 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Shelter Profile View</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="account_style.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="navbar.css">
   </head>
 
   
 <body>
-<div class="sp-nav-container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-blue">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
-    <!-- Change href to HOME PAGE-->
-    <div class="navbar-logo">
-      <a class="navbar-brand" href="#">
-        <img src="petpal_logo.png" alt="Pet Pal Logo">
-      </a>
-    </div>
+<!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+  <div class="container-fluid">
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150px"></a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link current-nav" href="#">Home<span class="visually-hidden">(current)</span></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link other_nav" href="#">About</a>
+          <a class="nav-link" aria-current="page" href="index.html">Adoption Process</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link other_nav" href="#">Contact</a>
+        <hr>
+        <li class="nav-item mobile-nav-item">
+          <a class="nav-link" href="log-in-page.html">Login</a>
+        </li>
+        <li class="nav-item mobile-nav-item">
+          <a class="nav-link" href="sign-up-page.html">Sign up</a>
         </li>
       </ul>
+      <div class="ms-auto">
+        <a class="nav-item btn btn btn-outline-primary me-2 def-nav-item" role="button" href="log-in-page.html">Login</a>
+        <a class="nav-item btn btn-primary def-nav-item" role="button" href="sign-up-page.html">Sign up</a>
+      </div>
     </div>
-  </nav>
-</div>
+  </div>
+</nav>
 
+<!--Profile Banner-->
 <div class="profile-banner">
   <div class="overlay">
     <div class="overlay-content">
       <h1>Toronto Zoo Escapees</h1>
-      <p>This shelter loves animals!!!</p>
     </div>
-  </div>
-  <div class="profile-picture">
-    <img src="example_images/shelter_portrait.jpg" alt="Profile Picture">
   </div>
 </div>
 
 
+<!--Shelter details grid-->
+<div class="container shelter-details mb-4">
+  <div class="row gx-2">
+    <!--Profile Circle-->
+    <div class="col mt-2">
+      <div class="profile-picture">
+        <img src="example_images/shelter_portrait.jpg" alt="Profile Picture">
+      </div>
+    </div>  
 
-<div class="container shelter-details">
-  <div class="row no-gutters">
+    <!--Mission Statement-->
+    <div class="col-6 mt-2">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Our Mission</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.</p>
+        </div>
+      </div>
+    </div>
 
-    <div class="col">
+    <!--Overall Ratings Card-->
+    <div class="col mt-2">
+      <div class="card w-100 h-100">
+        <div class="card-body">
+          <h5 class="card-title">Ratings</h5>
+          <img class="" src="example_images/4halfstars.png" height="50px"/> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row gx-2">
+    <!--Shelter Intro Card-->
+    <div class="col mt-2">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Toronto Zoo Escapees</h5>
@@ -72,21 +105,80 @@
       </div>
     </div>
 
-    <div class="col-6">
-      <div class="carousel slide" data-interval="5000">
-        <div class="carousel-item active">
-          <img class="d-block w-100 img-fluid" src="example_images/shelter_banner1.jpg" alt="First slide">
+    <!--Pet Carousel-->
+    <div class="col-6 mt-2">
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="card pet-card">
+              <img src="example_images/milky2.jpg" class="card-img-top pet-card-img">
+              <div class="card-body">
+                <h5 class="card-title">Christopher</h5>
+                <p class="card-text">
+                  <ul class="pet-card-text">
+                    <li>Breed: Labrador Retriever</li>
+                    <li>Age: 6 years</li>
+                    <li><a href="details.html" class="stretched-link">View Details</a></li>
+                  </ul>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card pet-card">
+              <img src="example_images/milky3.jpg" class="card-img-top pet-card-img">
+              <div class="card-body">
+                <h5 class="card-title">Milky</h5>
+                <p class="card-text">
+                  <ul class="pet-card-text">
+                    <li>Breed: Labrador Retriever</li>
+                    <li>Age: 4 years</li>
+                    <li><a href="details.html" class="stretched-link">View Details</a></li>
+                  </ul>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card pet-card">
+              <div class="pet-card-img-cover">
+                <img src="example_images/bean1.jpg" class="card-img-top pet-card-img">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Bean</h5>
+                <p class="card-text">
+                  <ul class="pet-card-text">
+                    <li>Breed: Calico</li>
+                    <li>Age: 4 years</li>
+                    <li><a href="details.html" class="stretched-link">View Details</a></li>
+                  </ul>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="carousel-item">
-          2 bruh
-        </div>
-        <div class="carousel-item">
-          what 3 three??
-        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only"></span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only"></span>
+        </a>
       </div>
     </div>
 
-    <div class="col">
+    <!--Reviews Card-->
+    <div class="col mt-2">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Reviews</h5>
@@ -96,6 +188,12 @@
     </div>
   </div>
 </div>
+
+<footer class="d-flex flex-column justify-content-center mt-auto" style="height: 8vh; background-color: #87CEEB;">
+  <p class="m-auto text-white">
+    © 2023 PetPal Inc.
+  </p>
+</footer>
 
 </body>
 </html>
