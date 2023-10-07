@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petpal prototype</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="navbar.css">
+</head>
+
+<body class="bg-body-tertiary">
+
+    <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150px"></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="my_pets.html">My Pets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="applications.html">Applications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mobile-nav-item" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="nav-item mobile-nav-item">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="collapse"
+                                data-bs-target="#notifications-list" aria-expanded="true"
+                                aria-controls="notifications-list">
+                                Notifications
+                            </a>
+                            <div class="collapse" id="notifications-list">
+                                <div class="ms-4"><a class="nav-link" href="#">Notification 1</a></div>
+                                <div class="ms-4"><a class="nav-link" href="#">Notification 2</a></div>
+                                <div class="ms-4"><a class="nav-link" href="#">Notification 3</a></div>
+                                <div class="ms-4"><a class="nav-link" href="#">Notification 4</a></div>
+                                <div class="ms-4"><a class="nav-link" href="#">Notification 5</a></div>
+                            </div>
+                        </div>
+                    </li>
+                    <hr>
+                    <li class="nav-item">
+                        <a class="nav-link mobile-nav-item" href="#">Logout</a>
+                    </li>
+                </ul>
+
+                <div class="ms-auto d-flex" style="margin-right: 6rem;">
+                    <div class="dropdown my-auto def-nav-item">
+                        <button class="btn" type="button" data-bs-toggle="dropdown">
+                            <!-- https://icons.getbootstrap.com/icons/bell/ -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor"
+                                class="bi bi-bell me-2 text-secondary" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                            </svg>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Notification 1</a></li>
+                            <li><a class="dropdown-item" href="#">Notification 2</a></li>
+                            <li><a class="dropdown-item" href="#">Notification 3</a></li>
+                            <li><a class="dropdown-item" href="#">Notification 4</a></li>
+                            <li><a class="dropdown-item" href="#">Notification 5</a></li>
+                        </ul>
+                    </div>
+                    <div class="vr mx-2 def-nav-item"></div>
+                    <div class="dropdown my-auto def-nav-item">
+                        <button class="btn" type="button" data-bs-toggle="dropdown">
+                            <img class="rounded-circle border" src="images/user.png"
+                                style="background-color: cornsilk; width: 50px;">
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <hr>
+                            <li><a class="dropdown-item" href="index.html">Log out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Main content -->
+
+    <div class="container-fluid d-flex flex-columnm my-5">
+
+        <div class="d-flex mx-auto">
+
+            <div class="d-flex flex-column justify-content-center align-self-start">
+                <div class="card text-center" style="width: 28rem;">
+                    <div class="mb-4" style="background-color: #C8F4FF;">
+                        <!-- <img class="mt-5 mx-auto rounded-circle border" src="images/user.png" style="background-color: cornsilk; width: 80px;" > -->
+                        <div class="mt-3 mx-auto rounded-circle border text-center d-flex flex-column justify-content-center"
+                            src="images/user.png"
+                            style="background-color: cornsilk; width: 80px; height: 80px; transform: translate(0, 50%); ">
+                            <h3 style="color: chocolate" class="my-auto">K</h3>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body d-flex flex-column justify-content-center mt-2">
+                        <h5 class="card-title">Kai Dicarlantonio</h5>
+                        <a href="#" class="card-link link-underline link-underline-opacity-0"><b>View Profile</b></a>
+
+
+                        <div class="d-flex my-4 mx-auto">
+                            <div class="d-flex my-auto" style="width: 30%;">
+                                <!-- https://icons.getbootstrap.com/icons/star-fill/ -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+                                <!-- https://icons.getbootstrap.com/icons/star-half/ -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-star-half" viewBox="0 0 16 16">
+                                    <path
+                                        d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
+                                </svg>
+                            </div>
+                            <div class="vr mx-2"></div>
+                            <div href="#" class="my-auto text-muted" style="width: 30%;">123 reviews</div>
+                            <div class="vr mx-2"></div>
+                            <div class="text-muted my-auto" style="width: 30%;">Joined Sep. 21, 2023</div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="list-group flex-column mt-5">
+                    <li class="list-group-item">
+                        <a class="nav-link" href="my_pets.html">My Pets</a>
+                    </li>
+                    <li class="list-group-item active">
+                        <a class="nav-link" href="applications.html">Applications</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="ms-5 d-flex flex-column" style="min-width: 40vw;">
+                <h1 class="ms-1 mb-0">Applications</h1>
+                <hr>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <b>Happy Dog</b>
+                        <div class="d-flex">
+                            <div class="text-muted">From: UserName</div>
+                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
+                            <a class="stretched-link" href="adoption.html"></a>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Happy Dog</b>
+                        <div class="d-flex">
+                            <div class="text-muted">From: UserName</div>
+                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
+                            <a class="stretched-link" href="adoption.html"></a>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Happy Dog</b>
+                        <div class="d-flex">
+                            <div class="text-muted">From: UserName</div>
+                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
+                            <a class="stretched-link" href="adoption.html"></a>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Happy Dog</b>
+                        <div class="d-flex">
+                            <div class="text-muted">From: UserName</div>
+                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
+                            <a class="stretched-link" href="adoption.html"></a>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Happy Dog</b>
+                        <div class="d-flex">
+                            <div class="text-muted">From: UserName</div>
+                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
+                            <a class="stretched-link" href="adoption.html"></a>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Happy Dog</b>
+                        <div class="d-flex">
+                            <div class="text-muted">From: UserName</div>
+                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
+                            <a class="stretched-link" href="adoption.html"></a>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Happy Dog</b>
+                        <div class="d-flex">
+                            <div class="text-muted">From: UserName</div>
+                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
+                            <a class="stretched-link" href="adoption.html"></a>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Happy Dog</b>
+                        <div class="d-flex">
+                            <div class="text-muted">From: UserName</div>
+                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
+                            <a class="stretched-link" href="adoption.html"></a>
+                        </div>
+                    </li>
+                </ul>
+                <!-- https://getbootstrap.com/docs/4.0/components/pagination/ (Working with icons) -->
+                <ul class="pagination my-3 mx-auto">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only"></span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="applications.html">1</a></li>
+                    <li class="page-item"><a class="page-link" href="applications_2.html">2</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="applications_2.html" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

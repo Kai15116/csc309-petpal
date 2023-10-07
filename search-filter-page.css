@@ -1,0 +1,92 @@
+.category-filter-container ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.navbar-type-link:link,
+.navbar-type-link:visited{
+    text-decoration: none;
+    color: black;
+}
+
+
+.category-filter-container a {
+    display: block;
+    padding: 1rem 0;
+    /* width: 100%; */
+    
+    margin: 0;
+}
+
+.navbar-type-link:hover {
+    background: rgb(240, 248, 255);
+    padding-left: 2px;
+    box-shadow: 0px 1px 1px rgba(178, 178, 178, 0.701);
+
+}
+
+
+
+
+.area-center {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.section-top {
+    /* height: 60vh; */
+    /* height: 300px; */
+    background: rgb(237, 237, 237);
+
+    /* https://unsplash.com/photos/dxTYr7do8tM?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink */
+    /* https://unsplash.com/photos/RKj8f4odYTM?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink */
+
+    /* https://unsplash.com/photos/urs_y9NwFcc?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink */
+
+    /* "https://www.freepik.com/free-vector/paper-style-white-monochrome-background_15518074.htm#query=background&position=9&from_view=keyword&track=sph"Image by pikisuperstar on Freepik */
+    /* Photo by href="https://unsplash.com/@annadudkova?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyTextAnna Dudkova</> on <a href="https://unsplash.com/photos/urs_y9NwFcc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> */
+  
+    background: url("5594016.jpg"), linear-gradient(rgba(90, 89, 89, 0.218), rgba(0,0,0,0.3));
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.slider-container-cus {
+    width: 60%; 
+    max-width: 770px;
+    
+
+    
+    
+ 
+}
+
+
+.section-bottom {
+    /* background: rgb(237, 237, 237); */
+
+/* background: white; */
+width: 80%;
+margin: 0 auto;
+}
+
+
+.section-bottom .card:hover{
+box-shadow: 0.1rem 0.5rem 6px rgba(24, 24, 24, 0.199);
+transform: scale(101%);
+
+}
+
+.pagination-container {
+display: flex;
+justify-content: center;
+}
+
+.sort-filter-section {
+    width: 80%;
+}
+
+

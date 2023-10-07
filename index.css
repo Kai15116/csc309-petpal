@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+
+#main-container {
+    background-image: url('images/pets-image-2-resized.jpg'), linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
+    background-blend-mode: overlay;
+    background-size: cover; 
+    background-repeat: no-repeat;
+    height: 70vh;
+}
+
+#become-pet-shelter{
+    background-image: url('images/cat-image-3.jpg');
+    background-blend-mode: overlay;
+    background-size: cover; 
+    background-repeat: no-repeat;
+    height: 70vh;
+}
+
+.card:hover {
+    box-shadow: 0.1rem 0.5rem 6px rgba(24, 24, 24, 0.199);
+    transform: scale(101%);
+}

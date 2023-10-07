@@ -1,0 +1,93 @@
+.exploration-button {
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 3px;
+    border: 4px solid green;
+    color: green;
+    padding: 0.5rem 1rem;
+    transition: 0.3s;
+    cursor: pointer;
+    position: relative;
+
+}
+
+.exploration-button:active,
+.exploration-button:link, 
+.exploration-button:visited{
+    color: green;
+
+}
+
+.exploration-button:active {
+    box-shadow: 2px 5px 5px 3px rgba(0, 0, 0, 0.25);
+}
+
+
+
+.exploration-button:hover {
+    background-color: green;
+    color:white;
+    border-color: black;
+    border-radius: 3px;
+    z-index: 1;
+
+}
+
+.exploration-button:hover{
+    transform: scale(1.2);
+}
+
+.svg-container {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 45%;
+    z-index: -1;
+    animation: fadeIn 1.2s;
+}
+.check-svg-container {
+    border: 2px solid green;
+    border-radius: 100%;
+}
+.success-title, .success-message{
+    font-family: Georgia, 'Times New Roman', Times;
+    text-shadow: 2px 2px 4px rgba(14, 111, 64, 0.502);
+}
+
+.success-pop {
+    animation: moveFromBottom 1.2s;
+}
+
+
+
+@keyframes fadeIn {
+    0% {
+
+opacity: 0;
+
+}
+
+100% {
+
+opacity: 100%;
+}
+
+
+    
+}
+
+
+@keyframes moveFromBottom {
+    0% {
+transform: translateY(500%);
+opacity: 0;
+
+}
+
+100% {
+transform: translateY(0%);
+opacity: 100%;
+}
+
+    
+}
