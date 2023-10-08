@@ -41,14 +41,17 @@
   </div>
 </nav>
 
-<div class="container mt-4 mb-4" style="min-height: 82vh;">
+<div class="container mt-4 mb-4" style="min-height: 77vh;">
     <div class="row">
         <div class="col-3">
             <div class="list-group">
-                <button class="btn btn-link list-group-item list-group-item-action collapsed" data-bs-toggle="collapse" data-bs-target="#collapseShelterDescription" aria-expanded="true" aria-controls="collapseShelterDescription">
+                <button class="btn btn-link list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#collapseShelterContact" aria-expanded="true" aria-controls="collapseShelterContact">
+                    Shelter Contact
+                </button>
+                <button class="btn btn-link list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#collapseShelterDescription" aria-expanded="true" aria-controls="collapseShelterDescription">
                     Shelter Description
                 </button>
-                <button class="btn btn-link list-group-item list-group-item-action collapsed" data-bs-toggle="collapse" data-bs-target="#collapseShelterImages" aria-expanded="true" aria-controls="collapseShelterImages">
+                <button class="btn btn-link list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#collapseShelterImages" aria-expanded="true" aria-controls="collapseShelterImages">
                     Profile Images
                 </button>
                 <button class="btn btn-link list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#collapseCenterBlurb" aria-expanded="true" aria-controls="collapseCenterBlurb">
@@ -59,10 +62,36 @@
         <div class="col">
             <div class="card" id="editInfoAccordion">
                 <div class="card-body" data-bs-parent="editInfoAccordion">
-                    <h1 class="card-title">Edit Your Information</h1>
+                    <h1 class="card-title">Edit Shelter Information</h1>
 
+                    <!--Collapse Shelter Contact Information-->
+                    <div class="collapse show" id="collapseShelterContact" data-bs-parent="#editInfoAccordion">
+                        <div class="form-group">
+                            <label for="shelterContactAddress">Shelter Address</label>
+                            <input class="form-control" id="shelterContactAddress" placeholder="123 Main Street, Toronto ON">
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="shelterContactWebsite">Shelter Website</label>
+                            <input class="form-control" id="shelterContactWebsite" placeholder="exampleshelter.com">
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="shelterContactEmail">Shelter Email</label>
+                            <input type="email" class="form-control" id="shelterContactEmail" placeholder="name@example.com">
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="shelterContactPhone">Shelter Phone Number</label>
+                            <input class="form-control" id="shelterContactPhone" placeholder="+1 123-456-7890">
+                        </div>
+                        <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
+                            <button type="submit" class="btn btn-primary ms-5">Save</button>
+                            <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShelterDescription">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                    
                     <!--Collapse Shelter Description-->
-                    <div class="collapse show" id="collapseShelterDescription" data-bs-parent="#editInfoAccordion">
+                    <div class="collapse" id="collapseShelterDescription" data-bs-parent="#editInfoAccordion">
                         <div class="form-group"">
                             <label for="shelterDescriptionName">Shelter Name</label>
                             <textarea class="form-control" id="shelterDescriptionName" rows="1"></textarea>
@@ -71,13 +100,11 @@
                             <label for="shelterDescription">Shelter Description</label>
                             <textarea class="form-control" id="shelterDescription" rows="3"></textarea>
                         </div>
-                        <div class="form-group mt-4">
-                            <label for="shelterDescriptionEmail">Shelter Email</label>
-                            <input type="email" class="form-control" id="shelterDescriptionEmail" placeholder="name@example.com">
-                        </div>
                         <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
-                            <button type="submit" class="btn btn-primary ms-4">Save</button>
-                            <button type="submit" class="btn btn-danger ms-4">Cancel</button>
+                            <button type="submit" class="btn btn-primary ms-5">Save</button>
+                            <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShelterDescription">
+                                Cancel
+                            </button>
                         </div>
                     </div>
 
@@ -92,8 +119,10 @@
                             <input type="file" class="form-control" id="shelterImagesCircle">
                         </div>
                         <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
-                            <button type="submit" class="btn btn-primary ms-4">Save</button>
-                            <button type="submit" class="btn btn-danger ms-4">Cancel</button>
+                            <button type="submit" class="btn btn-primary ms-5">Save</button>
+                            <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShelterImages">
+                                Cancel
+                            </button>
                         </div>
                     </div>
 
@@ -101,15 +130,17 @@
                     <div class="collapse" id="collapseCenterBlurb" data-bs-parent="#editInfoAccordion">
                         <div class="form-group"">
                             <label for="shelterCenterBlurbTitle">Center Blurb Title</label>
-                            <textarea class="form-control" id="shelterCenterBlurbTitle" rows="3"></textarea>
+                            <textarea class="form-control" id="shelterCenterBlurbTitle" rows="1"></textarea>
                         </div>
                         <div class="form-group mt-4">
                             <label for="shelterCenterBlurbContent">Center Blurb Content</label>
                             <textarea class="form-control" id="shelterCenterBlurbContent" rows="3"></textarea>
                         </div>
                         <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
-                            <button type="submit" class="btn btn-primary ms-4">Save</button>
-                            <button type="submit" class="btn btn-danger ms-4">Cancel</button>
+                            <button type="submit" class="btn btn-primary ms-5">Save</button>
+                            <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCenterBlurb">
+                                Cancel
+                            </button>
                         </div>
                     </div>
                 </div>

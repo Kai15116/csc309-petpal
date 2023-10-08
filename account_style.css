@@ -1,7 +1,7 @@
 .card {
   border-radius: 10px;
 }
-.list-group {
+.list-group-item {
   border-radius: 0;
 }
 body, html {
