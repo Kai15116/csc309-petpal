@@ -83,8 +83,8 @@ body, html {
   overflow: hidden;
 }
 .review-profile-pic {
-  width: 4em;
-  height: auto;
+  width: auto;
+  height: 6em;
   object-fit: cover;
 }
 .rating-stars {
