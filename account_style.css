@@ -1,6 +1,9 @@
 .card {
   border-radius: 10px;
 }
+.list-group {
+  border-radius: 0;
+}
 body, html {
   height: 100%;
   margin: 0;
