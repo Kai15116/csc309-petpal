@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- TODO: update the header to be same format as index.html header -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Edit Page</title>
+    <link rel="stylesheet" href="pet_creation_and_update.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Bootstrap Requirements -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+    <div class="page-container">
+      <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+          <div class="container-fluid">
+
+            <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150px"></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto">
+
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="index.html">Adoption Process</a>
+                </li>
+                <hr>
+                <li class="nav-item mobile-nav-item">
+                  <a class="nav-link" href="log-in-page.html">Login</a>
+                </li>
+                <li class="nav-item mobile-nav-item">
+                  <a class="nav-link" href="sign-up-page.html">Sign up</a>
+                </li>
+              </ul>
+              <div class="ms-auto">
+                <a class="nav-item btn btn btn-outline-primary me-2 def-nav-item" role="button" href="log-in-page.html">Login</a>
+                <a class="nav-item btn btn-primary def-nav-item" role="button" href="sign-up-page.html">Sign up</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <main class="page-content">
+            <h3>Edit Pet Listing Fields: Lalo</h3>        
+            <div class="background-details">
+                <div class="bg-white mt-4 p-4 rounded shadow">
+                    <div class="container">
+                        <div class="pet-details">
+                            <h4>1. Pet Details</h4>
+
+                            <form class="form-inputs" action="submit_pet_listing.php" method="POST">
+                                <div class="form-group">
+                                    <label for="breed">Pet Name:</label>
+                                    <input type="text" class="form-control" id="breed" name="breed" value="Lalo">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pet_type">Pet Type:</label>
+                                    <select class="form-control" id="pet_type" name="pet_type">
+                                        <option value="Cat">Cat</option>
+                                        <option value="Dog">Dog</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sex">Sex:</label>
+                                    <select class="form-control" id="sex" name="sex">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="breed">Breed:</label>
+                                    <input type="text" class="form-control" id="breed" name="breed" placeholder="ex: Shih Tzu" value="American Bobtail">
+                                </div>
+                                <div class="form-group">
+                                    <label for="age">Age:</label>
+                                    <input type="number" class="form-control" id="age" name="age" min="0" max="99" placeholder="0-99" value="1.5">
+                                </div>
+                                <div class="form-group">
+                                    <label for="weight">Weight (lbs):</label>
+                                    <input type="number" class="form-control" id="weight" name="weight" min="0" max="999" placeholder="0-999" value="11.464">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="weight">Adoption Fee (CAD):</label>
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="adoption_fee" name="adoption_fee" step="0.01" placeholder="Use 0 for free adoption" value="125">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="addressLine1" class="form-label">Adoption Location:</label>
+                                    <input type="text" class="form-control" id="addressLine1" placeholder="ex: address, city" value="27 King's College Cir, Toronto">
+                                </div>
+                                <div class="form-group">
+                                    <label for="medical_history">Medical History:</label>
+                                    <input type="text" class="form-control" id="medical_history" name="medical_history" placeholder="vaccines received, allergies, etc" value="5 Vacinations (Polio, Flu, etc)">
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="bg-white mt-4 p-4 rounded shadow">
+                    <div class="container">
+                        <div class="pet-details">
+                            <h4>2. Media</h4>
+                            <h6>Include photos with different angles and environments (4:3 Aspect Ratio Recomended)</h6>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for="image1" class="image-label">
+                                        <input type="file" class="image-input" id="image1" accept="image/*" style="display:none;">
+                                        <img src="images/image1.jpg" alt="No Image" class="img-fluid image-preview" id="imagePreview1">
+                                    </label>
+                                </div>
+                                <div class="col-4">
+                                    <label for="image2" class="image-label">
+                                        <input type="file" class="image-input" id="image2" accept="image/*" style="display:none;">
+                                        <img src="images/image2.jpg" alt="No Image" class="img-fluid image-preview" id="imagePreview2">
+                                    </label>
+                                </div>
+                                <div class="col-4">
+                                    <label for="image3" class="image-label">
+                                        <input type="file" class="image-input" id="image3" accept="image/*" style="display:none;">
+                                        <img src="images/image3.jpg" alt="No Image" class="img-fluid image-preview" id="imagePreview3">
+                                    </label>
+                                </div>
+                                <script>
+                                    // function to handle image selection and display
+                                    function handleImageSelect(input, preview) {
+                                        const file = input.files[0];
+                                        if (file) {
+                                            const reader = new FileReader();
+                                            reader.onload = function(e) {
+                                                preview.src = e.target.result;
+                                            };
+                                            reader.readAsDataURL(file);
+                                        } else {
+                                            preview.src = "no_image_icon.png"; // reset to the default image
+                                        }
+                                    }
+                            
+                                    // attach event listeners to image inputs
+                                    const imageInputs = document.querySelectorAll(".image-input");
+                                    const imagePreviews = document.querySelectorAll(".image-preview");
+                            
+                                    imageInputs.forEach((input, index) => {
+                                        input.addEventListener("change", function() {
+                                            handleImageSelect(input, imagePreviews[index]);
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="bg-white mt-4 p-4 rounded shadow">
+                    <div class="container">
+                        <div class="pet-details">
+                            <h4 >3. Additional Details</h4>
+                            <h6>Include any notable details about the pet's behaviour and traits for the new owner</h6>
+                            <form class="form-inputs" action="submit_pet_listing.php" method="POST">
+                                <div class="form-group">
+                                    <label for="medical_history">Additional Notes:</label>
+                                    <textarea class="form-control" id="medical_history" name="medical_history" rows="4">Lalo is a very nice cat. He loves to be curious and is always exploring stuff. This cat is great for big families. He's always ready for a new adventure, and ensuring his safety is a top priority. Lalo can't wait to find his forever home, where he'll continue to be the warrior with the heart of gold!
+                                    </textarea>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="confirm-button"> 
+                        <a class="btn btn-primary btn-lg btn-xl" href="adoption.html" role="button">Edit Pet Listing</a>   
+                    <div>
+                </div>
+            </div> 
+            <div class="d-flex pet-creation-graphic" id="post-pet">
+                <div class="ms-5 p-2 my-auto"
+                  style="background-image: linear-gradient(rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4)); width: 40%;">
+                  <h1 class="mb-2" style="color: #87CEEB;">Post your pet, find them a new home!</h1>
+                  <p class="text-light"> By posting your pet on our site, you can make a profound difference in the lives of 
+                    both animals in need and caring individuals looking to provide a loving home. Your act of kindness opens the 
+                    door to a brighter future for pets who may have experienced hardship or abandonment. It offers them a chance 
+                    to find a safe and nurturing environment where they can thrive and be cherished as part of a loving family. 
+                    Your pet's story, personality, and unique qualities can touch the hearts of potential adopters, forging 
+                    connections that lead to lifelong bonds. Your contribution not only helps a pet find a new home but also 
+                    enriches the lives of those who choose to adopt, creating a heartwarming win-win for all involved. Together, 
+                    we can make a positive impact and bring happiness to both pets and their future families. Post your pet today 
+                    and be a part of this wonderful journey of compassion and companionship!
+                  </p>
+                </div>
+            </div>
+        </div>
+        <div class="space-bottom"></div>
+        </main>
+        <footer>
+            Copyright 2023 by The Salamancas.
+        </footer>
+    </div>
+</body>
+</html>

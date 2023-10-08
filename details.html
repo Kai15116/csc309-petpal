@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- TODO: update the header to be same format as index.html header -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Details Page</title>
     <link rel="stylesheet" href="details_and_adoption.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="navbar.css">
 </head>
 <body>
     <!-- Bootstrap Requirements -->
@@ -13,17 +15,51 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
     <div class="page-container">
-        <header>
+      <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+          <div class="container-fluid">
+
+            <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150px"></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto">
+
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="index.html">Adoption Process</a>
+                </li>
+                <hr>
+                <li class="nav-item mobile-nav-item">
+                  <a class="nav-link" href="log-in-page.html">Login</a>
+                </li>
+                <li class="nav-item mobile-nav-item">
+                  <a class="nav-link" href="sign-up-page.html">Sign up</a>
+                </li>
+              </ul>
+              <div class="ms-auto">
+                <a class="nav-item btn btn btn-outline-primary me-2 def-nav-item" role="button" href="log-in-page.html">Login</a>
+                <a class="nav-item btn btn-primary def-nav-item" role="button" href="sign-up-page.html">Sign up</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <!-- <header>
             <div class="logo-container">
                 <img src="images/logo-2.png" alt="logo" class="logo-img">
             </div>
             <div class="button-container">
-                <!-- Bootstrap buttons -->
                 <button type="button" class="btn btn-light btn-lg">Shelter Reviews</button>
                 <button type="button" class="btn btn-secondary btn-lg">Login</button>
                 <button type="button" class="btn btn-secondary btn-lg">Sign Up</button>
             </div>
-        </header>
+        </header> -->
         <main class="page-content">        
             <div id="carouselExampleIndicators" class="carousel slide">
                 <div class="carousel-indicators">
@@ -34,20 +70,20 @@
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <img src="images/image1.jpg" alt="Image 1" class="pet-main-img">
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-md-block">
                         <h2>Meet Lalo!</h2>
                     </div>
                   </div>
                   <div class="carousel-item">
                     <img src="images/image2.jpg" alt="Image 2" class="pet-main-img">
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-md-block">
                         <h5>Give Lalo A Loving Home</h5>
                     </div>
                     
                   </div>
                   <div class="carousel-item">
                     <img src="images/image3.jpg" alt="Image 3" class="pet-main-img">
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-md-block">
                         <h5>Bring Home A Loving Companion</h5>
                     </div>
                   </div>
@@ -61,45 +97,108 @@
                   <span class="visually-hidden">Next</span>
                 </button>
             </div>
+            <!-- TODO: add a section to the right to add the pet donation shelter that entered this pet --> 
             <div class="background-details">
-                <div class="container">
+                <div class="container" id="pet-details-container">
                     <div class="pet-details">
                         <h1>Get To Know Lalo</h1>
-                        <div class="col-lg-6">
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <th scope="row"><strong>Gender:</strong></th>
-                                    <td>Male</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><strong>Breed:</strong></th>
-                                    <td>American Bobtail</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><strong>Age:</strong></th>
-                                    <td>0 Years/5 Months</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><strong>Past Owners:</strong></th>
-                                    <td>None</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><strong>Adoption Status:</strong></th>
-                                    <td>Adopted</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><strong>Weight:</strong></th>
-                                    <td>11.464 lbs</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><strong>Adoption Fee:</strong></th>
-                                    <td>$125</td>
-                                </tr>
-                                </tbody>
-                            </table>    
+                        <div class="d-flex"> 
+                            <div class="col-lg-6">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row"><strong>Sex:</strong></th>
+                                        <td>Male</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><strong>Breed:</strong></th>
+                                        <td>American Bobtail</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><strong>Age:</strong></th>
+                                        <td>0 Years/6 Months</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><strong>Weight:</strong></th>
+                                        <td>11.464 lbs</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><strong>Adoption Fee:</strong></th>
+                                        <td>$125</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><strong>Posted Date:</strong></th>
+                                        <td>March 20, 2022</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><strong>Location:</strong></th>
+                                        <td>27 King's College Cir, Toronto</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><strong>Medical History:</strong></th>
+                                        <td>5 Vacinations (Polio, Flu, etc)</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row"><strong>Adoption Status:</strong></th>
+                                      <td>Adopted</td>
+                                    </tr>
+                                    </tbody>
+                                </table> 
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card text-center ms-5" id="profile-card">
+                                    <div class="mb-4" style="background-color: #C8F4FF;">
+                                      <img class="mt-3 mx-auto rounded-circle border text-center d-flex flex-column justify-content-center"
+                                        src="images/user-2.png"
+                                        style="width: 80px; height: 80px; transform: translate(0, 50%); ">
+                                    </div>
+                                  
+                                  
+                                    <div class="card-body d-flex flex-column justify-content-center mt-2">
+                                      <h5 class="card-title">Random Shelter</h5>
+                                      <a href="#" class="card-link link-underline link-underline-opacity-0"><b>View Profile</b></a>
+                                  
+                                  
+                                      <div class="d-flex my-4 mx-auto">
+                                        <div class="d-flex my-auto" style="width: 30%;">
+                                          <!-- https://icons.getbootstrap.com/icons/star-fill/ -->
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-star-fill" viewBox="0 0 16 16">
+                                            <path
+                                              d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                          </svg>
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-star-fill" viewBox="0 0 16 16">
+                                            <path
+                                              d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                          </svg>
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-star-fill" viewBox="0 0 16 16">
+                                            <path
+                                              d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                          </svg>
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-star-fill" viewBox="0 0 16 16">
+                                            <path
+                                              d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                          </svg>
+                                          <!-- https://icons.getbootstrap.com/icons/star-half/ -->
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-star-half" viewBox="0 0 16 16">
+                                            <path
+                                              d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
+                                          </svg>
+                                        </div>
+                                        <div class="vr mx-2"></div>
+                                        <div href="#" class="my-auto text-muted" style="width: 30%;">123 reviews</div>
+                                        <div class="vr mx-2"></div>
+                                        <div class="text-muted my-auto" style="width: 30%;">Joined Sep. 21, 2023</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-12" id="owner-notes">
                             <h2>Owner Notes:</h2>
                             <ul>
                               <li>Lalo is a very nice cat</li>
@@ -109,15 +208,17 @@
                               <li>Lalo can't wait to find his forever home, where he'll continue to be the warrior with the heart of gold!</li>
                             </ul>
                           </div>
-                            <a class="btn btn-primary btn-lg" href="adoption.html" role="button">Apply For Adoption</a>
+                            <a class="btn btn-primary btn-lg apply-button" href="adoption.html" role="button">Apply For Adoption</a>
                         </div>
                     </div>
-                </div>
+                </div>    
             </div>
         </main>
-        <footer>
-            Copyright 2023 by The Salamancas.
-        </footer>
+        <footer class="d-flex flex-column justify-content-center mt-auto" style="height: 8vh; background-color: #87CEEB;">
+          <p class="m-auto text-white">
+            © 2023 PetPal Inc.
+          </p>
+      </footer>
     </div>
 </body>
 </html>
