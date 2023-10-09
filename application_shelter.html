@@ -12,48 +12,91 @@
 
 </head>
 
-<body class="background-color" style="height: 100%; margin: 0;">
+<body class="background-color" style="height: 100%; margin: 0; ">
 
-    <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
-    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
-        <div class="container-fluid">
-
-            <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150px"></a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.html">Adoption Process</a>
-                    </li>
-                    <hr>
-                    <li class="nav-item mobile-nav-item">
-                        <a class="nav-link" href="log-in-page.html">Login</a>
-                    </li>
-                    <li class="nav-item mobile-nav-item">
-                        <a class="nav-link" href="sign-up-page.html">Sign up</a>
-                    </li>
-                </ul>
-                <div class="ms-auto">
-                    <a class="nav-item btn btn btn-outline-primary me-2 def-nav-item" role="button"
-                        href="log-in-page.html">Login</a>
-                    <a class="nav-item btn btn-primary def-nav-item" role="button" href="sign-up-page.html">Sign up</a>
+        <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+            <div class="container-fluid">
+    
+                <a class="navbar-brand" href="my_pets.html"><img src="images/logo-1.png" width="150px"></a>
+    
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="my_pets.html">My Pets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="applications.html">Applications</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mobile-nav-item" href="#">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="nav-item mobile-nav-item">
+                                <a class="nav-link" href="#" role="button" data-bs-toggle="collapse"
+                                    data-bs-target="#notifications-list" aria-expanded="true"
+                                    aria-controls="notifications-list">
+                                    Notifications
+                                </a>
+                                <div class="collapse" id="notifications-list">
+                                    <div class="ms-4"><a class="nav-link" href="#">Notification 1</a></div>
+                                    <div class="ms-4"><a class="nav-link" href="#">Notification 2</a></div>
+                                    <div class="ms-4"><a class="nav-link" href="#">Notification 3</a></div>
+                                    <div class="ms-4"><a class="nav-link" href="#">Notification 4</a></div>
+                                    <div class="ms-4"><a class="nav-link" href="#">Notification 5</a></div>
+                                </div>
+                            </div>
+                        </li>
+                        <hr>
+                        <li class="nav-item">
+                            <a class="nav-link mobile-nav-item" href="#">Logout</a>
+                        </li>
+                    </ul>
+    
+                    <div class="ms-auto d-flex" style="margin-right: 6rem;">
+                        <div class="dropdown my-auto def-nav-item">
+                            <button class="btn" type="button" data-bs-toggle="dropdown">
+                                <!-- https://icons.getbootstrap.com/icons/bell/ -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor"
+                                    class="bi bi-bell me-2 text-secondary" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Notification 1</a></li>
+                                <li><a class="dropdown-item" href="#">Notification 2</a></li>
+                                <li><a class="dropdown-item" href="#">Notification 3</a></li>
+                                <li><a class="dropdown-item" href="#">Notification 4</a></li>
+                                <li><a class="dropdown-item" href="#">Notification 5</a></li>
+                            </ul>
+                        </div>
+                        <div class="vr mx-2 def-nav-item"></div>
+                        <div class="dropdown my-auto def-nav-item">
+                            <button class="btn" type="button" data-bs-toggle="dropdown">
+                                <img class="rounded-circle border" src="images/user.png"
+                                    style="background-color: cornsilk; width: 50px;">
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <hr>
+                                <li><a class="dropdown-item" href="index.html">Log out</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
     <!-- Main Content -->
     <main class="d-flex flex-column justify-content-center align-items-center" style="height: 100%;">
-        <div class="d-flex align-items-start mx-auto" style="height: 100%;">
+        <div class="d-flex align-items-start" style="height: 100%;" id="main-container">
             <div class="application-form" style="height: 100%;">
                 <!-- <h1 class="fw-bold">Just One More Step To Adoption!</h1> -->
 
@@ -115,9 +158,9 @@
                 </div>
             </div>
 
-            <div class="chat-container ms-5" style="width: 30vw;">
-                <div class="mb-0" style="height: 90vh;">
-                    <div class="messages-container overflow-scroll mb-0 d-flex flex-column" id="messages-container" style="height: 63vh;">
+            <div class="chat-container">
+                <div class="mb-0">
+                    <div class="messages-container overflow-scroll mb-0 d-flex flex-column" id="messages-container">
 
                         <div class="user-message message-seeker align-self-start rounded bg-body-tertiary p-3 my-3 d-flex align-items-center" style="height: auto; max-width: 80%;">
                             <img src="images/user.png" class="rounded-circle border me-3 ms-1 align-self-start" style="width: 50px;">
@@ -132,31 +175,11 @@
                             <div class="text-wrap w-100">Ah! Got it!</div>
                         </div>
 
-                        <!-- <div class="system-message accepted-message w-100 justify-content-center align-items-center d-flex flex-column my-3">
-                            <div class=" text-success d-flex justify-content-center align-items-center text-center" style="width: 90%;">
-                                <p class="fw-bold align-self-center my-auto mx-1">You accepted the application!</p>
-                                <svg  xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
-                                    <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
-                                    <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
-                                </svg>
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="system-message rejected-message w-100 justify-content-center align-items-center d-flex flex-column my-3">
-                            <div class="text-danger d-flex justify-content-center align-items-center text-center" style="width: 90%;">
-                                <p class="fw-bold align-self-center my-auto mx-1 ">You rejected the application!.</p>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                  </svg>
-                            </div>
-                        </div> -->
-
                     </div>
 
                 </div>
             
-                <div class="sticky-bottom pb-3" style="width: 30vw;">
+                <div class="sticky-bottom pb-3 chat-form-container">
                     <form class="bg-body-tertiary p-3 rounded w-100 shadow" id="chat-form">
                         <div class="form-group mb-2">
                             <div class="d-flex">

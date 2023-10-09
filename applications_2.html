@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="shelter_management.css">
 </head>
 
 <body class="bg-body-tertiary">
@@ -16,7 +17,7 @@
     <nav class="navbar navbar-expand-lg bg-white shadow-sm">
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150px"></a>
+            <a class="navbar-brand" href="my_pets.html"><img src="images/logo-1.png" width="150px"></a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -93,15 +94,18 @@
     </nav>
 
 
+    <!-- Main content -->
+
     <div class="container-fluid d-flex flex-columnm my-5">
 
-        <div class="d-flex mx-auto">
+        <div class="d-flex mx-auto" id="main-container">
 
             <div class="d-flex flex-column justify-content-center align-self-start">
-                <div class="card text-center" style="width: 28rem;">
+                    <div class="card text-center" id="profile-card">
                     <div class="mb-4" style="background-color: #C8F4FF;">
-                        <img class="mt-5 mx-auto rounded-circle border" src="images/user.png"
-                            style="background-color: cornsilk; width: 80px; transform: translate(0, 50%);">
+                        <img class="mt-3 mx-auto rounded-circle border text-center d-flex flex-column justify-content-center"
+                        src="images/user.png"
+                        style="width: 80px; height: 80px; transform: translate(0, 50%); ">
                     </div>
 
 
@@ -158,51 +162,65 @@
                 </ul>
             </div>
 
-            <div class="ms-5 d-flex flex-column" style="min-width: 40vw;">
+            <div class="d-flex flex-column" id="lst-container" style="min-width: 40vw;">
                 <h1 class="ms-1 mb-0">Applications</h1>
                 <hr>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <b>Happy Dog</b>
                         <div class="d-flex">
-                            <div class="text-muted">From: UserName</div>
-                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
-                            <a class="stretched-link" href="adoption.html"></a>
+                            <div class="text-muted" id="application-from">From: UserName</div>
+                            <div class="px-2"></div>
+                            <div class="text-muted ms-auto" id="application-date">Sept. 21, 2023</div>
+                            <a class="stretched-link" href="application_shelter.html"></a>
                         </div>
                     </li>
                     <li class="list-group-item">
                         <b>Happy Dog</b>
                         <div class="d-flex">
-                            <div class="text-muted">From: UserName</div>
-                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
-                            <a class="stretched-link" href="adoption.html"></a>
+                            <div class="text-muted" id="application-from">From: UserName</div>
+                            <div class="px-2"></div>
+                            <div class="text-muted ms-auto" id="application-date">Sept. 21, 2023</div>
+                            <a class="stretched-link" href="application_shelter.html"></a>
                         </div>
                     </li>
                     <li class="list-group-item">
                         <b>Happy Dog</b>
                         <div class="d-flex">
-                            <div class="text-muted">From: UserName</div>
-                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
-                            <a class="stretched-link" href="adoption.html"></a>
+                            <div class="text-muted" id="application-from">From: UserName</div>
+                            <div class="px-2"></div>
+                            <div class="text-muted ms-auto" id="application-date">Sept. 21, 2023</div>
+                            <a class="stretched-link" href="application_shelter.html"></a>
                         </div>
                     </li>
-                    <!-- https://getbootstrap.com/docs/4.0/components/pagination/ (Working with icons) -->
-                    <ul class="pagination my-3 mx-auto">
-                        <li class="page-item">
-                            <a class="page-link" href="applications.html" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only"></span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="applications.html">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="applications_2.html">2</a></li>
-                        <li class="page-item">
-                            <a class="page-link disabled" href="applications_2.html" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only"></span>
-                            </a>
-                        </li>
-                    </ul>
+                    <li class="list-group-item">
+                        <b>Happy Dog</b>
+                        <div class="d-flex">
+                            <div class="text-muted" id="application-from">From: UserName</div>
+                            <div class="px-2"></div>
+                            <div class="text-muted ms-auto" id="application-date">Sept. 21, 2023</div>
+                            <a class="stretched-link" href="application_shelter.html"></a>
+                        </div>
+                    </li>
+
+                </ul>
+                <!-- https://getbootstrap.com/docs/4.0/components/pagination/ (Working with icons) -->
+                <ul class="pagination my-3 mx-auto">
+                    <li class="page-item">
+                        <a class="page-link" href="applications.html" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only"></span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="applications.html">1</a></li>
+                    <li class="page-item active"><a class="page-link" href="applications_2.html">2</a></li>
+                    <li class="page-item">
+                        <a class="page-link disabled" href="applications_2.html" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only"></span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

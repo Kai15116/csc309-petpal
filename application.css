@@ -22,6 +22,7 @@
     padding: 30px;
     gap: 10px;
     width: 900px;
+    max-width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: start;
@@ -81,4 +82,59 @@
 .rejected-message > div:after {
     width: 21%;
     border-color: var(--bs-danger);
+}
+
+.chat-container{
+    width: 30vw;
+    margin-left: 32px
+}
+
+div:has(.messages-container){
+    height: 90vh;
+}
+
+.messages-container{
+    height: 63vh;
+}
+
+@media only screen and (max-width: 1360px) { 
+    #main-container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chat-container{
+        width: 100%;
+        margin-top: 16px;
+        margin-left: auto;
+        margin-right: auto
+    }
+
+    div:has(.messages-container){
+        height: fit-content;
+    }
+
+    .messages-container{
+        height: 50vh;
+    }
+
+    .chat-container{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .chat-form-container {
+        margin-top: 16px;
+        position: initial;
+    }
+
+    .application-form {
+        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+    }
+}
+
+@media only screen and (max-width: 900px) { 
+    #main-container{
+        width: 100%;
+    }
 }
