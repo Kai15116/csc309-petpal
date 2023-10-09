@@ -319,6 +319,7 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
+                        id="breed2"
                       >
                       <label for="breed2">American Bobtail</label>
                       <br>
@@ -326,15 +327,18 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
+                        id="breed3"
+
                       >
-                      <label for="breed2">Birman</label>
+                      <label for="breed3">Birman</label>
                       <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
+                        id="breed4"
                       >
-                      <label for="breed2">Bombay</label>
+                      <label for="breed4">Bombay</label>
                     </div>
                   </details>
                   <hr>
@@ -345,37 +349,43 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                        value="age1"
+                        id="age1"
                       >
-                      <label for="age"> &lt;1</label>
+                      <label for="age1"> &lt;1</label>
                       <br >
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
+                        id="age2"
                       >
-                      <label for="breed1">1-3</label>
+                      <label for="age2">1-3</label>
                       <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
+                        id="age3"
+
                       >
-                      <label for="breed2">3-7</label>
+                      <label for="age3">3-7</label>
                       <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
+                        id="age4"
                       >
-                      <label for="breed2">8-12</label>
+                      <label for="age4">8-12</label>
                       <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
+                        id="age5"
+
                       >
-                      <label for="breed2">12+</label>
+                      <label for="age5">12+</label>
                     </div>
                   </details>
                   <hr>
@@ -387,8 +397,9 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
+                        id="size1"
                       >
-                      <label for="breed1"> XS(&lt;5kg)</label>
+                      <label for="size1"> XS(&lt;5kg)</label>
 
                       <br>
 
@@ -396,31 +407,35 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
+                        id="size2"
                       >
-                      <label for="breed1">S(5kg-12kg)</label>
+                      <label for="size2">S(5kg-12kg)</label>
 
                       <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
+                        id="size3"
                       >
-                      <label for="breed2">M(12kg-21kg)</label>
+                      <label for="size3">M(12kg-21kg)</label>
                       <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
-                        name="breed2"
+                        name="size4"
+                        id="size4"
                       >
-                      <label for="breed2">L(21kg-40kg)</label>
+                      <label for="size4">L(21kg-40kg)</label>
 
                       <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
+                        id="size5"
                       >
-                      <label for="breed2">XL(45kg+)</label>
+                      <label for="size5">XL(45kg+)</label>
                     </div>
                   </details>
                   <hr >
@@ -572,7 +587,7 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                      />
+                      >
                       <label for="breed1">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -679,179 +694,8 @@
       <p class="m-auto text-white">© 2023 PetPal Inc.</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // javascript for a better demo purpose.
-    const sortSelecter = document.querySelector("#sort-selector");
-    const sortOptions = document.querySelectorAll(".sort-option");
-    const loadingScreen = document.querySelector(".loader-container");
-    const loader = document.querySelector("#loader");
-    const sortFilterResult = document.querySelector("#sort-filter-result");
-    const filterForm = document.querySelector("#filter-form");
+    <script src="search-filter-page.js"></script>
 
-    demo_list = [
-      {
-        img: "images/cat-image-1.jpg",
-        breed: "America Bobtail",
-        age: "1",
-      },
-      {
-        img: "images/cat-image-2.jpg",
-        breed: "Canada Bobtail",
-        age: "13",
-      },
-      {
-        img: "images/cat-image-3.jpg",
-        breed: "China Bobtail",
-        age: "2",
-      },
-      {
-        img: "images/cat-image-1.jpg",
-        breed: "Japan Bobtail",
-        age: "9",
-      },
-      {
-        img: "images/cat-image-2.jpg",
-        breed: "America Bobtail",
-        age: "8",
-      },
-      {
-        img: "images/cat-image-3.jpg",
-        breed: "America Bobtail",
-        age: "3",
-      },
-      {
-        img: "images/cat-image-1.jpg",
-        breed: "America Bobtail",
-        age: "8",
-      },
-      {
-        img: "images/search-filter-images/cat-image-1.jpg",
-        breed: "America Bobtail",
-        age: "7",
-      },
-      {
-        img: "images/search-filter-images/cat-image-1.jpg",
-        breed: "America Bobtail",
-        age: "9",
-      },
-      {
-        img: "images/search-filter-images/cat-image-1.jpg",
-        breed: "America Bobtail",
-        age: "1",
-      },
-      {
-        img: "images/search-filter-images/cat-image-1.jpg",
-        breed: "America Bobtail",
-        age: "5",
-      },
-      {
-        img: "images/search-filter-images/cat-image-1.jpg",
-        breed: "America Bobtail",
-        age: "6",
-      },
-      {
-        img: "images/search-filter-images/cat-image-1.jpg",
-        breed: "America Bobtail",
-        age: "2",
-      },
-    ];
-
-    function createDemoView(demo_list, demo_status) {
-      const searchResultDiv = document.querySelector(
-        "#search-result-container"
-      );
-      const paginationControl = document.querySelector("#pagination-control");
-      paginationControl.classList.toggle("d-none");
-      const searchResHtml = demo_list
-        .map(
-          (item) => `
-          <div class="col">
-                <div class="card">
-                    <img src="${item.img}" style="height: 180px; object-fit: cover;" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Lalo</h5>
-                      <p class="card-text">
-                        breed: ${item.breed}
-                        <br>
-                        age: ${item.age} year
-                        <br>
-                        <a href="details.html" class="stretched-link">view details</a>
-                      </p>
-                    </div>
-                    <div class="card-footer">
-                      <small class="text-body-secondary">Last updated 3 mins ago</small>
-                    </div>
-                  </div>
-              </div>
-        `
-        )
-        .join("");
-      searchResultDiv.innerHTML = `<div class="d-flex align-items-center">
-  <strong role="status">Loading...</strong>
-  <div class="spinner-border ms-auto" aria-hidden="true"></div>
-</div>`;
-
-      const sortResultSuccessHtml = `<div class="alert alert-success d-flex align-items-center" role="alert" >
-            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-            <div>
-              <p class="p-0 m-0"><img class="pr-1" src="check2-circle.svg" alt="">
-                We have prepared the result for "Sort By Age"</p>
-            </div>
-          </div>`;
-
-      // const filterResultSuccessHtml = `<div class="alert alert-success d-flex align-items-center" role="alert">
-      //   <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-      //   <div>
-      //     <p class="p-0 m-0"><img class="pr-1" src="check2-circle.svg" alt="">
-      //       <span class="pr-1">
-      //           Found <strong>2</strong> results with <strong class="text-primary">1 </strong>Filter</p>
-      //   </div>
-      // </div>`;
-
-      // const filterResultFailureHtml = `<div class="alert alert-danger d-flex align-items-center" role="alert">
-      //   <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-      //   <div>
-      //     <p class="p-0 m-0"><img class="pr-1" src="check2-circle.svg" alt="">
-      //       Sorry, No Matching results with the filters above. Please try allow more general options.</p>
-      //   </div>
-      // </div>`;
-
-      setTimeout(() => {
-        paginationControl.classList.toggle("d-none");
-        searchResultDiv.innerHTML = searchResHtml;
-        if (demo_status === "sort_success") {
-          sortFilterResult.innerHTML = sortResultSuccessHtml;
-        }
-        // else if (demo_status === "filter_success") {
-        //   sortFilterResult.innerHTML = filterResultSuccessHtml;
-        // } else if (demo_status === "filter_failure") {
-        //   sortFilterResult.innerHTML = filterResultFailureHtml;
-        // }
-      }, 1200);
-    }
-    createDemoView(demo_list, "normal");
-
-    const sortByAgeDemoViewDESC = demo_list.sort((x, y) => y.age - x.age);
-    const sortByAgeDemoView = demo_list.sort((x, y) => x.age - y.age);
-
-    // console.log(sortOptions);
-    sortSelecter.addEventListener("change", () => {
-      createDemoView(sortByAgeDemoView, "sort_success");
-    });
-    // sortOptions.forEach((elem) => {
-
-    //     elem.addEventListener('select', (e) => {
-    //         console.log(elem.value);
-    // if (e.currentTarget === elem) {
-
-    // console.log(`${e.currentTarget.value} has been selected`);
-    // sortSelecter.innerHTML = `Sort by ${elem.value}`;
-    // loader.classList.toggle('loader-customize-show');
-    // createDemoView(sortByAgeDemoView, "sort_success");
-    // }
-    //     })
-    // });
-  </script>
   </body>
   
 </html>
