@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shelter Profile Edit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="account_style.css">
+    <link rel="stylesheet" href="navbar.css">
+  </head>
+
+  
+<body class="">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+<!--REMOVED LOGIN/SIGN-UP FROM EDIT PAGE-->
+<!--Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150px"></a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="index.html">Adoption Process</a>
+        </li>
+        <hr>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4 mb-4" style="min-height: 77vh;">
+    <div class="row">
+        <div class="col-3">
+            <div class="list-group">
+                <button class="btn btn-link list-group-item list-group-item-action" type="radio" data-bs-toggle="collapse" data-bs-target="#collapseShelterContact" aria-expanded="true" aria-controls="collapseShelterContact">
+                    Shelter Contact
+                </button>
+                <button class="btn btn-link list-group-item list-group-item-action" type="radio" data-bs-toggle="collapse" data-bs-target="#collapseShelterDescription" aria-expanded="true" aria-controls="collapseShelterDescription">
+                    Shelter Description
+                </button>
+                <button class="btn btn-link list-group-item list-group-item-action" type="radio" data-bs-toggle="collapse" data-bs-target="#collapseShelterImages" aria-expanded="true" aria-controls="collapseShelterImages">
+                    Profile Images
+                </button>
+                <button class="btn btn-link list-group-item list-group-item-action" type="radio" data-bs-toggle="collapse" data-bs-target="#collapseCenterBlurb" aria-expanded="true" aria-controls="collapseCenterBlurb">
+                    Center Blurb
+                </button>
+                <button class="btn btn-link list-group-item list-group-item-action" type="radio" data-bs-toggle="collapse" data-bs-target="#collapseFeaturedPets" aria-expanded="true" aria-controls="collapseFeaturedPets">
+                    Featured Pets
+                </button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" id="editInfoAccordion">
+                <div class="card-body" data-bs-parent="editInfoAccordion">
+                    <h1 class="card-title">Edit Shelter Information</h1>
+
+                    <!--Collapse Shelter Contact Information-->
+                    <div class="collapse show" id="collapseShelterContact" data-bs-parent="#editInfoAccordion">
+                        <div class="form-group">
+                            <label for="shelterContactAddress">Shelter Address</label>
+                            <input class="form-control" id="shelterContactAddress" placeholder="123 Main Street, Toronto ON">
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="shelterContactWebsite">Shelter Website</label>
+                            <input class="form-control" id="shelterContactWebsite" placeholder="exampleshelter.com">
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="shelterContactEmail">Shelter Email</label>
+                            <input type="email" class="form-control" id="shelterContactEmail" placeholder="name@example.com">
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="shelterContactPhone">Shelter Phone Number</label>
+                            <input class="form-control" id="shelterContactPhone" placeholder="+1 123-456-7890">
+                        </div>
+                        <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
+                            <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                Save
+                            </a>
+                            <a href="shelter_profile_view.html" type="cancel" class="btn btn-default ms-4">
+                                Cancel
+                            </a>
+                        </div>
+                        <!--
+                        <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
+                            <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                Save
+                            </a>
+                            <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShelterContact">
+                                Cancel
+                            </button>
+                        </div>
+                        -->
+                    </div>
+                    
+                    <!--Collapse Shelter Description-->
+                    <div class="collapse" id="collapseShelterDescription" data-bs-parent="#editInfoAccordion">
+                        <div class="form-group"">
+                            <label for="shelterDescriptionName">Shelter Name</label>
+                            <textarea class="form-control" id="shelterDescriptionName" rows="1"></textarea>
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="shelterDescription">Shelter Description</label>
+                            <textarea class="form-control" id="shelterDescription" rows="3"></textarea>
+                        </div>
+                        <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
+                            <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                Save
+                            </a>
+                            <a href="shelter_profile_view.html" type="cancel" class="btn btn-default ms-4">
+                                Cancel
+                            </a>
+                        </div>
+                        <!--
+                        <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
+                            <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                Save
+                            </a>
+                            <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShelterDescription">
+                                Cancel
+                            </button>
+                        </div>
+                        -->
+                    </div>
+
+                    <!--Collapse Shelter Images-->
+                    <div class="collapse" id="collapseShelterImages" data-bs-parent="#editInfoAccordion">
+                        <div class="form-group"">
+                            <label for="shelterImagesBanner">Banner Picture</label>
+                            <input type="file" class="form-control" id="shelterImagesBanner">
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="shelterImagesCircle">Profile Picture</label>
+                            <input type="file" class="form-control" id="shelterImagesCircle">
+                        </div>
+                        <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
+                            <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                Save
+                            </a>
+                            <a href="shelter_profile_view.html" type="cancel" class="btn btn-default ms-4">
+                                Cancel
+                            </a>
+                        </div>
+                        <!--
+                        <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
+                            <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                Save
+                            </a>
+                            <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShelterImages">
+                                Cancel
+                            </button>
+                        </div>
+                        -->
+                    </div>
+
+                    <!--Collapse Center Blurb-->
+                    <div class="collapse" id="collapseCenterBlurb" data-bs-parent="#editInfoAccordion">
+                        <div class="form-group"">
+                            <label for="shelterCenterBlurbTitle">Center Blurb Title</label>
+                            <textarea class="form-control" id="shelterCenterBlurbTitle" rows="1"></textarea>
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="shelterCenterBlurbContent">Center Blurb Content</label>
+                            <textarea class="form-control" id="shelterCenterBlurbContent" rows="3"></textarea>
+                        </div>
+                        <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
+                            <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                Save
+                            </a>
+                            <a href="shelter_profile_view.html" type="cancel" class="btn btn-default ms-4">
+                                Cancel
+                            </a>
+                        </div>
+                        <!--
+                        <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
+                            <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                Save
+                            </a>
+                            <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCenterBlurb">
+                                Cancel
+                            </button>
+                        </div>
+                        -->
+                    </div>
+
+                    <!--Collapse Featured Pets-->
+                    <div class="collapse" id="collapseFeaturedPets" data-bs-parent="#editInfoAccordion">
+                        <div class="form-group">
+                            <label for="shelterFeaturedPet1">Select Featured Pet 1</label>
+                            <select class="form-control" id="shelterFeaturedPet1">
+                                <option>Bean</option>
+                                <option>Milky</option>
+                                <option>Lalo</option>
+                                <option>Mika</option>
+                                <option>Gungro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="shelterFeaturedPet2">Select Featured Pet 2</label>
+                            <select class="form-control" id="shelterFeaturedPet2">
+                                <option>Milky</option>
+                                <option>Bean</option>
+                                <option>Lalo</option>
+                                <option>Mika</option>
+                                <option>Gungro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="shelterFeaturedPet3">Select Featured Pet 3</label>
+                            <select class="form-control" id="shelterFeaturedPet3">
+                                <option>Lalo</option>
+                                <option>Bean</option>
+                                <option>Milky</option>
+                                <option>Mika</option>
+                                <option>Gungro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="shelterFeaturedPet4">Select Featured Pet 4</label>
+                            <select class="form-control" id="shelterFeaturedPet4">
+                                <option>Gungro</option>
+                                <option>Bean</option>
+                                <option>Milky</option>
+                                <option>Lalo</option>
+                                <option>Mika</option>
+                            </select>
+                        </div>
+                        <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
+                            <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
+                                <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                    Save
+                                </a>
+                                <a href="shelter_profile_view.html" type="cancel" class="btn btn-default ms-4">
+                                    Cancel
+                                </a>
+                            </div>
+                            <!--
+                            <button type="submit" class="btn btn-primary ms-5">Save</button>
+                            <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFeaturedPets">
+                                Cancel
+                            </button>
+                            -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="d-flex flex-column justify-content-center mt-auto" style="height: 8vh; background-color: #87CEEB;">
+    <p class="m-auto text-white">
+      © 2023 PetPal Inc.
+    </p>
+  </footer>
+
+</body>
+</html>
