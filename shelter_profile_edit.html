@@ -45,19 +45,19 @@
     <div class="row">
         <div class="col-3">
             <div class="list-group">
-                <button class="btn btn-link list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#collapseShelterContact" aria-expanded="true" aria-controls="collapseShelterContact">
+                <button class="btn btn-link list-group-item list-group-item-action" type="radio" data-bs-toggle="collapse" data-bs-target="#collapseShelterContact" aria-expanded="true" aria-controls="collapseShelterContact">
                     Shelter Contact
                 </button>
-                <button class="btn btn-link list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#collapseShelterDescription" aria-expanded="true" aria-controls="collapseShelterDescription">
+                <button class="btn btn-link list-group-item list-group-item-action" type="radio" data-bs-toggle="collapse" data-bs-target="#collapseShelterDescription" aria-expanded="true" aria-controls="collapseShelterDescription">
                     Shelter Description
                 </button>
-                <button class="btn btn-link list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#collapseShelterImages" aria-expanded="true" aria-controls="collapseShelterImages">
+                <button class="btn btn-link list-group-item list-group-item-action" type="radio" data-bs-toggle="collapse" data-bs-target="#collapseShelterImages" aria-expanded="true" aria-controls="collapseShelterImages">
                     Profile Images
                 </button>
-                <button class="btn btn-link list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#collapseCenterBlurb" aria-expanded="true" aria-controls="collapseCenterBlurb">
+                <button class="btn btn-link list-group-item list-group-item-action" type="radio" data-bs-toggle="collapse" data-bs-target="#collapseCenterBlurb" aria-expanded="true" aria-controls="collapseCenterBlurb">
                     Center Blurb
                 </button>
-                <button class="btn btn-link list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#collapseFeaturedPets" aria-expanded="true" aria-controls="collapseFeaturedPets">
+                <button class="btn btn-link list-group-item list-group-item-action" type="radio" data-bs-toggle="collapse" data-bs-target="#collapseFeaturedPets" aria-expanded="true" aria-controls="collapseFeaturedPets">
                     Featured Pets
                 </button>
             </div>
@@ -86,8 +86,10 @@
                             <input class="form-control" id="shelterContactPhone" placeholder="+1 123-456-7890">
                         </div>
                         <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
-                            <button type="submit" class="btn btn-primary ms-5">Save</button>
-                            <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShelterDescription">
+                            <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                Save
+                            </a>
+                            <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShelterContact">
                                 Cancel
                             </button>
                         </div>
@@ -104,7 +106,9 @@
                             <textarea class="form-control" id="shelterDescription" rows="3"></textarea>
                         </div>
                         <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
-                            <button type="submit" class="btn btn-primary ms-5">Save</button>
+                            <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                Save
+                            </a>
                             <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShelterDescription">
                                 Cancel
                             </button>
@@ -122,7 +126,9 @@
                             <input type="file" class="form-control" id="shelterImagesCircle">
                         </div>
                         <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
-                            <button type="submit" class="btn btn-primary ms-5">Save</button>
+                            <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                Save
+                            </a>
                             <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShelterImages">
                                 Cancel
                             </button>
@@ -140,7 +146,9 @@
                             <textarea class="form-control" id="shelterCenterBlurbContent" rows="3"></textarea>
                         </div>
                         <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
-                            <button type="submit" class="btn btn-primary ms-5">Save</button>
+                            <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                Save
+                            </a>
                             <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCenterBlurb">
                                 Cancel
                             </button>
@@ -190,7 +198,9 @@
                             </select>
                         </div>
                         <div class="d-flex flex-row-reverse align-items-end mt-4 w-100">
-                            <button type="submit" class="btn btn-primary ms-5">Save</button>
+                            <a href="shelter_profile_view.html" type="submit" class="btn btn-primary ms-4">
+                                Save
+                            </a>
                             <button class="btn btn-default ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFeaturedPets">
                                 Cancel
                             </button>

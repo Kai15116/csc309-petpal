@@ -112,6 +112,13 @@ body, html {
   */
 }
 
+.shelter-profile-edit-icon {
+  color: white;
+}
+.shelter-profile-edit-icon:hover {
+  color: #00aab6;
+}
+
 * {
   box-sizing: border-box;
 }

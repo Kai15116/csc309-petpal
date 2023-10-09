@@ -54,7 +54,16 @@
 <div class="profile-banner">
   <div class="overlay">
     <div class="overlay-content">
-      <h1>Toronto Zoo Escapees</h1>
+      <h1>
+        Toronto Zoo Escapees
+        <a class="shelter-profile-edit-icon" href="shelter_profile_edit.html">
+          <!--https://icons.getbootstrap.com/icons/pencil-square/-->
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+          </svg>
+        </a>
+      </h1>
     </div>
   </div>
 </div>
@@ -71,15 +80,20 @@
       </div>
 
       <!--Shelter Intro Card-->
-      <div class="card" style="margin-top: 6em;">
+      <div class="card" style="margin-top: 6em; max-width: 20em;">
         <div class="card-body">
           <h5 class="card-title">Toronto Zoo Escapees</h5>
           <h6 class="card-subtitle mb-2 text-muted" style="font-size: 12px; ">Main Street, Toronto ON M3V 0N1</h6>
           <p class="card-text">Small description of the shelter Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.</p>
-          <p>
-            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseContactInfo" role="button" aria-expanded="false" aria-controls="collapseEmailLink">Show Contact Info</a>
-          </p>
-          <div class="collapse" id="collapseContactInfo">
+          <div class="d-flex justify-content-around">
+            <a class="btn btn-primary" href="shelter_pets.html" role="button">
+              View Pets
+            </a>
+            <button class="btn btn-defaul" data-bs-toggle="collapse" href="#collapseContactInfo" role="button" aria-expanded="false" aria-controls="collapseEmailLink">
+              Show Contact
+            </button>
+          </div>
+          <div class="collapse mt-3" id="collapseContactInfo">
             <div class="card m-0 pb-0" style="max-width: 16em;">
               <div class="card-body">
                 <p class="text-wrap"><a href="#" class="card-link">notstealingfromzoos.com</a></p>
@@ -115,7 +129,7 @@
                   <ul class="pet-card-text">
                     <li>Breed: Labrador Retriever</li>
                     <li>Age: 6 years</li>
-                    <li><a href="details.html" class="stretched-link">View Details</a></li>
+                    <li><a href="details.html" class="stretched-link"></a></li>
                   </ul>
                 </p>
               </div>
@@ -133,7 +147,7 @@
                   <ul class="pet-card-text">
                     <li>Breed: Labrador Retriever</li>
                     <li>Age: 4 years</li>
-                    <li><a href="details.html" class="stretched-link">View Details</a></li>
+                    <li><a href="details.html" class="stretched-link"></a></li>
                   </ul>
                 </p>
               </div>
@@ -153,7 +167,7 @@
                   <ul class="pet-card-text">
                     <li>Breed: Calico</li>
                     <li>Age: 4 years</li>
-                    <li><a href="details.html" class="stretched-link">View Details</a></li>
+                    <li><a href="details.html" class="stretched-link"></a></li>
                   </ul>
                 </p>
               </div>
@@ -177,7 +191,7 @@
     
     <div class="col">
       <!--Reviews Card-->
-      <div class="card mt-4">
+      <div class="card mt-4" style="max-width: 20em;">
         <div class="card-body">
           <h5 class="card-title">Reviews</h5>
           <ul class="list-group list-group-flush">
