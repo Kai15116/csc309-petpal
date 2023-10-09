@@ -29,28 +29,11 @@ header {
     gap: 30px; /* add some spacing between buttons */
 }
 
-footer {
-    background-color: #000000; 
-    color: #ffffff; 
-    padding: 10px;
-    text-align: center; 
-    position: absolute;
-    bottom: 0; 
-    width: 100%;
-    position: absolute;
-    height: 2.5rem;
-    margin-top: 100px;
-}
 
 /* page styles */
 .page-container {
     background-color: #f0eeec; 
-    position: fixed;
-    top: 0; 
-    left: 0;
-    justify-content: space-between;
     width: 100%;
-    height: 100%;
     font-family: sans-serif;
     overflow-y: auto;
 }
@@ -203,10 +186,10 @@ footer {
     flex: 2; /* allow input/select to expand to fill available space */
 }
 
-ul {
+.pet-details ul {
     list-style-type: disc !important; /* add bullet points */
     margin-left: 20px; /* adjust the margin for proper spacing */
-  }
+}
 
 .pet-details h2 {
     font-size: 24px;
@@ -228,14 +211,14 @@ ul {
 }
 
 /* apply Button Styles */
-.btn-primary {
+.post-button {
     background-color: #007bff; /* blue color for primary button */
     color: #fff;
     border: none;
     margin-bottom: 2.5rem;
 }
 
-.btn-primary:hover {
+.post-button:hover {
     background-color: #0056b3; /* darker blue on hover */
 }
 
@@ -246,10 +229,6 @@ ul {
 
 .confirm-button {
     margin-top: 40px;
-}
-
-.space-bottom {
-    margin-bottom: 100px;
 }
 
 .pet-creation-graphic{
