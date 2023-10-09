@@ -209,3 +209,11 @@ footer {
     margin-bottom: 20px;
     /* padding: 10px; */
 }
+
+/* responsive design */
+@media (max-width: 800px) {
+    .pet_details_and_shelter {
+        flex-direction: column; /* change to column layout */
+        align-items: center; 
+    }
+}
