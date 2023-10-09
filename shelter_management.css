@@ -1,5 +1,5 @@
 html {
-    overflow-y: scroll;
+    overflow-y: overlay;
 }
 
 body {
@@ -8,7 +8,7 @@ body {
     top: 0;
     width: 100vw;
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: overlay;
 }
 
 #profile-card {
@@ -31,6 +31,12 @@ body {
 #profile-container {
     align-self: flex-start;
 }
+
+#lst-container .card:hover {
+    box-shadow: 0.1rem 0.5rem 6px rgba(24, 24, 24, 0.199);
+    transform: scale(101%);
+}
+
 
 @media only screen and (max-width: 1350px) {
     #pets-grid {
@@ -85,3 +91,4 @@ body {
         width: 9rem;
     }
 }
+
