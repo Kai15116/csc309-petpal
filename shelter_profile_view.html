@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shelter Profile View</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="account_style.css">
+    <link rel="stylesheet" href="navbar.css">
+  </head>
+
+  
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+<!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150px"></a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="index.html">Adoption Process</a>
+        </li>
+        <hr>
+        <li class="nav-item mobile-nav-item">
+          <a class="nav-link" href="log-in-page.html">Login</a>
+        </li>
+        <li class="nav-item mobile-nav-item">
+          <a class="nav-link" href="sign-up-page.html">Sign up</a>
+        </li>
+      </ul>
+      <div class="ms-auto">
+        <a class="nav-item btn btn btn-outline-primary me-2 def-nav-item" role="button" href="log-in-page.html">Login</a>
+        <a class="nav-item btn btn-primary def-nav-item" role="button" href="sign-up-page.html">Sign up</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!--Profile Banner-->
+<div class="profile-banner">
+  <div class="overlay">
+    <div class="overlay-content">
+      <h1>
+        Toronto Zoo Escapees
+        <a class="shelter-profile-edit-icon" href="shelter_profile_edit.html">
+          <!--https://icons.getbootstrap.com/icons/pencil-square/-->
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+          </svg>
+        </a>
+      </h1>
+    </div>
+  </div>
+</div>
+
+
+<!--Shelter details grid-->
+<div class="container shelter-details mb-4" style="min-height: 82vh;">
+  <div class="row gx-4">
+
+    <div class="col">
+      <!--Profile Circle-->
+      <div class="profile-picture mt-2">
+        <img src="example_images/shelter_portrait.jpg" alt="Profile Picture">
+      </div>
+
+      <!--Shelter Intro Card-->
+      <div class="card" style="margin-top: 6em; max-width: 20em;">
+        <div class="card-body">
+          <h5 class="card-title">Toronto Zoo Escapees</h5>
+          <h6 class="card-subtitle mb-2 text-muted" style="font-size: 12px; ">Main Street, Toronto ON M3V 0N1</h6>
+          <p class="card-text">Small description of the shelter Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.</p>
+          <div class="d-flex justify-content-around">
+            <a class="btn btn-primary" href="shelter_pets.html" role="button">
+              View Pets
+            </a>
+            <button class="btn btn-defaul" data-bs-toggle="collapse" href="#collapseContactInfo" role="button" aria-expanded="false" aria-controls="collapseEmailLink">
+              Show Contact
+            </button>
+          </div>
+          <div class="collapse mt-3" id="collapseContactInfo">
+            <div class="card m-0 pb-0" style="max-width: 16em;">
+              <div class="card-body">
+                <p class="text-wrap"><a href="#" class="card-link">notstealingfromzoos.com</a></p>
+                <p class="text-wrap"><a href="#" class="card-link">torontozooescapees@gmail.com</a></p>
+                <p class="text-wrap">+1 123-456-7890</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>  
+
+    
+    <div class="col-6">
+      <!--Mission Statement-->
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">Our Mission</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.</p>
+        </div>
+      </div>
+
+      <!--Pet Carousel-->
+      <div id="carouselControls" class="carousel slide mt-4" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="card pet-card">
+              <img src="example_images/milky2.jpg" class="card-img-top pet-card-img">
+              <div class="card-body">
+                <h5 class="card-title">Christopher</h5>
+                <p class="card-text">
+                  <ul class="pet-card-text">
+                    <li>Breed: Labrador Retriever</li>
+                    <li>Age: 6 years</li>
+                    <li><a href="details.html" class="stretched-link"></a></li>
+                  </ul>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card pet-card">
+              <img src="example_images/milky4.jpg" class="card-img-top pet-card-img">
+              <div class="card-body">
+                <h5 class="card-title">Milky</h5>
+                <p class="card-text">
+                  <ul class="pet-card-text">
+                    <li>Breed: Labrador Retriever</li>
+                    <li>Age: 4 years</li>
+                    <li><a href="details.html" class="stretched-link"></a></li>
+                  </ul>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card pet-card">
+              <div class="pet-card-img-cover">
+                <img src="example_images/bean1.jpg" class="card-img-top pet-card-img">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Bean</h5>
+                <p class="card-text">
+                  <ul class="pet-card-text">
+                    <li>Breed: Calico</li>
+                    <li>Age: 4 years</li>
+                    <li><a href="details.html" class="stretched-link"></a></li>
+                  </ul>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" data-bs-target="#carouselControls" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only"></span>
+        </a>
+        <a class="carousel-control-next" data-bs-target="#carouselControls" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only"></span>
+        </a>
+      </div>
+    </div>
+
+    
+    <div class="col">
+      <!--Reviews Card-->
+      <div class="card mt-4" style="max-width: 20em;">
+        <div class="card-body">
+          <h5 class="card-title">Reviews</h5>
+          <ul class="list-group list-group-flush">
+
+            <li class="list-group-item">
+              <img style="margin-left: 0.5em;" src="example_images/4halfstars.png" height="50px"/> 
+            </li>
+
+            <!--Review Element-->
+            <li class="list-group-item ps-0 pe-0">
+              <div class="review-box container pt-2 ps-2 pe-2 pb-0">
+                <div class="row">
+                  <div class="col-3">
+                    <div class="review-profile-pic-frame d-flex align-items-center justify-content-center">
+                      <img class="review-profile-pic" src="example_images/milky3.jpg">
+                    </div>
+                  </div>
+                  <div class="col d-flex flex-column">
+                    <p class="m-0" style="font-weight: bold;">Milky T.</p>
+                    <p class="m-0 text-body-secondary" style="font-size: 12px;">San Francisco, CA</p>
+                  </div>
+                  <div class="col d-flex flex-row-reverse flex-wrap">
+                    <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <p class="text-body-secondary" style="font-size: 12px;">10/7/23</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col pt-2">
+                    <div class=""></div>
+                    <p>This shelter is amazing! They were very accomodating for our new monkey and kept in touch with us every step of the way, making the adoption process go as smooth as possible. All these pets deserve a loving home ^.^</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="list-group-item ps-0 pe-0">
+              <div class="review-box container pt-2 ps-2 pe-2 pb-0">
+                <div class="row">
+                  <div class="col-3">
+                    <div class="review-profile-pic-frame d-flex align-items-center justify-content-center">
+                      <img class="review-profile-pic" src="example_images/bean2.jpg">
+                    </div>
+                  </div>
+                  <div class="col d-flex flex-column">
+                    <p class="m-0" style="font-weight: bold;">Bean L.</p>
+                    <p class="m-0 text-body-secondary" style="font-size: 12px;">Toronto, ON</p>
+                  </div>
+                  <div class="col d-flex flex-row-reverse flex-wrap">
+                    <!-- https://icons.getbootstrap.com/icons/star-fill/ -->
+                    <svg class="bi bi-star rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                    </svg>
+                    <svg class="bi bi-star rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                    </svg>
+                    <svg class="bi bi-star rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                    </svg>
+                    <svg class="bi bi-star rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                    </svg>
+                    <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <p class="text-body-secondary" style="font-size: 12px;">10/2/23</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col pt-2">
+                    <div class=""></div>
+                    <p>MEOW MEOW MEOW MEOW MEOW MEOW!!!! MEOWoOEmEO MEoRRRrRRRr MEOWWW</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+        <div class="card-footer">
+          See more reviews
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="d-flex flex-column justify-content-center mt-auto" style="height: 8vh; background-color: #87CEEB;">
+  <p class="m-auto text-white">
+    © 2023 PetPal Inc.
+  </p>
+</footer>
+
+</body>
+</html>
