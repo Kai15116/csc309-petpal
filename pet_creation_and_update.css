@@ -29,7 +29,6 @@ header {
     gap: 30px; /* add some spacing between buttons */
 }
 
-/* 
 footer {
     background-color: #000000; 
     color: #ffffff; 
@@ -41,30 +40,32 @@ footer {
     position: absolute;
     height: 2.5rem;
     margin-top: 100px;
-} */
+}
 
 /* page styles */
 .page-container {
-    background-color: #F5F5F5; 
-    /* position: fixed;
+    background-color: #f0eeec; 
+    position: fixed;
     top: 0; 
-    left: 0; */
+    left: 0;
     justify-content: space-between;
     width: 100%;
     height: 100%;
+    font-family: sans-serif;
     overflow-y: auto;
 }
 
 .page-content {
-    font-family: sans-serif;
     flex: 1; 
     justify-content: flex-start; 
-    text-align: left; 
-    align-items: flex-start; 
+    text-align: center; 
+    align-items: center; 
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
+    background-color: #f0eeec;
+    padding-top: 20px;
 }
 
 .logo-img {
@@ -72,11 +73,12 @@ footer {
     width: auto;
 }
 
-
 .pet-main-img {
-    object-fit: cover;
-    width: 100%;
-    height: 700px;
+    object-fit: contain; /* change from 'cover' to 'contain' */
+    max-width: 100%; /* allow the image to adjust its width */
+    max-height: 100%; 
+    width: auto; /* automatically adjust the width */
+    height: auto; /* automatically adjust the height */
 }
 
 .pet-details h1 {
@@ -89,13 +91,28 @@ footer {
 }
 
 .carousel {
-    height: fit-content;
+    height: 100%;
+    min-height: 600px;
     width: 100%;
     overflow: hidden;
+    position: relative;
+}
+
+.carousel-inner {
+    height: 100%;
+    min-height: 600px;
 }
 
 .carousel-item {
-    height: fit-content;
+    min-height: 600px;
+    height: 100%;
+}
+
+.pet-main-img {
+    object-fit: cover;
+    width: 100%;
+    min-height: 600px;
+    height: 100%;
 }
 
 .carousel-control-prev,
@@ -120,71 +137,88 @@ footer {
     background-size: cover;
     background-repeat: no-repeat; 
     background-position: center center;
-    background-color: #f2f8fe;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.background-adoption {
-    /* background-image: url('images/backgroundImage1.jpg');  */
-    background-size: cover;
-    background-repeat: no-repeat; 
-    background-position: center center;
     background-color: #f0eeec;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    /* margin-top: 400px; */
 }
 
-
-#pet-details-container {
+.background-adoption {
+    background-image: url('images/backgroundImage1.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center center;
+    background-color: #ffffff;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 1; 
+    width: 100%;
+    height: 100%;
 
 }
 
-.application-form {
-    background-color: #f2f8fe; /* gray background color */
+.form-inputs{
+    width: 100%;
+}
+
+.pet-details {
+    background-color: #F5F5F5; /* gray background color */
     padding: 30px;
     gap: 10px;
     width: 900px;
     display: flex;
-    justify-content: flex-start;
-    align-items: start;
     flex-direction: column;
+    align-items: start;
 }
 
-.pet-details {
-    background-color: #f2f8fe; /* gray background color */
-    padding: 30px;
-    gap: 10px;
-    /* width: 900px; */
+.form-group {
+    margin-bottom: 30px;
     display: flex;
-    justify-content: flex-start;
-    align-items: start;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between; /* adjust alignment as needed */
+    align-items: center; /* center vertically */
+    gap: 5px;
+    width: 100%;
 }
 
-#owner-notes ul {
+.form-group label {
+    flex: 1; /* allow label to expand to fill available space */
+    margin-right: 10px; /* add some space between label and input */
+    white-space: nowrap; /* prevent label from wrapping */
+}
+
+.form-group input, .form-group select {
+    flex: 2; /* allow input/select to expand to fill available space */
+}
+
+ul {
     list-style-type: disc !important; /* add bullet points */
     margin-left: 20px; /* adjust the margin for proper spacing */
-}
+  }
 
-.pet-details h2, .application-form h2 {
+.pet-details h2 {
     font-size: 24px;
     margin-bottom: 10px;
 }
 
-.pet-details ul, .application-form ul {
+.pet-details ul {
     list-style-type: none;
     padding: 0;
 }
 
-.pet-details ul li, .application-form ul li{
+.pet-details ul li {
     margin-bottom: 10px;
 }
 
@@ -193,19 +227,39 @@ footer {
     margin-right: 20px; /* adjust this value as needed for spacing */
 }
 
-/* Apply Button Styles */
-.apply-button {
+/* apply Button Styles */
+.btn-primary {
     background-color: #007bff; /* blue color for primary button */
     color: #fff;
     border: none;
     margin-bottom: 2.5rem;
 }
 
-.apply-button:hover {
+.btn-primary:hover {
     background-color: #0056b3; /* darker blue on hover */
 }
 
-.form-group {
-    margin-bottom: 20px;
-    /* padding: 10px; */
+.custom-padding {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.confirm-button {
+    margin-top: 40px;
+}
+
+.space-bottom {
+    margin-bottom: 100px;
+}
+
+.pet-creation-graphic{
+    min-height: calc(100vh - 2.5rem);
+}
+
+#post-pet{
+    background-image: url('images/pet-creation-image.jpg');
+    background-blend-mode: overlay;
+    background-size: cover; 
+    background-repeat: no-repeat;
+    height: 70vh;
 }
