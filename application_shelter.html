@@ -12,7 +12,7 @@
 
 </head>
 
-<body class="background-color" style="height: 100%; margin: 0;">
+<body class="background-color" style="height: 100%; margin: 0; ">
 
     <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
     <nav class="navbar navbar-expand-lg bg-white shadow-sm">
@@ -53,7 +53,7 @@
 
     <!-- Main Content -->
     <main class="d-flex flex-column justify-content-center align-items-center" style="height: 100%;">
-        <div class="d-flex align-items-start mx-auto" style="height: 100%;">
+        <div class="d-flex align-items-start" style="height: 100%;" id="main-container">
             <div class="application-form" style="height: 100%;">
                 <!-- <h1 class="fw-bold">Just One More Step To Adoption!</h1> -->
 
@@ -115,9 +115,9 @@
                 </div>
             </div>
 
-            <div class="chat-container ms-5" style="width: 30vw;">
-                <div class="mb-0" style="height: 90vh;">
-                    <div class="messages-container overflow-scroll mb-0 d-flex flex-column" id="messages-container" style="height: 63vh;">
+            <div class="chat-container">
+                <div class="mb-0">
+                    <div class="messages-container overflow-scroll mb-0 d-flex flex-column" id="messages-container">
 
                         <div class="user-message message-seeker align-self-start rounded bg-body-tertiary p-3 my-3 d-flex align-items-center" style="height: auto; max-width: 80%;">
                             <img src="images/user.png" class="rounded-circle border me-3 ms-1 align-self-start" style="width: 50px;">
@@ -132,31 +132,11 @@
                             <div class="text-wrap w-100">Ah! Got it!</div>
                         </div>
 
-                        <!-- <div class="system-message accepted-message w-100 justify-content-center align-items-center d-flex flex-column my-3">
-                            <div class=" text-success d-flex justify-content-center align-items-center text-center" style="width: 90%;">
-                                <p class="fw-bold align-self-center my-auto mx-1">You accepted the application!</p>
-                                <svg  xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
-                                    <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
-                                    <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
-                                </svg>
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="system-message rejected-message w-100 justify-content-center align-items-center d-flex flex-column my-3">
-                            <div class="text-danger d-flex justify-content-center align-items-center text-center" style="width: 90%;">
-                                <p class="fw-bold align-self-center my-auto mx-1 ">You rejected the application!.</p>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                  </svg>
-                            </div>
-                        </div> -->
-
                     </div>
 
                 </div>
             
-                <div class="sticky-bottom pb-3" style="width: 30vw;">
+                <div class="sticky-bottom pb-3 chat-form-container">
                     <form class="bg-body-tertiary p-3 rounded w-100 shadow" id="chat-form">
                         <div class="form-group mb-2">
                             <div class="d-flex">

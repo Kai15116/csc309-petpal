@@ -22,3 +22,29 @@
     box-shadow: 0.1rem 0.5rem 6px rgba(24, 24, 24, 0.199);
     transform: scale(101%);
 }
+
+@media only screen and (max-width: 1000px) {
+
+    .card-container {
+        display: grid;
+        grid-template-columns: auto;
+    }
+
+    .card-container > * {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #become-pet-shelter > div > p{
+        font-size: small;;
+    }
+}
+
+@media only screen and (max-width: 389px) {
+
+    
+    #become-pet-shelter > div > p{
+        display: none;
+    }
+}

@@ -1,0 +1,87 @@
+html {
+    overflow-y: scroll;
+}
+
+body {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+#profile-card {
+    max-width: 80vw;
+    width: 28rem;
+}
+
+#lst-container {
+    margin-left: 32px;
+}
+
+#pets-grid {
+    grid-template-columns: auto auto auto auto;
+}
+
+.card {
+    width: 12rem;
+}
+
+#profile-container {
+    align-self: flex-start;
+}
+
+@media only screen and (max-width: 1350px) {
+    #pets-grid {
+        grid-template-columns: auto auto auto;
+    }
+}
+
+@media only screen and (max-width: 1148px) {
+    #pets-grid {
+        grid-template-columns: auto auto;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    #main-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+    }
+
+    #profile-container {
+        align-self: center;
+        margin: 0;
+    }
+
+    #pets-grid {
+        grid-template-columns: auto auto auto;
+    }
+
+    #lst-container {
+        width: 100%;
+        margin-top: 32px;
+        margin-left: 0px;
+    }
+}
+
+@media only screen and (max-width: 728px) {
+    #pets-grid {
+        grid-template-columns: auto auto;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    #pets-grid {
+        grid-template-columns: auto auto;
+    }
+}
+
+@media only screen and (max-width: 470px) {
+    .card {
+        width: 9rem;
+    }
+}

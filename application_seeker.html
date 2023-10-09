@@ -53,7 +53,7 @@
 
     <!-- Main Content -->
     <main class="d-flex flex-column justify-content-center align-items-center" style="height: 100%;">
-        <div class="d-flex align-items-start mx-auto" style="height: 100%;">
+        <div class="d-flex align-items-start mx-auto" style="height: 100%;" id="main-container">
             <div class="application-form" style="height: 100%;">
                 <!-- <h1 class="fw-bold">Just One More Step To Adoption!</h1> -->
 
@@ -115,8 +115,8 @@
                 </div>
             </div>
 
-            <div class="chat-container ms-5" style="width: 30vw;">
-                <div class="mb-0" style="height: 90vh;">
+            <div class="chat-container">
+                <div class="mb-0">
                     <div class="messages-container overflow-scroll mb-0 d-flex flex-column" id="messages-container" style="height: 63vh;">
 
                         <div class="user-message message-seeker align-self-end rounded bg-body-tertiary p-3 my-3 d-flex flex-row-reverse align-items-center" style="height: auto; max-width: 80%;">
@@ -156,7 +156,7 @@
 
                 </div>
                 
-                <div class="sticky-bottom pb-3" style="width: 30vw;">
+                <div class="sticky-bottom pb-3">
                     <form class="bg-body-tertiary p-3 rounded w-100 shadow" id="chat-form">
                         <div class="form-group mb-2">
                             <label for="chat-input" class="fw-bold mb-2">Message:</label>
