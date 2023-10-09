@@ -267,7 +267,11 @@ ul {
 /* responsive design */
 @media (max-width: 1000px) {
     .pet-details {
-        width: calc(100vw - 18rem);
+        width: calc(100vw - 5rem);
+    }
+
+    .bg-white {
+        width: calc(100vw - 5rem);
     }
 
     .form-group {
