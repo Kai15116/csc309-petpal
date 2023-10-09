@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    />
+    >
     <style></style>
-    <link rel="stylesheet" href="search-filter-page.css" />
-    <link rel="stylesheet" href="navbar.css" />
+    <link rel="stylesheet" href="search-filter-page.css">
+    <link rel="stylesheet" href="navbar.css">
 
     <title>search-filter-page</title>
   </head>
@@ -20,7 +20,7 @@
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html"
           ><img src="images/logo-1.png" width="150px"
-        /></a>
+        ></a>
 
         <button
           class="navbar-toggler"
@@ -46,7 +46,7 @@
                 >Adoption Process</a
               >
             </li>
-            <hr />
+            <hr>
             <li class="nav-item mobile-nav-item">
               <a class="nav-link" href="log-in-page.html">Login</a>
             </li>
@@ -74,7 +74,7 @@
 
     <!-- The top section of the page with the carousel display -->
 
-    <section
+    <div
       class="section-search-res-message mb-1 mt-1 pb-1 pt-1"
       id="sort-filter-result"
     >
@@ -91,7 +91,7 @@
         </svg>
         <div>
           <p class="p-0 m-0">
-            <img class="pr-1" src="check2-circle.svg" alt="" />
+            <img class="pr-1" src="check2-circle.svg" alt="" >
             <span class="pr-1">
               Found <strong>117</strong> matching results for
               <strong class="text-primary">Cats </strong>category!
@@ -99,7 +99,7 @@
           </p>
         </div>
       </div>
-    </section>
+    </div>
 
     <div class="container w-80 sort-filter-section">
       <div
@@ -114,7 +114,7 @@
                   type="search"
                   placeholder="Search by name..."
                   aria-label="Search"
-                />
+                >
                 <button class="btn btn-outline-success" type="submit">
                   Search
                 </button>
@@ -174,7 +174,7 @@
             data-bs-target="#offcanvasExample"
             aria-controls="offcanvasExample"
           >
-            <img src="filter-right.svg" alt="" />Filter by
+            <img src="filter-right.svg" alt="" >Filter by
           </button>
 
           <div
@@ -299,7 +299,7 @@
                   </li>
                 </ul>
               </div>
-              <hr />
+              <hr>
               <div class="filter-container">
                 <form action="search-filter-page-filter.html" id="filter-form">
                   <h4>Apply Filters</h4>
@@ -311,32 +311,33 @@
                         type="checkbox"
                         name="breed1"
                         value="breed1"
-                      />
+                        id="breed1"
+                      >
                       <label for="breed1">Abyssinian</label>
-                      <br />
+                      <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
-                      />
+                      >
                       <label for="breed2">American Bobtail</label>
-                      <br />
+                      <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
-                      />
+                      >
                       <label for="breed2">Birman</label>
-                      <br />
+                      <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
-                      />
+                      >
                       <label for="breed2">Bombay</label>
                     </div>
                   </details>
-                  <hr />
+                  <hr>
                   <details open>
                     <summary>Age</summary>
                     <div class="checkbox-group mt-2 mb-2">
@@ -345,39 +346,39 @@
                         type="checkbox"
                         name="age"
                         value="age1"
-                      />
+                      >
                       <label for="age"> &lt;1</label>
-                      <br />
+                      <br >
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                      />
+                      >
                       <label for="breed1">1-3</label>
-                      <br />
+                      <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
-                      />
+                      >
                       <label for="breed2">3-7</label>
-                      <br />
+                      <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
-                      />
+                      >
                       <label for="breed2">8-12</label>
-                      <br />
+                      <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
-                      />
+                      >
                       <label for="breed2">12+</label>
                     </div>
                   </details>
-                  <hr />
+                  <hr>
 
                   <details open>
                     <summary>Size</summary>
@@ -386,43 +387,43 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                      />
+                      >
                       <label for="breed1"> XS(&lt;5kg)</label>
 
-                      <br />
+                      <br>
 
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                      />
+                      >
                       <label for="breed1">S(5kg-12kg)</label>
 
-                      <br />
+                      <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
-                      />
+                      >
                       <label for="breed2">M(12kg-21kg)</label>
-                      <br />
+                      <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
-                      />
+                      >
                       <label for="breed2">L(21kg-40kg)</label>
 
-                      <br />
+                      <br>
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="breed2"
-                      />
+                      >
                       <label for="breed2">XL(45kg+)</label>
                     </div>
                   </details>
-                  <hr />
+                  <hr >
                   <details open>
                     <summary>Gender</summary>
                     <div class="checkbox-group mt-2 mb-2">
@@ -430,18 +431,18 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                      />
+                      >
                       <label for="breed1"> Male </label>
-                      <br />
+                      <br >
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                      />
+                      >
                       <label for="breed1"> Female</label>
                     </div>
                   </details>
-                  <hr />
+                  <hr >
                   <details open>
                     <summary>Color</summary>
                     <div class="checkbox-group mt-2 mb-2">
@@ -449,7 +450,7 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                      />
+                      >
                       <label for="breed1">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -469,7 +470,7 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                      />
+                      >
                       <label for="breed1">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -489,7 +490,7 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                      />
+                      >
                       <label for="breed1">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -509,7 +510,7 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                      />
+                      >
                       <label for="breed1">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -525,13 +526,13 @@
                         </svg>
                       </label>
 
-                      <br />
+                      <br>
 
                       <input
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                      />
+                      >
                       <label for="breed1">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -551,7 +552,7 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                      />
+                      >
                       <label for="breed1">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -591,7 +592,7 @@
                         class="checkbox-control"
                         type="checkbox"
                         name="age"
-                      />
+                      >
                       <label for="breed1">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -607,7 +608,7 @@
                         </svg>
                       </label>
 
-                      <br />
+                      <br>
                     </div>
                   </details>
                   <!-- Reference: https://getbootstrap.com/docs/5.3/components/buttons/ -->
@@ -624,7 +625,7 @@
     </div>
 
     <!-- All the search and filter result -->
-    <section class="section-bottom me-auto mb-4">
+    <div class="section-bottom me-auto mb-4">
       <div
         class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3"
         id="search-result-container"
@@ -649,7 +650,7 @@
                   </div>
               </div> -->
       </div>
-    </section>
+    </div>
 
     <!-- Pagination: -->
     <!-- Reference: https://getbootstrap.com/docs/5.3/components/pagination/ -->
@@ -677,8 +678,7 @@
     >
       <p class="m-auto text-white">© 2023 PetPal Inc.</p>
     </footer>
-  </body>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     // javascript for a better demo purpose.
     const sortSelecter = document.querySelector("#sort-selector");
@@ -852,4 +852,6 @@
     //     })
     // });
   </script>
+  </body>
+  
 </html>
