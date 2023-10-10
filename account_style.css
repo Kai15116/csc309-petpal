@@ -74,6 +74,11 @@ body {
 .shelter-details {
 	position: relative;
 }
+@media (max-width: 767.98) {
+  .shelter-details {
+    margin-right: -50vw;
+  }
+}
 .shelter-about {
 }
 .pet-card {
@@ -158,4 +163,19 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .review-card-col {
+    margin-top: -18em;
+  }
+  .center-col-md-lg {
+    width: 38em;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px){
+  .review-card-col {
+    margin-top: -26em;
+  }
 }
