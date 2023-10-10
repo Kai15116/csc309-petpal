@@ -243,6 +243,10 @@ header {
     height: 70vh;
 }
 
+.space-bottom{
+    margin-bottom: 40px;
+}
+
 /* responsive design */
 @media (max-width: 1000px) {
     .pet-details {
