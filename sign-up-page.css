@@ -8,12 +8,12 @@
   width: 80%;
 }
 
-img {
+/* img {
   object-fit: cover;
   width: 100%;
   max-width: 250px;
   min-width: 200px;
-}
+} */
 
 .pet-seeker-header-text {
   font-family: Georgia, "Times New Roman";

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- TODO: update the header to be same format as index.html header -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,41 +15,81 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
     <div class="page-container">
-      <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
-        <nav class="navbar navbar-expand-lg bg-white shadow-sm">
-          <div class="container-fluid">
 
-            <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150px"></a>
+    <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+        <div class="container-fluid">
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+        <a class="navbar-brand" href="my_pets.html"><img src="images/logo-1.png" width="150px"></a>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="index.html">Adoption Process</a>
-                </li>
-                <hr>
-                <li class="nav-item mobile-nav-item">
-                  <a class="nav-link" href="log-in-page.html">Login</a>
-                </li>
-                <li class="nav-item mobile-nav-item">
-                  <a class="nav-link" href="sign-up-page.html">Sign up</a>
-                </li>
-              </ul>
-              <div class="ms-auto">
-                <a class="nav-item btn btn btn-outline-primary me-2 def-nav-item" role="button" href="log-in-page.html">Login</a>
-                <a class="nav-item btn btn-primary def-nav-item" role="button" href="sign-up-page.html">Sign up</a>
-              </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="my_pets.html">My Pets</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="applications.html">Applications</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mobile-nav-item" href="#">Profile</a>
+            </li>
+            <li class="nav-item">
+                <div class="nav-itemd-flex">
+                <a class="nav-link mobile-nav-item" href="#" role="button" data-bs-toggle="collapse" data-bs-target="#notifications-list"
+                    aria-expanded="true" aria-controls="notifications-list">
+                    Notifications
+                    <span class="badge bg-danger ms-2 " style="height: fit-content;">3</span>
+                </a>
+                <div class="collapse" id="notifications-list">
+                    <div class="ms-4"><a class="nav-link" href="shelter_profile_view.html">You got a review!</a></div>
+                    <div class="ms-4"><a class="nav-link" href="application_shelter.html">You got a new application!</a></div>
+                    <div class="ms-4"><a class="nav-link" href="application_shelter.html">You got a new application!</a></div>
+                </div>
+                </div>
+            </li>
+            <hr>
+            <li class="nav-item">
+                <a class="nav-link mobile-nav-item" href="#">Logout</a>
+            </li>
+            </ul>
+
+            <div class="ms-auto d-flex" style="margin-right: 6rem;">
+            <div class="dropdown my-auto def-nav-item">
+                <button class="btn d-flex" type="button" data-bs-toggle="dropdown">
+                <!-- https://icons.getbootstrap.com/icons/bell/ -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor"
+                    class="bi bi-bell me-2 text-secondary" viewBox="0 0 16 16">
+                    <path
+                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                </svg>
+                <span class="badge bg-danger" style="transform: translate(-25px, -4px) scale(0.8); margin-right: -25px;">3</span>
+                </button>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="shelter_profile_view.html">You got a review!</a></li>
+                <li><a class="dropdown-item" href="application_shelter.html">You got a new application!</a></li>
+                <li><a class="dropdown-item" href="application_shelter.html">You got a new application!</a></li>
+                </ul>
             </div>
-          </div>
-        </nav>
+            <div class="vr mx-2 def-nav-item"></div>
+            <div class="dropdown my-auto def-nav-item">
+                <button class="btn" type="button" data-bs-toggle="dropdown">
+                <img class="rounded-circle border" src="example_images/shelter_portrait.jpg"
+                style="background-color: cornsilk; width: 50px; height: 50px;">            </button>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <hr>
+                <li><a class="dropdown-item" href="index.html">Log out</a></li>
+                </ul>
+            </div>
+            </div>
+        </div>
+        </div>
+    </nav>
         <main class="page-content">
             <h3>Post your pet for adoption, it's quick and easy!</h3>        
             <div class="background-details">
@@ -61,8 +100,8 @@
 
                             <form class="form-inputs" action="submit_pet_listing.php" method="POST">
                                 <div class="form-group">
-                                    <label for="breed">Pet Name:</label>
-                                    <input type="text" class="form-control" id="breed" name="breed">
+                                    <label for="name">Pet Name:</label>
+                                    <input type="text" class="form-control" id="name" name="breed">
                                 </div>
 
                                 <div class="form-group">
@@ -136,8 +175,9 @@
                                         <img src="images/no_image_icon.png" alt="No Image" class="img-fluid image-preview" id="imagePreview3">
                                     </label>
                                 </div>
+                                <!-- logic to handle image upload -->
                                 <script>
-                                    // Function to handle image selection and display
+                                    // function to handle image selection and display
                                     function handleImageSelect(input, preview) {
                                         const file = input.files[0];
                                         if (file) {
@@ -147,11 +187,12 @@
                                             };
                                             reader.readAsDataURL(file);
                                         } else {
-                                            preview.src = "no_image_icon.png"; // Reset to the default image
+                                            // reset to the default image
+                                            preview.src = "no_image_icon.png"; 
                                         }
                                     }
                             
-                                    // Attach event listeners to image inputs
+                                    // attach event listeners to image inputs
                                     const imageInputs = document.querySelectorAll(".image-input");
                                     const imagePreviews = document.querySelectorAll(".image-preview");
                             
@@ -174,39 +215,34 @@
 
                             <form class="form-inputs" action="submit_pet_listing.php" method="POST">
                                 <div class="form-group">
-                                    <label for="medical_history">Additional Notes:</label>
-                                    <textarea class="form-control" id="medical_history" name="medical_history" rows="4"></textarea>
+                                    <label for="additional_notes">Additional Notes:</label>
+                                    <textarea class="form-control" id="additional_notes" name="additional_notes" rows="4"></textarea>
                                 </div>
                             </form>
                             </div>
                         </div>
                     </div>
                     <div class="confirm-button"> 
-                        <a class="btn btn-primary btn-lg btn-xl" href="adoption.html" role="button">Post Pet Listing</a>   
+                        <a class="btn btn-primary btn-lg btn-xl post-button" href="adoption.html" role="button">Post Pet Listing</a>   
                     <div>
                 </div>
             </div> 
             <div class="d-flex pet-creation-graphic" id="post-pet">
                 <div class="ms-5 p-2 my-auto"
-                  style="background-image: linear-gradient(rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4)); width: 40%;">
+                  style="background-image: linear-gradient(rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4)); width: 60%;">
                   <h1 class="mb-2" style="color: #87CEEB;">Post your pet, find them a new home!</h1>
                   <p class="text-light"> By posting your pet on our site, you can make a profound difference in the lives of 
-                    both animals in need and caring individuals looking to provide a loving home. Your act of kindness opens the 
-                    door to a brighter future for pets who may have experienced hardship or abandonment. It offers them a chance 
-                    to find a safe and nurturing environment where they can thrive and be cherished as part of a loving family. 
-                    Your pet's story, personality, and unique qualities can touch the hearts of potential adopters, forging 
-                    connections that lead to lifelong bonds. Your contribution not only helps a pet find a new home but also 
-                    enriches the lives of those who choose to adopt, creating a heartwarming win-win for all involved. Together, 
-                    we can make a positive impact and bring happiness to both pets and their future families. Post your pet today 
+                    both animals in need and caring individuals looking to provide a loving home, opening the 
+                    door to a brighter future for pets who may have experienced hardship or abandonment. Post your pet today 
                     and be a part of this wonderful journey of compassion and companionship!
                   </p>
                 </div>
             </div>
-        </div>
-        <div class="space-bottom"></div>
         </main>
-        <footer>
-            Copyright 2023 by The Salamancas.
+        <footer class="d-flex flex-column justify-content-center mt-auto" style="width: 100%; height: 8vh; background-color: #87CEEB;">
+            <p class="m-auto text-white">
+              © 2023 PetPal Inc.
+            </p>
         </footer>
     </div>
 </body>
