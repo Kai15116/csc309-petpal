@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shelter Profile View Unauthorized</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="account_style.css">
+    <link rel="stylesheet" href="navbar.css">
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Petpal prototype</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <link rel="stylesheet" href="navbar.css">
-  <link rel="stylesheet" href="shelter_management.css">
-  <link rel="stylesheet" href="seeker_profile_view_styles.css">
-</head>
+  
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
-<body class="bg-body-tertiary">
-
-  <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
-  <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+<!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
     <div class="container-fluid">
 
       <a class="navbar-brand" href="my_pets.html"><img src="images/logo-1.png" width="150px"></a>
@@ -38,23 +38,19 @@
           </li>
           <li class="nav-item">
             <div class="nav-itemd-flex">
-              <a class="nav-link mobile-nav-item" href="#" role="button" data-bs-toggle="collapse" data-bs-target="#notifications-list"
-                aria-expanded="true" aria-controls="notifications-list">
+              <a class="nav-link mobile-nav-item" href="#" role="button" data-bs-toggle="collapse"
+                data-bs-target="#notifications-list" aria-expanded="true" aria-controls="notifications-list">
                 Notifications
                 <span class="badge bg-danger ms-2 " style="height: fit-content;">3</span>
               </a>
               <div class="collapse" id="notifications-list">
-                <div class="ms-4"><a class="nav-link" href="#">Notification 1</a></div>
-                <div class="ms-4"><a class="nav-link" href="#">Notification 2</a></div>
-                <div class="ms-4"><a class="nav-link" href="#">Notification 3</a></div>
-                <div class="ms-4"><a class="nav-link" href="#">Notification 4</a></div>
-                <div class="ms-4"><a class="nav-link" href="#">Notification 5</a></div>
+                <div class="ms-4"><a class="nav-link" href="shelter_profile_view.html">No notifications...</a></div>
               </div>
             </div>
           </li>
           <hr>
           <li class="nav-item">
-            <a class="nav-link mobile-nav-item" href="seeker_profile_view_unauth.html">Logout</a>
+            <a class="nav-link mobile-nav-item" href="kkkk">Logout</a>
           </li>
         </ul>
 
@@ -67,382 +63,547 @@
                 <path
                   d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
               </svg>
-              <span class="badge bg-danger" style="transform: translate(-25px, -4px) scale(0.8); margin-right: -25px;">3</span>
+              <span class="badge bg-danger"
+                style="transform: translate(-25px, -4px) scale(0.8); margin-right: -25px;">3</span>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Notification 1</a></li>
-              <li><a class="dropdown-item" href="#">Notification 2</a></li>
-              <li><a class="dropdown-item" href="#">Notification 3</a></li>
-              <li><a class="dropdown-item" href="#">Notification 4</a></li>
-              <li><a class="dropdown-item" href="#">Notification 5</a></li>
+              <li><a class="dropdown-item" href="#">No notifications...</a></li>
             </ul>
           </div>
           <div class="vr mx-2 def-nav-item"></div>
           <div class="dropdown my-auto def-nav-item">
             <button class="btn" type="button" data-bs-toggle="dropdown">
               <img class="rounded-circle border" src="example_images/milky3.jpg"
-              style="background-color: cornsilk; width: 50px; height: 50px;">
+                style="background-color: cornsilk; width: 50px; height: 50px;"> </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="seeker_profile_view.html">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
               <hr>
-              <li><a class="dropdown-item" href="seeker_profile_view_unauth.html">Logout</a></li>
+              <li><a class="dropdown-item" href="index.html">Log out</a></li>
             </ul>
           </div>
         </div>
       </div>
     </div>
   </nav>
+<!--Profile Banner-->
+<div class="profile-banner">
+  <div class="overlay">
+    <div class="overlay-content">
+      <h1>
+        Toronto Zoo Escapees
+      </h1>
+    </div>
+  </div>
+</div>
 
-  <!-- Main content -->
 
-  <div class="container-fluid d-flex flex-columnm justify-content-center my-5">
+<!--Shelter details grid-->
+<div class="container shelter-details mb-4" style="min-height: 82vh;">
+  <div class="row gx-4">
 
-    <div class="d-flex mx-auto" id="main-container">
+    <div class="col-12 col-lg">
+      <!--Profile Circle-->
+      <div class="profile-picture mt-2">
+        <img src="example_images/shelter_portrait.jpg" alt="Profile Picture">
+      </div>
 
-      <div class="d-flex flex-column justify-content-center" id="profile-container">
-        <div class="card text-center" id="profile-card">
-          <div class="mb-4" style="background-color: #C8F4FF;">
-            <img class="mt-3 mx-auto rounded-circle border text-center d-flex flex-column justify-content-center"
-              src="example_images/milky3.jpg"
-              style="width: 80px; height: 80px; transform: translate(0, 50%); ">
+      <!--Shelter Intro Card-->
+      <div class="card" style="margin-top: 6em; max-width: 20em;">
+        <div class="card-body">
+          <h5 class="card-title">Toronto Zoo Escapees</h5>
+          <h6 class="card-subtitle mb-2 text-muted" style="font-size: 12px; ">Main Street, Toronto ON M3V 0N1</h6>
+          <p class="card-text">Small description of the shelter Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.</p>
+          <div class="d-flex justify-content-around">
+            <a class="btn btn-primary" href="shelter_pets.html" role="button">
+              View Pets
+            </a>
+            <button class="btn btn-default" data-bs-toggle="collapse" href="#collapseContactInfo" role="button" aria-expanded="false" aria-controls="collapseContactInfo">
+              Show Contact
+            </button>
           </div>
-
-
-          <div class="card-body d-flex flex-column justify-content-center mt-2">
-            <h5 class="card-title">Milky T.</h5>
-
-
-            <div class="d-flex my-4 mx-auto">
-              <div class="text-muted my-auto" style="width: 30%;">Toronto, ON</div>
-              <div class="vr mx-2"></div>
-              <div href="#" class="my-auto text-muted" style="width: 30%;">123 reviews</div>
-              <div class="vr mx-2"></div>
-              <div class="text-muted my-auto" style="width: 30%;">Joined Sep. 21, 2023</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mt-3" style="width: auto; max-width: 30em;">
-          <div class="card-body">
-            <h5 class="card-title">About Me</h5>
-            <h6 class="card-subtitle mb-2 text-muted" style="font-size: 12px; ">Main Street, Toronto ON M3V 0N1</h6>
-            <p class="card-text">Small description of the seeker Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.</p>
-            <div class="d-flex">
-              <button class="btn btn-default" data-bs-toggle="collapse" href="#collapseContactInfo" role="button" aria-expanded="false" aria-controls="collapseContactInfo">
-                Show Contact
-              </button>
-            </div>
-            <div class="collapse mt-3" id="collapseContactInfo">
-              <div class="card m-0 pb-0" style="width: auto;">
-                <div class="card-body">
-                  <p class="text-wrap"><a href="#" class="card-link">milkytao.com</a></p>
-                  <p class="text-wrap"><a href="#" class="card-link">milkytaoxl@gmail.com</a></p>
-                  <p class="text-wrap">+1 123-456-7890</p>
-                </div>
+          <div class="collapse mt-3" id="collapseContactInfo">
+            <div class="card m-0 pb-0" style="max-width: 16em;">
+              <div class="card-body">
+                <p class="text-wrap"><a href="#" class="card-link">notstealingfromzoos.com</a></p>
+                <p class="text-wrap"><a href="#" class="card-link">torontozooescapees@gmail.com</a></p>
+                <p class="text-wrap">+1 123-456-7890</p>
               </div>
             </div>
           </div>
+
+        </div>
+      </div>
+    </div>  
+
+    
+    <div class="col-6">
+      <!--Mission Statement-->
+      <div class="card mt-4" style="min-width: 20em;">
+        <div class="card-body">
+          <h5 class="card-title">Our Mission</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.</p>
         </div>
       </div>
 
-      <div id="lst-container">
-        <div class="d-flex">
-          <h1 class="ms-1 mb-0">Reviews</h1>
+      <!--Pet Carousel-->
+      <div id="carouselControls" class="carousel slide mt-4" data-bs-ride="carousel" style="min-width: 20em;">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="card pet-card">
+              <img src="example_images/milky2.jpg" class="card-img-top pet-card-img">
+              <div class="card-body">
+                <h5 class="card-title">Christopher</h5>
+                <p class="card-text">
+                  <ul class="pet-card-text">
+                    <li>Breed: Labrador Retriever</li>
+                    <li>Age: 6 years</li>
+                    <li><a href="details.html" class="stretched-link"></a></li>
+                  </ul>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card pet-card">
+              <img src="example_images/milky4.jpg" class="card-img-top pet-card-img">
+              <div class="card-body">
+                <h5 class="card-title">Milky</h5>
+                <p class="card-text">
+                  <ul class="pet-card-text">
+                    <li>Breed: Labrador Retriever</li>
+                    <li>Age: 4 years</li>
+                    <li><a href="details.html" class="stretched-link"></a></li>
+                  </ul>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card pet-card">
+              <div class="pet-card-img-cover">
+                <img src="example_images/bean1.jpg" class="card-img-top pet-card-img">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Bean</h5>
+                <p class="card-text">
+                  <ul class="pet-card-text">
+                    <li>Breed: Calico</li>
+                    <li>Age: 4 years</li>
+                    <li><a href="details.html" class="stretched-link"></a></li>
+                  </ul>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          </div>
         </div>
-        <hr>
-        
-        <div class="d-flex flex-wrap flex-row">
-          <div> <!--Review Start-->
-            <div class="review-box container pt-2 ps-2 pe-2 pb-0">
-              <div class="row">
-                <div class="col-3 me-2">
-                  <div class="review-profile-pic-frame d-flex align-items-center justify-content-center">
-                    <img class="review-profile-pic" src="example_images/milky3.jpg">
-                  </div>
-                </div>
-                <div class="col d-flex flex-column pe-0">
-                  <p class="m-0" style="font-weight: bold;">Milky T.</p>
-                  <p class="m-0 text-body-secondary" style="font-size: 12px;">San Francisco, CA</p>
-                </div>
-                <div class="col d-flex flex-row-reverse flex-wrap">
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <p class="text-body-secondary" style="font-size: 12px;">10/7/23</p>
-                </div>
-              </div>
-              <div class="row d-flex flex-column">
-                <div class="col pt-2 mb-0">
-                  <div class=""></div>
-                  <p>This shelter is amazing! They were very accomodating for our new monkey and kept in touch with us every step of the way, making the adoption process go as smooth as possible. All these pets deserve a loving home ^.^</p>
-                </div>
-                <div class="col mt-0">
-                  <a type="button" class="btn btn-default view-shelter-button" href="shelter_profile_view_unauth.html">
-                    <p class="view-shelter-button-text">
-                      View Shelter
-                    </p>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div> <!--End Review-->
-
-          <div> <!--Review Start-->
-            <div class="review-box container pt-2 ps-2 pe-2 pb-0">
-              <div class="row">
-                <div class="col-3 me-2">
-                  <div class="review-profile-pic-frame d-flex align-items-center justify-content-center">
-                    <img class="review-profile-pic" src="example_images/milky3.jpg">
-                  </div>
-                </div>
-                <div class="col d-flex flex-column pe-0">
-                  <p class="m-0" style="font-weight: bold;">Milky T.</p>
-                  <p class="m-0 text-body-secondary" style="font-size: 12px;">San Francisco, CA</p>
-                </div>
-                <div class="col d-flex flex-row-reverse flex-wrap">
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <p class="text-body-secondary" style="font-size: 12px;">10/7/23</p>
-                </div>
-              </div>
-              <div class="row d-flex flex-column">
-                <div class="col pt-2 mb-0">
-                  <div class=""></div>
-                  <p>This shelter is amazing! They were very accomodating for our new monkey and kept in touch with us every step of the way, making the adoption process go as smooth as possible. All these pets deserve a loving home ^.^</p>
-                </div>
-                <div class="col mt-0">
-                  <a type="button" class="btn btn-default view-shelter-button" href="shelter_profile_view_unauth.html">
-                    <p class="view-shelter-button-text">
-                      View Shelter
-                    </p>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div> <!--End Review-->
-
-          <div> <!--Review Start-->
-            <div class="review-box container pt-2 ps-2 pe-2 pb-0">
-              <div class="row">
-                <div class="col-3 me-2">
-                  <div class="review-profile-pic-frame d-flex align-items-center justify-content-center">
-                    <img class="review-profile-pic" src="example_images/milky3.jpg">
-                  </div>
-                </div>
-                <div class="col d-flex flex-column pe-0">
-                  <p class="m-0" style="font-weight: bold;">Milky T.</p>
-                  <p class="m-0 text-body-secondary" style="font-size: 12px;">San Francisco, CA</p>
-                </div>
-                <div class="col d-flex flex-row-reverse flex-wrap">
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <p class="text-body-secondary" style="font-size: 12px;">10/7/23</p>
-                </div>
-              </div>
-              <div class="row d-flex flex-column">
-                <div class="col pt-2 mb-0">
-                  <div class=""></div>
-                  <p>This shelter is amazing! They were very accomodating for our new monkey and kept in touch with us every step of the way, making the adoption process go as smooth as possible. All these pets deserve a loving home ^.^</p>
-                </div>
-                <div class="col mt-0">
-                  <a type="button" class="btn btn-default view-shelter-button" href="shelter_profile_view_unauth.html">
-                    <p class="view-shelter-button-text">
-                      View Shelter
-                    </p>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div> <!--End Review-->
-
-          <div> <!--Review Start-->
-            <div class="review-box container pt-2 ps-2 pe-2 pb-0">
-              <div class="row">
-                <div class="col-3 me-2">
-                  <div class="review-profile-pic-frame d-flex align-items-center justify-content-center">
-                    <img class="review-profile-pic" src="example_images/milky3.jpg">
-                  </div>
-                </div>
-                <div class="col d-flex flex-column pe-0">
-                  <p class="m-0" style="font-weight: bold;">Milky T.</p>
-                  <p class="m-0 text-body-secondary" style="font-size: 12px;">San Francisco, CA</p>
-                </div>
-                <div class="col d-flex flex-row-reverse flex-wrap">
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <p class="text-body-secondary" style="font-size: 12px;">10/7/23</p>
-                </div>
-              </div>
-              <div class="row d-flex flex-column">
-                <div class="col pt-2 mb-0">
-                  <div class=""></div>
-                  <p>This shelter is amazing! They were very accomodating for our new monkey and kept in touch with us every step of the way, making the adoption process go as smooth as possible. All these pets deserve a loving home ^.^</p>
-                </div>
-                <div class="col mt-0">
-                  <a type="button" class="btn btn-default view-shelter-button" href="shelter_profile_view_unauth.html">
-                    <p class="view-shelter-button-text">
-                      View Shelter
-                    </p>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div> <!--End Review-->
-
-          <div> <!--Review Start-->
-            <div class="review-box container pt-2 ps-2 pe-2 pb-0">
-              <div class="row">
-                <div class="col-3 me-2">
-                  <div class="review-profile-pic-frame d-flex align-items-center justify-content-center">
-                    <img class="review-profile-pic" src="example_images/milky3.jpg">
-                  </div>
-                </div>
-                <div class="col d-flex flex-column pe-0">
-                  <p class="m-0" style="font-weight: bold;">Milky T.</p>
-                  <p class="m-0 text-body-secondary" style="font-size: 12px;">San Francisco, CA</p>
-                </div>
-                <div class="col d-flex flex-row-reverse flex-wrap">
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <p class="text-body-secondary" style="font-size: 12px;">10/7/23</p>
-                </div>
-              </div>
-              <div class="row d-flex flex-column">
-                <div class="col pt-2 mb-0">
-                  <div class=""></div>
-                  <p>This shelter is amazing! They were very accomodating for our new monkey and kept in touch with us every step of the way, making the adoption process go as smooth as possible. All these pets deserve a loving home ^.^</p>
-                </div>
-                <div class="col mt-0">
-                  <a type="button" class="btn btn-default view-shelter-button" href="shelter_profile_view_unauth.html">
-                    <p class="view-shelter-button-text">
-                      View Shelter
-                    </p>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div> <!--End Review-->
-
-          <div> <!--Review Start-->
-            <div class="review-box container pt-2 ps-2 pe-2 pb-0">
-              <div class="row">
-                <div class="col-3 me-2">
-                  <div class="review-profile-pic-frame d-flex align-items-center justify-content-center">
-                    <img class="review-profile-pic" src="example_images/milky3.jpg">
-                  </div>
-                </div>
-                <div class="col d-flex flex-column pe-0">
-                  <p class="m-0" style="font-weight: bold;">Milky T.</p>
-                  <p class="m-0 text-body-secondary" style="font-size: 12px;">San Francisco, CA</p>
-                </div>
-                <div class="col d-flex flex-row-reverse flex-wrap">
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                  </svg>
-                  <p class="text-body-secondary" style="font-size: 12px;">10/7/23</p>
-                </div>
-              </div>
-              <div class="row d-flex flex-column">
-                <div class="col pt-2 mb-0">
-                  <div class=""></div>
-                  <p>This shelter is amazing! They were very accomodating for our new monkey and kept in touch with us every step of the way, making the adoption process go as smooth as possible. All these pets deserve a loving home ^.^</p>
-                </div>
-                <div class="col mt-0">
-                  <a type="button" class="btn btn-default view-shelter-button" href="shelter_profile_view_unauth.html">
-                    <p class="view-shelter-button-text">
-                      View Shelter
-                    </p>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div> <!--End Review-->
-
-        </div>
+        <a class="carousel-control-prev" data-bs-target="#carouselControls" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only"></span>
+        </a>
+        <a class="carousel-control-next" data-bs-target="#carouselControls" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only"></span>
+        </a>
       </div>
     </div>
 
+    
+    <div class="col">
+      <!--Reviews Card-->
+      <div class="card mt-4" style="max-width: 20em;">
+
+        <div class="card-header d-flex flex-wrap justify-content-between">
+          <h5 class="m-2">Reviews</h5>
+          <!--https://getbootstrap.com/docs/5.2/components/modal/-->
+          <!-- Review Form Prompter -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#writeReview">
+            Leave a review
+          </button>
+
+          <!-- Review Form -->
+          <div class="modal fade" id="writeReview" tabindex="-1" aria-labelledby="writeReviewLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="writeReviewLabel">Review</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="writeReviewInput">Write your review here</label>
+                    <textarea class="form-control" id="writeReviewInput" rows="3" placeholder=""></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="selectReviewRating">How would you rate this shelter?</label>
+                    <select class="form-control" id="selectReviewRating">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ms-4 mb-2 mt-2">
+            <img src="example_images/4halfstars.png" height="50"> 
+          </div>
+        </div>
+        <div class="card-body" style="min-width: 20em;">
+          <ul class="list-group list-group-flush overflow-auto" style="max-height: 82vh;">
+
+            <!--Review Element-->
+            <li class="list-group-item ps-0 pe-1">
+              <div class="review-box container pt-2 ps-2 pe-2 pb-0">
+                <div class="row">
+                  <div class="col-3 me-2">
+                    <div class="review-profile-pic-frame d-flex align-items-center justify-content-center">
+                      <img class="review-profile-pic" src="example_images/milky3.jpg">
+                    </div>
+                  </div>
+                  <div class="col d-flex flex-column pe-0">
+                    <a class="m-0" href="seeker_profile_view_unauth.html" style="color: black; text-decoration: none; font-weight: bold;">
+                      Milky T.
+                    </a>
+                    <p class="m-0 text-body-secondary" style="font-size: 12px;">San Francisco, CA</p>
+                  </div>
+                  <div class="col d-flex flex-row-reverse flex-wrap">
+                    <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <p class="text-body-secondary" style="font-size: 12px;">10/7/23</p>
+                  </div>
+                </div>
+                <div class="row d-flex flex-column">
+                  <div class="col pt-2 mb-0">
+                    <div class=""></div>
+                    <p>This shelter is amazing! They were very accomodating for our new monkey and kept in touch with us every step of the way, making the adoption process go as smooth as possible. All these pets deserve a loving home ^.^</p>
+                  </div>
+                    <!--Reply Column-->
+                    <div class="col mt-0">
+
+                      <!--https://getbootstrap.com/docs/5.2/components/modal/-->
+                      <!-- Reply Form Prompter -->
+                      <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
+                        <p class="reply-button-text">Reply</p>
+                      </button>
+
+                      <!-- Reply Form -->
+                      <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="form-group">
+                                <label for="writeReviewInput">Write your reply here</label>
+                                <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@username"></textarea>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> <!--End Reply Column-->
+                </div>
+              </div>
+
+              <!--Main Reply-->
+              <div class="review-box review-reply container ms-4 pt-2 ps-2 pe-2 pb-0">
+                <div class="row">
+                  <div class="col-3 me-2">
+                    <div class="review-profile-pic-frame d-flex align-items-center justify-content-center">
+                      <img class="review-profile-pic" src="example_images/shelter_portrait.jpg">
+                    </div>
+                  </div>
+                  <div class="col-5 d-flex flex-column">
+                    <p class="m-0 text-truncate" style="font-weight: bold;">Toronto Zoo Escapees</p>
+                    <p class="m-0 text-body-secondary" style="font-size: 12px;">San Francisco, CA</p>
+                  </div>
+                  <div class="col d-flex flex-row-reverse flex-wrap">
+                    <p class="text-body-secondary" style="font-size: 12px;">10/7/23</p>
+                  </div>
+                </div>
+                <div class="row d-flex flex-column">
+                  <div class="col pt-2 mb-0">
+                    <a class="review-reply-atting">@Milky T.</a>
+                    <p>
+                      Thank you for such a thoughtful review! Milky is the best :D
+                    </p>
+                  </div>
+
+                  <!--Reply Column-->
+                  <div class="col mt-0">
+
+                    <!--https://getbootstrap.com/docs/5.2/components/modal/-->
+                    <!-- Reply Form Prompter -->
+                    <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
+                      <p class="reply-button-text">Reply</p>
+                    </button>
+
+                    <!-- Reply Form -->
+                    <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <label for="writeReviewInput">Write your reply here</label>
+                              <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@Toronto Zoo Escapees"></textarea>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div> 
+                  <!--End Reply Column-->
+                </div>
+              </div>
+
+              <!--Other Replies-->
+              <div> <!--Change to collapsible later-->
+                <div class="review-box review-reply container ms-4 pt-2 ps-2 pe-2 pb-0">
+                  <div class="row">
+                    <div class="col-3 me-2">
+                      <div class="review-profile-pic-frame d-flex align-items-center justify-content-center">
+                        <img class="review-profile-pic" src="example_images/bean3.jpg">
+                      </div>
+                    </div>
+                    <div class="col-5 d-flex flex-column">
+                      <p class="m-0" style="font-weight: bold;">Bean L.</p>
+                      <p class="m-0 text-body-secondary" style="font-size: 12px;">San Francisco, CA</p>
+                    </div>
+                    <div class="col d-flex flex-row-reverse flex-wrap">
+                      <p class="text-body-secondary" style="font-size: 12px;">10/8/23</p>
+                    </div>
+                  </div>
+                  <div class="row d-flex flex-column">
+                    <div class="col pt-2 mb-0">
+                      <div class=""></div>
+                      <a class="review-reply-atting">@Milky T.</a>
+                      <p>
+                        Your Review SUCKS
+                      </p>
+                    </div>
+                    <!--Reply Column-->
+                    <div class="col mt-0">
+
+                      <!--https://getbootstrap.com/docs/5.2/components/modal/-->
+                      <!-- Reply Form Prompter -->
+                      <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
+                        <p class="reply-button-text">Reply</p>
+                      </button>
+
+                      <!-- Reply Form -->
+                      <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="form-group">
+                                <label for="writeReviewInput">Write your reply here</label>
+                                <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@username"></textarea>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> <!--End Reply Column-->
+                  </div>
+                </div>
+
+                <div class="review-box review-reply container ms-4 pt-2 ps-2 pe-2 pb-0">
+                  <div class="row">
+                    <div class="col-3 me-2">
+                      <div class="review-profile-pic-frame d-flex align-items-center justify-content-center">
+                        <img class="review-profile-pic" src="example_images/milky3.jpg">
+                      </div>
+                    </div>
+                    <div class="col-5 d-flex flex-column">
+                      <p class="m-0" style="font-weight: bold;">Milky T.</p>
+                      <p class="m-0 text-body-secondary" style="font-size: 12px;">San Francisco, CA</p>
+                    </div>
+                    <div class="col d-flex flex-row-reverse flex-wrap">
+                      <p class="text-body-secondary" style="font-size: 12px;">10/9/23</p>
+                    </div>
+                  </div>
+                  <div class="row d-flex flex-column">
+                    <div class="col pt-2">
+                      <div class=""></div>
+                      <a class="review-reply-atting">
+                        @Bean L.
+                      </a>
+                      <p>
+                        I appreciate your critique -_-
+                      </p>
+                    </div>
+                    <!--Reply Column-->
+                    <div class="col mt-0">
+
+                      <!--https://getbootstrap.com/docs/5.2/components/modal/-->
+                      <!-- Reply Form Prompter -->
+                      <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
+                        <p class="reply-button-text">Reply</p>
+                      </button>
+
+                      <!-- Reply Form -->
+                      <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="form-group">
+                                <label for="writeReviewInput">Write your reply here</label>
+                                <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@username"></textarea>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> <!--End Reply Column-->
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="list-group-item ps-0 pe-0">
+              <div class="review-box container pt-2 ps-2 pe-2 pb-0">
+                <div class="row">
+                  <div class="col-3">
+                    <div class="review-profile-pic-frame d-flex align-items-center justify-content-center">
+                      <img class="review-profile-pic" src="example_images/bean2.jpg">
+                    </div>
+                  </div>
+                  <div class="col d-flex flex-column">
+                    <p class="m-0" style="font-weight: bold;">Bean L.</p>
+                    <p class="m-0 text-body-secondary" style="font-size: 12px;">Toronto, ON</p>
+                  </div>
+                  <div class="col d-flex flex-row-reverse flex-wrap">
+                    <!-- https://icons.getbootstrap.com/icons/star-fill/ -->
+                    <svg class="bi bi-star rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                    </svg>
+                    <svg class="bi bi-star rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                    </svg>
+                    <svg class="bi bi-star rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                    </svg>
+                    <svg class="bi bi-star rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                    </svg>
+                    <svg class="bi bi-star-fill rating-stars" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="goldenrod" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <p class="text-body-secondary" style="font-size: 12px;">10/2/23</p>
+                  </div>
+                </div>
+                <div class="row d-flex flex-column">
+                  <div class="col pt-2">
+                    <div class=""></div>
+                    <p>MEOW MEOW MEOW MEOW MEOW MEOW!!!! MEOWoOEmEO MEoRRRrRRRr MEOWWW</p>
+                  </div>
+                  <!--Reply Column-->
+                  <div class="col mt-0">
+
+                    <!--https://getbootstrap.com/docs/5.2/components/modal/-->
+                    <!-- Reply Form Prompter -->
+                    <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
+                      <p class="reply-button-text">Reply</p>
+                    </button>
+
+                    <!-- Reply Form -->
+                    <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <label for="writeReviewInput">Write your reply here</label>
+                              <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@Bean L."></textarea>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> <!--End Reply Column-->
+                </div>
+              </div>
+            </li>
+
+          </ul> <!--End List of Replies-->
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-    crossorigin="anonymous"></script>
+<footer class="d-flex flex-column justify-content-center mt-auto" style="height: 8vh; background-color: #87CEEB;">
+  <p class="m-auto text-white">
+    © 2023 PetPal Inc.
+  </p>
+</footer>
+
 </body>
-
 </html>
