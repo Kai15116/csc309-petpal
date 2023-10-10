@@ -28,11 +28,14 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Adoption Process</a>
-                    </li>
+                        <form role="search" style="width: 400px; min-width: 35%; max-width: 90%;" action="search-filter-page.html">
+                          <div class="input-group">
+                            <input type="search" class="form-control" placeholder="Search here..." aria-label="Search"
+                              aria-describedby="search-btn" required>
+                            <button class="btn btn-outline-success" type="submit" id="search-btn">Search</button>
+                          </div>
+                        </form>
+                      </li>
                     <li class="nav-item">
                         <a class="nav-link mobile-nav-item" href="#">Profile</a>
                     </li>
@@ -44,11 +47,8 @@
                                 Notifications
                             </a>
                             <div class="collapse" id="notifications-list">
-                                <div class="ms-4"><a class="nav-link" href="#">Notification 1</a></div>
-                                <div class="ms-4"><a class="nav-link" href="#">Notification 2</a></div>
-                                <div class="ms-4"><a class="nav-link" href="#">Notification 3</a></div>
-                                <div class="ms-4"><a class="nav-link" href="#">Notification 4</a></div>
-                                <div class="ms-4"><a class="nav-link" href="#">Notification 5</a></div>
+                                <div class="ms-4"><a class="nav-link" href="application_seeker.html">Your application was accepted!</a></div>
+                                <div class="ms-4"><a class="nav-link" href="shelter_profile_view.html">You got a reply from Toronto Zoo Escapees!</a></div>
                             </div>
                         </div>
                     </li>
@@ -69,11 +69,8 @@
                             </svg>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Notification 1</a></li>
-                            <li><a class="dropdown-item" href="#">Notification 2</a></li>
-                            <li><a class="dropdown-item" href="#">Notification 3</a></li>
-                            <li><a class="dropdown-item" href="#">Notification 4</a></li>
-                            <li><a class="dropdown-item" href="#">Notification 5</a></li>
+                            <li><a class="dropdown-item text-wrap" href="application_seeker.html">Your application was accepted!</a></li>
+                            <li><a class="dropdown-item text-wrap" href="shelter_profile_view.html">You got a reply from Toronto Zoo Escapees!</a></li>
                         </ul>
                     </div>
                     <div class="vr mx-2 def-nav-item"></div>

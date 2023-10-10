@@ -34,11 +34,11 @@ header {
 .page-container {
     background-color: #f0eeec; 
     width: 100%;
-    font-family: sans-serif;
     overflow-y: auto;
 }
 
 .page-content {
+    font-family: sans-serif;
     flex: 1; 
     justify-content: flex-start; 
     text-align: center; 
