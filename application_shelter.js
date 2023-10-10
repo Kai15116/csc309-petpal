@@ -49,7 +49,7 @@ function sendMessage(event){
     if (chatInput != ""){
         new_message.innerHTML = `
         <div class="user-message  message-shelter align-self-end rounded bg-dark-subtle p-3 my-3 d-flex flex-row-reverse align-items-center" style="height: auto; max-width: 80%;">
-            <img src="images/user-2.png" class="rounded-circle border ms-3 me-1 align-self-start" style="width: 50px;">
+            <img src="images/user-2.png" class="rounded-circle border ms-3 me-1 align-self-start" style="width: 50px;" alt="Pet shelter icon">
             <div class="text-wrap w-100">${chatInput}</div>
         </div>
         `

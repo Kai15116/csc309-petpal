@@ -46,6 +46,8 @@
                                     data-bs-target="#notifications-list" aria-expanded="true"
                                     aria-controls="notifications-list">
                                     Notifications
+                                    <span class="badge bg-danger ms-2" style="height: fit-content;">3</span>
+
                                 </a>
                                 <div class="collapse" id="notifications-list">
                                     <div class="ms-4"><a class="nav-link" href="application_seeker.html">Your application was accepted!</a></div>
@@ -55,19 +57,20 @@
                         </li>
                         <hr>
                         <li class="nav-item">
-                            <a class="nav-link mobile-nav-item" href="#">Logout</a>
+                            <a class="nav-link mobile-nav-item" href="index.html">Logout</a>
                         </li>
                     </ul>
 
                     <div class="ms-auto d-flex" style="margin-right: 6rem;">
                         <div class="dropdown my-auto def-nav-item">
-                            <button class="btn" type="button" data-bs-toggle="dropdown">
+                            <button class="btn d-flex" type="button" data-bs-toggle="dropdown">
                                 <!-- https://icons.getbootstrap.com/icons/bell/ -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor"
                                     class="bi bi-bell me-2 text-secondary" viewBox="0 0 16 16">
                                     <path
                                         d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                                 </svg>
+                                <span class="badge bg-danger" style="transform: translate(-25px, -4px) scale(0.8); margin-right: -25px;">2</span>
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item text-wrap" href="application_seeker.html">Your application was accepted!</a></li>
@@ -178,16 +181,15 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="card text-center" id="profile-card">
-                                    <div class="mb-4" style="background-color: #C8F4FF;">
+                                    <div class="mb-4 banner">
                                       <img class="mt-3 mx-auto rounded-circle border text-center d-flex flex-column justify-content-center"
-                                        src="images/user-2.png"
-                                        style="width: 80px; height: 80px; transform: translate(0, 50%); "
-                                        alt="profile_card">
-                                    </div>
+                                        src="example_images/shelter_portrait.jpg"
+                                        style="width: 80px; height: 80px; transform: translate(0, 50%); ">
+                                    </div>                        
                                   
                                   
                                     <div class="card-body d-flex flex-column justify-content-center mt-2">
-                                      <h5 class="card-title">Random Shelter</h5>
+                                      <h5 class="card-title">Toronto Zoo Escapees</h5>
                                       <a href="shelter_profile_view.html" class="card-link link-underline link-underline-opacity-0"><b>View Profile</b></a>
                                   
                                   
