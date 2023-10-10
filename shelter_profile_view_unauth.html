@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Shelter Profile View</title>
+    <title>Shelter Profile View Unauthorized</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="account_style.css">
     <link rel="stylesheet" href="navbar.css">
@@ -16,76 +16,75 @@
 
 <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
 <nav class="navbar navbar-expand-lg bg-white shadow-sm">
-  <div class="container-fluid">
+    <div class="container-fluid">
 
       <a class="navbar-brand" href="my_pets.html"><img src="images/logo-1.png" width="150px"></a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="my_pets.html">My Pets</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="applications.html">Applications</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link mobile-nav-item" href="#">Profile</a>
-              </li>
-              <li class="nav-item">
-                  <div class="nav-item mobile-nav-item">
-                      <a class="nav-link" href="#" role="button" data-bs-toggle="collapse"
-                          data-bs-target="#notifications-list" aria-expanded="true"
-                          aria-controls="notifications-list">
-                          Notifications
-                      </a>
-                      <div class="collapse" id="notifications-list">
-                          <div class="ms-4"><a class="nav-link" href="#">No notifications...</a></div>
-                      </div>
-                  </div>
-              </li>
-              <hr>
-              <li class="nav-item">
-                  <a class="nav-link mobile-nav-item" href="#">Logout</a>
-              </li>
-          </ul>
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="applications.html">Applications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mobile-nav-item" href="#">Profile</a>
+          </li>
+          <li class="nav-item">
+            <div class="nav-itemd-flex">
+              <a class="nav-link mobile-nav-item" href="#" role="button" data-bs-toggle="collapse"
+                data-bs-target="#notifications-list" aria-expanded="true" aria-controls="notifications-list">
+                Notifications
+                <span class="badge bg-danger ms-2 " style="height: fit-content;">3</span>
+              </a>
+              <div class="collapse" id="notifications-list">
+                <div class="ms-4"><a class="nav-link" href="shelter_profile_view.html">No notifications...</a></div>
+              </div>
+            </div>
+          </li>
+          <hr>
+          <li class="nav-item">
+            <a class="nav-link mobile-nav-item" href="#">Logout</a>
+          </li>
+        </ul>
 
-          <div class="ms-auto d-flex" style="margin-right: 6rem;">
-              <div class="dropdown my-auto def-nav-item">
-                  <button class="btn" type="button" data-bs-toggle="dropdown">
-                      <!-- https://icons.getbootstrap.com/icons/bell/ -->
-                      <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor"
-                          class="bi bi-bell me-2 text-secondary" viewBox="0 0 16 16">
-                          <path
-                              d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
-                      </svg>
-                  </button>
-                  <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">No notifications...</a></li>
-                  </ul>
-              </div>
-              <div class="vr mx-2 def-nav-item"></div>
-              <div class="dropdown my-auto def-nav-item">
-                  <button class="btn" type="button" data-bs-toggle="dropdown">
-                      <img class="rounded-circle border" src="example_images/shelter_portrait.jpg"
-                          style="background-color: cornsilk; width: 50px; height: 50px;">
-                  </button>
-                  <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Profile</a></li>
-                      <hr>
-                      <li><a class="dropdown-item" href="index.html">Log out</a></li>
-                  </ul>
-              </div>
+        <div class="ms-auto d-flex" style="margin-right: 6rem;">
+          <div class="dropdown my-auto def-nav-item">
+            <button class="btn d-flex" type="button" data-bs-toggle="dropdown">
+              <!-- https://icons.getbootstrap.com/icons/bell/ -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor"
+                class="bi bi-bell me-2 text-secondary" viewBox="0 0 16 16">
+                <path
+                  d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+              </svg>
+              <span class="badge bg-danger"
+                style="transform: translate(-25px, -4px) scale(0.8); margin-right: -25px;">3</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">No notifications...</a></li>
+            </ul>
           </div>
+          <div class="vr mx-2 def-nav-item"></div>
+          <div class="dropdown my-auto def-nav-item">
+            <button class="btn" type="button" data-bs-toggle="dropdown">
+              <img class="rounded-circle border" src="example_images/milky3.jpg"
+                style="background-color: cornsilk; width: 50px; height: 50px;"> </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <hr>
+              <li><a class="dropdown-item" href="index.html">Log out</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-  </div>
-</nav>
-
+    </div>
+  </nav>
 <!--Profile Banner-->
 <div class="profile-banner">
   <div class="overlay">
@@ -221,16 +220,55 @@
     <div class="col">
       <!--Reviews Card-->
       <div class="card mt-4" style="max-width: 20em;">
-        <div class="card-body">
-          <h5 class="card-title">Reviews</h5>
-          <ul class="list-group list-group-flush">
 
-            <li class="list-group-item">
-              <img style="margin-left: 0.5em;" src="example_images/4halfstars.png" height="50"> 
-            </li>
+        <div class="card-header d-flex flex-wrap justify-content-between">
+          <h5 class="m-2">Reviews</h5>
+          <!--https://getbootstrap.com/docs/5.2/components/modal/-->
+          <!-- Review Form Prompter -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#writeReview">
+            Leave a review
+          </button>
+
+          <!-- Review Form -->
+          <div class="modal fade" id="writeReview" tabindex="-1" aria-labelledby="writeReviewLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="writeReviewLabel">Review</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="writeReviewInput">Write your review here</label>
+                    <textarea class="form-control" id="writeReviewInput" rows="3" placeholder=""></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="selectReviewRating">How would you rate this shelter?</label>
+                    <select class="form-control" id="selectReviewRating">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ms-4 mb-2 mt-2">
+            <img src="example_images/4halfstars.png" height="50"> 
+          </div>
+        </div>
+        <div class="card-body" style="min-width: 20em;">
+          <ul class="list-group list-group-flush overflow-auto" style="max-height: 82vh;">
 
             <!--Review Element-->
-            <li class="list-group-item ps-0 pe-0">
+            <li class="list-group-item ps-0 pe-1">
               <div class="review-box container pt-2 ps-2 pe-2 pb-0">
                 <div class="row">
                   <div class="col-3 me-2">
@@ -261,11 +299,42 @@
                     <p class="text-body-secondary" style="font-size: 12px;">10/7/23</p>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col pt-2">
+                <div class="row d-flex flex-column">
+                  <div class="col pt-2 mb-0">
                     <div class=""></div>
                     <p>This shelter is amazing! They were very accomodating for our new monkey and kept in touch with us every step of the way, making the adoption process go as smooth as possible. All these pets deserve a loving home ^.^</p>
                   </div>
+                    <!--Reply Column-->
+                    <div class="col mt-0">
+
+                      <!--https://getbootstrap.com/docs/5.2/components/modal/-->
+                      <!-- Reply Form Prompter -->
+                      <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
+                        <p class="reply-button-text">Reply</p>
+                      </button>
+
+                      <!-- Reply Form -->
+                      <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="form-group">
+                                <label for="writeReviewInput">Write your reply here</label>
+                                <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@username"></textarea>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> <!--End Reply Column-->
                 </div>
               </div>
 
@@ -285,14 +354,47 @@
                     <p class="text-body-secondary" style="font-size: 12px;">10/7/23</p>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col pt-2">
-                    <div class=""></div>
+                <div class="row d-flex flex-column">
+                  <div class="col pt-2 mb-0">
                     <a class="review-reply-atting">@Milky T.</a>
                     <p>
                       Thank you for such a thoughtful review! Milky is the best :D
                     </p>
                   </div>
+
+                  <!--Reply Column-->
+                  <div class="col mt-0">
+
+                    <!--https://getbootstrap.com/docs/5.2/components/modal/-->
+                    <!-- Reply Form Prompter -->
+                    <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
+                      <p class="reply-button-text">Reply</p>
+                    </button>
+
+                    <!-- Reply Form -->
+                    <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <label for="writeReviewInput">Write your reply here</label>
+                              <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@Toronto Zoo Escapees"></textarea>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div> 
+                  <!--End Reply Column-->
                 </div>
               </div>
 
@@ -313,14 +415,45 @@
                       <p class="text-body-secondary" style="font-size: 12px;">10/8/23</p>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col pt-2">
+                  <div class="row d-flex flex-column">
+                    <div class="col pt-2 mb-0">
                       <div class=""></div>
                       <a class="review-reply-atting">@Milky T.</a>
                       <p>
                         Your Review SUCKS
                       </p>
                     </div>
+                    <!--Reply Column-->
+                    <div class="col mt-0">
+
+                      <!--https://getbootstrap.com/docs/5.2/components/modal/-->
+                      <!-- Reply Form Prompter -->
+                      <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
+                        <p class="reply-button-text">Reply</p>
+                      </button>
+
+                      <!-- Reply Form -->
+                      <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="form-group">
+                                <label for="writeReviewInput">Write your reply here</label>
+                                <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@username"></textarea>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> <!--End Reply Column-->
                   </div>
                 </div>
 
@@ -339,7 +472,7 @@
                       <p class="text-body-secondary" style="font-size: 12px;">10/9/23</p>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row d-flex flex-column">
                     <div class="col pt-2">
                       <div class=""></div>
                       <a class="review-reply-atting">
@@ -349,6 +482,37 @@
                         I appreciate your critique -_-
                       </p>
                     </div>
+                    <!--Reply Column-->
+                    <div class="col mt-0">
+
+                      <!--https://getbootstrap.com/docs/5.2/components/modal/-->
+                      <!-- Reply Form Prompter -->
+                      <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
+                        <p class="reply-button-text">Reply</p>
+                      </button>
+
+                      <!-- Reply Form -->
+                      <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="form-group">
+                                <label for="writeReviewInput">Write your reply here</label>
+                                <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@username"></textarea>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> <!--End Reply Column-->
                   </div>
                 </div>
               </div>
@@ -386,19 +550,47 @@
                     <p class="text-body-secondary" style="font-size: 12px;">10/2/23</p>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row d-flex flex-column">
                   <div class="col pt-2">
                     <div class=""></div>
                     <p>MEOW MEOW MEOW MEOW MEOW MEOW!!!! MEOWoOEmEO MEoRRRrRRRr MEOWWW</p>
                   </div>
+                  <!--Reply Column-->
+                  <div class="col mt-0">
+
+                    <!--https://getbootstrap.com/docs/5.2/components/modal/-->
+                    <!-- Reply Form Prompter -->
+                    <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
+                      <p class="reply-button-text">Reply</p>
+                    </button>
+
+                    <!-- Reply Form -->
+                    <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <label for="writeReviewInput">Write your reply here</label>
+                              <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@Bean L."></textarea>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> <!--End Reply Column-->
                 </div>
               </div>
             </li>
 
-          </ul>
-        </div>
-        <div class="card-footer">
-          See more reviews
+          </ul> <!--End List of Replies-->
         </div>
       </div>
     </div>

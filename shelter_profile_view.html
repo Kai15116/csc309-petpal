@@ -122,7 +122,7 @@
           <h6 class="card-subtitle mb-2 text-muted" style="font-size: 12px; ">Main Street, Toronto ON M3V 0N1</h6>
           <p class="card-text">Small description of the shelter Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.</p>
           <div class="d-flex justify-content-around">
-            <a class="btn btn-primary" href="shelter_pets.html" role="button">
+            <a class="btn btn-primary" href="my_pets.html" role="button">
               View Pets
             </a>
             <button class="btn btn-default" data-bs-toggle="collapse" href="#collapseContactInfo" role="button" aria-expanded="false" aria-controls="collapseContactInfo">
@@ -138,7 +138,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>  
@@ -231,43 +230,6 @@
 
         <div class="card-header d-flex flex-wrap justify-content-between">
           <h5 class="m-2">Reviews</h5>
-          <!--https://getbootstrap.com/docs/5.2/components/modal/-->
-          <!-- Review Form Prompter -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#writeReview">
-            Leave a review
-          </button>
-
-          <!-- Review Form -->
-          <div class="modal fade" id="writeReview" tabindex="-1" aria-labelledby="writeReviewLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="writeReviewLabel">Review</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <div class="form-group">
-                    <label for="writeReviewInput">Write your review here</label>
-                    <textarea class="form-control" id="writeReviewInput" rows="3" placeholder=""></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="selectReviewRating">How would you rate this shelter?</label>
-                    <select class="form-control" id="selectReviewRating">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="ms-4 mb-2 mt-2">
             <img src="example_images/4halfstars.png" height="50"> 
           </div>
@@ -285,7 +247,9 @@
                     </div>
                   </div>
                   <div class="col d-flex flex-column pe-0">
-                    <p class="m-0" style="font-weight: bold;">Milky T.</p>
+                    <a class="m-0" href="seeker_profile_view.html" style="color: black; text-decoration: none; font-weight: bold;">
+                      Milky T.
+                    </a>
                     <p class="m-0 text-body-secondary" style="font-size: 12px;">San Francisco, CA</p>
                   </div>
                   <div class="col d-flex flex-row-reverse flex-wrap">
