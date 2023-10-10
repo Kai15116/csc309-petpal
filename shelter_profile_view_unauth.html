@@ -51,7 +51,7 @@
               </li>
               <hr>
               <li class="nav-item">
-                  <a class="nav-link mobile-nav-item" href="shelter_profile_view_unauth.html">Logout</a>
+                  <a class="nav-link mobile-nav-item" href="#">Logout</a>
               </li>
           </ul>
 
@@ -78,7 +78,7 @@
                   <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="#">Profile</a></li>
                       <hr>
-                      <li><a class="dropdown-item" href="shelter_profile_view_unauth.html">Log out</a></li>
+                      <li><a class="dropdown-item" href="index.html">Log out</a></li>
                   </ul>
               </div>
           </div>
@@ -92,13 +92,6 @@
     <div class="overlay-content">
       <h1>
         Toronto Zoo Escapees
-        <a class="shelter-profile-edit-icon" href="shelter_profile_edit.html">
-          <!--https://icons.getbootstrap.com/icons/pencil-square/-->
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-          </svg>
-        </a>
       </h1>
     </div>
   </div>
@@ -228,55 +221,16 @@
     <div class="col">
       <!--Reviews Card-->
       <div class="card mt-4" style="max-width: 20em;">
+        <div class="card-body">
+          <h5 class="card-title">Reviews</h5>
+          <ul class="list-group list-group-flush">
 
-        <div class="card-header d-flex flex-wrap justify-content-between">
-          <h5 class="m-2">Reviews</h5>
-          <!--https://getbootstrap.com/docs/5.2/components/modal/-->
-          <!-- Review Form Prompter -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#writeReview">
-            Leave a review
-          </button>
-
-          <!-- Review Form -->
-          <div class="modal fade" id="writeReview" tabindex="-1" aria-labelledby="writeReviewLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="writeReviewLabel">Review</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <div class="form-group">
-                    <label for="writeReviewInput">Write your review here</label>
-                    <textarea class="form-control" id="writeReviewInput" rows="3" placeholder=""></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="selectReviewRating">How would you rate this shelter?</label>
-                    <select class="form-control" id="selectReviewRating">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="ms-4 mb-2 mt-2">
-            <img src="example_images/4halfstars.png" height="50"> 
-          </div>
-        </div>
-        <div class="card-body" style="min-width: 20em;">
-          <ul class="list-group list-group-flush overflow-auto" style="max-height: 82vh;">
+            <li class="list-group-item">
+              <img style="margin-left: 0.5em;" src="example_images/4halfstars.png" height="50"> 
+            </li>
 
             <!--Review Element-->
-            <li class="list-group-item ps-0 pe-1">
+            <li class="list-group-item ps-0 pe-0">
               <div class="review-box container pt-2 ps-2 pe-2 pb-0">
                 <div class="row">
                   <div class="col-3 me-2">
@@ -307,42 +261,11 @@
                     <p class="text-body-secondary" style="font-size: 12px;">10/7/23</p>
                   </div>
                 </div>
-                <div class="row d-flex flex-column">
-                  <div class="col pt-2 mb-0">
+                <div class="row">
+                  <div class="col pt-2">
                     <div class=""></div>
                     <p>This shelter is amazing! They were very accomodating for our new monkey and kept in touch with us every step of the way, making the adoption process go as smooth as possible. All these pets deserve a loving home ^.^</p>
                   </div>
-                    <!--Reply Column-->
-                    <div class="col mt-0">
-
-                      <!--https://getbootstrap.com/docs/5.2/components/modal/-->
-                      <!-- Reply Form Prompter -->
-                      <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
-                        <p class="reply-button-text">Reply</p>
-                      </button>
-
-                      <!-- Reply Form -->
-                      <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="form-group">
-                                <label for="writeReviewInput">Write your reply here</label>
-                                <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@Milky T."></textarea>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div> <!--End Reply Column-->
                 </div>
               </div>
 
@@ -362,47 +285,14 @@
                     <p class="text-body-secondary" style="font-size: 12px;">10/7/23</p>
                   </div>
                 </div>
-                <div class="row d-flex flex-column">
-                  <div class="col pt-2 mb-0">
+                <div class="row">
+                  <div class="col pt-2">
+                    <div class=""></div>
                     <a class="review-reply-atting">@Milky T.</a>
                     <p>
                       Thank you for such a thoughtful review! Milky is the best :D
                     </p>
                   </div>
-
-                  <!--Reply Column-->
-                  <div class="col mt-0">
-
-                    <!--https://getbootstrap.com/docs/5.2/components/modal/-->
-                    <!-- Reply Form Prompter -->
-                    <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
-                      <p class="reply-button-text">Reply</p>
-                    </button>
-
-                    <!-- Reply Form -->
-                    <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="form-group">
-                              <label for="writeReviewInput">Write your reply here</label>
-                              <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@Toronto Zoo Escapees"></textarea>
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div> 
-                  <!--End Reply Column-->
                 </div>
               </div>
 
@@ -423,45 +313,14 @@
                       <p class="text-body-secondary" style="font-size: 12px;">10/8/23</p>
                     </div>
                   </div>
-                  <div class="row d-flex flex-column">
-                    <div class="col pt-2 mb-0">
+                  <div class="row">
+                    <div class="col pt-2">
                       <div class=""></div>
                       <a class="review-reply-atting">@Milky T.</a>
                       <p>
                         Your Review SUCKS
                       </p>
                     </div>
-                    <!--Reply Column-->
-                    <div class="col mt-0">
-
-                      <!--https://getbootstrap.com/docs/5.2/components/modal/-->
-                      <!-- Reply Form Prompter -->
-                      <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
-                        <p class="reply-button-text">Reply</p>
-                      </button>
-
-                      <!-- Reply Form -->
-                      <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="form-group">
-                                <label for="writeReviewInput">Write your reply here</label>
-                                <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@Bean L."></textarea>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div> <!--End Reply Column-->
                   </div>
                 </div>
 
@@ -480,7 +339,7 @@
                       <p class="text-body-secondary" style="font-size: 12px;">10/9/23</p>
                     </div>
                   </div>
-                  <div class="row d-flex flex-column">
+                  <div class="row">
                     <div class="col pt-2">
                       <div class=""></div>
                       <a class="review-reply-atting">
@@ -490,37 +349,6 @@
                         I appreciate your critique -_-
                       </p>
                     </div>
-                    <!--Reply Column-->
-                    <div class="col mt-0">
-
-                      <!--https://getbootstrap.com/docs/5.2/components/modal/-->
-                      <!-- Reply Form Prompter -->
-                      <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
-                        <p class="reply-button-text">Reply</p>
-                      </button>
-
-                      <!-- Reply Form -->
-                      <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="form-group">
-                                <label for="writeReviewInput">Write your reply here</label>
-                                <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@Milky T."></textarea>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div> <!--End Reply Column-->
                   </div>
                 </div>
               </div>
@@ -558,47 +386,19 @@
                     <p class="text-body-secondary" style="font-size: 12px;">10/2/23</p>
                   </div>
                 </div>
-                <div class="row d-flex flex-column">
+                <div class="row">
                   <div class="col pt-2">
                     <div class=""></div>
                     <p>MEOW MEOW MEOW MEOW MEOW MEOW!!!! MEOWoOEmEO MEoRRRrRRRr MEOWWW</p>
                   </div>
-                  <!--Reply Column-->
-                  <div class="col mt-0">
-
-                    <!--https://getbootstrap.com/docs/5.2/components/modal/-->
-                    <!-- Reply Form Prompter -->
-                    <button type="button" class="btn btn-default reply-button" data-bs-toggle="modal" data-bs-target="#writeReply">
-                      <p class="reply-button-text">Reply</p>
-                    </button>
-
-                    <!-- Reply Form -->
-                    <div class="modal fade" id="writeReply" tabindex="-1" aria-labelledby="writeReplyLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="writeReplyLabel">Reply</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <div class="form-group">
-                              <label for="writeReviewInput">Write your reply here</label>
-                              <textarea class="form-control" id="writeReviewInput" rows="3" placeholder="@Bean L."></textarea>
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div> <!--End Reply Column-->
                 </div>
               </div>
             </li>
 
-          </ul> <!--End List of Replies-->
+          </ul>
+        </div>
+        <div class="card-footer">
+          See more reviews
         </div>
       </div>
     </div>

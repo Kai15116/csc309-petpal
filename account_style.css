@@ -139,6 +139,15 @@ body {
 .review-reply-atting {
   text-decoration: none;
 }
+.reply-button {
+  transform: translate(0, -0.5em);
+  width: 4em;
+  height: 2em;
+}
+.reply-button-text {
+  font-size: 12px;
+  color: gray;
+}
 
 .shelter-profile-edit-icon {
   color: white;
