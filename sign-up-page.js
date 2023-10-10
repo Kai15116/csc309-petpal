@@ -80,6 +80,7 @@ userTypeSelector.addEventListener("change", function() {
     body.style.backgroundSize = 'cover';
     body.style.backgroundPosition = 'center';
     body.style.backgroundRepeat = 'no-repeat';
+    signUpForm.action = 'sign-up-success-page-shelter.html';
 
 
   } else {
@@ -92,7 +93,7 @@ userTypeSelector.addEventListener("change", function() {
     body.style.backgroundSize = 'cover';
     body.style.backgroundPosition = 'center';
     body.style.backgroundRepeat = 'no-repeat';
-
+    signUpForm.action = 'sign-up-success-page.html';
   }
 })
 
