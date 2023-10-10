@@ -136,8 +136,9 @@
                                         <img src="images/no_image_icon.png" alt="No Image" class="img-fluid image-preview" id="imagePreview3">
                                     </label>
                                 </div>
+                                <!-- logic to handle image upload -->
                                 <script>
-                                    // Function to handle image selection and display
+                                    // function to handle image selection and display
                                     function handleImageSelect(input, preview) {
                                         const file = input.files[0];
                                         if (file) {
@@ -147,11 +148,12 @@
                                             };
                                             reader.readAsDataURL(file);
                                         } else {
-                                            preview.src = "no_image_icon.png"; // Reset to the default image
+                                            // reset to the default image
+                                            preview.src = "no_image_icon.png"; 
                                         }
                                     }
                             
-                                    // Attach event listeners to image inputs
+                                    // attach event listeners to image inputs
                                     const imageInputs = document.querySelectorAll(".image-input");
                                     const imagePreviews = document.querySelectorAll(".image-preview");
                             
