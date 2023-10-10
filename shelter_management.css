@@ -78,6 +78,11 @@ body {
     }
 }
 
+.banner {
+    background-image: url("example_images/yosemite_banner.jpg");
+    background-size: cover;
+}
+
 @media only screen and (max-width: 728px) {
     #pets-grid {
         grid-template-columns: auto auto;
