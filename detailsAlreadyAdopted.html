@@ -131,7 +131,7 @@
                                     </tr>
                                     <tr>
                                       <th scope="row"><strong>Adoption Status:</strong></th>
-                                      <td>Not Adopted</td>
+                                      <td>Adopted</td>
                                     </tr>
                                     </tbody>
                                 </table> 
@@ -200,7 +200,15 @@
                             </ul>
                           </div>
                             <a class="btn btn-primary btn-lg apply-button" href="adoption.html" role="button">Apply For Adoption</a>
-                        </div>
+                            <div class="d-none" id="form-result-box">
+                              <div class="alert alert-danger" role="alert">
+                                  <h4 class="alert-heading">Error!</h4>
+                                  <p> Pet Not Available for Adoption </p>
+                                  <hr>
+                                  <p class="mb-0">This pet has already been adopted and is not longer available. Please look for another pet.</p>
+                              </div>
+                            </div>
+                          </div>
                       </div>
                 </div>    
             </div>
@@ -212,4 +220,19 @@
       </footer>
     </div>
 </body>
+  <!-- logic to show error message since pet is already adopted -->
+  <script>
+    // get a reference to the button and the form-result-box
+    const applyButton = document.querySelector('.apply-button');
+    const formResultBox = document.getElementById('form-result-box');
+    const errorMessage = document.getElementById('error-message');
+
+    // add a click event listener to the button
+    applyButton.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // show the form-result-box
+        formResultBox.classList.remove('d-none');
+    });
+  </script>
 </html>
