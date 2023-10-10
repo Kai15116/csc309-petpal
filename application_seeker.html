@@ -13,11 +13,12 @@
 </head>
 
 <body class="background-color" style="height: 100%; margin: 0;">
-
+    
+    <!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
     <nav class="navbar navbar-expand-lg bg-white shadow-sm">
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150px"></a>
+            <a class="navbar-brand" href="index.html"><img src="images/logo-1.png" width="150" alt="logo"></a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -52,9 +53,9 @@
                             </div>
                         </div>
                     </li>
-                    <hr>
+                    <li><hr></li>
                     <li class="nav-item">
-                        <a class="nav-link mobile-nav-item" href="#">Logout</a>
+                        <a class="nav-link mobile-nav-item" href="index.html">Logout</a>
                     </li>
                 </ul>
 
@@ -77,11 +78,11 @@
                     <div class="dropdown my-auto def-nav-item">
                         <button class="btn" type="button" data-bs-toggle="dropdown">
                             <img class="rounded-circle border" src="images/user.png"
-                                style="background-color: cornsilk; width: 50px;">
+                                style="background-color: cornsilk; width: 50px;" alt="user icon">
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <hr>
+                            <li><hr></li>
                             <li><a class="dropdown-item" href="index.html">Log out</a></li>
                         </ul>
                     </div>
@@ -94,33 +95,44 @@
     <main class="d-flex flex-column justify-content-center align-items-center" style="height: 100%;">
         <div class="d-flex align-items-start mx-auto" style="height: 100%;" id="main-container">
             <div class="application-form" style="height: 100%;">
-                <!-- <h1 class="fw-bold">Just One More Step To Adoption!</h1> -->
 
                 <div class="col-lg-12">
+                    <h2>Adoption Process:</h2>
+                    <p>At PetPal, we facilitate a caring and efficient process for shelters to rescue and find
+                        loving homes for abandoned pets.
+                        Shelters can sign up for an account and list these pets for adoption, providing them
+                        with a chance for a brighter future.
+                        Once a shelter lists a pet, they have the flexibility to set an adoption fee ranging
+                        from $20 to $500, reflecting the unique
+                        circumstances and needs of each animal. These fees help cover the cost of care,
+                        vaccinations, and other essentials to ensure the
+                        pet is ready for their new home. To ensure the welfare of these pets, we have
+                        established adoption requirements, which are detailed
+                        in our comprehensive terms and conditions listed below. </p>
                     <h2>Terms and Conditions for Pet Adoption:</h2>
                     <p>The Tenant acknowledges and agrees to the following terms:</p>
                     <ol>
                         <li>The Landlord has agreed to permit pet/s at the Premises as specified in the Tenancy
                             Agreement and this Pet Agreement.</li>
-                        <li>Any pet/s other than the approved pet/s specified in the Tenancy Agreement and this Pet
-                            Agreement must first be requested by the Tenant in writing via a separate Pet
-                            Application giving full details and then be approved in writing by the Landlord PRIOR to
-                            the pet/s being allowed onto the Premises. Pet approval may be subject to specific
-                            criteria and must be complied with. Approval is NOT guaranteed.</li>
-                        <li>The Tenant shall be liable for any damage or injury whatsoever caused by the pet/s on
-                            the Property, whether they are the Tenant’s pets or their guests pets and regardless of
-                            their approval status.</li>
-                        <li>The Tenant accepts full responsibility and indemnifies the Landlord for any claims by or
-                            injuries to third parties or their Property caused by, or as result of actions by their
-                            pet/s or their guests pet/s, and regardless of their approval status.</li>
-                        <li>The Tenant agrees to arrange for Flea Fumigation at the end of the Tenancy or at a time
-                            during the Tenancy as required or requested by the Landlord / Landlord’s Agent to be
-                            carried out by a Company complying with Australian Standards.</li>
+                        <li>Any pet/s other than the approved pet/s specified in the Tenancy Agreement and this
+                            Pet Agreement must first be requested by the Tenant in writing via a separate Pet
+                            Application giving full details and then be approved in writing by the Landlord
+                            PRIOR to the pet/s being allowed onto the Premises. Pet approval may be subject to
+                            specific criteria and must be complied with. Approval is NOT guaranteed.</li>
+                        <li>The Tenant shall be liable for any damage or injury whatsoever caused by the pet/s
+                            on the Property, whether they are the Tenant’s pets or their guests pets and
+                            regardless of their approval status.</li>
+                        <li>The Tenant accepts full responsibility and indemnifies the Landlord for any claims
+                            by or injuries to third parties or their Property caused by, or as result of actions
+                            by their pet/s or their guests pet/s, and regardless of their approval status.</li>
+                        <li>The Tenant agrees to arrange for Flea Fumigation at the end of the Tenancy or at a
+                            time during the Tenancy as required or requested by the Landlord / Landlord’s Agent
+                            to be carried out by a Company complying with Australian Standards.</li>
                         <li>The pet/s are to be outside at all times unless specified otherwise in the Tenancy
                             Agreement or this Pet Agreement. Guide dogs are an exception.</li>
-                        <li>If the pet is a dog, the Tenant agrees to restrain or remove the dog from the premises
-                            for the duration of inspections arranged by the Agent with the required notice given.
-                        </li>
+                        <li>If the pet is a dog, the Tenant agrees to restrain or remove the dog from the
+                            premises for the duration of inspections arranged by the Agent with the required
+                            notice given.</li>
                         <li>By signing below you are only asking for approval of the above-mentioned pet/s to be
                             accepted at the Property for which you are applying.</li>
                     </ol>
@@ -128,46 +140,57 @@
 
                 <div class="col-lg-12">
                     <h2>Fill Out The Following Information</h2>
-                    <form>
+                    <form action="/application_seeker.html">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Kai Dicarlantonio" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number:</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" placeholder="123-456-7890" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address:</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="test@gmail.com" readonly>
+                        </div>
                         <div class="form-group">
                             <label for="over18">Are you over 18?</label>
                             <input type="checkbox" id="over18" name="over18" disabled checked>
                         </div>
                         <div class="form-group">
                             <label for="address">Address:</label>
-                            <input type="text" id="address" name="address" class="form-control"
-                                placeholder="22 Whatever St. Toronto, ON" readonly>
+                            <input type="text" id="address" name="address" class="form-control" placeholder="22 Whatever St. Toronto, ON" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="suitability">Why are you suitable owners for Lalo?</label>
-                            <textarea id="suitability" name="suitability" class="form-control" rows="4"
-                                style="user-select: none;"
-                                placeholder="Amet deserunt consequat ullamco irure minim deserunt cupidatat laboris pariatur velit laboris. Cupidatat laboris fugiat cupidatat elit qui. Dolore culpa mollit quis aliquip ut veniam tempor tempor. Fugiat enim exercitation tempor cupidatat non non incididunt laborum sit ullamco. Dolore quis anim commodo commodo eu ea amet est. Adipisicing aute velit laboris enim dolore ut cupidatat.."
+                            <label for="suitability">What qualities or characteristics make you suitable
+                                candidates to become pet owners?</label>
+                            <textarea id="suitability" name="suitability" class="form-control" rows="4" placeholder="Amet deserunt consequat ullamco irure minim deserunt cupidatat laboris pariatur velit laboris. Cupidatat laboris fugiat cupidatat elit qui. Dolore culpa mollit quis aliquip ut veniam tempor tempor. Fugiat enim exercitation tempor cupidatat non non incididunt laborum sit ullamco. Dolore quis anim commodo commodo eu ea amet est. Adipisicing aute velit laboris enim dolore ut cupidatat.."
                                 readonly></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="signature">Signature:</label>
-                            <input type="text" id="signature" name="signature" class="form-control"
-                                placeholder="Place holder value" readonly>
+                            <label for="signature">Digital Signature: (I agree to the terms and
+                                conditions)</label>
+                            <input type="text" id="signature" name="signature" class="form-control" placeholder="Kai Dicarlantonio" readonly>
                         </div>
                     </form>
+
                 </div>
             </div>
 
             <div class="chat-container">
                 <div class="mb-0">
-                    <div class="messages-container overflow-scroll mb-0 d-flex flex-column" id="messages-container" style="height: 63vh;">
+                    <div class="messages-container overflow-scroll mb-0 d-flex flex-column" id="messages-container">
 
                         <div class="user-message message-seeker align-self-end rounded bg-body-tertiary p-3 my-3 d-flex flex-row-reverse align-items-center" style="height: auto; max-width: 80%;">
-                            <img src="images/user.png" class="rounded-circle border ms-3 me-1 align-self-start" style="width: 50px;">
+                            <img src="images/user.png" class="rounded-circle border ms-3 me-1 align-self-start" style="width: 50px;" alt="Pet seeker icon">
                             <div class="text-wrap w-100">Hello, I have a question about the application process. What is the exact fee for this adoption? </div>
                         </div>
                         <div class="user-message  message-shelter align-self-start rounded bg-dark-subtle p-3 my-3 d-flex align-items-center" style="height: auto; max-width: 80%;">
-                            <img src="images/user-2.png" class="rounded-circle border me-3 align-self-start" style="width: 50px;">
+                            <img src="images/user-2.png" class="rounded-circle border me-3 align-self-start" style="width: 50px;" alt="Pet shelter icon">
                             <div class="text-wrap w-100">Thank you for reaching out. I don't know what to say because I'm writing this just for demo, so hahaha.</div>
                         </div>
                         <div class="user-message message-seeker align-self-end rounded bg-body-tertiary p-3 my3 d-flex  flex-row-reverse align-items-center" style="height: auto; max-width: 80%;">
-                            <img src="images/user.png" class="rounded-circle border ms-3 me-1 align-self-start" style="width: 50px;">
+                            <img src="images/user.png" class="rounded-circle border ms-3 me-1 align-self-start" style="width: 50px;" alt="Pet seeker icon">
                             <div class="text-wrap w-100">Ah! Got it!</div>
                         </div>
 

@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-lg bg-white shadow-sm">
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="my_pets.html"><img src="images/logo-1.png" width="150px"></a>
+            <a class="navbar-brand" href="my_pets.html"><img src="images/logo-1.png" width="150" alt="logo"></a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -28,13 +28,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="my_pets.html">My Pets</a>
+                        <a class="nav-link" aria-current="page" href="my_pets.html">My Pets</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="applications.html">Applications</a>
+                        <a class="nav-link active" href="applications.html">Applications</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mobile-nav-item" href="#">Profile</a>
+                        <a class="nav-link mobile-nav-item" href="shelter_profile_view.html">Profile</a>
                     </li>
                     <li class="nav-item">
                         <div class="nav-item mobile-nav-item">
@@ -44,17 +44,13 @@
                                 Notifications
                             </a>
                             <div class="collapse" id="notifications-list">
-                                <div class="ms-4"><a class="nav-link" href="#">Notification 1</a></div>
-                                <div class="ms-4"><a class="nav-link" href="#">Notification 2</a></div>
-                                <div class="ms-4"><a class="nav-link" href="#">Notification 3</a></div>
-                                <div class="ms-4"><a class="nav-link" href="#">Notification 4</a></div>
-                                <div class="ms-4"><a class="nav-link" href="#">Notification 5</a></div>
+                                <div class="ms-4"><a class="nav-link" href="#">No notifications...</a></div>
                             </div>
                         </div>
                     </li>
-                    <hr>
+                    <li><hr></li>
                     <li class="nav-item">
-                        <a class="nav-link mobile-nav-item" href="#">Logout</a>
+                        <a class="nav-link mobile-nav-item" href="index.html">Logout</a>
                     </li>
                 </ul>
 
@@ -69,22 +65,18 @@
                             </svg>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Notification 1</a></li>
-                            <li><a class="dropdown-item" href="#">Notification 2</a></li>
-                            <li><a class="dropdown-item" href="#">Notification 3</a></li>
-                            <li><a class="dropdown-item" href="#">Notification 4</a></li>
-                            <li><a class="dropdown-item" href="#">Notification 5</a></li>
+                            <li><a class="dropdown-item" href="#">No notifications...</a></li>
                         </ul>
                     </div>
                     <div class="vr mx-2 def-nav-item"></div>
                     <div class="dropdown my-auto def-nav-item">
                         <button class="btn" type="button" data-bs-toggle="dropdown">
                             <img class="rounded-circle border" src="example_images/shelter_portrait.jpg"
-                                style="background-color: cornsilk; width: 50px; height: 50px;">
+                                style="background-color: cornsilk; width: 50px; height: 50px;" alt="user icon">
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <hr>
+                            <li><a class="dropdown-item" href="shelter_profile_view.html">Profile</a></li>
+                            <li><hr></li>
                             <li><a class="dropdown-item" href="index.html">Log out</a></li>
                         </ul>
                     </div>
@@ -101,17 +93,17 @@
         <div class="d-flex mx-auto" id="main-container">
 
             <div class="d-flex flex-column justify-content-center align-self-start">
-                    <div class="card text-center" id="profile-card">
+                <div class="card text-center" id="profile-card">
                     <div class="mb-4 banner">
                         <img class="mt-3 mx-auto rounded-circle border text-center d-flex flex-column justify-content-center"
-                        src="example_images/shelter_portrait.jpg"
-                        style="width: 80px; height: 80px; transform: translate(0, 50%); ">
+                            src="example_images/shelter_portrait.jpg"
+                            style="width: 80px; height: 80px; transform: translate(0, 50%); " alt="user icon">
                     </div>
 
 
                     <div class="card-body d-flex flex-column justify-content-center mt-2">
                         <h5 class="card-title">Toronto Zoo Escapees</h5>
-                        <a href="#" class="card-link link-underline link-underline-opacity-0"><b>View Profile</b></a>
+                        <a href="shelter_profile_view.html" class="card-link link-underline link-underline-opacity-0"><b>View Profile</b></a>
 
 
                         <div class="d-flex my-4 mx-auto">
@@ -145,7 +137,7 @@
                                 </svg>
                             </div>
                             <div class="vr mx-2"></div>
-                            <div href="#" class="my-auto text-muted" style="width: 30%;">123 reviews</div>
+                            <div class="my-auto text-muted" style="width: 30%;">123 reviews</div>
                             <div class="vr mx-2"></div>
                             <div class="text-muted my-auto" style="width: 30%;">Joined Sep. 21, 2023</div>
                         </div>
@@ -169,36 +161,36 @@
                     <li class="list-group-item">
                         <b>Happy Dog</b>
                         <div class="d-flex">
-                            <div class="text-muted" id="application-from">From: UserName</div>
+                            <div class="text-muted">From: UserName</div>
                             <div class="px-2"></div>
-                            <div class="text-muted ms-auto" id="application-date">Sept. 21, 2023</div>
+                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
                             <a class="stretched-link" href="application_shelter.html"></a>
                         </div>
                     </li>
                     <li class="list-group-item">
                         <b>Happy Dog</b>
                         <div class="d-flex">
-                            <div class="text-muted" id="application-from">From: UserName</div>
+                            <div class="text-muted">From: UserName</div>
                             <div class="px-2"></div>
-                            <div class="text-muted ms-auto" id="application-date">Sept. 21, 2023</div>
+                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
                             <a class="stretched-link" href="application_shelter.html"></a>
                         </div>
                     </li>
                     <li class="list-group-item">
                         <b>Happy Dog</b>
                         <div class="d-flex">
-                            <div class="text-muted" id="application-from">From: UserName</div>
+                            <div class="text-muted">From: UserName</div>
                             <div class="px-2"></div>
-                            <div class="text-muted ms-auto" id="application-date">Sept. 21, 2023</div>
+                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
                             <a class="stretched-link" href="application_shelter.html"></a>
                         </div>
                     </li>
                     <li class="list-group-item">
                         <b>Happy Dog</b>
                         <div class="d-flex">
-                            <div class="text-muted" id="application-from">From: UserName</div>
+                            <div class="text-muted">From: UserName</div>
                             <div class="px-2"></div>
-                            <div class="text-muted ms-auto" id="application-date">Sept. 21, 2023</div>
+                            <div class="text-muted ms-auto">Sept. 21, 2023</div>
                             <a class="stretched-link" href="application_shelter.html"></a>
                         </div>
                     </li>
@@ -226,7 +218,7 @@
     </div>
     <footer class="d-flex flex-column justify-content-center mt-auto" style="height: 8vh; background-color: #87CEEB;">
         <p class="m-auto text-white">
-          © 2023 PetPal Inc.
+            © 2023 PetPal Inc.
         </p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

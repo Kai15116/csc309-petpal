@@ -215,6 +215,11 @@ footer {
     margin-left: 32px;
 }
 
+.banner {
+    background-image: url("example_images/yosemite_banner.jpg");
+    background-size: cover;
+}
+
 /* responsive design */
 @media (max-width: 800px) {
     .pet_details_and_shelter {
