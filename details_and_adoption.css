@@ -209,3 +209,21 @@ footer {
     margin-bottom: 20px;
     /* padding: 10px; */
 }
+
+
+#profile-card {
+    margin-left: 32px;
+}
+
+/* responsive design */
+@media (max-width: 800px) {
+    .pet_details_and_shelter {
+        flex-direction: column-reverse; /* change to column layout */
+        align-items: center; 
+    }
+
+    #profile-card {
+        margin-bottom: 16px;
+        margin-left: 0;
+    }
+}

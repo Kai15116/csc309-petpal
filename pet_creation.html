@@ -136,8 +136,9 @@
                                         <img src="images/no_image_icon.png" alt="No Image" class="img-fluid image-preview" id="imagePreview3">
                                     </label>
                                 </div>
+                                <!-- logic to handle image upload -->
                                 <script>
-                                    // Function to handle image selection and display
+                                    // function to handle image selection and display
                                     function handleImageSelect(input, preview) {
                                         const file = input.files[0];
                                         if (file) {
@@ -147,11 +148,12 @@
                                             };
                                             reader.readAsDataURL(file);
                                         } else {
-                                            preview.src = "no_image_icon.png"; // Reset to the default image
+                                            // reset to the default image
+                                            preview.src = "no_image_icon.png"; 
                                         }
                                     }
                             
-                                    // Attach event listeners to image inputs
+                                    // attach event listeners to image inputs
                                     const imageInputs = document.querySelectorAll(".image-input");
                                     const imagePreviews = document.querySelectorAll(".image-preview");
                             
@@ -182,31 +184,27 @@
                         </div>
                     </div>
                     <div class="confirm-button"> 
-                        <a class="btn btn-primary btn-lg btn-xl" href="adoption.html" role="button">Post Pet Listing</a>   
+                        <a class="btn btn-primary btn-lg btn-xl post-button" href="adoption.html" role="button">Post Pet Listing</a>   
                     <div>
                 </div>
             </div> 
             <div class="d-flex pet-creation-graphic" id="post-pet">
                 <div class="ms-5 p-2 my-auto"
-                  style="background-image: linear-gradient(rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4)); width: 40%;">
+                  style="background-image: linear-gradient(rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4)); width: 60%;">
                   <h1 class="mb-2" style="color: #87CEEB;">Post your pet, find them a new home!</h1>
                   <p class="text-light"> By posting your pet on our site, you can make a profound difference in the lives of 
-                    both animals in need and caring individuals looking to provide a loving home. Your act of kindness opens the 
-                    door to a brighter future for pets who may have experienced hardship or abandonment. It offers them a chance 
-                    to find a safe and nurturing environment where they can thrive and be cherished as part of a loving family. 
-                    Your pet's story, personality, and unique qualities can touch the hearts of potential adopters, forging 
-                    connections that lead to lifelong bonds. Your contribution not only helps a pet find a new home but also 
-                    enriches the lives of those who choose to adopt, creating a heartwarming win-win for all involved. Together, 
-                    we can make a positive impact and bring happiness to both pets and their future families. Post your pet today 
+                    both animals in need and caring individuals looking to provide a loving home, opening the 
+                    door to a brighter future for pets who may have experienced hardship or abandonment. Post your pet today 
                     and be a part of this wonderful journey of compassion and companionship!
                   </p>
                 </div>
             </div>
         </div>
-        <div class="space-bottom"></div>
         </main>
-        <footer>
-            Copyright 2023 by The Salamancas.
+        <footer class="d-flex flex-column justify-content-center mt-auto" style="width: 100%; height: 8vh; background-color: #87CEEB;">
+            <p class="m-auto text-white">
+              © 2023 PetPal Inc.
+            </p>
         </footer>
     </div>
 </body>

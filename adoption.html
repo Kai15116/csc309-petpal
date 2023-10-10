@@ -69,6 +69,13 @@
                         <h1 class="fw-bold">Just One More Step To Adoption!</h1>
 
                         <div class="col-lg-12">
+                            <h2>Adoption Process:</h2>
+                            <p>At PetPal, we facilitate a caring and efficient process for shelters to rescue and find loving homes for abandoned pets. 
+                                Shelters can sign up for an account and list these pets for adoption, providing them with a chance for a brighter future.
+                                Once a shelter lists a pet, they have the flexibility to set an adoption fee ranging from $20 to $500, reflecting the unique 
+                                circumstances and needs of each animal. These fees help cover the cost of care, vaccinations, and other essentials to ensure the 
+                                pet is ready for their new home. To ensure the welfare of these pets, we have established adoption requirements, which are detailed 
+                                in our comprehensive terms and conditions listed below. </p>
                             <h2>Terms and Conditions for Pet Adoption:</h2>
                             <p>The Tenant acknowledges and agrees to the following terms:</p>
                             <ol>
@@ -87,6 +94,18 @@
                             <h2>Fill Out The Following Information</h2>
                             <form action="/application_seeker.html">
                                 <div class="form-group">
+                                    <label for="name">Name:</label>
+                                    <input type="text" id="name" name="name" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number:</label>
+                                    <input type="tel" id="phone" name="phone" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address:</label>
+                                    <input type="email" id="email" name="email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="over18">Are you over 18?</label>
                                     <input type="checkbox" id="over18" name="over18" required>
                                 </div>
@@ -95,15 +114,16 @@
                                     <input type="text" id="address" name="address" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="suitability">Why are you suitable owners for Lalo?</label>
+                                    <label for="suitability">What qualities or characteristics make you suitable candidates to become pet owners?</label>
                                     <textarea id="suitability" name="suitability" class="form-control" rows="4" required></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="signature">Signature:</label>
+                                    <label for="signature">Digital Signature: (I agree to the terms and conditions)</label>
                                     <input type="text" id="signature" name="signature" class="form-control" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary apply-button btn-lg">Submit Application</button>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
