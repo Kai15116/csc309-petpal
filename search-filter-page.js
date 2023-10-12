@@ -81,6 +81,7 @@ function createDemoView(demo_list, demo_status) {
   );
   const paginationControl = document.querySelector("#pagination-control");
   paginationControl.classList.toggle("d-none");
+  // Reference: https://getbootstrap.com/docs/5.3/components/card/
   const searchResHtml = demo_list
     .map(
       (item) => `
@@ -105,11 +106,12 @@ function createDemoView(demo_list, demo_status) {
     `
     )
     .join("");
+  // Reference: https://getbootstrap.com/docs/5.3/components/spinners/
   searchResultDiv.innerHTML = `<div class="d-flex align-items-center">
 <strong role="status">Loading...</strong>
 <div class="spinner-border ms-auto" aria-hidden="true"></div>
 </div>`;
-
+  // Reference: https://getbootstrap.com/docs/5.3/components/alerts/
   const sortResultSuccessHtml = `<div class="alert alert-success d-flex align-items-center" role="alert" >
         <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
         <div>

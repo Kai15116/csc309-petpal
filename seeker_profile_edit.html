@@ -14,11 +14,11 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
-<!--Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+<!-- Reference: https://getbootstrap.com/docs/5.3/components/navbar/ -->
 <nav class="navbar navbar-expand-lg bg-white shadow-sm">
     <div class="container-fluid">
 
-        <a class="navbar-brand" href="my_pets.html"><img src="images/logo-1.png" width="150px"></a>
+        <a class="navbar-brand" href="index-logged-in.html"><img src="images/logo-1.png" width="150" alt="logo"></a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -29,10 +29,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="my_pets.html">My Pets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="applications.html">Applications</a>
+                    <form role="search" style="width: 400px; min-width: 35%; max-width: 90%;"
+                        action="search-filter-page.html">
+                        <div class="input-group">
+                            <input type="search" class="form-control" placeholder="Search here..."
+                                aria-label="Search" aria-describedby="search-btn-2" required>
+                            <button class="btn btn-outline-success" type="submit" id="search-btn-2">Search</button>
+                        </div>
+                    </form>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mobile-nav-item" href="seeker_profile_view.html">Profile</a>
@@ -49,15 +53,17 @@
                         </div>
                     </div>
                 </li>
-                <hr>
+                <li>
+                    <hr>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link mobile-nav-item" href="#">Logout</a>
+                    <a class="nav-link mobile-nav-item" href="index.html">Logout</a>
                 </li>
             </ul>
 
             <div class="ms-auto d-flex" style="margin-right: 6rem;">
                 <div class="dropdown my-auto def-nav-item">
-                    <button class="btn" type="button" data-bs-toggle="dropdown">
+                    <button class="btn d-flex" type="button" data-bs-toggle="dropdown">
                         <!-- https://icons.getbootstrap.com/icons/bell/ -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor"
                             class="bi bi-bell me-2 text-secondary" viewBox="0 0 16 16">
@@ -66,18 +72,20 @@
                         </svg>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">No notifications...</a></li>
+                        <li><a class="dropdown-item text-wrap" href="#">No notifications...</a></li>
                     </ul>
                 </div>
                 <div class="vr mx-2 def-nav-item"></div>
                 <div class="dropdown my-auto def-nav-item">
                     <button class="btn" type="button" data-bs-toggle="dropdown">
-                        <img class="rounded-circle border" src="example_images/milky3.jpg"
-                            style="background-color: cornsilk; width: 50px; height: 50px;">
+                        <img class="rounded-circle border" src="images/user.png"
+                            style="background-color: cornsilk; width: 50px;" alt="user icon">
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="seeker_profile_view.html">Profile</a></li>
-                        <hr>
+                        <li>
+                            <hr>
+                        </li>
                         <li><a class="dropdown-item" href="index.html">Log out</a></li>
                     </ul>
                 </div>
@@ -85,7 +93,6 @@
         </div>
     </div>
 </nav>
-
 <div class="container mt-4 mb-4" style="min-height: 77vh;">
     <div class="row gx-2">
         <div class="col mb-4" style="max-width: 16em;">
@@ -176,7 +183,7 @@
 
                     <!--Collapse Shelter Images-->
                     <div class="collapse" id="collapseShelterImages" data-bs-parent="#editInfoAccordion">
-                        <div class="form-group"">
+                        <div class="form-group">
                             <label for="shelterImagesBanner">Banner Picture</label>
                             <input type="file" class="form-control" id="shelterImagesBanner">
                         </div>
