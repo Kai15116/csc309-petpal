@@ -1,0 +1,9 @@
+db.sqlite3
+*.sqlite3
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*/migrations/0*.py
+*.pyc
+*.pyo
+media/
