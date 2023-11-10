@@ -13,8 +13,8 @@ class Application(models.Model):
     ]
 
     pet = models.ForeignKey('pets.Pet', on_delete=models.CASCADE)
-    user = models.ForeignKey('accounts.PetSeeker', on_delete=models.SET_NULL)  # pet seeker who sent the application
-    status = models.CharField(max_length=8, choices=STATUS_CHOICES, default='pending')
+    user = models.ForeignKey('accounts.PetSeeker', on_delete=models.SET_NULL, null=True)  # pet seeker who sent the application
+    status = models.CharField(max_length=9, choices=STATUS_CHOICES, default='pending')
 
     name = models.CharField(max_length=128)
     phone_number = models.CharField(max_length=12)
