@@ -6,11 +6,13 @@ from django.db import models
 # Create your models here.
 
 
+# comment for shelter and application
+
 class Comment(models.Model):
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
 
-    rating = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(limit_value=5)])
-    text = models.TextField(blank=True, null=True)
+    # rating = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(limit_value=5)])
+    text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     reply_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
@@ -23,3 +25,8 @@ class Comment(models.Model):
         indexes = [
             models.Index(fields=['content_type', 'object_id']),
         ]
+
+
+class Rating(models.Model):
+    shelter = models.ForeignKey('accounts.PetShelter', on_delete=models.CASCADE)
+    rating = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(limit_value=5)])
