@@ -1,7 +1,11 @@
 from rest_framework import permissions
 from rest_framework.permissions import SAFE_METHODS
 
-
+class IsCurrentUser(permissions.BasePermission):
+    def has_permission(self, request, view):
+        user = request.user
+        return user.id == view.kwargs.get('pk')
+    
 class IsPetSeeker(permissions.BasePermission):
     def has_permission(self, request, view):
         user = request.user

@@ -16,6 +16,12 @@ class User(AbstractUser):
     banner = models.ImageField(upload_to='banners/', blank=True, null=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
+    def is_pet_seeker(self):
+        return hasattr(self, 'petseeker')
+
+    def is_pet_shelter(self):
+        return hasattr(self, 'petseeker')
+
 
 class PetSeeker(User):
     pass
