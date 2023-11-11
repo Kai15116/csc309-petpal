@@ -1,4 +1,5 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, get_object_or_404, ListAPIView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import SAFE_METHODS
 from .models import Pet
 from .serializers import PetSerializer, PetSearchSerializer
@@ -18,7 +19,12 @@ class ListCreatePetView(ListCreateAPIView):
     def get_queryset(self):
         serializer = PetSearchSerializer(data=self.request.query_params)
         serializer.is_valid(raise_exception=True)
-        return Pet.objects.all().filter(**serializer.validated_data)
+        order_by = serializer.validated_data.pop('order_by', None)
+
+        search_result = Pet.objects.all().filter(**serializer.validated_data)
+        if order_by:
+            search_result = search_result.order_by(order_by)
+        return search_result
 
 
 class RetrieveUpdateDestroyPetView(RetrieveUpdateDestroyAPIView):

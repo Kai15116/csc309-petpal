@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer, FloatField, DecimalField, DateTimeField
+from rest_framework.serializers import ModelSerializer, FloatField, DecimalField, DateTimeField, ChoiceField, IntegerField
 
 from .models import Pet
 import copy
@@ -13,6 +13,13 @@ class PetSerializer(ModelSerializer):
 
 
 class PetSearchSerializer(ModelSerializer):
+    ORDER_BY_CHOICES = [
+        'name', '-name',
+        'age', '-age',
+        'weight', '-weight'
+        'adoption_fee', '-adoption_fee'
+    ]
+    order_by = ChoiceField(choices=ORDER_BY_CHOICES, required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
