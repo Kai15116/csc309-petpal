@@ -22,3 +22,5 @@ class Notification(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
+    # attribute for the type of notification
+    notification_type = models.CharField()
