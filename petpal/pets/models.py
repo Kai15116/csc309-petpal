@@ -47,7 +47,7 @@ class Pet(models.Model):
 
     age = models.FloatField(validators=[MinValueValidator(limit_value=0)])
     weight = models.FloatField(validators=[MinValueValidator(limit_value=0)])
-    adoption_fee = models.DecimalField(max_digits=6, decimal_places=2, validators=[MinValueValidator(limit_value=0.01)])
+    adoption_fee = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(limit_value=0.01)])
     adoption_location = models.CharField(max_length=128)
     medical_history = models.TextField()  # text field vs char field
     notes = models.TextField()
@@ -58,4 +58,6 @@ class Pet(models.Model):
 
     last_modified = models.DateTimeField(auto_now=True)
     # add created_at if needed
-    
+
+    def __str__(self):
+        return f'{self.name}:{self.pk}'
