@@ -8,7 +8,7 @@ class PetSerializer(ModelSerializer):
 
     class Meta:
         model = Pet
-        exclude = ['id', 'last_modified', 'owner']
+        fields = '__all__'
         read_only_fields = ['id', 'last_modified', 'owner']
 
 
