@@ -28,7 +28,10 @@ class Pet(models.Model):
 
     COLOR_CHOICES = {
         ('black', 'Black'),
-        # add more...
+        ('white', 'White'),
+        ('brown', 'Brown'),
+        ('gray', 'Gray'),
+        ('orange', 'Orange'),
     }
 
     name = models.CharField(max_length=128)
