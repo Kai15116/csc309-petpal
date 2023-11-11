@@ -1,5 +1,4 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, get_object_or_404, ListAPIView
-from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import SAFE_METHODS
 from .models import Pet
 from .serializers import PetSerializer, PetSearchSerializer
