@@ -8,6 +8,8 @@ from django.core.exceptions import ValidationError
 
 class CustomizedTokenObtainSerializer(TokenObtainSerializer):
     def validate(self, attrs: Dict[str, Any]) -> Dict[Any, Any]:
+        validated_data = super().validate(attrs)
+      
         username = attrs.get("username")
         password = attrs.get("password")
         try:
@@ -17,7 +19,7 @@ class CustomizedTokenObtainSerializer(TokenObtainSerializer):
 
         if not user.check_password(password):
             raise ValidationError({"password":"Password is incorrect."})
-        return super().validate(attrs)
+        return validated_data
 
 
 class PetSeekerSerializer(ModelSerializer):
