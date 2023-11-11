@@ -1,0 +1,17 @@
+[
+  {
+    "model": "pets.PetType",
+    "pk": 1,
+    "fields": {
+      "name": "Cat"
+    }
+  },
+  {
+    "model": "pets.Breed",
+    "pk": 1,
+    "fields": {
+      "pet_type": 1,
+      "name": "American Bobtail"
+    }
+  }
+]
