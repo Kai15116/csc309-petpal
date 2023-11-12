@@ -48,7 +48,10 @@ class RetrieveUpdateApplicationView(RetrieveUpdateAPIView):
         result = Application.objects.all()
         if self.request.user.is_pet_seeker():
             return result.filter(user=self.request.user.petseeker)
-        return result.filter(pet__owner=self.request.user.petshelter)
+        elif self.request.user.is_pet_shelter():
+            return result.filter(pet__owner=self.request.user.petshelter)
+        else:
+            raise PermissionDenied()
 
     def perform_update(self, serializer):
         validated_data = serializer.validated_data
