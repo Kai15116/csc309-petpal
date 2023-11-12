@@ -20,7 +20,7 @@ class User(AbstractUser):
         return hasattr(self, 'petseeker')
 
     def is_pet_shelter(self):
-        return hasattr(self, 'petseeker')
+        return hasattr(self, 'petshelter')
 
 
 class PetSeeker(User):
