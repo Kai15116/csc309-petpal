@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import IsAdminUser, IsAuthenticated, AllowAny
 from .models import PetSeeker, PetShelter, User
 from .serializers import PetSeekerSerializer, PetShelterSerializer, CustomizedTokenObtainSerializer
 from rest_framework.response import Response
@@ -34,30 +34,22 @@ class SeekerProfileGetPermission(permissions.BasePermission):
 
 # Create your views here.
 class CustomizedTokenObtainPairView(TokenObtainPairView):
-    
     serializer_class = CustomizedTokenObtainSerializer
     
-    
-
 class PetShelterProfilesListCreate(ListCreateAPIView):
-    permission_classes=[]
-    
+    permission_classes=[AllowAny]
     serializer_class = PetShelterSerializer
     queryset = PetShelter.objects.all()
     
 
- 
-
-    
-
 class PetSeekerProfileCreateView(CreateAPIView):
-    permission_classes=[]
+    permission_classes=[AllowAny]
     serializer_class = PetSeekerSerializer
    
 
 class PetShelterProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     serializer_class = PetShelterSerializer
-    permission_classes = [] 
+    permission_classes = [IsAuthenticated, IsCurrentUser] 
     
     def get_object(self):
         return get_object_or_404(PetShelter, id=self.kwargs["pk"])
@@ -83,8 +75,10 @@ class PetSeekerProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     def get_permissions(self):
         user = self.request.user
         method = self.request.method
-        if method == "GET":
-            return [SeekerProfileGetPermission]
+        if method == "GET" and User.is_pet_shelter(user):
+            return [IsAuthenticated,SeekerProfileGetPermission()]
+        else:
+            return [IsAuthenticated,IsCurrentUser()]
         
         
         
