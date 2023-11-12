@@ -20,8 +20,11 @@ class IsCurrentUser(permissions.BasePermission):
 class SeekerProfileGetPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         # Shelters can only view pet seekers' profiles if they have an active application with the shelter.
-        pet_seeker = get_object_or_404(PetSeeker, id=view.kwargs.get('pk'))
-        cur_shelter = get_object_or_404(PetShelter, id=request.user.id)
+        try:
+            pet_seeker = get_object_or_404(PetSeeker, id=view.kwargs.get('pk'))
+            cur_shelter = get_object_or_404(PetShelter, id=request.user.id)
+        except:
+            raise PermissionDenied("Permission Denied: Shelters can only view pet seekers' profiles if they have an active application with the shelter.")
         applications = Application.objects.filter(user=pet_seeker).all()
         if applications:
             for application in applications:
@@ -37,19 +40,19 @@ class CustomizedTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomizedTokenObtainSerializer
     
 class PetShelterProfilesListCreate(ListCreateAPIView):
-    permission_classes=[AllowAny]
+    permission_classes=[AllowAny()]
     serializer_class = PetShelterSerializer
     queryset = PetShelter.objects.all()
     
 
 class PetSeekerProfileCreateView(CreateAPIView):
-    permission_classes=[AllowAny]
+    permission_classes=[AllowAny()]
     serializer_class = PetSeekerSerializer
    
 
 class PetShelterProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     serializer_class = PetShelterSerializer
-    permission_classes = [IsAuthenticated, IsCurrentUser] 
+    permission_classes = [IsAuthenticated(), IsCurrentUser()] 
     
     def get_object(self):
         return get_object_or_404(PetShelter, id=self.kwargs["pk"])
@@ -76,9 +79,9 @@ class PetSeekerProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         user = self.request.user
         method = self.request.method
         if method == "GET" and User.is_pet_shelter(user):
-            return [IsAuthenticated,SeekerProfileGetPermission()]
+            return [IsAuthenticated(),SeekerProfileGetPermission()]
         else:
-            return [IsAuthenticated,IsCurrentUser()]
+            return [IsAuthenticated(),IsCurrentUser()]
         
         
         
