@@ -23,10 +23,12 @@ class SeekerProfileGetPermission(permissions.BasePermission):
         pet_seeker = get_object_or_404(PetSeeker, id=view.kwargs.get('pk'))
         cur_shelter = get_object_or_404(PetShelter, id=request.user.id)
         applications = Application.objects.filter(user=pet_seeker).all()
-        for application in applications:
-            if application.pet.owner == cur_shelter and (application.status != "accepted" or application.status != "withdrawn"):
-                return True
-        raise PermissionDenied("....")
+        if applications:
+            for application in applications:
+                if application.pet.owner == cur_shelter and (application.status != "accepted" or application.status != "withdrawn"):
+                    return True
+        raise PermissionDenied("Permission Denied: Shelters can only view pet seekers' profiles if they have an active application with the shelter.")
+    
 
 
 
@@ -75,21 +77,24 @@ class PetShelterProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     
 class PetSeekerProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     serializer_class = PetSeekerSerializer
-    permission_classes = [SeekerProfileGetPermission]
+    # permission_classes = []
     queryset = PetSeeker.objects.all()
 
     def get_permissions(self):
-        if self.request.method == "GET":
-            
+        user = self.request.user
+        method = self.request.method
+        if method == "GET":
             return [SeekerProfileGetPermission]
-        elif self.request.method == "PATCH" or self.request.method == "PUT":
-            return []
+        
+        
+        
+
     
     # def get_queryset(self):
     #     if self.request.user.is_pet_seeker():
     #         return PetSeeker.objects.filter(id=self.request.user.id)
     #     elif self.request.user.is_pet_shelter():
-    #         return PetSeeker.objects.filter(application_set__pet__owner=self.request.user.petshelter)
+    #         return PetSeeker.objects.filter(application__pet__owner=self.request.user.petshelter)
     #     else:
     #         raise PermissionDenied()
 
