@@ -3,6 +3,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MaxValueValidator
 from django.db import models
 
+from django.apps import apps
+
+
 # Create your models here.
 
 
@@ -25,6 +28,13 @@ class Comment(models.Model):
         indexes = [
             models.Index(fields=['content_type', 'object_id']),
         ]
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        if isinstance(self.content_object, apps.get_model('applications', 'Application')):
+            application = self.content_object
+            application.last_updated = self.created_at
+            application.save()
 
 
 class Rating(models.Model):

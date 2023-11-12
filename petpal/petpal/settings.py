@@ -149,6 +149,7 @@ REST_FRAMEWORK = {
       'rest_framework.authentication.SessionAuthentication',
       'rest_framework.authentication.BasicAuthentication',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'petpal.pagination.DefaultPagination'
 }
 
 from datetime import timedelta
