@@ -1,6 +1,6 @@
 from typing import Any, Dict
 from rest_framework.serializers import ModelSerializer, DateTimeField, ListField, \
-    PrimaryKeyRelatedField, HyperlinkedRelatedField
+    PrimaryKeyRelatedField, HyperlinkedRelatedField, CharField
 
 from .models import PetSeeker, PetShelter, User
 
@@ -33,27 +33,40 @@ class CustomizedTokenObtainSerializer(TokenObtainPairSerializer):
 
 
 class PetSeekerSerializer(ModelSerializer):
+    password = CharField(write_only=True)
     class Meta:
         model = PetSeeker
-        fields = '__all__'
+        fields = ["id","username", "password", "phone_number", "email", "first_name", "last_name", "address", \
+                  "description","banner", "profile_picture"]
+    
+        def create(self, data):
+            password = data.pop("password")
+            user = PetSeeker(**data)
+            user.set_password(password)
+            user.save()
+            
+            return user
 
 class PetShelterSerializer(ModelSerializer):
+    password = CharField(write_only=True)
     class Meta:
         model = PetShelter
-        fields = '__all__'
+        fields = ["id", "username", "password", "phone_number", "email", "first_name", "last_name", "address", \
+                  "description","banner", "profile_picture", "mission_title", "mission_statement"]
 
     def create(self, data):
-        user = PetShelter.objects.create_user(
-            username=data.get('username', ''),
-            phone_number=data.get('phone_number', ''),
-            email=data.get('email', ''),
-            first_name=data.get('first_name', ''),
-            last_name=data.get('last_name', ''),
-            address=data.get('address', ''),
-            mission_title=data.get('mission_title', ''),
-            mission_statement=data.get('mission_statement', '')  
+        password = data.pop("password")
+        user = PetShelter.objects.create_user(**data
+            # username=data.get('username', ''),
+            # phone_number=data.get('phone_number', ''),
+            # email=data.get('email', ''),
+            # first_name=data.get('first_name', ''),
+            # last_name=data.get('last_name', ''),
+            # address=data.get('address', ''),
+            # mission_title=data.get('mission_title', ''),
+            # mission_statement=data.get('mission_statement', '')  
         )
-        user.set_password(data["password"])
+        user.set_password(password)
         user.save()
         
         return user

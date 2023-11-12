@@ -34,7 +34,9 @@ class PetShelterProfilesListCreate(ListCreateAPIView):
     
 
 class PetSeekerProfileCreateView(CreateAPIView):
+    permission_classes=[]
     serializer_class = PetSeekerSerializer
+   
 
 class PetShelterProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     serializer_class = PetShelterSerializer
@@ -58,16 +60,7 @@ class PetShelterProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     
 class PetSeekerProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     serializer_class = PetSeekerSerializer
-    permission_classes = [IsAuthenticated]
-    def get_object(self):
-        user = self.request.user
-        if not PetSeeker.objects.filter(id=user.id).all():
-            return Response("Access Denied 1", status=403)
+    permission_classes = []
 
-
-
-            
-
-        return super().get_object()
 
 
