@@ -7,11 +7,26 @@ from .models import PetSeeker, PetShelter, User
 from .serializers import PetSeekerSerializer, PetShelterSerializer, CustomizedTokenObtainSerializer
 from rest_framework.response import Response
 from rest_framework import permissions
+from applications.models import Application
+from rest_framework.exceptions import AuthenticationFailed, PermissionDenied
+from django.shortcuts import get_object_or_404
 
 class IsCurrentUser(permissions.BasePermission):
     def has_permission(self, request, view):
-        return request.user.id == view.kwargs.get('pk')
-
+        if request.user.id != view.kwargs.get('pk'):
+            raise PermissionDenied("Permission Denied: You are not allowed to access other people's profile.")
+        return True
+    
+class SeekerProfileGetPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        # Shelters can only view pet seekers' profiles if they have an active application with the shelter.
+        pet_seeker = get_object_or_404(PetSeeker, id=view.kwargs.get('pk'))
+        cur_shelter = get_object_or_404(PetShelter, id=request.user.id)
+        applications = Application.objects.filter(user=pet_seeker).all()
+        for application in applications:
+            if application.pet.owner == cur_shelter and application.status == "pending":
+                return True
+        raise PermissionDenied("....")
 
 
 
@@ -40,7 +55,7 @@ class PetSeekerProfileCreateView(CreateAPIView):
 
 class PetShelterProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     serializer_class = PetShelterSerializer
-    permission_classes = [IsCurrentUser, IsAuthenticated] 
+    permission_classes = [] 
     
     def get_object(self):
         return get_object_or_404(PetShelter, id=self.kwargs["pk"])
@@ -61,6 +76,18 @@ class PetShelterProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
 class PetSeekerProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     serializer_class = PetSeekerSerializer
     permission_classes = []
+    # queryset = PetSeeker.objects.all()
+
+    # def get_permissions(self):
+    #     return super().get_permissions()
+    
+    def get_queryset(self):
+        if self.request.user.is_seeker():
+            return PetSeeker.objects.filter(id=self.request.user.id)
+        elif self.request.user.is_shelter():
+            return PetSeeker.objects.filter(application_set__pet__owner=self.request.user.petshelter)
+        else:
+            raise PermissionDenied()
 
 
 

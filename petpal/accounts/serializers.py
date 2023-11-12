@@ -3,7 +3,7 @@ from rest_framework.serializers import ModelSerializer, DateTimeField, ListField
     PrimaryKeyRelatedField, HyperlinkedRelatedField, CharField
 
 from .models import PetSeeker, PetShelter, User
-
+from django.shortcuts import get_object_or_404
 from django.core.exceptions import ValidationError
 
 from django.contrib.auth import get_user_model
@@ -11,7 +11,8 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.exceptions import AuthenticationFailed, PermissionDenied
+
 
 
 
@@ -25,10 +26,10 @@ class CustomizedTokenObtainSerializer(TokenObtainPairSerializer):
             user = User.objects.get(username=username)
         except:
 
-            raise ValidationError({"username":"User Not Found."})
+            raise serializers.ValidationError({"username":"User Not Found."})
 
         if not user.check_password(password):
-            raise ValidationError({"password":"Password is incorrect."})
+            raise serializers.ValidationError({"password":"Password is incorrect."})
         return super().validate(attrs)
 
 
@@ -39,13 +40,15 @@ class PetSeekerSerializer(ModelSerializer):
         fields = ["id","username", "password", "phone_number", "email", "first_name", "last_name", "address", \
                   "description","banner", "profile_picture"]
     
-        def create(self, data):
-            password = data.pop("password")
-            user = PetSeeker(**data)
-            user.set_password(password)
-            user.save()
-            
-            return user
+    def create(self, data):
+        password = data.pop("password")
+        user = PetSeeker.objects.create_user(**data)
+        user.set_password(password)
+        user.save()
+        
+        return user
+    
+    
 
 class PetShelterSerializer(ModelSerializer):
     password = CharField(write_only=True)

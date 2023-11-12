@@ -16,7 +16,8 @@ class User(AbstractUser):
     banner = models.ImageField(upload_to='banners/', blank=True, null=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
-
+    def __str__(self):
+        return str(self.id)
 
 
 class PetSeeker(User):
