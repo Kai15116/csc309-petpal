@@ -24,7 +24,7 @@ class SeekerProfileGetPermission(permissions.BasePermission):
         cur_shelter = get_object_or_404(PetShelter, id=request.user.id)
         applications = Application.objects.filter(user=pet_seeker).all()
         for application in applications:
-            if application.pet.owner == cur_shelter and application.status == "pending":
+            if application.pet.owner == cur_shelter and (application.status != "accepted" or application.status != "withdrawn"):
                 return True
         raise PermissionDenied("....")
 
@@ -75,19 +75,23 @@ class PetShelterProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     
 class PetSeekerProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     serializer_class = PetSeekerSerializer
-    permission_classes = []
-    # queryset = PetSeeker.objects.all()
+    permission_classes = [SeekerProfileGetPermission]
+    queryset = PetSeeker.objects.all()
 
-    # def get_permissions(self):
-    #     return super().get_permissions()
+    def get_permissions(self):
+        if self.request.method == "GET":
+            
+            return [SeekerProfileGetPermission]
+        elif self.request.method == "PATCH" or self.request.method == "PUT":
+            return []
     
-    def get_queryset(self):
-        if self.request.user.is_seeker():
-            return PetSeeker.objects.filter(id=self.request.user.id)
-        elif self.request.user.is_shelter():
-            return PetSeeker.objects.filter(application_set__pet__owner=self.request.user.petshelter)
-        else:
-            raise PermissionDenied()
+    # def get_queryset(self):
+    #     if self.request.user.is_pet_seeker():
+    #         return PetSeeker.objects.filter(id=self.request.user.id)
+    #     elif self.request.user.is_pet_shelter():
+    #         return PetSeeker.objects.filter(application_set__pet__owner=self.request.user.petshelter)
+    #     else:
+    #         raise PermissionDenied()
 
 
 
