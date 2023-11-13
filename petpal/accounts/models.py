@@ -33,7 +33,7 @@ class PetSeeker(User):
 
 
 class PetShelter(User):
-    mission_title = models.CharField(max_length=128)
-    mission_statement = models.TextField()  # text field vs char field
+    mission_title = models.CharField(max_length=128, blank=True, null=True)
+    mission_statement = models.TextField(blank=True, null=True)  # text field vs char field
 
 

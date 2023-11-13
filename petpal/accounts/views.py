@@ -20,8 +20,9 @@ class IsCurrentUser(permissions.BasePermission):
 class SeekerProfileGetPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         # Shelters can only view pet seekers' profiles if they have an active application with the shelter.
+        pet_seeker = get_object_or_404(PetSeeker, id=view.kwargs.get('pk'))
         try:
-            pet_seeker = get_object_or_404(PetSeeker, id=view.kwargs.get('pk'))
+            
             cur_shelter = get_object_or_404(PetShelter, id=request.user.id)
         except:
             raise PermissionDenied("Permission Denied: Shelters can only view pet seekers' profiles if they have an active application with the shelter.")
