@@ -5,12 +5,6 @@ from django.db import models
 
 from django.apps import apps
 
-
-# Create your models here.
-
-
-# comment for shelter and application
-
 class Comment(models.Model):
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
 
@@ -38,5 +32,6 @@ class Comment(models.Model):
 
 
 class Rating(models.Model):
+    user = models.ForeignKey('accounts.User', on_delete=models.SET_NULL) # Rating value stays after delete
     shelter = models.ForeignKey('accounts.PetShelter', on_delete=models.CASCADE)
     rating = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(limit_value=5)])
