@@ -1,5 +1,5 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, get_object_or_404, ListAPIView
-from rest_framework.permissions import SAFE_METHODS
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import SAFE_METHODS, IsAuthenticatedOrReadOnly
 from .models import Pet
 from .serializers import PetSerializer, PetSearchSerializer
 
@@ -10,7 +10,7 @@ from accounts.permissions import IsPetShelterOrReadOnly
 
 class ListCreatePetView(ListCreateAPIView):
     serializer_class = PetSerializer
-    permission_classes = [IsPetShelterOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsPetShelterOrReadOnly]
 
     def perform_create(self, serializer):
         Pet.objects.create(**serializer.validated_data, owner=self.request.user.petshelter)
@@ -28,6 +28,7 @@ class ListCreatePetView(ListCreateAPIView):
 
 class RetrieveUpdateDestroyPetView(RetrieveUpdateDestroyAPIView):
     serializer_class = PetSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         if self.request.method in SAFE_METHODS:
