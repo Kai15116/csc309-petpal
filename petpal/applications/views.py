@@ -1,5 +1,6 @@
 from rest_framework.exceptions import ValidationError, PermissionDenied
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Application
 from accounts.permissions import IsPetSeekerOrReadOnly
@@ -10,7 +11,7 @@ from .serializers import CreateApplicationSerializer, FilterApplicationSerialize
 # Create your views here.
 
 class ListCreateApplicationView(ListCreateAPIView):
-    permission_classes = [IsPetSeekerOrReadOnly]
+    permission_classes = [IsPetSeekerOrReadOnly, IsAuthenticated]
     serializer_class = CreateApplicationSerializer
 
     def get_queryset(self):
@@ -43,6 +44,7 @@ class ListCreateApplicationView(ListCreateAPIView):
 
 class RetrieveUpdateApplicationView(RetrieveUpdateAPIView):
     serializer_class = UpdateApplicationSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         result = Application.objects.all()
