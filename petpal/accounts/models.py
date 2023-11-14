@@ -7,8 +7,8 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     email = models.EmailField(unique=True)
 
-    phone_number = models.CharField(max_length=12)
-    address = models.CharField(max_length=128)
+    phone_number = models.CharField(max_length=12, blank=True, null=True)
+    address = models.CharField(max_length=128, blank=True, null=True)
 
     description = models.TextField(blank=True, null=True)  # text field vs char field
     website = models.URLField(max_length=256, blank=True, null=True)

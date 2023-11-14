@@ -41,13 +41,13 @@ class CustomizedTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomizedTokenObtainSerializer
     
 class PetShelterProfilesListCreate(ListCreateAPIView):
-    permission_classes=[AllowAny()]
+    permission_classes=[AllowAny]
     serializer_class = PetShelterSerializer
     queryset = PetShelter.objects.all()
     
 
 class PetSeekerProfileCreateView(CreateAPIView):
-    permission_classes=[AllowAny()]
+    permission_classes=[AllowAny]
     serializer_class = PetSeekerSerializer
    
 
