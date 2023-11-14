@@ -39,25 +39,77 @@ class SeekerProfileGetPermission(permissions.BasePermission):
 
 # Create your views here.
 class CustomizedTokenObtainPairView(TokenObtainPairView):
+    """
+    post: Login the user with the given username and password credentials.
+    400 Bad request will be returned if 
+    1). User Does Not Exist.
+    2). The password does not match with the username.
+
+    A JWT corresponding to the logged-in user would be returned if authentication succeeds.
+    """
     serializer_class = CustomizedTokenObtainSerializer
     
 class PetShelterProfilesListCreate(ListCreateAPIView):
+    """
+    get: Get a list of all shelter profiles with the pet shelter information. 
+    Authentication is not required.
+
+    post: Create new pet shelter based on the given information. 
+    The required fields includes: username, password, and email
+    Errors include: 
+    1. Username: A user with that username already exists.
+    2. Email: Enter a valid email address.
+    3. All: This field may not be blank.
+    A 400 Bad request would be returned.
+    Authentication is not required for the sign up.
+    """
     permission_classes=[AllowAny]
     serializer_class = PetShelterSerializer
     queryset = PetShelter.objects.all()
     
 
 class PetSeekerProfileCreateView(CreateAPIView):
+    """
+    get: Not allowed. 405 Method Not Allowed
+
+    post: Create new pet seeker based on the given information.
+    The required fields includes: username, password, and email
+    Errors include: 
+    1. Username: A user with that username already exists.
+    2. Email: Enter a valid email address.
+    3. All: This field may not be blank.
+    A 400 Bad request would be returned.
+    Authentication is not required for the sign up.
+    """
     permission_classes=[AllowAny]
     serializer_class = PetSeekerSerializer
    
 
 class PetShelterProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
+    """
+    get: Pet shelter profile with given ID will be retrieved. Authentication is not required.
+
+    put: Update shelter profile info with given ID based on the given info 
+    User is required to be logged in as the current pet shelter account. 
+
+    patch: Partial update shelter profile info with given ID based on the given info of pet shelter.
+    User is required to be logged in as the current pet shelter account. 
+
+    delete: Delete pet shelter with the given ID. User are required to be logged in as the current pet shelter account.
+    """
     serializer_class = PetShelterSerializer
     permission_classes = [IsAuthenticated, IsCurrentUser] 
     
     def get_object(self):
         return get_object_or_404(PetShelter, id=self.kwargs["pk"])
+
+    def get_permissions(self):
+        user = self.request.user
+        method = self.request.method
+        if method == "GET":
+            return [AllowAny()]
+        else:
+            return [IsAuthenticated(), IsCurrentUser()]
     
     # def perform_update(self, serializer):
     #     pet_shelter = get_object_or_404(PetShelter, id=self.kwargs["pk"])
@@ -73,6 +125,19 @@ class PetShelterProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     #     return super().perform_destroy(instance)
     
 class PetSeekerProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
+    """
+    get: Pet seeker profile with given ID will be retrieved. 
+    User must either be pet seeker himself or pet shelter account that has a pending application with
+    the intended pet seeker.
+
+    put: Update seeker profile info with given ID based on the given info 
+    User is required to be logged in as the current pet seeker account. 
+
+    patch: Partial update seeker profile info with given ID based on the given info of pet seeker.
+    User is required to be logged in as the current pet seeker account. 
+
+    delete: Delete pet seeker with the given ID. User are required to be logged in as the current pet seeker account.
+    """
     serializer_class = PetSeekerSerializer
     # permission_classes = []
     queryset = PetSeeker.objects.all()
