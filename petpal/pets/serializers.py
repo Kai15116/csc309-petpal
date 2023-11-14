@@ -10,6 +10,7 @@ class PetSerializer(ModelSerializer):
         model = Pet
         fields = '__all__'
         read_only_fields = ['id', 'last_modified', 'owner']
+        extra_kwargs = {'id': {'help_text': 'Id of the pet.'}}
 
 
 class PetSearchSerializer(ModelSerializer):
@@ -19,7 +20,8 @@ class PetSearchSerializer(ModelSerializer):
         'weight', '-weight'
         'adoption_fee', '-adoption_fee'
     ]
-    order_by = ChoiceField(choices=ORDER_BY_CHOICES, required=False)
+    order_by = ChoiceField(choices=ORDER_BY_CHOICES, required=False,
+                           help_text='Options for sorting. Negative sign (-) indicates descending order.')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -30,8 +32,14 @@ class PetSearchSerializer(ModelSerializer):
             if isinstance(field, (FloatField, DecimalField, DateTimeField)):
                 self.fields[f'{key}__gt'] = copy.deepcopy(field)
                 self.fields[f'{key}__gte'] = copy.deepcopy(field)
+
                 self.fields[f'{key}__lt'] = copy.deepcopy(field)
                 self.fields[f'{key}__lte'] = copy.deepcopy(field)
+
+                self.fields[f'{key}__gt'].help_text = f"Upper bound (exclusive) of {key} for filtering."
+                self.fields[f'{key}__gte'].help_text = f"Upper bound (inclusive) of {key} for filtering."
+                self.fields[f'{key}__lt'].help_text = f"Lower bound (exclusive) of {key} for filtering."
+                self.fields[f'{key}__lte'].help_text = f"Lower bound (inclusive) of {key} for filtering."
 
                 self.fields[f'{key}__gt'].required = False
                 self.fields[f'{key}__gte'].required = False
