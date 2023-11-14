@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'accounts',
     'pets',
     'comments',
-    'applications'
+    'applications',
+    'notifications',
+    'drf_yasg',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -149,11 +152,16 @@ REST_FRAMEWORK = {
       'rest_framework.authentication.SessionAuthentication',
       'rest_framework.authentication.BasicAuthentication',
     ),
-    'DEFAULT_PAGINATION_CLASS': 'petpal.pagination.DefaultPagination'
+    'DEFAULT_PAGINATION_CLASS': 'petpal.pagination.DefaultPagination',
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
 
 from datetime import timedelta
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+}
+
+SWAGGER_SETTINGS = {
+    'DEFAULT_PAGINATOR_INSPECTORS': ['petpal.pagination.DefaultPaginatorInspector']
 }
