@@ -9,7 +9,7 @@ class Comment(models.Model):
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
 
     # rating = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(limit_value=5)])
-    text = models.TextField()
+    text = models.TextField(max_length=500, null=False, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     reply_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
@@ -32,6 +32,6 @@ class Comment(models.Model):
 
 
 class Rating(models.Model):
-    user = models.ForeignKey('accounts.User', on_delete=models.SET_NULL) # Rating value stays after delete
-    shelter = models.ForeignKey('accounts.PetShelter', on_delete=models.CASCADE)
+    user = models.ForeignKey('accounts.User', null=True, on_delete=models.SET_NULL) # Rating value stays after delete
+    shelter = models.ForeignKey('accounts.PetShelter', on_delete=models.CASCADE, related_name='ratings')
     rating = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(limit_value=5)])
