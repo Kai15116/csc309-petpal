@@ -19,7 +19,6 @@ from rest_framework.exceptions import AuthenticationFailed, PermissionDenied
 class CustomizedTokenObtainSerializer(TokenObtainPairSerializer):
     def validate(self, attrs: Dict[str, Any]) -> Dict[Any, Any]:
         # validated_data = super().validate(attrs)
-      
         username = attrs.get("username")
         password = attrs.get("password")
         try:
