@@ -12,8 +12,8 @@ class NotificationSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'user', 'created_at', 'read']
 
     def create(self, validated_data):
-        content_object = self.object.content_object
-        user = self.request.user
+        content_object = validated_data['content_object']
+        user = self.context['request'].user  
 
         if isinstance(user, PetSeeker) and isinstance(content_object, Application):
             notification_type = 'status_update'
@@ -38,5 +38,4 @@ class NotificationSerializer(serializers.ModelSerializer):
         else:
             notification_type = ''
 
-        return Notification.objects.create(notification_type=notification_type, **validated_data)
-
+        return Notification.objects.create(user=user, notification_type=notification_type, **validated_data)
