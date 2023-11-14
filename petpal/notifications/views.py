@@ -12,6 +12,16 @@ class NotificationCreate(CreateAPIView):
     serializer_class = NotificationSerializer
 
     def perform_create(self, serializer):
+        """
+        Create a new notification based on the type of action and user involved.
+
+        If the user is a PetSeeker and the content_object refers to an Application, it creates a status update notification.
+        If the user is a PetShelter and the content_object refers to an Application, it creates an application creation notification.
+        If the user is a PetShelter and the content_object refers to a Comment, and the comment.content_object refers to Shelter,
+        it creates a new review notification.
+        If the content_object refers to a Comment and comment.content_object refers to an Application, it creates a new message notification.
+        If the content_object refers to a Pet, it creates a new pet listing notification.
+        """
         content_object = serializer.validated_data['content_object']
         user = self.request.user
         # if user is PetSeeker AND content_object refers to Application => status update notification
@@ -42,6 +52,9 @@ class NotificationCreate(CreateAPIView):
         serializer.save(user=user, notification_type=notification_type)
 
 class NotificationUpdate(UpdateAPIView):
+    """
+    Update the state of a notification from "unread" to "read".
+    """
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
     lookup_field = 'notification_id'  
@@ -51,22 +64,36 @@ class NotificationUpdate(UpdateAPIView):
         serializer.save(read=True)
 
 class NotificationList(ListAPIView):
+    """
+    Retrieve a list of notifications for the authenticated user.
+
+    Users (shelter and seeker) can only view their own notifications.
+    Filter notifications by read/unread to get all unread notifications.
+    Sort notifications by creation time in descending order (latest first).
+    """
     serializer_class = NotificationSerializer
 
     def get_queryset(self):
         user = self.request.user
-        # users (shelter and seeker) can only view their own notifications
-        # filter notifications by read/unread to get all unread notifications
-        # sort notifications by creation time in descending order (latest first)
         queryset = Notification.objects.filter(user=user, read=False).order_by('-created_at')
         return queryset
 
 class NotificationDelete(DestroyAPIView):
+    """
+    Delete a notification.
+    """
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
     lookup_field = 'notification_id'
     
 class NotificationGet(RetrieveAPIView):
+    """
+    Retrieve details of a notification and provide links to associated models.
+
+    If the notification refers to a comment, link to the new comment added.
+    If the notification refers to an application, link to application creation and status update.
+    If the application refers to a pet, link to a new pet listing.
+    """
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
     lookup_field = 'notification_id'
