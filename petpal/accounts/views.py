@@ -10,6 +10,7 @@ from rest_framework import permissions
 from applications.models import Application
 from rest_framework.exceptions import AuthenticationFailed, PermissionDenied
 from django.shortcuts import get_object_or_404
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class IsCurrentUser(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -30,7 +31,7 @@ class SeekerProfileGetPermission(permissions.BasePermission):
         
         if applications:
             for application in applications:
-                if application.pet.owner == cur_shelter and (application.status != "accepted" or application.status != "withdrawn"):
+                if application.pet.owner == cur_shelter and (application.status == "pending"):
                     return True
         raise PermissionDenied("Permission Denied: Shelters can only view pet seekers' profiles if they have an active application with the shelter.")
     
@@ -98,10 +99,11 @@ class PetShelterProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     delete: Delete pet shelter with the given ID. User are required to be logged in as the current pet shelter account.
     """
     serializer_class = PetShelterSerializer
-    permission_classes = [IsAuthenticated, IsCurrentUser] 
+    permission_classes = [IsAuthenticated, IsCurrentUser]
+    queryset = PetShelter.objects.all() 
     
-    def get_object(self):
-        return get_object_or_404(PetShelter, id=self.kwargs["pk"])
+    # def get_object(self):
+    #     return get_object_or_404(PetShelter, id=self.kwargs["pk"])
 
     def get_permissions(self):
         user = self.request.user
