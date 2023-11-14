@@ -24,9 +24,10 @@ class SeekerProfileGetPermission(permissions.BasePermission):
         try:
             
             cur_shelter = get_object_or_404(PetShelter, id=request.user.id)
+            applications = Application.objects.filter(user=pet_seeker).all()
         except:
             raise PermissionDenied("Permission Denied: Shelters can only view pet seekers' profiles if they have an active application with the shelter.")
-        applications = Application.objects.filter(user=pet_seeker).all()
+        
         if applications:
             for application in applications:
                 if application.pet.owner == cur_shelter and (application.status != "accepted" or application.status != "withdrawn"):
@@ -53,7 +54,7 @@ class PetSeekerProfileCreateView(CreateAPIView):
 
 class PetShelterProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     serializer_class = PetShelterSerializer
-    permission_classes = [IsAuthenticated(), IsCurrentUser()] 
+    permission_classes = [IsAuthenticated, IsCurrentUser] 
     
     def get_object(self):
         return get_object_or_404(PetShelter, id=self.kwargs["pk"])
@@ -80,9 +81,9 @@ class PetSeekerProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         user = self.request.user
         method = self.request.method
         if method == "GET" and User.is_pet_shelter(user):
-            return [IsAuthenticated(),SeekerProfileGetPermission()]
+            return [IsAuthenticated(), SeekerProfileGetPermission()]
         else:
-            return [IsAuthenticated(),IsCurrentUser()]
+            return [IsAuthenticated(), IsCurrentUser()]
         
         
         
