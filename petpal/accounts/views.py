@@ -110,6 +110,20 @@ class PetShelterProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
             return [AllowAny()]
         else:
             return [IsAuthenticated(), IsCurrentUser()]
+        
+    def perform_update(self, serializer):
+        user = super().perform_update(serializer)
+        data = serializer.validated_data
+        if "password" in data:
+            password = data.pop("password")
+            user = self.get_object()
+            user.set_password(password)
+            return user.save()
+        return user
+            
+        
+        
+
     
     # def perform_update(self, serializer):
     #     pet_shelter = get_object_or_404(PetShelter, id=self.kwargs["pk"])
@@ -149,6 +163,16 @@ class PetSeekerProfileRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
             return [IsAuthenticated(), SeekerProfileGetPermission()]
         else:
             return [IsAuthenticated(), IsCurrentUser()]
+        
+    def perform_update(self, serializer):
+        user = super().perform_update(serializer)
+        data = serializer.validated_data
+        if "password" in data:
+            password = data.pop("password")
+            user = self.get_object()
+            user.set_password(password)
+            return user.save()
+        return user
         
         
         
