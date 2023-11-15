@@ -3,18 +3,21 @@ from django.contrib.contenttypes.models import ContentType
 from .models import Comment, Rating
 from accounts.models import User
 
+
 class CommentSerializer(ModelSerializer):
     class Meta:
         model = Comment
         fields = [
             'user',
-            'text', 
+            'text',
             'created_at',
             'reply_to',
             'content_type',
             'object_id',
             'content_object',
         ]
+
+        read_only_fields = ['user', 'content_type']
         
     def create(self, validated_data):
         content_type = validated_data['content_type']
@@ -37,7 +40,7 @@ class CommentSerializer(ModelSerializer):
 class RatingSerializer(ModelSerializer):
     class Meta:
         model = Rating
-        field = [
+        fields = [
             'user',
             'shelter',
             'rating',
