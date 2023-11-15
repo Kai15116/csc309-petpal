@@ -38,7 +38,7 @@ class NotificationListCreate(ListCreateAPIView):
         read = self.request.query_params.get('read')
         if read is not None:
             result = result.filter(read=read)
-        return result
+        return result.order_by('-created_at')
 
     def perform_create(self, serializer):
         content_type = serializer.validated_data.get('content_type')
