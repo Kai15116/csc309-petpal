@@ -1,19 +1,16 @@
-from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView
-from rest_framework.response import Response
 
 from .models import Comment, Rating
-# from applications import Application
 from .serializers import CommentSerializer, RatingSerializer
 from django.apps import apps
-from django.contrib.contenttypes.models import ContentType
-from rest_framework import permissions
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import PermissionDenied, ValidationError
 from rest_framework.permissions import IsAuthenticated
 
 from applications.models import Application
 
 from django.contrib.contenttypes.models import ContentType
+
+from accounts.models import PetShelter
 
 
 class CommentListCreateView(ListCreateAPIView):
@@ -70,14 +67,21 @@ class CommentListCreateView(ListCreateAPIView):
 
 class CommentApplicationListCreateView(ListCreateAPIView):
     serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Comment.objects.filter(object_id=self.request.data.get('object_id'),
-                content_type=ContentType.objects.get_for_model(Application))
+                content_type=ContentType.objects.get_for_model(Application)).order_by('-created_at')
 
     def perform_create(self, serializer):
         application = Application.objects.get(id=serializer.validated_data.get('object_id'))
         user = self.request.user
+
+        reply_to = serializer.validated_data.get('reply_to')
+        if reply_to and reply_to.content_type != ContentType.objects.get_for_model(Application):
+            raise ValidationError({'reply_to': 'You have to reply to the comment of same type.'})
+        if reply_to and reply_to.object_id != serializer.validated_data.get('object_id'):
+            raise ValidationError({'reply_to': 'You have to reply to the comment that corresponds to the same object.'})
 
         app_seeker = application.user
         app_shelter = application.pet.owner
@@ -89,26 +93,24 @@ class CommentApplicationListCreateView(ListCreateAPIView):
             raise PermissionDenied('Permission Denied: You may only comment on your own applications.')
 
 
-class PetShelterApplicationListCreateView(ListCreateAPIView):
+class PetShelterCommentListCreateView(ListCreateAPIView):
     serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Comment.objects.filter(object_id=self.request.data.get('object_id'),
-                                      content_type=ContentType.objects.get_for_model(Application))
+                content_type=ContentType.objects.get_for_model(PetShelter)).order_by('-created_at')
 
     def perform_create(self, serializer):
-        # content_object = serializer.validated_data['content_object']
-        application = Application.objects.get(id=serializer.validated_data.get('object_id'))
         user = self.request.user
+        reply_to = serializer.validated_data.get('reply_to')
+        if reply_to and reply_to.content_type != ContentType.objects.get_for_model(PetShelter):
+            raise ValidationError({'reply_to': 'You have to reply to the comment of same type.'})
+        if reply_to and reply_to.object_id != serializer.validated_data.get('object_id'):
+            raise ValidationError({'reply_to': 'You have to reply to the comment that corresponds to the same object.'})
 
-        app_seeker = application.user
-        app_shelter = application.pet.owner
-
-        if (user.pk == app_seeker.pk) or (user.pk == app_shelter.pk):
-            Comment.objects.create(**serializer.validated_data, user=user,
-                                   content_type=ContentType.objects.get_for_model(Application))
-        else:
-            raise PermissionDenied('Permission Denied: You may only comment on your own applications.')
+        Comment.objects.create(**serializer.validated_data, user=user,
+                               content_type=ContentType.objects.get_for_model(PetShelter))
 
 
 class RatingListCreateView(ListCreateAPIView):

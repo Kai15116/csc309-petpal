@@ -1,14 +1,10 @@
+from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import ModelSerializer
 from django.contrib.contenttypes.models import ContentType
 from .models import Comment, Rating
-from accounts.models import User
-
-from applications.serializers import CreateApplicationSerializer
 
 
 class CommentSerializer(ModelSerializer):
-
-    # content_object = CreateApplicationSerializer(read_only=True)
 
     class Meta:
         model = Comment
@@ -24,8 +20,17 @@ class CommentSerializer(ModelSerializer):
         ]
 
         read_only_fields = ['id', 'user', 'content_type', 'created_at']
+
+    # def validate(self, attrs):
+    #     # content_type = get_object_or_404(ContentType, pk=attrs.get('content_type'))
+    #     reply_to = attrs.get('reply_to')
+    #     if reply_to:
+    #         if reply_to.content_type.id != attrs.get('content_type').id:
+    #             raise ValidationError('You have to reply to the comment of same type.')
+
         
     # def create(self, validated_data):
+    #
     #     content_type = validated_data['content_type']
     #     object_id = validated_data['object_id']
     #
