@@ -1,17 +1,13 @@
-from rest_framework.generics import ListCreateAPIView
-
+from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
 from .models import Comment, Rating
 from .serializers import CommentSerializer, RatingSerializer
 from django.apps import apps
 from rest_framework.exceptions import PermissionDenied, ValidationError
 from rest_framework.permissions import IsAuthenticated
-
 from applications.models import Application
-
 from django.contrib.contenttypes.models import ContentType
-
 from accounts.models import User, PetShelter
-
+from django.http import Http404
 
 class CommentListCreateView(ListCreateAPIView):
     """
@@ -104,7 +100,7 @@ class CommentApplicationListCreateView(ListCreateAPIView):
                 raise PermissionDenied('Permission Denied: You may only comment on your own applications.')
             
         except Application.DoesNotExist:
-            raise ValidationError({'object_id': 'Application with this ID does not exist.'})
+            raise Http404('Application does not exist.')
 
 
 class PetShelterCommentListCreateView(ListCreateAPIView):
@@ -142,8 +138,23 @@ class PetShelterCommentListCreateView(ListCreateAPIView):
             Comment.objects.create(**serializer.validated_data, user=user,
                                 content_type=ContentType.objects.get_for_model(PetShelter))
         except User.DoesNotExist:
-            raise ValidationError({'object_id': 'User with this object_id does not exist.'})
+            raise Http404('User does not exist.')
 
+
+class CommentRetrieveView(RetrieveAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    def get(self):
+        comment_id = self.kwargs.get('pk')
+
+        try:
+            comment = Comment.objects.get(pk=comment_id)
+            return comment
+        except Comment.DoesNotExist:
+            raise Http404('Comment does not exist.')
+        
+        
 
 class RatingListCreateView(ListCreateAPIView):
     """
