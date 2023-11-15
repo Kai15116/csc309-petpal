@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'accounts',
     'pets',
     'comments',
-    'applications',
     'notifications',
+    'applications',
     'drf_yasg',
     'django_extensions'
 ]
