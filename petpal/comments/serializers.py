@@ -56,3 +56,6 @@ class RatingSerializer(ModelSerializer):
             'shelter',
             'rating',
         ]
+        read_only_fields = ['user']
+        extra_kwargs = {'shelter': {'required': True}}
+

@@ -70,6 +70,9 @@ class CommentApplicationListCreateView(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        object_id = self.request.data.get('object_id')
+        if not object_id:
+            raise ValidationError({"object_id": "This field is required."})
         return Comment.objects.filter(object_id=self.request.data.get('object_id'),
                 content_type=ContentType.objects.get_for_model(Application)).order_by('-created_at')
 
@@ -98,6 +101,9 @@ class PetShelterCommentListCreateView(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        object_id = self.request.data.get('object_id')
+        if not object_id:
+            raise ValidationError({"object_id": "This field is required."})
         return Comment.objects.filter(object_id=self.request.data.get('object_id'),
                 content_type=ContentType.objects.get_for_model(PetShelter)).order_by('-created_at')
 
@@ -117,10 +123,11 @@ class RatingListCreateView(ListCreateAPIView):
     serializer_class = RatingSerializer
 
     def get_queryset(self):
-        shelter_wanted = self.request.query_params.get('shelter')
-        return Rating.objects.filter(shelter=shelter_wanted)
+        shelter = self.request.data.get('shelter')
+        if not shelter:
+            raise ValidationError({"shelter": "This field is required."})
+        return Rating.objects.filter(shelter=shelter)
 
     def perform_create(self, serializer):
-        self.serializer_class.is_valid(raise_exception=True)
         user = self.request.user
         Rating.objects.create(**serializer.validated_data, user=user)
