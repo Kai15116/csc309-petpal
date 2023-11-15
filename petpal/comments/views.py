@@ -176,12 +176,14 @@ class RatingListCreateView(ListCreateAPIView):
 
     def get_queryset(self):
         shelter = self.request.data.get('shelter')
+        user = self.request.user
 
         if not shelter:
             raise ValidationError({"shelter": "This field is required."})
         
-        return Rating.objects.filter(shelter=shelter)
+        return Rating.objects.filter(user=user, shelter=shelter)
 
     def perform_create(self, serializer):
         user = self.request.user
         Rating.objects.create(**serializer.validated_data, user=user)
+        serializer.save(user=user)
