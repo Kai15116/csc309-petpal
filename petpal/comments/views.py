@@ -69,18 +69,32 @@ class CommentListCreateView(ListCreateAPIView):
 
 
 class CommentApplicationListCreateView(ListCreateAPIView):
-    # queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-
-    # def list(self, request, **kwargs):
-    #     # Note the use of `get_queryset()` instead of `self.queryset`
-    #     queryset = self.get_queryset()
-    #     serializer = CommentSerializer(queryset, many=True)
-    #     return Response(serializer.data)
 
     def get_queryset(self):
         return Comment.objects.filter(object_id=self.request.data.get('object_id'),
                 content_type=ContentType.objects.get_for_model(Application))
+
+    def perform_create(self, serializer):
+        application = Application.objects.get(id=serializer.validated_data.get('object_id'))
+        user = self.request.user
+
+        app_seeker = application.user
+        app_shelter = application.pet.owner
+
+        if (user.pk == app_seeker.pk) or (user.pk == app_shelter.pk):
+            Comment.objects.create(**serializer.validated_data, user=user,
+                                   content_type=ContentType.objects.get_for_model(Application))
+        else:
+            raise PermissionDenied('Permission Denied: You may only comment on your own applications.')
+
+
+class PetShelterApplicationListCreateView(ListCreateAPIView):
+    serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        return Comment.objects.filter(object_id=self.request.data.get('object_id'),
+                                      content_type=ContentType.objects.get_for_model(Application))
 
     def perform_create(self, serializer):
         # content_object = serializer.validated_data['content_object']
