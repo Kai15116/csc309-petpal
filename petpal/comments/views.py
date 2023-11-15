@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView
-from .models import Comment
+from .models import Comment, Rating
 from applications import Application
 from .serializers import CommentSerializer, RatingSerializer
 from django.apps import apps
@@ -62,7 +62,7 @@ class CommentListCreateView(ListCreateAPIView):
                 raise PermissionDenied('Permission Denied: You may only comment on your own applications.')
             
         elif isinstance(content_object, apps.get_model('accounts', 'PetShelter')):
-            Comment.objects.create(**serializer.validated_data)
+            Comment.objects.create(**serializer.validated_data, user=user)
 
         
 
@@ -70,7 +70,10 @@ class RatingListCreateView(ListCreateAPIView):
     serializer_class = RatingSerializer
 
     def get_queryset(self):
-        return super().get_queryset()
+        shelter_wanted = self.request.query_params.get('shelter')
+        return Rating.objects.filter(shelter=shelter_wanted)
     
     def perform_create(self, serializer):
-        return super().perform_create(serializer)
+        self.serializer_class.is_valid(raise_exception=True)
+        user = self.request.user
+        Rating.objects.create(**serializer.validated_data, user=user)
