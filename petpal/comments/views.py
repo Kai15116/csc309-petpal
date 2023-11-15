@@ -142,10 +142,13 @@ class PetShelterCommentListCreateView(ListCreateAPIView):
 
 
 class CommentRetrieveView(RetrieveAPIView):
+    """
+    get: Retrieves a single comment given the primary key in API url.
+    """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
-    def get(self):
+    def get_object(self):
         comment_id = self.kwargs.get('pk')
 
         try:
