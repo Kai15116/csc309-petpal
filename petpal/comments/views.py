@@ -30,7 +30,6 @@ class CommentListCreateView(ListCreateAPIView):
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated]
 
-
     def get_queryset(self):
         content_type_model_mapping = {
             'application': apps.get_model('applications', 'Application'),
@@ -55,7 +54,7 @@ class CommentListCreateView(ListCreateAPIView):
 
         content_object = serializer.validated_data['content_object']
         user = self.request.user
-        
+
         if isinstance(content_object, apps.get_model('applications', 'Application')):
             app_seeker = content_object.user
             app_shelter = content_object.pet.owner
@@ -64,17 +63,24 @@ class CommentListCreateView(ListCreateAPIView):
                 Comment.objects.create(**serializer.validated_data)
             else:
                 raise PermissionDenied('Permission Denied: You may only comment on your own applications.')
-            
+
         elif isinstance(content_object, apps.get_model('accounts', 'PetShelter')):
             Comment.objects.create(**serializer.validated_data, user=user)
 
 
 class CommentApplicationListCreateView(ListCreateAPIView):
-    queryset = Comment.objects.all()
+    # queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
+    # def list(self, request, **kwargs):
+    #     # Note the use of `get_queryset()` instead of `self.queryset`
+    #     queryset = self.get_queryset()
+    #     serializer = CommentSerializer(queryset, many=True)
+    #     return Response(serializer.data)
+
     def get_queryset(self):
-        return Comment.objects.filter(object_id=self.request.data.get('object_id'))
+        return Comment.objects.filter(object_id=self.request.data.get('object_id'),
+                content_type=ContentType.objects.get_for_model(Application))
 
     def perform_create(self, serializer):
         # content_object = serializer.validated_data['content_object']
@@ -97,7 +103,7 @@ class RatingListCreateView(ListCreateAPIView):
     def get_queryset(self):
         shelter_wanted = self.request.query_params.get('shelter')
         return Rating.objects.filter(shelter=shelter_wanted)
-    
+
     def perform_create(self, serializer):
         self.serializer_class.is_valid(raise_exception=True)
         user = self.request.user

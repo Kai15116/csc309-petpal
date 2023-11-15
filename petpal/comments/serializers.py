@@ -14,7 +14,7 @@ class CommentSerializer(ModelSerializer):
             'reply_to',
             'content_type',
             'object_id',
-            'content_object',
+            # 'content_object',
         ]
 
         read_only_fields = ['user', 'content_type']

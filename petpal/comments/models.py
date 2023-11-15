@@ -7,7 +7,7 @@ from django.apps import apps
 
 class Comment(models.Model):
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, help_text='User who wrote the comment')
-    text = models.TextField(max_length=500, null=False, blank=True, help_text='Text of the comment')
+    text = models.TextField(max_length=500, help_text='Text of the comment')
     created_at = models.DateTimeField(auto_now_add=True, help_text='Date when the comment was created')
     reply_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, help_text='Who the comment is referring to')
 
