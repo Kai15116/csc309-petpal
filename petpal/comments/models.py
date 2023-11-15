@@ -6,13 +6,10 @@ from django.db import models
 from django.apps import apps
 
 class Comment(models.Model):
-    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
-
-    # rating = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(limit_value=5)])
-    text = models.TextField(max_length=500, null=False, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    reply_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, help_text='User who wrote the comment')
+    text = models.TextField(max_length=500, null=False, blank=True, help_text='Text of the comment')
+    created_at = models.DateTimeField(auto_now_add=True, help_text='Date when the comment was created')
+    reply_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, help_text='Who the comment is referring to')
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()

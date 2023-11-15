@@ -15,10 +15,24 @@ class CommentSerializer(ModelSerializer):
             'object_id',
             'content_object',
         ]
+        
     def create(self, validated_data):
-        validated_data['user'] = self.context['request'].user
-        validated_data['content_type'] = ContentType.objects.get_for_model(User)
-        return super().create(validated_data)
+        content_type = validated_data['content_type']
+        object_id = validated_data['object_id']
+
+        content_type_instance = ContentType.objects.get(model=content_type)
+
+        comment = Comment.objects.create(
+            user=self.context['request'].user,
+            text=validated_data['text'],
+            reply_to=validated_data.get('reply_to'),
+            content_type=content_type_instance,
+            object_id=object_id,
+        )
+
+        return comment
+    
+    
 
 class RatingSerializer(ModelSerializer):
     class Meta:

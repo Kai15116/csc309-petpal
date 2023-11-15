@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import CommentListCreateViewReviews, CommentListCreateViewChat
+from .views import CommentListCreateView, RatingListCreateView
 
 urlpatterns = [
-    path('petshelter/<int:pk>/comments/', CommentListCreateViewReviews.as_view(), name='comment-list-create-reviews'),
-    path('applications/<int:pk>/comments/', CommentListCreateViewChat.as_view(), name='comment-list-create-chat'),
+    path('comment/<int:pk>', CommentListCreateView.as_view(), name='comment-list-create-view'),
+    path('rating/', RatingListCreateView.as_view(), name='raitng-list-create'),
 ]
