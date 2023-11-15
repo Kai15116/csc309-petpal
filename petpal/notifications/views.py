@@ -29,13 +29,21 @@ class NotificationCreate(CreateAPIView):
     serializer_class = NotificationSerializer
 
     def perform_create(self, serializer):
-        # content_type = serializer.validated_data.get('content_type')
+        # content_id = serializer.validated_data.get('content_type')
         # object_id = serializer.validated_data.get('object_id')
 
-        # content_object = self.get_content_object(content_type, object_id)
+        # content_type = ContentType.objects.get(id=content_id)
+        # content_object = content_type.get_object_for_this_type(id=object_id)
+        # serializer.validated_data['content_object'] = content_object
+        content_type = serializer.validated_data.get('content_type')
+        object_id = serializer.validated_data.get('object_id')
 
-        content_object = serializer.validated_data['content_object']
+
+
+        content_object = content_type.get_object_for_this_type(id=object_id)
+
         user = self.request.user
+
         # if user is PetSeeker AND content_object refers to Application => status update notification
         if isinstance(user, PetSeeker) and isinstance(content_object, Application):
             notification_type = 'status_update'
@@ -45,11 +53,11 @@ class NotificationCreate(CreateAPIView):
             notification_type = 'application_creation'
 
         # if user is PetShelter AND content_object refers to Comment AND comment.content_object refers to Shelter
-        elif isinstance(user, PetShelter) and isinstance(content_object, Comment) and isinstance(content_object.content_object, PetShelter):
+        elif isinstance(user, PetShelter) and isinstance(content_object, Comment) and isinstance(content_type, PetShelter):
             notification_type = 'new_review'
         
         # if content_object refers to Comment AND comment.content_object refers to Application => new message notification
-        elif isinstance(content_object, Comment) and isinstance(content_object.content_object, Application):
+        elif isinstance(content_object, Comment) and isinstance(content_type, Application):
             notification_type = 'new_message'
             
         # if content_object refers to Pet => new pet listing notification
@@ -70,14 +78,6 @@ class NotificationCreate(CreateAPIView):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return self.response(serializer.data, headers=headers)
-    
-    def get_content_object(self, content_type_id, object_id):
-        try:
-            content_type = ContentType.objects.get_for_id(content_type_id)
-            model_class = content_type.model_class()
-            return get_object_or_404(model_class, pk=object_id)
-        except ContentType.DoesNotExist:
-            return None  # or raise an appropriate exception
 
 class NotificationUpdate(UpdateAPIView):
     """
