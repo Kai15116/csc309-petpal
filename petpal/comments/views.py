@@ -10,7 +10,7 @@ from applications.models import Application
 
 from django.contrib.contenttypes.models import ContentType
 
-from accounts.models import PetShelter
+from accounts.models import User, PetShelter
 
 
 class CommentListCreateView(ListCreateAPIView):
@@ -84,23 +84,27 @@ class CommentApplicationListCreateView(ListCreateAPIView):
                 content_type=ContentType.objects.get_for_model(Application)).order_by('-created_at')
 
     def perform_create(self, serializer):
-        application = Application.objects.get(id=serializer.validated_data.get('object_id'))
+        
         user = self.request.user
+        try:
+            application = Application.objects.get(id=serializer.validated_data.get('object_id'))
+            reply_to = serializer.validated_data.get('reply_to')
+            if reply_to and reply_to.content_type != ContentType.objects.get_for_model(Application):
+                raise ValidationError({'reply_to': 'You have to reply to the comment of same type.'})
+            if reply_to and reply_to.object_id != serializer.validated_data.get('object_id'):
+                raise ValidationError({'reply_to': 'You have to reply to the comment that corresponds to the same object.'})
 
-        reply_to = serializer.validated_data.get('reply_to')
-        if reply_to and reply_to.content_type != ContentType.objects.get_for_model(Application):
-            raise ValidationError({'reply_to': 'You have to reply to the comment of same type.'})
-        if reply_to and reply_to.object_id != serializer.validated_data.get('object_id'):
-            raise ValidationError({'reply_to': 'You have to reply to the comment that corresponds to the same object.'})
+            app_seeker = application.user
+            app_shelter = application.pet.owner
 
-        app_seeker = application.user
-        app_shelter = application.pet.owner
-
-        if (user.pk == app_seeker.pk) or (user.pk == app_shelter.pk):
-            Comment.objects.create(**serializer.validated_data, user=user,
-                                   content_type=ContentType.objects.get_for_model(Application))
-        else:
-            raise PermissionDenied('Permission Denied: You may only comment on your own applications.')
+            if (user.pk == app_seeker.pk) or (user.pk == app_shelter.pk):
+                Comment.objects.create(**serializer.validated_data, user=user,
+                                    content_type=ContentType.objects.get_for_model(Application))
+            else:
+                raise PermissionDenied('Permission Denied: You may only comment on your own applications.')
+            
+        except Application.DoesNotExist:
+            raise ValidationError({'object_id': 'Application with this ID does not exist.'})
 
 
 class PetShelterCommentListCreateView(ListCreateAPIView):
@@ -125,18 +129,25 @@ class PetShelterCommentListCreateView(ListCreateAPIView):
     def perform_create(self, serializer):
         user = self.request.user
         reply_to = serializer.validated_data.get('reply_to')
-        if reply_to and reply_to.content_type != ContentType.objects.get_for_model(PetShelter):
-            raise ValidationError({'reply_to': 'You have to reply to the comment of same type.'})
-        if reply_to and reply_to.object_id != serializer.validated_data.get('object_id'):
-            raise ValidationError({'reply_to': 'You have to reply to the comment that corresponds to the same object.'})
+        object_id = self.request.data.get('object_id')
 
-        Comment.objects.create(**serializer.validated_data, user=user,
-                               content_type=ContentType.objects.get_for_model(PetShelter))
+        try: 
+            if User.objects.get(id=object_id).is_pet_seeker:
+                raise ValidationError({'object_id': 'Expected object_id to refer to a shelter.'})
+            if reply_to and reply_to.content_type != ContentType.objects.get_for_model(PetShelter):
+                raise ValidationError({'reply_to': 'You have to reply to the comment of same type.'})
+            if reply_to and reply_to.object_id != serializer.validated_data.get('object_id'):
+                raise ValidationError({'reply_to': 'You have to reply to the comment that corresponds to the same object.'})
+
+            Comment.objects.create(**serializer.validated_data, user=user,
+                                content_type=ContentType.objects.get_for_model(PetShelter))
+        except User.DoesNotExist:
+            raise ValidationError({'object_id': 'User (Shelter) with this object_id does not exist.'})
 
 
 class RatingListCreateView(ListCreateAPIView):
     """
-    get: Returns all the ratings for a given shelter
+    get: Returns all the ratings for a given shelter.
 
     post: Create rating for a PetShelter from a User.
     """
