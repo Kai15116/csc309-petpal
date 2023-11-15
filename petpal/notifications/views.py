@@ -160,15 +160,26 @@ class NotificationGet(RetrieveAPIView):
 
         # if the notification refers to comment link to new comment added
         if isinstance(content_object, Comment):
-            context['associated_model_link'] = reverse_lazy('comment-detail', kwargs={'pk': content_object.pk})
+            # context['associated_model_link'] = reverse_lazy('comment-detail', kwargs={'pk': content_object.pk})
+            context['associated_model_link'] = reverse_lazy('comments', kwargs={
+                'application_id': content_object.content_object.pk,
+                'comment_id': content_object.pk,
+            })
 
         # if notification refers to appplication link to application creation and status update
         elif isinstance(content_object, Application):
-            context['associated_model_link'] = reverse_lazy('application-detail', kwargs={'pk': content_object.pk})
+            # context['associated_model_link'] = reverse_lazy('application-detail', kwargs={'pk': content_object.pk})
+            context['associated_model_link'] = reverse_lazy('applications', kwargs={
+                'application_id': content_object.content_object.pk,
+            })
         
         # if application refers to pet link to new pet listing
         elif isinstance(content_object, Pet):
-            context['associated_model_link'] = reverse_lazy('pet-detail', kwargs={'pk': content_object.pk})
+            # context['associated_model_link'] = reverse_lazy('pet-detail', kwargs={'pk': content_object.pk})
+            context['associated_model_link'] = reverse_lazy('pets', kwargs={
+                'application_id': content_object.content_object.pk,
+                'pet_id': content_object.pk,
+            })
 
         return context
     
