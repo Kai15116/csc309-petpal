@@ -74,12 +74,23 @@ class CommentApplicationListCreateView(ListCreateAPIView):
 
     def get_queryset(self):
         object_id = self.request.data.get('object_id')
+        user = self.request.user
 
         if not object_id:
             raise ValidationError({"object_id": "This field is required."})
         
-        return Comment.objects.filter(object_id=self.request.data.get('object_id'),
-                content_type=ContentType.objects.get_for_model(Application)).order_by('-created_at')
+        try:
+            application = Application.objects.get(id=object_id)
+            app_seeker = application.user
+            app_shelter = application.pet.owner
+
+            if (user.pk == app_seeker.pk) or (user.pk == app_shelter.pk):
+                return Comment.objects.filter(object_id=self.request.data.get('object_id'),
+                                              content_type=ContentType.objects.get_for_model(Application)).order_by('-created_at')
+            else:
+                raise ValidationError({'object_id': 'Cannot view foreign Application comments.'})
+        except Application.DoesNotExist:
+            raise Http404('Application does not exist.')
 
     def perform_create(self, serializer):
         
@@ -176,12 +187,14 @@ class RatingListCreateView(ListCreateAPIView):
 
     def get_queryset(self):
         shelter = self.request.data.get('shelter')
+        user = self.request.user
 
         if not shelter:
             raise ValidationError({"shelter": "This field is required."})
         
-        return Rating.objects.filter(shelter=shelter)
+        return Rating.objects.filter(user=user, shelter=shelter)
 
     def perform_create(self, serializer):
         user = self.request.user
         Rating.objects.create(**serializer.validated_data, user=user)
+        serializer.save(user=user)
