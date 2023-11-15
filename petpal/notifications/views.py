@@ -8,20 +8,22 @@ from .serializers import NotificationSerializer
 from rest_framework.generics import CreateAPIView, UpdateAPIView, ListAPIView, DestroyAPIView, RetrieveAPIView
 
 class NotificationCreate(CreateAPIView):
+    """
+    perform_create:
+    Create a new notification based on the type of action and user involved.
+
+    If the user is a PetSeeker and the content_object refers to an Application, it creates a status update notification.
+    If the user is a PetShelter and the content_object refers to an Application, it creates an application creation notification.
+    If the user is a PetShelter and the content_object refers to a Comment, and the comment.content_object refers to Shelter,
+    it creates a new review notification.
+    If the content_object refers to a Comment and comment.content_object refers to an Application, it creates a new message notification.
+    If the content_object refers to a Pet, it creates a new pet listing notification.
+    """
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
 
     def perform_create(self, serializer):
-        """
-        Create a new notification based on the type of action and user involved.
 
-        If the user is a PetSeeker and the content_object refers to an Application, it creates a status update notification.
-        If the user is a PetShelter and the content_object refers to an Application, it creates an application creation notification.
-        If the user is a PetShelter and the content_object refers to a Comment, and the comment.content_object refers to Shelter,
-        it creates a new review notification.
-        If the content_object refers to a Comment and comment.content_object refers to an Application, it creates a new message notification.
-        If the content_object refers to a Pet, it creates a new pet listing notification.
-        """
         content_object = serializer.validated_data['content_object']
         user = self.request.user
         # if user is PetSeeker AND content_object refers to Application => status update notification
@@ -51,6 +53,14 @@ class NotificationCreate(CreateAPIView):
         # create and save the notification with the user and notification type
         serializer.save(user=user, notification_type=notification_type)
 
+    def post(self, request, *args, **kwargs):
+        # creating a new notification
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return self.response(serializer.data, headers=headers)
+
 class NotificationUpdate(UpdateAPIView):
     """
     Update the state of a notification from "unread" to "read".
@@ -63,20 +73,31 @@ class NotificationUpdate(UpdateAPIView):
     def perform_update(self, serializer):
         serializer.save(read=True)
 
+    def put(self, request, *args, **kwargs):
+        # update the notification 
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return self.response(serializer.data)
+
 class NotificationList(ListAPIView):
     """
     Retrieve a list of notifications for the authenticated user.
 
-    Users (shelter and seeker) can only view their own notifications.
+    get: Users (shelter and seeker) can only view their own notifications.
     Filter notifications by read/unread to get all unread notifications.
     Sort notifications by creation time in descending order (latest first).
     """
     serializer_class = NotificationSerializer
 
-    def get_queryset(self):
+    def get(self, request, *args, **kwargs):
+        # retrieve a list of notifications with filtering and sorting
         user = self.request.user
         queryset = Notification.objects.filter(user=user, read=False).order_by('-created_at')
-        return queryset
+        serializer = self.get_serializer(queryset, many=True)
+        return self.response(serializer.data)
+
 
 class NotificationDelete(DestroyAPIView):
     """
@@ -85,6 +106,12 @@ class NotificationDelete(DestroyAPIView):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
     lookup_field = 'notification_id'
+
+    def delete(self, request, *args, **kwargs):
+        # delete a notification
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return self.response(status=204)
     
 class NotificationGet(RetrieveAPIView):
     """
@@ -116,4 +143,12 @@ class NotificationGet(RetrieveAPIView):
             context['associated_model_link'] = reverse_lazy('pet-detail', kwargs={'pk': content_object.pk})
 
         return context
+    
+    def get(self, request, *args, **kwargs):
+        # retrieving details of a notification and providing links to associated models
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        context = self.get_context_data()
+        context.update(serializer.data)
+        return self.response(context)
     
