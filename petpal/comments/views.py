@@ -74,8 +74,10 @@ class CommentApplicationListCreateView(ListCreateAPIView):
 
     def get_queryset(self):
         object_id = self.request.data.get('object_id')
+
         if not object_id:
             raise ValidationError({"object_id": "This field is required."})
+        
         return Comment.objects.filter(object_id=self.request.data.get('object_id'),
                 content_type=ContentType.objects.get_for_model(Application)).order_by('-created_at')
 
@@ -85,6 +87,7 @@ class CommentApplicationListCreateView(ListCreateAPIView):
         try:
             application = Application.objects.get(id=serializer.validated_data.get('object_id'))
             reply_to = serializer.validated_data.get('reply_to')
+
             if reply_to and reply_to.content_type != ContentType.objects.get_for_model(Application):
                 raise ValidationError({'reply_to': 'You have to reply to the comment of same type.'})
             if reply_to and reply_to.object_id != serializer.validated_data.get('object_id'):
@@ -117,8 +120,10 @@ class PetShelterCommentListCreateView(ListCreateAPIView):
 
     def get_queryset(self):
         object_id = self.request.data.get('object_id')
+
         if not object_id:
             raise ValidationError({"object_id": "This field is required."})
+        
         return Comment.objects.filter(object_id=self.request.data.get('object_id'),
                 content_type=ContentType.objects.get_for_model(PetShelter)).order_by('-created_at')
 
@@ -137,13 +142,14 @@ class PetShelterCommentListCreateView(ListCreateAPIView):
 
             Comment.objects.create(**serializer.validated_data, user=user,
                                 content_type=ContentType.objects.get_for_model(PetShelter))
+            
         except User.DoesNotExist:
             raise Http404('User does not exist.')
 
 
 class CommentRetrieveView(RetrieveAPIView):
     """
-    get: Retrieves a single comment given the primary key in API url.
+    get: Retrieves a single comment given the primary key in URL.
     """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
@@ -154,6 +160,7 @@ class CommentRetrieveView(RetrieveAPIView):
         try:
             comment = Comment.objects.get(pk=comment_id)
             return comment
+        
         except Comment.DoesNotExist:
             raise Http404('Comment does not exist.')
         
@@ -169,8 +176,10 @@ class RatingListCreateView(ListCreateAPIView):
 
     def get_queryset(self):
         shelter = self.request.data.get('shelter')
+
         if not shelter:
             raise ValidationError({"shelter": "This field is required."})
+        
         return Rating.objects.filter(shelter=shelter)
 
     def perform_create(self, serializer):

@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import CommentListCreateView, RatingListCreateView, CommentApplicationListCreateView, PetShelterCommentListCreateView, CommentRetrieveView
 
+app_name = 'comments'
 urlpatterns = [
     path('application/', CommentApplicationListCreateView.as_view(), name='application-comment-list-create-view'),
     path('shelter/', PetShelterCommentListCreateView.as_view(), name='shelter-comment-list-create-view'),
