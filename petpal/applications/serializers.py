@@ -24,7 +24,8 @@ class UpdateApplicationSerializer(ModelSerializer):
 class FilterApplicationSerializer(ModelSerializer):
     ORDER_BY_CHOICES = ['created_at', '-created_at', 'last_updated', '-last_updated']
     order_by = ChoiceField(choices=ORDER_BY_CHOICES,
-                           help_text='Options for sorting. Negative sign (-) indicates descending order.')
+                           help_text='Options for sorting. Negative sign (-) indicates descending order.',
+                           required=False)
 
     class Meta:
         model = Application

@@ -16,7 +16,3 @@ class Notification(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, help_text='The content type of the referenced object (used to find the notification type).')
     object_id = models.PositiveIntegerField(help_text='The ID of the referenced object.')
     content_object = GenericForeignKey('content_type', 'object_id')
-
-    # The notification_type field categorizes the type of notification.
-    # Possible values include: 'status_update', 'application_creation', 'new_review', 'new_message', 'new_pet_listing'.
-    notification_type = models.CharField(max_length=50, blank=True, help_text='The type of notification ("status_update", "application_creation", "new_message", "new_pet_listing")')

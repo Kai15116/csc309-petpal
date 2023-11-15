@@ -5,6 +5,9 @@ from django.db import models
 
 from django.apps import apps
 
+from notifications.models import Notification
+
+
 class Comment(models.Model):
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, help_text='User who wrote the comment')
     text = models.TextField(max_length=500, help_text='Text of the comment')
@@ -22,10 +25,18 @@ class Comment(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super().save(force_insert, force_update, using, update_fields)
+
         if isinstance(self.content_object, apps.get_model('applications', 'Application')):
             application = self.content_object
             application.last_updated = self.created_at
             application.save()
+
+            if self.user.is_pet_seeker():
+                Notification.objects.create(user=self.content_object.pet.owner, content_object=self)
+            elif self.user.is_pet_shelter():
+                Notification.objects.create(user=self.content_object.user, content_object=self)
+        elif isinstance(self.content_object, apps.get_model('accounts', 'PetShelter')):
+            Notification.objects.create(user=self.content_object, content_object=self)
 
 
 class Rating(models.Model):

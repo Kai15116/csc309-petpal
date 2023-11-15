@@ -74,3 +74,8 @@ class Pet(models.Model):
 
     def __str__(self):
         return f'{self.name}:{self.pk}'
+
+    # def save(
+    #     self, force_insert=False, force_update=False, using=None, update_fields=None
+    # ):
+    #     super().
