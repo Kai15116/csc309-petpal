@@ -19,4 +19,4 @@ class Notification(models.Model):
 
     # The notification_type field categorizes the type of notification.
     # Possible values include: 'status_update', 'application_creation', 'new_review', 'new_message', 'new_pet_listing'.
-    notification_type = models.CharField(max_length=50, blank=True, help_text='The type of notification.')
+    notification_type = models.CharField(max_length=50, blank=True, help_text='The type of notification ("status_update", "application_creation", "new_message", "new_pet_listing")')
