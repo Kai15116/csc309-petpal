@@ -18,6 +18,10 @@ class NotificationCreate(CreateAPIView):
     it creates a new review notification.
     If the content_object refers to a Comment and comment.content_object refers to an Application, it creates a new message notification.
     If the content_object refers to a Pet, it creates a new pet listing notification.
+
+    post:
+    Create a new notification based on the provided data. The notification type and user association
+    are determined by the type of user and the type of content object involved.
     """
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
@@ -64,6 +68,8 @@ class NotificationCreate(CreateAPIView):
 class NotificationUpdate(UpdateAPIView):
     """
     Update the state of a notification from "unread" to "read".
+
+    put: Update a notification by updating read attribute for that object
     """
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
@@ -85,7 +91,8 @@ class NotificationList(ListAPIView):
     """
     Retrieve a list of notifications for the authenticated user.
 
-    get: Users (shelter and seeker) can only view their own notifications.
+    get: 
+    Users (shelter and seeker) can only view their own notifications.
     Filter notifications by read/unread to get all unread notifications.
     Sort notifications by creation time in descending order (latest first).
     """
@@ -101,7 +108,7 @@ class NotificationList(ListAPIView):
 
 class NotificationDelete(DestroyAPIView):
     """
-    Delete a notification.
+    delete: Delete a notification object.
     """
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
@@ -115,11 +122,14 @@ class NotificationDelete(DestroyAPIView):
     
 class NotificationGet(RetrieveAPIView):
     """
+    get_context_data:
     Retrieve details of a notification and provide links to associated models.
 
     If the notification refers to a comment, link to the new comment added.
     If the notification refers to an application, link to application creation and status update.
     If the application refers to a pet, link to a new pet listing.
+
+    get: Object will be retrieved with details of a notification and providing links to associated models.
     """
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
@@ -145,7 +155,6 @@ class NotificationGet(RetrieveAPIView):
         return context
     
     def get(self, request, *args, **kwargs):
-        # retrieving details of a notification and providing links to associated models
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         context = self.get_context_data()
