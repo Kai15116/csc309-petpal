@@ -132,7 +132,7 @@ class PetShelterCommentListCreateView(ListCreateAPIView):
         object_id = self.request.data.get('object_id')
 
         try: 
-            if User.objects.get(id=object_id).is_pet_seeker:
+            if User.objects.get(id=object_id).is_pet_seeker():
                 raise ValidationError({'object_id': 'Expected object_id to refer to a shelter.'})
             if reply_to and reply_to.content_type != ContentType.objects.get_for_model(PetShelter):
                 raise ValidationError({'reply_to': 'You have to reply to the comment of same type.'})
@@ -142,7 +142,7 @@ class PetShelterCommentListCreateView(ListCreateAPIView):
             Comment.objects.create(**serializer.validated_data, user=user,
                                 content_type=ContentType.objects.get_for_model(PetShelter))
         except User.DoesNotExist:
-            raise ValidationError({'object_id': 'User (Shelter) with this object_id does not exist.'})
+            raise ValidationError({'object_id': 'User with this object_id does not exist.'})
 
 
 class RatingListCreateView(ListCreateAPIView):
