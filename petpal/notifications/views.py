@@ -1,42 +1,46 @@
-from accounts.models import PetSeeker, PetShelter
-from applications.models import Application
-from pets.models import Pet
+from rest_framework.permissions import IsAuthenticated
+
 from .models import Notification
-from django.urls import reverse_lazy
 from .serializers import NotificationSerializer
-from rest_framework.generics import CreateAPIView, UpdateAPIView, ListAPIView, DestroyAPIView, RetrieveAPIView
-from django.contrib.contenttypes.models import ContentType
-from django.shortcuts import get_object_or_404
-from comments.models import Comment
+from rest_framework.generics import ListCreateAPIView,  RetrieveDestroyAPIView
 from django.http import Http404
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+
+read_param = openapi.Parameter('read', openapi.IN_QUERY, description="Read attribute used to filter.", type=openapi.TYPE_BOOLEAN)
 
 
-class NotificationCreate(CreateAPIView):
+class NotificationListCreate(ListCreateAPIView):
     """
-    perform_create:
-    Create a new notification based on the type of action and user involved.
-
-    If the user is a PetSeeker and the content_object refers to an Application, it creates a status update notification.
-    If the user is a PetShelter and the content_object refers to an Application, it creates an application creation notification.
-    If the user is a PetShelter and the content_object refers to a Comment, and the comment.content_object refers to Shelter,
-    it creates a new review notification.
-    If the content_object refers to a Comment and comment.content_object refers to an Application, it creates a new message notification.
-    If the content_object refers to a Pet, it creates a new pet listing notification.
+    get: Retrieve a list of notifications for the authenticated user with filtering.
+    - Users (shelter and seeker) can only view their own notifications.
+    - User can filter notifications by read/unread to get all unread notifications.
+    - It is sorted by creation time in descending order (latest first).
 
     post:
     Create a new notification based on the provided data. The notification type and user association
     are determined by the type of user and the type of content object involved.
+    - If the user is a PetSeeker and the content type represents an Application, it creates a status update notification.
+    - If the user is a PetShelter and the content type represents an Application, it creates an application creation notification.
+    - If the user is a PetShelter and the content type represents a Comment, and the comment is made on Shelter, it creates a new review notification.
+    - If the content type represents a Comment and comment was made on an Application, it creates a new message notification.
+    - If the content type represents a Pet, it creates a new pet listing notification.
     """
-    queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
+    permission_classes = [IsAuthenticated]
+
+    @swagger_auto_schema(manual_parameters=[read_param])
+    def get(self, request):
+        return super().get(request)
+
+    def get_queryset(self):
+        result = Notification.objects.filter(user=self.request.user)
+        read = self.request.query_params.get('read')
+        if read is not None:
+            result = result.filter(read=read)
+        return result
 
     def perform_create(self, serializer):
-        # content_id = serializer.validated_data.get('content_type')
-        # object_id = serializer.validated_data.get('object_id')
-
-        # content_type = ContentType.objects.get(id=content_id)
-        # content_object = content_type.get_object_for_this_type(id=object_id)
-        # serializer.validated_data['content_object'] = content_object
         content_type = serializer.validated_data.get('content_type')
         object_id = serializer.validated_data.get('object_id')
         try:
@@ -44,7 +48,6 @@ class NotificationCreate(CreateAPIView):
         except:
             raise Http404
 
-        print(ContentType.objects.get_for_model(Comment).id)
         user = self.request.user
 
         # if user is PetSeeker AND content_object refers to Application => status update notification
@@ -75,118 +78,25 @@ class NotificationCreate(CreateAPIView):
         # create and save the notification with the user and notification type
         serializer.save(user=user, notification_type=notification_type)
 
-    # def post(self, request, *args, **kwargs):
-    #     # creating a new notification
-    #     serializer = self.get_serializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     self.perform_create(serializer)
-    #     headers = self.get_success_headers(serializer.data)
-    #     return self.response(serializer.data, headers=headers)
 
-class NotificationUpdate(UpdateAPIView):
+class NotificationRetrieveDestroy(RetrieveDestroyAPIView):
     """
-    Update the state of a notification from "unread" to "read".
+    delete: Delete the notification with the given id. The notification has to be associated with the user.
 
-    put: Update a notification by updating read attribute for that object
-    """
-    queryset = Notification.objects.all()
-    serializer_class = NotificationSerializer
-    lookup_field = 'notification_id'  
-
-     # change the state of a notification from "unread" to "read".
-    def perform_update(self, serializer):
-        serializer.save(read=True)
-
-    def put(self, request, *args, **kwargs):
-        # update the notification 
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
-        return self.response(serializer.data)
-
-class NotificationList(ListAPIView):
-    """
-    Retrieve a list of notifications for the authenticated user.
-
-    get: 
-    Users (shelter and seeker) can only view their own notifications.
-    Filter notifications by read/unread to get all unread notifications.
-    Sort notifications by creation time in descending order (latest first).
+    get: Retrieve details of a user's notification and provide links to associated models.
+    - If the notification refers to a comment, link to the new comment added.
+    - If the notification refers to an application, link to application creation and status update.
+    - If the application refers to a pet, link to a new pet listing.
+    It also updates the state of a notification from "unread" to "read".
     """
     serializer_class = NotificationSerializer
+    permission_classes = [IsAuthenticated]
 
-    def get(self, request, *args, **kwargs):
-        # retrieve a list of notifications with filtering and sorting
-        user = self.request.user
-        queryset = Notification.objects.filter(user=user, read=False).order_by('-created_at')
-        serializer = self.get_serializer(queryset, many=True)
-        return self.response(serializer.data)
+    def get_queryset(self):
+        return Notification.objects.filter(user=self.request.user)
 
-
-class NotificationDelete(DestroyAPIView):
-    """
-    delete: Delete a notification object.
-    """
-    queryset = Notification.objects.all()
-    serializer_class = NotificationSerializer
-    lookup_field = 'notification_id'
-
-    def delete(self, request, *args, **kwargs):
-        # delete a notification
-        instance = self.get_object()
-        self.perform_destroy(instance)
-        return self.response(status=204)
-    
-class NotificationGet(RetrieveAPIView):
-    """
-    get_context_data:
-    Retrieve details of a notification and provide links to associated models.
-
-    If the notification refers to a comment, link to the new comment added.
-    If the notification refers to an application, link to application creation and status update.
-    If the application refers to a pet, link to a new pet listing.
-
-    get: Object will be retrieved with details of a notification and providing links to associated models.
-    """
-    queryset = Notification.objects.all()
-    serializer_class = NotificationSerializer
-    lookup_field = 'notification_id'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        notification = self.get_object()
-        content_object = notification.content_object
-
-        # if the notification refers to comment link to new comment added
-        if isinstance(content_object, Comment):
-            # context['associated_model_link'] = reverse_lazy('comment-detail', kwargs={'pk': content_object.pk})
-            context['associated_model_link'] = reverse_lazy('comments', kwargs={
-                'application_id': content_object.content_object.pk,
-                'comment_id': content_object.pk,
-            })
-
-        # if notification refers to appplication link to application creation and status update
-        elif isinstance(content_object, Application):
-            # context['associated_model_link'] = reverse_lazy('application-detail', kwargs={'pk': content_object.pk})
-            context['associated_model_link'] = reverse_lazy('applications', kwargs={
-                'application_id': content_object.content_object.pk,
-            })
-        
-        # if application refers to pet link to new pet listing
-        elif isinstance(content_object, Pet):
-            # context['associated_model_link'] = reverse_lazy('pet-detail', kwargs={'pk': content_object.pk})
-            context['associated_model_link'] = reverse_lazy('pets', kwargs={
-                'application_id': content_object.content_object.pk,
-                'pet_id': content_object.pk,
-            })
-
-        return context
-    
-    def get(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        context = self.get_context_data()
-        context.update(serializer.data)
-        return self.response(context)
-    
+    def get_object(self):
+        notification = super().get_object()
+        notification.read = True
+        notification.save()
+        return notification
