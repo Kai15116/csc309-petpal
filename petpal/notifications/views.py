@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 from tokenize import Comment
 from .serializers import NotificationSerializer
 from rest_framework.generics import CreateAPIView, UpdateAPIView, ListAPIView, DestroyAPIView, RetrieveAPIView
+from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import get_object_or_404
 
 class NotificationCreate(CreateAPIView):
     """
@@ -27,6 +29,10 @@ class NotificationCreate(CreateAPIView):
     serializer_class = NotificationSerializer
 
     def perform_create(self, serializer):
+        # content_type = serializer.validated_data.get('content_type')
+        # object_id = serializer.validated_data.get('object_id')
+
+        # content_object = self.get_content_object(content_type, object_id)
 
         content_object = serializer.validated_data['content_object']
         user = self.request.user
@@ -64,6 +70,14 @@ class NotificationCreate(CreateAPIView):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return self.response(serializer.data, headers=headers)
+    
+    def get_content_object(self, content_type_id, object_id):
+        try:
+            content_type = ContentType.objects.get_for_id(content_type_id)
+            model_class = content_type.model_class()
+            return get_object_or_404(model_class, pk=object_id)
+        except ContentType.DoesNotExist:
+            return None  # or raise an appropriate exception
 
 class NotificationUpdate(UpdateAPIView):
     """
