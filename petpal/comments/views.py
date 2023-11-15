@@ -16,12 +16,9 @@ from accounts.models import PetShelter
 class CommentListCreateView(ListCreateAPIView):
     """
     get: Returns a paginated list of comments to a respective content_object, currently
-    for Application or PetShelter. 
-    Comments for Applications are only readable to the Application users. 
-    Comments for reviews are only viewable to users logged in.
+    for Application or PetShelter.
 
-    post: Creates comment on respective content_object. 
-    If commenting on an Application,
+    post: Creates comment on respective content_object.
     """
     # queryset = Comment.objects.all()
     serializer_class = CommentSerializer
@@ -66,6 +63,16 @@ class CommentListCreateView(ListCreateAPIView):
 
 
 class CommentApplicationListCreateView(ListCreateAPIView):
+    """
+    get: Returns paginated list of comments for an Application given the
+    object_id (primary key) of the Application. Orders by creation date.
+
+    post: Create comment on an Application. Ensures that the User who
+    wishes to comment is part of the Application, whether that be a
+    Seeker or Shelter of the Application. Verifies that comment replies cannot be
+    directed across models (e.g. Cannot reply to Application when on PetShelter,
+    Cannot reply to Application from a different Application).
+    """
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated]
 
@@ -97,6 +104,14 @@ class CommentApplicationListCreateView(ListCreateAPIView):
 
 
 class PetShelterCommentListCreateView(ListCreateAPIView):
+    """
+    get: Returns paginated list of comments for a PetShelter given the
+    object_id (primary key) of the PetShelter. Orders by creation date.
+
+    put: Create comment on PetShelter. Verifies that comment replies cannot be
+    directed across models (e.g. Cannot reply to Application when on PetShelter,
+    Cannot reply to Application from a different Application).
+    """
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated]
 
@@ -120,6 +135,11 @@ class PetShelterCommentListCreateView(ListCreateAPIView):
 
 
 class RatingListCreateView(ListCreateAPIView):
+    """
+    get: Returns all the ratings for a given shelter
+
+    post: Create rating for a PetShelter from a User.
+    """
     serializer_class = RatingSerializer
 
     def get_queryset(self):
