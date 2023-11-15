@@ -8,6 +8,7 @@ class CreateApplicationSerializer(ModelSerializer):
         model = Application
         fields = '__all__'
         read_only_fields = ['id', 'created_at', 'last_updated', 'user']
+        extra_kwargs = {'id': {'help_text': 'Identifier of the application.'}}
 
 
 class UpdateApplicationSerializer(ModelSerializer):
@@ -22,9 +23,12 @@ class UpdateApplicationSerializer(ModelSerializer):
 
 class FilterApplicationSerializer(ModelSerializer):
     ORDER_BY_CHOICES = ['created_at', '-created_at', 'last_updated', '-last_updated']
-    order_by = ChoiceField(choices=ORDER_BY_CHOICES)
+    order_by = ChoiceField(choices=ORDER_BY_CHOICES,
+                           help_text='Options for sorting. Negative sign (-) indicates descending order.')
 
     class Meta:
         model = Application
         fields = ['status', 'order_by']
+        extra_kwargs = {'status': {'help_text': 'Status to be filtered.'}}
+
 

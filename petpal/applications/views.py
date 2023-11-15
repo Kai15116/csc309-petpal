@@ -1,18 +1,34 @@
 from rest_framework.exceptions import ValidationError, PermissionDenied
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
+from drf_yasg.utils import swagger_auto_schema
 
 from .models import Application
 from accounts.permissions import IsPetSeekerOrReadOnly
 
 from .serializers import CreateApplicationSerializer, FilterApplicationSerializer, UpdateApplicationSerializer
 
-
 # Create your views here.
 
+
 class ListCreateApplicationView(ListCreateAPIView):
+    """
+    get: If user is logged in as pet shelter, it will return a list of applications sent to the pet that user owns.
+    If user is logged in as pet seeker, it will return all the applications that pet seeker sent.
+    User are required to be logged in.
+    You can provide query parameters to filter applications by status and sort by creation time or last update time.
+    If no query parameter is provided it will not apply any filter.
+
+    post: Creates application based on the given details about the application.
+    User can only create application for a pet listing that is "available".
+    User is required to be logged in as a pet seeker.
+    """
     permission_classes = [IsPetSeekerOrReadOnly, IsAuthenticated]
     serializer_class = CreateApplicationSerializer
+
+    @swagger_auto_schema(query_serializer=FilterApplicationSerializer)
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
         result = Application.objects.all()
@@ -43,6 +59,27 @@ class ListCreateApplicationView(ListCreateAPIView):
 
 
 class RetrieveUpdateApplicationView(RetrieveUpdateAPIView):
+    """
+    get: Retrieves application with the given ID. User is required to be logged in either as pet seeker or pet shelter.
+    Pet seeker can only retrieve application that they sent and pet shelter can only retrieve application that they received.
+
+    put: Updates application with the given ID. User is required to be logged in either as pet seeker or pet shelter.
+    - Shelter can only update the status of an application from pending to accepted or denied.
+    - Pet seeker can only update the status of an application from pending or accepted to withdrawn.
+
+    Pet seeker can only update application that they sent and pet shelter can only update application that they received.
+
+    Note\: there are no difference between put and patch because we only have 1 required field.
+
+    patch: Do partial update on the application with the given ID.
+    User is required to be logged in either as pet seeker or pet shelter.
+    - Shelter can only update the status of an application from pending to accepted or denied.
+    - Pet seeker can only update the status of an application from pending or accepted to withdrawn.
+
+    Pet seeker can only update application that they sent and pet shelter can only update application that they received.
+
+    Note\: there are no difference between put and patch because we only have 1 required field.
+    """
     serializer_class = UpdateApplicationSerializer
     permission_classes = [IsAuthenticated]
 
