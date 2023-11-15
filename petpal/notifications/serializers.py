@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from petpal.accounts.models import PetSeeker, PetShelter
-from petpal.applications.models import Application
-from petpal.pets.models import Pet
+from accounts.models import PetSeeker, PetShelter
+from applications.models import Application
+from pets.models import Pet
 from .models import Notification
 from tokenize import Comment
 
