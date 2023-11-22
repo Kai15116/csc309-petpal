@@ -18,3 +18,5 @@ pip3 install -r petpal/requirements.txt
 cd petpal || exit
 python3 manage.py makemigrations
 python3 manage.py migrate
+python manage.py loaddata data.json
+
