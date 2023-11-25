@@ -1,0 +1,16 @@
+.footer {
+  background-color: #96ceea;
+  text-align: center;
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer p {
+  margin: 0; /* Remove default margin for the paragraph element */
+  color: white;
+}
