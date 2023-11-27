@@ -1,13 +1,16 @@
 import React from 'react';
+import shelterPortrait from "../assets/example_images/shelter_portrait.jpg"
+import '../styles/details_and_adoption.css'; 
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-const Shelter = ({ name, profileLink, stars, reviewCount, joinDate, bannerImage }) => {
+const ShelterCard = ({ name, profileLink, stars, reviewCount, joinDate }) => {
   return (
-    <div className="col-lg-6">
+    <div className="col-lg-6" style={{ width: '500px' }}>
       <div className="card text-center" id="profile-card">
         <div className="mb-4 banner">
           <img
             className="mt-3 mx-auto rounded-circle border text-center d-flex flex-column justify-content-center"
-            src={bannerImage}
+            src={shelterPortrait}
             alt="Shelter Portrait"
             style={{ width: '80px', height: '80px', transform: 'translate(0, 50%)' }}
           />
@@ -39,4 +42,4 @@ const Shelter = ({ name, profileLink, stars, reviewCount, joinDate, bannerImage 
   );
 };
 
-export default Shelter;
+export default ShelterCard;
