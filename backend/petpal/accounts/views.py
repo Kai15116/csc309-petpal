@@ -56,6 +56,7 @@ class CustomizedTokenObtainPairView(TokenObtainPairView):
             username = request.data['username']
             user=get_object_or_404(User, username=username)
             response.data['user_id'] = user.id
+            response.data['user_type'] = "seeker" if User.is_pet_seeker(user) else "shelter"
         return response
     
 class PetShelterProfilesListCreate(ListCreateAPIView):
