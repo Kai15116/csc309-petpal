@@ -49,6 +49,14 @@ class CustomizedTokenObtainPairView(TokenObtainPairView):
     A JWT corresponding to the logged-in user would be returned if authentication succeeds.
     """
     serializer_class = CustomizedTokenObtainSerializer
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        if response.status_code == 200:
+            username = request.data['username']
+            user=get_object_or_404(User, username=username)
+            response.data['user_id'] = user.id
+        return response
     
 class PetShelterProfilesListCreate(ListCreateAPIView):
     """

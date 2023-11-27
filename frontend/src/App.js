@@ -4,9 +4,11 @@ import Landing from './pages/Landing';
 import Login from './pages/Login';
 import PetDetails from './pages/PetDetails';
 import SignUp from './pages/SignUp';
+import { userContext, useUserContext } from './context/userContext';
 
 const App = () => {
   return (
+    <userContext.Provider value={useUserContext()}>
     <Router>
       <div>
         {/* Your common layout or navigation goes here */}
@@ -19,8 +21,10 @@ const App = () => {
         </Routes>
       </div>
     </Router>
+    </userContext.Provider>
   );
 };
 
 export default App;
+
 
