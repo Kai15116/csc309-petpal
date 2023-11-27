@@ -4,6 +4,8 @@ import Landing from './pages/Landing';
 import Login from './pages/Login';
 import PetDetails from './pages/PetDetails';
 import SignUp from './pages/SignUp';
+import Adoption from './pages/Adoption';
+import PetCreationUpdate from './pages/PetCreationUpdate';
 
 const App = () => {
   return (
@@ -15,6 +17,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/details" element={<PetDetails />} />
+          <Route path="/adoption" element={<Adoption />} />
+          <Route path="/createUpdate" element={<PetCreationUpdate />} />
           {/* Add more routes for additional pages */}
         </Routes>
       </div>

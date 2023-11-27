@@ -8,9 +8,10 @@ import image2 from "../assets/images/image2.jpg"
 import image3 from "../assets/images/image3.jpg"
 import ShelterCard from '../components/ShelterCard';
 import { Carousel } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-const PetDetails = () => {
+export default function PetDetails(props) {
   return (
     <div className="wrapper">
       <LandingHeader />
@@ -103,7 +104,9 @@ const PetDetails = () => {
                       <li>Lalo can't wait to find his forever home, where he'll continue to be the warrior with the heart of gold!</li>
                     </ul>
                   </div>
+                  <Link to="/adoption" role="button">
                     <a class="btn btn-primary btn-lg apply-button" href="adoption.html" role="button">Apply For Adoption</a>
+                  </Link>
                   </div>
                 </div>
             </div>
@@ -113,4 +116,3 @@ const PetDetails = () => {
   );
 };
 
-export default PetDetails;
