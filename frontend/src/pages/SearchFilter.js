@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState,  useEffect } from "react";
 import LandingHeader from "../components/LandingHeader";
 import Footer from "../components/Footer";
 import Button from 'react-bootstrap/Button';
@@ -6,14 +6,41 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Form, FloatingLabel, FormGroup, FormControl, FormLabel, Alert} from "react-bootstrap";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import PetCard from "../components/PetCard";
-
+import { useNavigate } from "react-router-dom";
 
 function SearchFilter() {
     // TODO: Change this to actual cards, with paginations
-    const pets = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11]
+    const [pets, setPets] = useState([]);
+    // const pets = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11]
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const navigate = useNavigate();
+
+    useEffect(function () {
+        async function fetchPets() {
+            try { 
+                const response = await fetch(`http://localhost:8000/pets`, {
+                method: 'GET',
+            });
+            
+            if (response.status >= 200 && response.status < 300) {
+                const data = await response.json();
+
+                setPets([...data])
+                console.log(data)
+               
+            } else {
+                console.log(response.status)
+
+            }} catch (e) {
+                console.log(e);
+                navigate('/');
+            }
+        }
+        fetchPets();
+
+    }, [])
 
 
     return (
@@ -25,12 +52,12 @@ function SearchFilter() {
                 </Alert>
                 <div style={{display: "flex", justifyContent: "right", paddingRight: "3rem"}}>
                 <Button variant="outline-primary" onClick={handleShow} style={{fontWeight: "500"}}>
-                    Show Filters<i class="bi bi-sort-down"></i>
+                    Show Filters<i className="bi bi-sort-down"></i>
                 </Button>
 
                 </div>
                 <div style={{display: "flex", justifyContent: "space-evenly", flexWrap: "wrap", alignItems: "center"}}>
-                    {pets.map((pet, index) => <PetCard></PetCard>)}
+                    {pets.map((pet, index) => <PetCard key={index} {...pet}></PetCard>)}
                 </div>
 
                 <Offcanvas show={show} onHide={handleClose} >

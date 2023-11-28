@@ -86,7 +86,7 @@ const SignUp = () => {
           </div>
           
           <h1 className="text-center" style={{fontFamily: "Georgia", color: "rgb(111, 70, 182)", paddingBottom: "30px" }}>
-            {userType? (userType==="seeker"? "Seeker":"Shelter"):"User"} Signup {userType==="shelter"?<i class="bi bi-house-check-fill"></i>:<i class="bi bi-person-circle"></i>}
+            {userType? (userType==="seeker"? "Seeker":"Shelter"):"User"} Signup {userType==="shelter"?<i className="bi bi-house-check-fill"></i>:<i className="bi bi-person-circle"></i>}
             </h1>
           
           <Form.Group className="mb-3">

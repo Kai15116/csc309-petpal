@@ -90,7 +90,7 @@ const Login = () => {
   
           </div>
           
-          <h1 className="text-center" style={{fontFamily: "Georgia", color: "rgb(111, 113, 182)", paddingBottom: "40px" }}>User Login<i class="bi bi-person-circle"></i></h1>
+          <h1 className="text-center" style={{fontFamily: "Georgia", color: "rgb(111, 113, 182)", paddingBottom: "40px" }}>User Login<i className="bi bi-person-circle"></i></h1>
           
           <Form.Group className="mb-3">
             <FloatingLabel controlId="floatingInput" label="Username">

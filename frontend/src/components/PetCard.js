@@ -1,29 +1,30 @@
-import { Card, ListGroup} from "react-bootstrap";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Card, ListGroup, Button} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 
 function PetCard(props) {
-    const {} = props;
+    const {name, id, picture_1, breed, age, weight, status } = props;
+    const navigate = useNavigate();
     return (
-        <Card style={{ width: '18rem', margin: "0.5rem" }}>
-        <Card.Img variant="top" src={"#"} />
+        <Card style={{ width: '18rem', margin: "0.5rem"}} className="text-center">
+        <Card.Img variant="top" src={picture_1} style={{height: "12rem", objectFit: "cover"}}/>
         <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
+            <Card.Title>{name}</Card.Title>
+            {/* <Card.Text>
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
-            </Card.Text>
+            </Card.Text> */}
         </Card.Body>
         <ListGroup className="list-group-flush">
-            <ListGroup.Item>Cras justo odio</ListGroup.Item>
-            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-            <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+            <ListGroup.Item>Breed: {breed}</ListGroup.Item>
+            <ListGroup.Item>Age: {age}</ListGroup.Item>
+            <ListGroup.Item>Size: {weight}</ListGroup.Item>
         </ListGroup>
         <Card.Body>
-            <Card.Link href="/details" variant="primary">Card Link</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link>
+            <Button onClick={() => navigate(`/details/${id}`)} variant="outline-primary">Learn More</Button>
+            
         </Card.Body>
+        <Card.Footer className="text-muted">Status: {status}</Card.Footer>
         </Card>
     )
 }
