@@ -4,6 +4,10 @@ import Landing from './pages/Landing';
 import Login from './pages/Login';
 import PetDetails from './pages/PetDetails';
 import SignUp from './pages/SignUp';
+import { userContext, useUserContext } from './context/userContext';
+import SeekerProfile from './pages/SeekerProfile';
+import ShelterProfile from './pages/ShelterProfile';
+import SearchFilter from './pages/SearchFilter';
 import Adoption from './pages/Adoption';
 import PetCreationUpdate from './pages/PetCreationUpdate';
 
@@ -17,6 +21,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/details" element={<PetDetails />} />
+          <Route path="/details:petId" element={<PetDetails />} />
           <Route path="/adoption" element={<Adoption />} />
           <Route path="/createUpdate" element={<PetCreationUpdate />} />
           {/* Add more routes for additional pages */}

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../styles/headerStyles.css'; 
 import logoImage from '../assets/images/logo-1.png'; 
 
+
 const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-white shadow-sm">
@@ -30,7 +31,8 @@ const Header = () => {
                 className=""
                 role="search"
                 style={{ width: '400px', minWidth: '35%', maxWidth: '90%' }}
-                action="search-filter-page.html"
+                action="/searchpage"
+                
               >
                 <div className="input-group">
                   <input

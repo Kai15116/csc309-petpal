@@ -5,3 +5,5 @@ Pillow
 pygraphviz
 drf-yasg
 django-extensions
+django
+django-cors-headers
