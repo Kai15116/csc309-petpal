@@ -31,7 +31,8 @@ function SeekerProfile() {
                 setUserInfo({...data})
                 // setAllowAccess(true);
             }} catch (e) {
-                console.log(e)
+                console.log(e);
+                navigate('/');
             }
             
             

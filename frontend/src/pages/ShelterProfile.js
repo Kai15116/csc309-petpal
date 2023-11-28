@@ -17,7 +17,7 @@ function ShelterProfile() {
                     method: 'GET'
                 }
             );
-            if (response.status === 401) {
+            if (response.status >= 400) {
                 navigate('/');
                 
                 // setAllowAccess(false);
@@ -28,6 +28,7 @@ function ShelterProfile() {
                 // setAllowAccess(true);
             }} catch (e) {
                 console.log(e)
+                navigate('/');
             }
             
             
