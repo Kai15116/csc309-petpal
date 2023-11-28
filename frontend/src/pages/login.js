@@ -16,7 +16,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [formErrors, setFormErrors] = useState({});
     // const [accessToken, setAccessToken] = useState("");
-    const {setUser} = useContext(userContext);
+    const {setContextUser} = useContext(userContext);
     const navigate = useNavigate();
   
     const resetFields = () => {
@@ -33,10 +33,11 @@ const Login = () => {
     }
   
     const handleSubmit = async (e) => {
-      setFormErrors("");
+      setFormErrors({});
       e.preventDefault();
-  
-      const response = await fetch("http://localhost:8000/accounts/token/", {
+
+    try {
+        const response = await fetch("http://localhost:8000/accounts/token/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,23 +51,31 @@ const Login = () => {
         return 
       } else if (response.status === 400) {
   
-          setFormErrors({...data})
+          setFormErrors({...data});
           console.log(formErrors);
-          resetFields()
-        
+          resetFields();
         return
+      } else if (response.status === 200) {
+          const user = {
+            accessToken: data.access,
+            refreshToken: data.refresh,
+            contextUserId: data.user_id,
+            contextUserType: data.user_type,
+          }
+          console.log(user);
+          setContextUser(user);
+          navigate(`/${user.contextUserType}profile/${user.contextUserId}`);
+      } else {
+        alert(response.status)
       }
-      const user = {
-        accessToken: data.access,
-        refreshToken: data.refresh,
-        user_id: data.user_id,
-        user_type: data.user_type,
-      }
-      console.log(user);
-      setUser(user);
       
-      navigate("/");
-    }
+
+      } catch(error) {
+        console.log(error)
+      }
+  
+      
+    } 
   
     return (
       <div style={{background: `url(${bgLogin})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition:"bottom", minHeight: "100vh"}}>
@@ -83,19 +92,6 @@ const Login = () => {
           
           <h1 className="text-center" style={{fontFamily: "Georgia", color: "rgb(111, 113, 182)", paddingBottom: "40px" }}>User Login<i class="bi bi-person-circle"></i></h1>
           
-          {/* <Form.Group>
-            <FloatingLabel label="account type">
-            <Form.Select as="select">
-              <option value=''>Select account type</option>
-              <option value='seeker'>PetSeeker</option>
-              <option value='shelter'>PetShelter</option>
-            </Form.Select>
-  
-            </FloatingLabel>
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid city.
-            </Form.Control.Feedback>
-          </Form.Group> */}
           <Form.Group className="mb-3">
             <FloatingLabel controlId="floatingInput" label="Username">
               <Form.Control type="text" placeholder="username" isInvalid={formErrors?.username}

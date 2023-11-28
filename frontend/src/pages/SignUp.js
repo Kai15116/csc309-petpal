@@ -1,14 +1,10 @@
 
 import LandingHeader from '../components/LandingHeader';
 import Footer from '../components/Footer';
-import React, { useState, useContext } from 'react';
-import { userContext } from '../context/userContext';
+import React, { useState } from 'react';
 import { FloatingLabel, Card, Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import bgLogin from '../assets/images/login-signup-images/bglogin.jpg';
-
-
-// TODO: make sign up work. 
+import { Link, useNavigate } from 'react-router-dom';
+import bgSignup from '../assets/images/pets-image-2.jpg';
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -16,8 +12,10 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [userType, setUserType] = useState("");
   const [formErrors, setFormErrors] = useState({});
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   // const [accessToken, setAccessToken] = useState("");
-  const {setUser} = useContext(userContext);
+  const navigate = useNavigate();
 
   const updateUsername = (event) => {
     setUsername(event.target.value)
@@ -36,19 +34,18 @@ const SignUp = () => {
   }
 
   const handleSubmit = async (e) => {
-    setFormErrors({});
     e.preventDefault();
     // Sign up requires user type
     if (userType !== "seeker" && userType !== "shelter") {
       setFormErrors({userType: ["This field may not be blank."]});
       
     } else {
-        const response = await fetch("http://localhost:8000/accounts/shelter/", {
+        const response = await fetch(`http://localhost:8000/accounts/${userType}/`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({username, password, email})
+            body: JSON.stringify({username, password, email, phone_number: phone, address})
           });
           
           const data = await response.json();
@@ -60,52 +57,48 @@ const SignUp = () => {
               setFormErrors({...data})
               console.log(formErrors);
             return
+          } else if (response.status >= 200 && response.status <300) {
+              console.log(data)
+              navigate('/login')
+          } else {
+            alert(response.status)
           }
-          const user = {
-            accessToken: data.access,
-            refreshToken: data.refresh,
-            user_id: data.user_id,
-          }
-          console.log(user);
-          
-          setUser(user);
 
     }
-
-    
   }
 
 
   return (
-    <div style={{background: `url(${bgLogin})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition:"bottom", minHeight: "100vh"}}>
+    <div style={{background: `url(${bgSignup})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition:"center", minHeight: "100vh", paddingBottom: "3rem"}}>
       <LandingHeader />
-      <div>
-        <h2>Sign Up Page</h2>
+      <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+        
         <Card className="border-4 border-dark-subtle border-start-0 rounded-end shadow" 
-          style={{minWidth: "375px", minHeight: "500px", marginTop: "2rem", width: "25%",backgroundColor: 'rgba(255, 240, 255, 0.6)', backdropFilter:"blur(10px)"}}>
+          style={{minWidth: "375px", minHeight: "500px", marginTop: "2rem", width: "25%",backgroundColor: 'rgba(255, 255, 255, 0.5)', backdropFilter:"blur(10px)"}}>
           <Form className="bg-tertiary" onSubmit={handleSubmit} style={{padding: "20px"}}>
           <div>
             {/* <img src={titleLogo} width={200} height={50}></img> */}
   
           </div>
           
-          <h1 className="text-center" style={{fontFamily: "Georgia", color: "rgb(111, 113, 182)", paddingBottom: "40px" }}>User Login<i class="bi bi-person-circle"></i></h1>
+          <h1 className="text-center" style={{fontFamily: "Georgia", color: "rgb(111, 70, 182)", paddingBottom: "30px" }}>{userType? (userType==="seeker"? "Seeker":"Shelter"):"User"} Signup<i class="bi bi-person-circle"></i></h1>
           
-          <Form.Group>
+          <Form.Group className="mb-3">
             <FloatingLabel label="account type">
-            <Form.Select as="select">
+            <Form.Select as="select" isInvalid={formErrors?.userType} onChange={updateUserType}>
               <option value=''>Select account type</option>
               <option value='seeker'>PetSeeker</option>
               <option value='shelter'>PetShelter</option>
             </Form.Select>
+            <Form.Control.Feedback type="invalid">
+              {formErrors?.userType}
+            </Form.Control.Feedback>
   
             </FloatingLabel>
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid city.
-            </Form.Control.Feedback>
+            
           </Form.Group>
           <Form.Group className="mb-3">
-            <FloatingLabel controlId="floatingInput" label="Username">
+            <FloatingLabel controlId="floatingUser" label="Username">
               <Form.Control type="text" placeholder="username" isInvalid={formErrors?.username}
               onChange={(e) => updateUsername(e)} value={username}/>
               <Form.Control.Feedback type="invalid">
@@ -123,40 +116,46 @@ const SignUp = () => {
           </FloatingLabel>
             
           </Form.Group>
+          <Form.Group className="mb-3">
+            <FloatingLabel controlId="floatingEmail" label="Email">
+            <Form.Control type="text" placeholder="Email" isInvalid={formErrors?.email}
+            onChange={(e) => updateEmail(e)} value={email}/>
+            <Form.Control.Feedback type="invalid">
+              {formErrors?.email}
+            </Form.Control.Feedback>
+          </FloatingLabel>
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <FloatingLabel controlId="floatingPhone" label="Phone">
+            <Form.Control type="text" placeholder="Phone" maxLength={10} minLength={10} isInvalid={formErrors?.phone}
+            onChange={(e) => setPhone(e.target.value)} value={phone}/>
+            <Form.Control.Feedback type="invalid">
+              {formErrors?.phone}
+            </Form.Control.Feedback>
+          </FloatingLabel>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <FloatingLabel controlId="floatingAddress" label="Address">
+            <Form.Control type="text" placeholder="Address" isInvalid={formErrors?.address}
+            onChange={(e) => setAddress(e.target.value)} value={address}/>
+            <Form.Control.Feedback type="invalid">
+              {formErrors?.address}
+            </Form.Control.Feedback>
+          </FloatingLabel>
+          </Form.Group>
           <div style={{display: "flex", justifyContent: "center"}}>
-          <Button type="submit" className="center"> Sign in </Button>
+          <Button type="submit" className="center"> Sign up </Button>
   
           </div>
           
           <hr></hr>
-          <p><strong>Don't have an account?</strong> <Link to="/signup" style={{fontWeight: "bold"}}>Register Here</Link> </p>
+          <p><strong>Have an account?</strong> <Link to="/login" style={{fontWeight: "bold"}}>Login</Link> <Link to="/" style={{fontWeight: "bold"}}>cancel</Link></p>
   
-          <Link to="/" style={{fontWeight: "bold"}}>Back to Home Page</Link>
+          
           
       </Form></Card>
-        <form>
-        <label htmlFor="usertype">usertype</label>
-        <select id="usertype" onChange={(e) => updateUserType(e)}  value={userType}>
-        <option value=''>Select account type</option>
-        <option value='seeker'>PetSeeker</option>
-        <option value='shelter'>PetShelter</option>
-        </select>
-        {formErrors&&formErrors?.userType&&<p>{formErrors.userType[0]}</p>}
-        <br></br>
-        <label htmlFor="username">username</label>
-        <input id="username" type="text" onChange={(e) => updateUsername(e)} value={username}></input>
-        {formErrors&&formErrors?.username&&<p>{formErrors.username[0]}</p>}
-        <br></br>
-        <label htmlFor="password">password</label>
-        <input id="password" type="password" onChange={(e) => updatePassword(e)} value={password}></input>
-        
-        {formErrors&&formErrors?.password&&<p>{formErrors.password[0]}</p>}
-        <br></br>
-        <label htmlFor="email">email</label>
-        <input id="email" type="text" onChange={(e) => updateEmail(e)} value={email}></input>
-        {formErrors&&formErrors?.email&&<p>{formErrors.email[0]}</p>}
-        <button type="submit" onClick={handleSubmit}>Submit</button>
-        </form>
+
       </div>
       <Footer />
     </div>

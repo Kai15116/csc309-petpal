@@ -1,15 +1,18 @@
-import { useState } from "react";
 import { createContext } from "react";
+import { getSessionCookie, setSessionCookie } from "./session";
 
 export const userContext = createContext({
-    user: {},
-    setUser: () => {},
+    getContextUser: () => {},
+    setContextUser: () => {},
 });
 
 export const useUserContext = () => {
-    const [user, setUser] = useState({});
+    const getContextUser = () => getSessionCookie();
+    const setContextUser = (user) => {
+        setSessionCookie(JSON.stringify(user))
+    }
 
     return {
-        user, setUser,
+        getContextUser, setContextUser,
     };
 }
