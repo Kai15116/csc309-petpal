@@ -21,7 +21,7 @@ function PetCard(props) {
             <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
         </ListGroup>
         <Card.Body>
-            <Card.Link href="#" variant="primary">Card Link</Card.Link>
+            <Card.Link href="/details" variant="primary">Card Link</Card.Link>
             <Card.Link href="#">Another Link</Card.Link>
         </Card.Body>
         </Card>

@@ -3,10 +3,13 @@ import LandingHeader from '../components/LandingHeader';
 import Footer from '../components/Footer';
 import React, { useState } from 'react';
 import { FloatingLabel, Card, Form, Button } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import bgSignup from '../assets/images/pets-image-2.jpg';
+import SignupModal from '../components/SignupModal';
 
 const SignUp = () => {
+  const [showModal, setShowModal] = useState(false);
+    
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -15,7 +18,8 @@ const SignUp = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   // const [accessToken, setAccessToken] = useState("");
-  const navigate = useNavigate();
+
+  const handleCloseModal = () => setShowModal(false);
 
   const updateUsername = (event) => {
     setUsername(event.target.value)
@@ -59,7 +63,7 @@ const SignUp = () => {
             return
           } else if (response.status >= 200 && response.status <300) {
               console.log(data)
-              navigate('/login')
+              setShowModal(true);
           } else {
             alert(response.status)
           }
@@ -157,9 +161,11 @@ const SignUp = () => {
           
           
       </Form></Card>
+      <SignupModal showModal={showModal} handleCloseModal={handleCloseModal}></SignupModal>
 
       </div>
       <Footer />
+      
     </div>
   );
 };
