@@ -1,8 +1,6 @@
-import { useState } from "react";
-import { Container } from "react-bootstrap";
 import Pagination from "react-bootstrap/Pagination";
 
-// Note: I created this in CSC301
+// Note: we created this in CSC301 project. so the logic is same.
 function getPaginationItems(pagesCount, page) {
   // When the Page has less than or equal to 8 pages.
   if (pagesCount <= 8) {
