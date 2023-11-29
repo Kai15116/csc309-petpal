@@ -3,14 +3,17 @@ import LandingHeader from "../components/LandingHeader";
 import Footer from "../components/Footer";
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { Form, FloatingLabel, FormGroup, FormControl, FormLabel, Alert} from "react-bootstrap";
+import { Form, FloatingLabel, FormGroup, FormControl, FormLabel, Alert, Col, Row, Pagination} from "react-bootstrap";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import PetCard from "../components/PetCard";
 import { useNavigate } from "react-router-dom";
+import CPagination from "../components/CPagination";
 
 function SearchFilter() {
     // TODO: Change this to actual cards, with paginations
-    const [pets, setPets] = useState([]);
+    const [currentActivePage, setcurrentActivePage] = useState(1);
+    const itemsPerPage = 5;
+    const [petsInfo, setPetsInfo] = useState(null);
     // const pets = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11]
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -20,14 +23,14 @@ function SearchFilter() {
     useEffect(function () {
         async function fetchPets() {
             try { 
-                const response = await fetch(`http://localhost:8000/pets`, {
+                const response = await fetch(`http://localhost:8000/pets?page=${currentActivePage}&size=${itemsPerPage}`, {
                 method: 'GET',
             });
             
             if (response.status >= 200 && response.status < 300) {
                 const data = await response.json();
-
-                setPets([...data])
+                setPetsInfo({...data})
+                
                 console.log(data)
                
             } else {
@@ -40,7 +43,9 @@ function SearchFilter() {
         }
         fetchPets();
 
-    }, [])
+    }, [currentActivePage]);
+
+    const pagesCount = Math.ceil(petsInfo?.count / itemsPerPage);
 
 
     return (
@@ -56,9 +61,12 @@ function SearchFilter() {
                 </Button>
 
                 </div>
-                <div style={{display: "flex", justifyContent: "space-evenly", flexWrap: "wrap", alignItems: "center"}}>
-                    {pets.map((pet, index) => <PetCard key={index} {...pet}></PetCard>)}
+                <div style={{width: "90%", margin: "0 auto", minHeight: "60vh"}}>
+                <Row className="" xs={1} md={2} lg={3} xl={4} >
+                    {petsInfo?.results?.map((pet, index) => <Col  key={index}><PetCard {...pet}></PetCard></Col>)}
+                </Row>
                 </div>
+                
 
                 <Offcanvas show={show} onHide={handleClose} >
                     <Offcanvas.Header closeButton>
@@ -176,10 +184,12 @@ function SearchFilter() {
                     </Offcanvas.Body>
                 </Offcanvas>
 
-                <div className="text-center border-danger border">Pagination right here</div>
+                
             </div>
+            <CPagination setcurrentActivePage={setcurrentActivePage} currentActivePage={currentActivePage} pagesCount={pagesCount}></CPagination>
             <Footer />
       </div>
+   
     )
 }
 
