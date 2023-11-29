@@ -21,9 +21,9 @@ function to_url_params(object) {
         }
         else {
             let value = object[key];
-            if (value !== null) {
-                result.push(`${key}=${value}`);
-            }
+            // if (value !== null) {
+            result.push(`${key}=${value}`);
+            // }
         }
     }
     return result.join('&');
@@ -36,7 +36,7 @@ function SearchFilter() {
     const [petsInfo, setPetsInfo] = useState(null);
     // searchparam initial state
     const [sortOption, setSortOption] = useState("");
-    const [sex, setSex] = useState(null);
+    
 
 
     // newly added (Not working)
@@ -44,11 +44,12 @@ function SearchFilter() {
     const query = useMemo(() => ({
         page : parseInt(searchParams.get("page") ?? 1),
         size: parseInt(searchParams.get("size") ?? 5),
-        // age__gte : searchParams.get("age__gte" ?? 0),
-        // age__lte : searchParams.get("age__lte" ?? 9999),
+        age__gte : parseInt(searchParams.get("age__gte") ?? 0),
+        
+        age__lte : parseInt(searchParams.get("age__lte") ?? 999),
         // weight__gte : searchParams.get("weight__gte" ?? 0),
         // weight__lte : searchParams.get("weight__lte" ?? 9999),
-        sex : searchParams.get("sex") ?? null,
+        // sex : searchParams.get("sex") ?? null,
         order_by : searchParams.get("order_by") ?? "name",
     }), [searchParams]);
     // (Not working)
@@ -178,7 +179,7 @@ function SearchFilter() {
                         </FormGroup>
                         <FormGroup className="mb-3">
                             <FloatingLabel label="Gender:">
-                            <Form.Select className="border-secondary" onChange={(e) => setSex(e.target.value)}>
+                            <Form.Select className="border-secondary">
                                     <option value={null}>Select Both</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
