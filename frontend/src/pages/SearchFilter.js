@@ -203,7 +203,7 @@ function SearchFilter() {
                     
                     <Form onSubmit={(e) => {
                         e.preventDefault();
-                        setSearchParams({...query, order_by: sortOption});
+                        setSearchParams({...query, order_by: sortOption, page: 1});
                         setShow(false);
                         }}>
                         <FormGroup className="mb-3 mt-4">
