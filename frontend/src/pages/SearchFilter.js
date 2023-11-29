@@ -15,13 +15,15 @@ function to_url_params(object) {
     var result = [];
     for (const key in object) {
         if (Array.isArray(object[key])) {
-            for (const value of object[key]) {
+            for (const value of object[key]) {      
                 result.push(`${key}[]=${value}`);
             }
         }
         else {
             let value = object[key];
-            result.push(`${key}=${value}`);
+            if (value !== null) {
+                result.push(`${key}=${value}`);
+            }
         }
     }
     return result.join('&');
@@ -32,7 +34,10 @@ function SearchFilter() {
     // const [currentActivePage, setcurrentActivePage] = useState(1);
     const itemsPerPage = 5;
     const [petsInfo, setPetsInfo] = useState(null);
+    // searchparam initial state
     const [sortOption, setSortOption] = useState("");
+    const [sex, setSex] = useState(null);
+
 
     // newly added (Not working)
     const [ searchParams, setSearchParams ] = useSearchParams();
@@ -43,7 +48,7 @@ function SearchFilter() {
         // age__lte : searchParams.get("age__lte" ?? 9999),
         // weight__gte : searchParams.get("weight__gte" ?? 0),
         // weight__lte : searchParams.get("weight__lte" ?? 9999),
-        // sex : searchParams.getAll("sex") ?? ["male", "female"],
+        sex : searchParams.get("sex") ?? null,
         order_by : searchParams.get("order_by") ?? "name",
     }), [searchParams]);
     // (Not working)
@@ -120,7 +125,7 @@ function SearchFilter() {
                     <hr></hr>
                     <Offcanvas.Body>
                     <Form>
-                        <FormGroup className="mb-3">
+                        {/* <FormGroup className="mb-3">
                             <FloatingLabel label="Category">
                             <Form.Select className="border-secondary">
 
@@ -132,9 +137,9 @@ function SearchFilter() {
                                
                             </FloatingLabel>
                                 
-                        </FormGroup>
+                        </FormGroup> */}
 
-                        <FormGroup className="mb-3">
+                        {/* <FormGroup className="mb-3">
                             <FloatingLabel label="Breed">
                             <Form.Select className="border-secondary">
 
@@ -145,7 +150,7 @@ function SearchFilter() {
                                 </Form.Select>
                             </FloatingLabel>
                                 
-                        </FormGroup>
+                        </FormGroup> */}
 
                         <FormGroup className="mb-3">
                             <FloatingLabel label="Age">
@@ -173,8 +178,8 @@ function SearchFilter() {
                         </FormGroup>
                         <FormGroup className="mb-3">
                             <FloatingLabel label="Gender:">
-                            <Form.Select className="border-secondary">
-                                    <option>Select Both</option>
+                            <Form.Select className="border-secondary" onChange={(e) => setSex(e.target.value)}>
+                                    <option value={null}>Select Both</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </Form.Select>
