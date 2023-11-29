@@ -20,8 +20,8 @@ const App = () => {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/details" element={<PetDetails />} />
-          <Route path="/details:petId" element={<PetDetails />} />
+          {/* <Route path="/details" element={<PetDetails />} /> */}
+          <Route path="/details/:petId" element={<PetDetails />} />
           <Route path="/adoption" element={<Adoption />} />
           <Route path="/createUpdate" element={<PetCreationUpdate />} />
           {/* Add more routes for additional pages */}

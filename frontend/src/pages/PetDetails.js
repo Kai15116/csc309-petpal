@@ -10,8 +10,39 @@ import ShelterCard from '../components/ShelterCard';
 import { Carousel } from 'react-bootstrap';
 import { Link } from 'react-router-dom'; 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import { useNavigate, useParams } from 'react-router-dom';
+import {useEffect, useState} from 'react';
 
-export default function PetDetails(props) {
+const PetDetails = () => {
+  const navigate = useNavigate();
+  const {petId} = useParams();
+  const [petInfo, setPetInfo] = useState(null);
+
+    useEffect(function() {
+        async function fetchUserInfo() {
+            try { 
+                const response = await fetch(`http://localhost:8000/pets/${petId}`, {
+                method: 'GET',
+            });
+            if (response.status === 403) {
+                navigate('/');
+
+                // setAllowAccess(false);
+            } else if (response.status >= 200 && response.status < 300) {
+                const data = await response.json();
+
+                setPetInfo({...data})
+                console.log(data)
+                // setAllowAccess(true);
+            }} catch (e) {
+                console.log(e);
+                navigate('/');
+            }
+        }
+        fetchUserInfo();
+
+    }, [ petId ])
+
   return (
     <div className="wrapper">
       <LandingHeader />
@@ -116,3 +147,4 @@ export default function PetDetails(props) {
   );
 };
 
+export default PetDetails;
