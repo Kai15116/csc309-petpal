@@ -17,7 +17,7 @@ class PetSearchSerializer(ModelSerializer):
     ORDER_BY_CHOICES = [
         'name', '-name',
         'age', '-age',
-        'weight', '-weight'
+        'weight', '-weight',
         'adoption_fee', '-adoption_fee'
     ]
     order_by = ChoiceField(choices=ORDER_BY_CHOICES, required=False,

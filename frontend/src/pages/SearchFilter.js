@@ -21,8 +21,9 @@ function to_url_params(object) {
         }
         else {
             let value = object[key];
-            // if (value !== null) {
+            if (value !== "") {
             result.push(`${key}=${value}`);
+            }
             // }
         }
     }
@@ -30,12 +31,14 @@ function to_url_params(object) {
 }
 
 function SearchFilter() {
-    // TODO: Change this to actual cards, with paginations
     // const [currentActivePage, setcurrentActivePage] = useState(1);
-    const itemsPerPage = 5;
+    // const itemsPerPage = 5;
     const [petsInfo, setPetsInfo] = useState(null);
     // searchparam initial state
     const [sortOption, setSortOption] = useState("");
+    const [filterOptions, setFilterOptions] = useState({age: "", weight: "", sex: ""});
+    
+    // const [colorFilter, setColorFilter] = useState("");
     
 
 
@@ -45,11 +48,10 @@ function SearchFilter() {
         page : parseInt(searchParams.get("page") ?? 1),
         size: parseInt(searchParams.get("size") ?? 5),
         age__gte : parseInt(searchParams.get("age__gte") ?? 0),
-        
         age__lte : parseInt(searchParams.get("age__lte") ?? 999),
-        // weight__gte : searchParams.get("weight__gte" ?? 0),
-        // weight__lte : searchParams.get("weight__lte" ?? 9999),
-        // sex : searchParams.get("sex") ?? null,
+        weight__gte : parseInt(searchParams.get("weight__gte") ?? 0),
+        weight__lte : parseInt(searchParams.get("weight__lte") ?? 999),
+        sex : searchParams.get("sex") ?? "",
         order_by : searchParams.get("order_by") ?? "name",
     }), [searchParams]);
     // (Not working)
@@ -57,6 +59,94 @@ function SearchFilter() {
     // used for pagination state management
     const setcurrentActivePage = (value) => {
         setSearchParams({...query, page : value})
+    }
+
+    const submitFilterOptions = (e) => {
+        e.preventDefault()
+        var additionalQuery = {}
+        var queryAgeMin = 0;
+        var queryAgeMax = 999;
+        var queryWeightMin = 0;
+        var queryWeightMax = 9999;
+        var querySex = "";
+        switch(filterOptions?.age) {
+            case "":
+                queryAgeMin = 0;
+                queryAgeMax = 999;
+                break;
+            case "newborn":
+                queryAgeMin = 0;
+                queryAgeMax = 2;
+                break;
+            case "young":
+                queryAgeMin = 2;
+                queryAgeMax = 5;
+                break;
+            case "adult":
+                queryAgeMin = 5;
+                queryAgeMax = 9;
+                break;
+            case "old":
+                queryAgeMin = 9;
+                queryAgeMax = 999;
+                break;
+            default:
+                break;
+        }
+        switch(filterOptions?.weight) {
+            case "":
+                queryWeightMin = 0;
+                queryWeightMax = 999;
+                break;
+            case "sm":
+                queryWeightMin = 0;
+                queryWeightMax = 20;
+                break;
+            case "md":
+                queryWeightMin = 20;
+                queryWeightMax = 50;
+                break;
+            case "lg":
+                queryWeightMin = 50;
+                queryWeightMax = 73;
+                break;
+            case "xl":
+                queryWeightMin = 73;
+                queryWeightMax = 999;
+                break;
+            default:
+                break;
+        }
+        switch(filterOptions?.sex) {
+            case "":
+                querySex="";
+                break;
+            case "female":
+                querySex="female";
+                break;
+            case "male":
+                querySex="male";
+                break;
+            default:
+                break;
+        }
+
+        additionalQuery = {age__gte: queryAgeMin, 
+            age__lte: queryAgeMax, 
+            weight__gte: queryWeightMin, 
+            weight__lte: queryWeightMax,
+            sex: querySex,
+        }
+        
+
+        // delete query.sex;
+
+        setSearchParams(
+            {...query, 
+            ...additionalQuery,
+
+            page: 1
+        })
     }
 
     // filter side Offcanvas 
@@ -80,7 +170,10 @@ function SearchFilter() {
                 
                 console.log(data)
                
-            } else {
+            } else if (response.status = 404) {
+                alert(404);
+            }
+            else {
                 console.log(response.status)
 
             }} catch (e) {
@@ -125,7 +218,7 @@ function SearchFilter() {
                     </Offcanvas.Header>
                     <hr></hr>
                     <Offcanvas.Body>
-                    <Form>
+                    <Form onSubmit={(e) => submitFilterOptions(e)}>
                         {/* <FormGroup className="mb-3">
                             <FloatingLabel label="Category">
                             <Form.Select className="border-secondary">
@@ -155,12 +248,13 @@ function SearchFilter() {
 
                         <FormGroup className="mb-3">
                             <FloatingLabel label="Age">
-                                <Form.Select className="border-secondary">
+                                <Form.Select className="border-secondary" value={filterOptions?.age} onChange={(e) => setFilterOptions({...filterOptions, age: e.target.value})}>
 
-                                <option>Select All</option>
-                                <option>1</option>
-                                <option>2</option>
-
+                                <option value="">Select All</option>
+                                <option value="newborn">Newborn(0-2 year old)</option>
+                                <option value="young">Young(2-5 years old)</option>
+                                <option value="adult">Adult(5-9 years old)</option>
+                                <option value="old">Old(9+ years old)</option>
                                 </Form.Select>
                                 
                             </FloatingLabel>
@@ -169,18 +263,20 @@ function SearchFilter() {
 
                         <FormGroup className="mb-3">
                             <FloatingLabel label="Size">
-                            <Form.Select className="border-secondary">
-                                    <option>Select All</option>
-                                    <option>1</option>
-                                    <option>2</option>
+                                <Form.Select className="border-secondary" value={filterOptions?.weight} onChange={(e) => setFilterOptions({...filterOptions, weight: e.target.value})}>
+                                    <option value="">Select All</option>
+                                    <option value="sm">Small(0-20 lbs)</option>
+                                    <option value="md">Medium(20-50 lbs)</option>
+                                    <option value="lg">Large(50-73 lbs)</option>
+                                    <option value="xl">XL(73+ lbs)</option>
                                 </Form.Select>
                             </FloatingLabel>
                                 
                         </FormGroup>
                         <FormGroup className="mb-3">
                             <FloatingLabel label="Gender:">
-                            <Form.Select className="border-secondary">
-                                    <option value={null}>Select Both</option>
+                            <Form.Select className="border-secondary" value={filterOptions?.sex} onChange={(e) => setFilterOptions({...filterOptions, sex: e.target.value})}>
+                                    <option value="">Select Both</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </Form.Select>
@@ -188,7 +284,7 @@ function SearchFilter() {
                                 
                         </FormGroup>
 
-                        <FormGroup className="mb-3">
+                        {/* <FormGroup className="mb-3">
                             <FloatingLabel label="Color">
                             <Form.Select className="border-secondary">
                                     <option>Select All</option>
@@ -197,9 +293,9 @@ function SearchFilter() {
                                 </Form.Select>
                             </FloatingLabel>
                                 
-                        </FormGroup>
+                        </FormGroup> */}
                         <FormGroup className="mb-3">
-                        <Button className="w-100 outline-primary">Apply Filter</Button>
+                        <Button className="w-100 outline-primary" type="submit">Apply Filter</Button>
 
                         </FormGroup>
                         
@@ -214,7 +310,7 @@ function SearchFilter() {
                         }}>
                         <FormGroup className="mb-3 mt-4">
                             <FloatingLabel label="Sort By">
-                            <Form.Select className="border-primary" onChange={(e) => setSortOption(e.target.value)}>
+                            <Form.Select className="border-primary" value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
 
                             <option value="">Relavence</option>
                             <option value="name">Name&#8593;(A to Z)</option>
