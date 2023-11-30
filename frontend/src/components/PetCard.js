@@ -4,7 +4,7 @@ import "../styles/petCardStyles.css";
 import PlaceholderPet from "../assets/images/placeholderpet.png"
 
 function PetCard(props) {
-    const {name, id, picture_1, breed, age, weight, status } = props;
+    const {name, id, picture_1, breed, age, weight, status } = props?.pet;
     const navigate = useNavigate();
     return (
         <Card style={{ width: '300px', marginBottom: "0.7rem"}} className="card-c">
