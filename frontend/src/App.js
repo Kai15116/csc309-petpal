@@ -8,6 +8,7 @@ import { userContext, useUserContext } from './context/userContext';
 import SeekerProfile from './pages/SeekerProfile';
 import ShelterProfile from './pages/ShelterProfile';
 import SearchFilter from './pages/SearchFilter';
+import MyPets from './pages/MyPets';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/searchpage" element={<SearchFilter/>}/>
           <Route path="/seekerprofile/:userId" element={<SeekerProfile />} />
           <Route path="/shelterprofile/:userId" element={<ShelterProfile />} />
+          <Route path="/mypets" element={<MyPets />} />
           {/* Add more routes for additional pages */}
         </Routes>
       </div>
