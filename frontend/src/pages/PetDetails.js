@@ -19,6 +19,17 @@ const PetDetails = () => {
   const navigate = useNavigate();
   const {petId} = useParams();
   const [petInfo, setPetInfo] = useState(null);
+  const [petName, setPetName] = useState('');
+  const [petSex, setPetSex] = useState('');
+  const [petBreed, setPetBreed] = useState(''); 
+  const [petAge, setPetAge] = useState(null);
+  const [petWeight, setPetWeight] = useState( null);
+  const [petFee, setPetFee] = useState(null);
+  const [petLocation, setPetLocation] = useState('');
+  const [petMedicalHistory, setPetMedicalHistory] = useState(''); 
+  const [petStatus, setPetStatus] = useState(false);
+  const [uploadedImages, setUploadedImages] = useState([noImage, noImage, noImage]);
+  const [additionalNotes, setAdditionalNotes] = useState('');
 
   useEffect(function() {
       async function fetchUserInfo() {
@@ -33,10 +44,26 @@ const PetDetails = () => {
               // setAllowAccess(false);
           } else if (response.status >= 200 && response.status < 300) {
               const data = await response.json();
-
-
               setPetInfo({...data})
               console.log(data)
+              
+              // set each value based on the data received
+              setPetName(data.name || '');
+              setPetSex(data.sex || '');
+              setPetBreed(data.breed || '');
+              setPetAge(data.age || null);
+              setPetWeight(data.weight || null);
+              setPetFee(data.adoption_fee || null);
+              setPetLocation(data.adoption_location || '');
+              setPetMedicalHistory(data.medical_history || '');
+              setPetStatus(data.status || '');
+              setUploadedImages([
+                getPetImage(data.picture_1),
+                getPetImage(data.picture_2),
+                getPetImage(data.picture_3),
+              ]);
+              setAdditionalNotes(data.notes || '');
+
               // setAllowAccess(true);
           }} catch (e) {
               console.log(e);
@@ -44,7 +71,6 @@ const PetDetails = () => {
           }
       }
       fetchUserInfo();
-
 
   }, [ petId ])
 
@@ -61,7 +87,7 @@ const PetDetails = () => {
     return petImages[key] || noImage;
   };
 
-  
+
   // helper function to format date
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
@@ -76,21 +102,21 @@ const PetDetails = () => {
       <main class="page-content">        
       <Carousel>
           <Carousel.Item>
-            <img className="d-block w-100" src={getPetImage(petInfo.picture_1)} alt="Image 1"/>
+            <img className="d-block w-100" src={uploadedImages[0]} alt="Image 1"/>
             <Carousel.Caption>
-              <h2>Meet {petInfo && petInfo.name ? petInfo.name : ''}!</h2>
+              <h2>Meet {petName}!</h2>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="d-block w-100" src={getPetImage(petInfo.picture_2)} alt="Image 2" />
+            <img className="d-block w-100" src={uploadedImages[1]} alt="Image 2" />
             <Carousel.Caption>
-              <h5>Give {petInfo && petInfo.name ? petInfo.name : ''} A Loving Home</h5>
+              <h5>Give {petName} A Loving Home</h5>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="d-block w-100" src={getPetImage(petInfo.picture_3)} alt="Image 3" />
+            <img className="d-block w-100" src={uploadedImages[2]} alt="Image 3" />
             <Carousel.Caption>
-              <h5>{petInfo && petInfo.name ? petInfo.name : ''} Is Waiting For Wonderful Parents </h5>
+              <h5>{petName} Is Waiting For Wonderful Parents </h5>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
@@ -104,39 +130,39 @@ const PetDetails = () => {
                               <tbody>
                               <tr>
                                 <th scope="row"><strong>Sex:</strong></th>
-                                <td>{petInfo.sex ? petInfo.sex : ''}</td>
+                                <td>{petSex}</td>
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Breed:</strong></th>
-                                <td>{petInfo.breed ? petInfo.breed : ''}</td>
+                                <td>{petBreed}</td>
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Age:</strong></th>
-                                <td>{petInfo.age ? `${petInfo.age} Years` : ''}</td>
+                                <td>{`${petAge} Years`}</td>
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Weight:</strong></th>
-                                <td>{petInfo.weight ? `${petInfo.weight} lbs` : ''}</td>
+                                <td>{`${petWeight} lbs`}</td>
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Adoption Fee:</strong></th>
-                                <td>{petInfo.adoption_fee ? `$${petInfo.adoption_fee}` : ''}</td>
+                                <td>{`$${petFee}`}</td>
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Posted Date:</strong></th>
-                                <td>{petInfo.last_modified ? formatDate(petInfo.last_modified) : ''}</td>
+                                <td>{formatDate(petLocation)}</td>
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Location:</strong></th>
-                                <td>{petInfo.adoption_location || ''}</td>
+                                <td>{petLocation}</td>
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Medical History:</strong></th>
-                                <td>{petInfo.medical_history || ''}</td>
+                                <td>{petMedicalHistory}</td>
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Adoption Status:</strong></th>
-                                <td>{petInfo.status || ''}</td>
+                                <td>{petStatus}</td>
                               </tr>
                               </tbody>
                           </table>
@@ -155,9 +181,9 @@ const PetDetails = () => {
                   <div class="col-lg-12" id="owner-notes">
                     <h2>Owner Notes:</h2>
                     <ul>
-                      {petInfo.notes &&
-                        petInfo.notes.split('.').map((sentence, index) => (
-                          <li key={index}>{sentence.trim()}{index < petInfo.notes.split('.').length - 1 && '.'}</li>
+                      {additionalNotes &&
+                        additionalNotes.split('.').map((sentence, index) => (
+                          <li key={index}>{sentence.trim()}{index < additionalNotes.split('.').length - 1 && '.'}</li>
                         ))}
                     </ul>
                   </div>

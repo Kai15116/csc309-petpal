@@ -23,7 +23,10 @@ const App = () => {
           {/* <Route path="/details" element={<PetDetails />} /> */}
           <Route path="/details/:petId" element={<PetDetails />} />
           <Route path="/adoption" element={<Adoption />} />
+          {/* below path is for creating */}
           <Route path="/createUpdate" element={<PetCreationUpdate />} />
+          {/* below path is for updating */}
+          <Route path="/createUpdate/:petId" element={<PetCreationUpdate />} />
           {/* Add more routes for additional pages */}
         </Routes>
       </div>

@@ -1,28 +1,95 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import LandingHeader from '../components/LandingHeader';
 import Footer from '../components/Footer';
 import '../styles/pet_creation_and_update.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import image1 from "../assets/images/image1.jpg"
+import image2 from "../assets/images/image2.jpg"
+import image3 from "../assets/images/image3.jpg"
 import noImage from '../assets/images/no_image_icon.png'; 
+import { useNavigate, useParams } from 'react-router-dom';
 
-export default function PetCreationUpdate(props) {
+const PetCreationUpdate = () => {
+  const navigate = useNavigate();
+  const { petId } = useParams();
+  const [petInfo, setPetInfo] = useState(null);
+
   // initialize with values from props for editing, or set to initial values if we are creating a pet
-  const [petName, setPetName] = useState(props.petName || '');
-  const [petType, setPetType] = useState(props.petType || '');
-  const [petSex, setPetSex] = useState(props.petSex || '');
-  const [petBreed, setPetBreed] = useState(props.petBreed || ''); 
-  const [petAge, setPetAge] = useState(props.petAge || null);
-  const [petWeight, setPetWeight] = useState(props.petWeight || null);
-  const [petFee, setPetFee] = useState(props.petFee || null);
-  const [petLocation, setPetLocation] = useState(props.petLocation || '');
-  const [petMedicalHistory, setPetMedicalHistory] = useState(props.petMedicalHistory || ''); 
-  const [uploadedImages, setUploadedImages] = useState(props.uploadedImages || [noImage, noImage, noImage]);
-  const [additionalNotes, setAdditionalNotes] = useState(props.additionalNotes || '');
-  
-  // determine if user is editing existing pet, if mode not provided it's creating by default
-  // eslint-disable-next-line no-unused-vars
-  const [editMode, setEditMode] = useState(props.editMode || false);
+  const [petName, setPetName] = useState('');
+  const [petType, setPetType] = useState('');
+  const [petSex, setPetSex] = useState('');
+  const [petBreed, setPetBreed] = useState(''); 
+  const [petAge, setPetAge] = useState(null);
+  const [petWeight, setPetWeight] = useState( null);
+  const [petFee, setPetFee] = useState(null);
+  const [petLocation, setPetLocation] = useState('');
+  const [petMedicalHistory, setPetMedicalHistory] = useState(''); 
+  const [uploadedImages, setUploadedImages] = useState([noImage, noImage, noImage]);
+  const [additionalNotes, setAdditionalNotes] = useState('');
+  const [editMode, setEditMode] = useState(false);
+
+  // helper function to get image given url that is stored in object
+  const getPetImage = (key) => {
+    // Create a dictionary for images within the function
+    const petImages = {
+      "http://localhost:8000/media/pet_images/image1.jpg": image1,
+      "http://localhost:8000/media/pet_images/image2.jpg": image2,
+      "http://localhost:8000/media/pet_images/image3.jpg": image3,
+    };
+
+    // return no image photo if image not found
+    return petImages[key] || noImage;
+  };
+
+  useEffect(function() {
+      async function fetchUserInfo() {
+          try {
+              const response = await fetch(`http://localhost:8000/pets/${petId}`, {
+              method: 'GET',
+          });
+          if (response.status === 403) {
+              navigate('/');
+
+
+              // setAllowAccess(false);
+          } else if (response.status >= 200 && response.status < 300) {
+              const data = await response.json();
+
+              setPetInfo({...data})
+              console.log(data)
+              
+              // set each value based on the data received
+              setPetName(data.name || '');
+              setPetType(data.breed || '');
+              setPetSex(data.sex || '');
+              setPetBreed(data.breed || '');
+              setPetAge(data.age || null);
+              setPetWeight(data.weight || null);
+              setPetFee(data.adoption_fee || null);
+              setPetLocation(data.adoption_location || '');
+              setPetMedicalHistory(data.medical_history || '');
+              setUploadedImages([
+                getPetImage(data.picture_1),
+                getPetImage(data.picture_2),
+                getPetImage(data.picture_3),
+              ]);
+              setAdditionalNotes(data.notes || '');
+              
+              if (petId) {
+                setEditMode(true);
+              }
+
+              // setAllowAccess(true);
+          }} catch (e) {
+              console.log(e);
+              navigate('/');
+          }
+      }
+      fetchUserInfo();
+
+
+  }, [ petId ])
 
   const handleImageSelect = (index, file) => {
     if (file) {
@@ -188,3 +255,4 @@ export default function PetCreationUpdate(props) {
   );
 };
 
+export default PetCreationUpdate;
