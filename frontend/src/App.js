@@ -9,10 +9,11 @@ import SeekerProfile from './pages/SeekerProfile';
 import ShelterProfile from './pages/ShelterProfile';
 import SearchFilter from './pages/SearchFilter';
 import MyPets from './pages/MyPets';
+import Adoption from './pages/Adoption';
+import PetCreationUpdate from './pages/PetCreationUpdate';
 
 const App = () => {
   return (
-    <userContext.Provider value={useUserContext()}>
     <Router>
       <div>
         {/* Your common layout or navigation goes here */}
@@ -25,14 +26,17 @@ const App = () => {
           <Route path="/seekerprofile/:userId" element={<SeekerProfile />} />
           <Route path="/shelterprofile/:userId" element={<ShelterProfile />} />
           <Route path="/mypets" element={<MyPets />} />
+          <Route path="/adoption" element={<Adoption />} />
+          {/* below path is for creating */}
+          <Route path="/createUpdate" element={<PetCreationUpdate />} />
+          {/* below path is for updating */}
+          <Route path="/createUpdate/:petId" element={<PetCreationUpdate />} />
           {/* Add more routes for additional pages */}
         </Routes>
       </div>
     </Router>
-    </userContext.Provider>
   );
 };
 
 export default App;
-
 
