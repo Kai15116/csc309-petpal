@@ -1,6 +1,7 @@
 import {useContext, useState, useEffect} from "react";
 import { userContext } from "../context/userContext";
 import { useParams, useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 function ShelterProfile() {
     const {getContextUser} = useContext(userContext);
     const [userInfo, setUserInfo] = useState(null);
@@ -9,6 +10,37 @@ function ShelterProfile() {
     const {accessToken, refreshToken, contextUserId, contextUserType} = getContextUser();
     // const [allowAccess, setAllowAccess] = useState(false)
     const navigate = useNavigate();
+
+    async function deleteShelter() {
+        try { 
+            const response = await fetch(`http://localhost:8000/accounts/shelter/${userId}`, {
+                method: 'DELETE',
+                headers: {
+
+                    'Authorization': `Bearer ${accessToken}`,
+                    
+                }
+            }
+        );
+        if (response.status >= 400) {
+            navigate('/');
+            
+            // setAllowAccess(false);
+        } else if (response.status >= 200 && response.status < 300) {
+            const data = await response.json();
+            setUserInfo({...data})
+            console.log(userInfo)
+            // setAllowAccess(true);
+        }} catch (e) {
+            console.log(e)
+            navigate('/');
+        }
+        
+
+        navigate('/shelters')
+        
+        
+    }
 
     useEffect(function() {
         async function fetchUserInfo() {
@@ -49,9 +81,14 @@ function ShelterProfile() {
             </div>
             <div>
                 <h1>This is from the api.</h1>
+                <h2>{userInfo?.id}</h2>
                 <h2>{userInfo?.username}</h2>
                 <h2>{userInfo?.email}</h2>
                 <h2>{userInfo?.address}</h2>
+            </div>
+            <div>
+                {/* Just testing there might be changes you have to make later. */}
+                {userInfo?.id === contextUserId && <Button onClick={deleteShelter}>Delete Shelter</Button>}
             </div>
         </div>
     )

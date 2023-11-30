@@ -237,8 +237,8 @@ function SearchFilter() {
                     <hr></hr>
                     <Offcanvas.Body>
                     <Form onSubmit={(e) => submitFilterOptions(e)}>
-                        {/* <FormGroup className="mb-3">
-                            <FloatingLabel label="Category">
+                        <FormGroup className="mb-3">
+                            <FloatingLabel label="Category:(Not supported)">
                             <Form.Select className="border-secondary">
 
                             <option>Select All</option>
@@ -249,10 +249,10 @@ function SearchFilter() {
                                
                             </FloatingLabel>
                                 
-                        </FormGroup> */}
+                        </FormGroup>
 
-                        {/* <FormGroup className="mb-3">
-                            <FloatingLabel label="Breed">
+                        <FormGroup className="mb-3">
+                            <FloatingLabel label="Breed:(Not supported)">
                             <Form.Select className="border-secondary">
 
                                 <option>Select All</option>
@@ -262,10 +262,10 @@ function SearchFilter() {
                                 </Form.Select>
                             </FloatingLabel>
                                 
-                        </FormGroup> */}
+                        </FormGroup>
 
                         <FormGroup className="mb-3">
-                            <FloatingLabel label="Age">
+                            <FloatingLabel label="Age:">
                                 <Form.Select className="border-secondary" value={filterOptions?.age} onChange={(e) => setFilterOptions({...filterOptions, age: e.target.value})}>
 
                                 <option value="">Select All</option>
@@ -280,7 +280,7 @@ function SearchFilter() {
                         </FormGroup>
 
                         <FormGroup className="mb-3">
-                            <FloatingLabel label="Size">
+                            <FloatingLabel label="Size:">
                                 <Form.Select className="border-secondary" value={filterOptions?.weight} onChange={(e) => setFilterOptions({...filterOptions, weight: e.target.value})}>
                                     <option value="">Select All</option>
                                     <option value="sm">Small(0-20 lbs)</option>
@@ -302,8 +302,8 @@ function SearchFilter() {
                                 
                         </FormGroup>
 
-                        {/* <FormGroup className="mb-3">
-                            <FloatingLabel label="Color">
+                        <FormGroup className="mb-3">
+                            <FloatingLabel label="Color:(Not supported)">
                             <Form.Select className="border-secondary">
                                     <option>Select All</option>
                                     <option>1</option>
@@ -311,7 +311,7 @@ function SearchFilter() {
                                 </Form.Select>
                             </FloatingLabel>
                                 
-                        </FormGroup> */}
+                        </FormGroup>
                         <FormGroup className="mb-3" style={{display: "flex", justifyContent: "space-between"}}>
                         <Button className=" outline-primary" type="submit" style={{width: "45%"}}>Apply Filters</Button>
                         <Button className="" onClick={(e)=>{e.preventDefault(); clearOptions();}} style={{width: "45%"}}>Clear Filters</Button>
