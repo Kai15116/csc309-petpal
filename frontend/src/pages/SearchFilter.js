@@ -10,6 +10,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import CPagination from "../components/CPagination";
 
 
+
 // Reference Lecture example: URL parser.
 function to_url_params(object) {
     var result = [];
@@ -207,7 +208,7 @@ function SearchFilter() {
                 </div>
                 <div style={{width: "90%", margin: "0 auto", minHeight: "60vh"}}>
                 <Row className="" xs={1} md={2} lg={3} xl={4} >
-                    {petsInfo?.results?.map((pet, index) => <Col  key={index}><PetCard {...pet}></PetCard></Col>)}
+                    {petsInfo?.results?.map((pet, index) => <Col  key={index}><PetCard props={{...pet}}></PetCard></Col>)}
                 </Row>
                 </div>
                 

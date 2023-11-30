@@ -1,4 +1,4 @@
-import NotFoundImage from "../assets/images/404page.jpg"
+import NotFoundImage from "../../assets/images/404page.jpg"
 import { Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 function NotFound() {
