@@ -2,17 +2,18 @@
 import React from 'react';
 import LandingHeader from '../components/LandingHeader';
 import Footer from '../components/Footer';
-import '../styles/details_and_adoption.css'; 
+import '../styles/details_and_adoption.css';
 import image1 from "../assets/images/image1.jpg"
 import image2 from "../assets/images/image2.jpg"
 import image3 from "../assets/images/image3.jpg"
 import noImage from "../assets/images/image-not-found-scaled.png"
 import ShelterCard from '../components/ShelterCard';
 import { Carousel } from 'react-bootstrap';
-import { Link } from 'react-router-dom'; 
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import {useEffect, useState} from 'react';
+
 
 const PetDetails = () => {
   const navigate = useNavigate();
@@ -21,16 +22,18 @@ const PetDetails = () => {
 
   useEffect(function() {
       async function fetchUserInfo() {
-          try { 
+          try {
               const response = await fetch(`http://localhost:8000/pets/${petId}`, {
               method: 'GET',
           });
           if (response.status === 403) {
               navigate('/');
 
+
               // setAllowAccess(false);
           } else if (response.status >= 200 && response.status < 300) {
               const data = await response.json();
+
 
               setPetInfo({...data})
               console.log(data)
@@ -41,6 +44,7 @@ const PetDetails = () => {
           }
       }
       fetchUserInfo();
+
 
   }, [ petId ])
 
@@ -65,11 +69,12 @@ const PetDetails = () => {
     return date.toLocaleDateString(undefined, options);
   };
 
+
   return (
     <div className="wrapper">
       <LandingHeader />
       <main class="page-content">        
-        <Carousel>
+      <Carousel>
           <Carousel.Item>
             <img className="d-block w-100" src={getPetImage(petInfo.picture_1)} alt="Image 1"/>
             <Carousel.Caption>
@@ -92,8 +97,8 @@ const PetDetails = () => {
       <div class="background-details">
           <div class="container" id="pet-details-container">
               <div class="pet-details">
-              <h1>{petInfo && petInfo.name ? petInfo.name : ''}</h1>
-                  <div class="d-flex pet_details_and_shelter"> 
+                  <h1>Get To Know Lalo</h1>
+                  <div class="d-flex pet_details_and_shelter">
                       <div class="col-lg-6">
                           <table class="table">
                               <tbody>
@@ -134,7 +139,7 @@ const PetDetails = () => {
                                 <td>{petInfo.status || ''}</td>
                               </tr>
                               </tbody>
-                          </table> 
+                          </table>
                       </div>
                       <div className="pet_details_and_shelter">
                         {/* Replace the existing shelter card code with the Shelter component */}
@@ -147,16 +152,6 @@ const PetDetails = () => {
                         />
                       </div>
                   </div>
-                  {/* <div class="col-lg-12" id="owner-notes">
-                    <h2>Owner Notes:</h2>
-                    <ul>
-                      <li>Lalo is a very nice cat</li>
-                      <li>He loves to be curious and is always exploring stuff</li>
-                      <li>This cat is great for big families</li>
-                      <li>He's always ready for a new adventure, and ensuring his safety is a top priority</li>
-                      <li>Lalo can't wait to find his forever home, where he'll continue to be the warrior with the heart of gold!</li>
-                    </ul>
-                  </div> */}
                   <div class="col-lg-12" id="owner-notes">
                     <h2>Owner Notes:</h2>
                     <ul>
