@@ -73,7 +73,8 @@ const SignUp = () => {
 
 
   return (
-    <div style={{background: `url(${bgSignup})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition:"center", minHeight: "100vh", paddingBottom: "3rem"}}>
+      <>
+    <div style={{background: `url(${bgSignup})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition:"center", minHeight: "calc(100vh - 4rem)"}}>
       <LandingHeader />
       <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
         
@@ -164,9 +165,10 @@ const SignUp = () => {
       <SignupModal showModal={showModal} handleCloseModal={handleCloseModal}></SignupModal>
 
       </div>
-      <Footer />
-      
+
     </div>
+  <Footer/>
+  </>
   );
 };
 
