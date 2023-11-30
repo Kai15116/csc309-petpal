@@ -108,6 +108,73 @@ const PetCreationUpdate = () => {
     }
   };
 
+  const createPet = async () => {
+    // console.log('Request Body:', JSON.stringify({
+    //   name: petName,
+    //   breed: petBreed,
+    //   sex: petSex,
+    //   age: Number(petAge),
+    //   weight: Number(petWeight),
+    //   adoption_fee: Number(petFee).toFixed(2),
+    //   adoption_location: petLocation,
+    //   medical_history: petMedicalHistory,
+    //   picture_1: uploadedImages[0],
+    //   picture_2: uploadedImages[1],
+    //   picture_3: uploadedImages[2],
+    //   notes: additionalNotes,
+    // }));
+
+    try {
+      const response = await fetch(`http://localhost:8000/pets/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: petName,
+          breed: petBreed,
+          sex: petSex,
+          age: Number(petAge),
+          weight: Number(petWeight),
+          adoption_fee: Number(petFee).toFixed(2),
+          adoption_location: petLocation,
+          medical_history: petMedicalHistory,
+          picture_1: uploadedImages[0],
+          picture_2: uploadedImages[1],
+          picture_3: uploadedImages[2],
+          notes: additionalNotes,
+        }),
+      });
+  
+      if (response.status === 403) {
+        navigate('/');
+      } else if (response.status >= 200 && response.status < 300) {
+        const data = await response.json();
+  
+        // after creation navigate to its details page for now
+        navigate(`/details/${data.id}`);
+      } else {
+        // other error in pet creation
+        console.error('Failed to create pet:', response.statusText);
+      }
+    } catch (e) {
+      console.log(e);
+      navigate('/');
+    }
+  };
+  
+  // handle button click 
+  const handleButtonClick = () => {
+    if (editMode) {
+      // edit the pet
+      // navigate("edit_pets.html");
+      return;
+    } else {
+      // create a new pet
+      createPet();
+    }
+  };
+
   return (
     <div className="wrapper">
       <LandingHeader />
@@ -223,6 +290,7 @@ const PetCreationUpdate = () => {
                         className="btn btn-primary btn-lg btn-xl post-button"
                         href={editMode ? "edit_pets.html" : "my_pets.html"}
                         role="button"
+                        onClick={handleButtonClick}
                       >
                         {editMode ? "Edit Pet Listing" : "Post Pet Listing"}
                       </a>   
