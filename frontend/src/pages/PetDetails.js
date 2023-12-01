@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
-import ProfileHeader from '../components/ProfileHeader';
+import LandingHeader from '../components/LandingHeader';
 import Footer from '../components/Footer';
 import '../styles/details_and_adoption.css';
 import image1 from "../assets/images/image1.jpg"
@@ -21,12 +21,12 @@ const PetDetails = () => {
   const [petInfo, setPetInfo] = useState(null);
   const [petName, setPetName] = useState('');
   const [petSex, setPetSex] = useState('');
-  const [petBreed, setPetBreed] = useState(''); 
+  const [petBreed, setPetBreed] = useState('');
   const [petAge, setPetAge] = useState(null);
   const [petWeight, setPetWeight] = useState( null);
   const [petFee, setPetFee] = useState(null);
   const [petLocation, setPetLocation] = useState('');
-  const [petMedicalHistory, setPetMedicalHistory] = useState(''); 
+  const [petMedicalHistory, setPetMedicalHistory] = useState('');
   const [petStatus, setPetStatus] = useState(false);
   const [uploadedImages, setUploadedImages] = useState([noImage, noImage, noImage]);
   const [additionalNotes, setAdditionalNotes] = useState('');
@@ -46,7 +46,7 @@ const PetDetails = () => {
               const data = await response.json();
               setPetInfo({...data})
               console.log(data)
-              
+
               // set each value based on the data received
               setPetName(data.name || '');
               setPetSex(data.sex || '');
@@ -98,8 +98,8 @@ const PetDetails = () => {
 
   return (
     <div className="wrapper">
-      <ProfileHeader />
-      <main class="page-content">        
+      <LandingHeader />
+      <main class="page-content">
       <Carousel>
           <Carousel.Item>
             <img className="d-block w-100" src={uploadedImages[0]} alt="Image 1"/>
@@ -125,7 +125,7 @@ const PetDetails = () => {
               <div class="pet-details">
                   <h1>Get To Know Lalo</h1>
                   <div class="d-flex pet_details_and_shelter">
-                      <div class="col-lg-6">
+                      <div class="col-lg-6" style={{"marginRight": "20px"}}>
                           <table class="table">
                               <tbody>
                               <tr>
@@ -167,12 +167,12 @@ const PetDetails = () => {
                               </tbody>
                           </table>
                       </div>
-                      <div className="pet_details_and_shelter">
+                      <div className="pet_details_and_shelter" style={{marginLeft: "32px"}}>
                         {/* Replace the existing shelter card code with the Shelter component */}
                         <ShelterCard
                           name="Toronto Zoo Escapees"
                           profileLink="shelter_profile_view_unauth.html"
-                          stars={['', '', '', '']} // Add stars as needed
+                          stars={4} // Add stars as needed
                           reviewCount={123}
                           joinDate="Sep. 21, 2023"
                         />

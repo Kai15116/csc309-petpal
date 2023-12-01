@@ -19,7 +19,7 @@ class CommentSerializer(ModelSerializer):
             # 'content_object',
         ]
 
-        read_only_fields = ['id', 'user', 'content_type', 'created_at']
+        read_only_fields = ['id', 'user', 'content_type', 'created_at', 'object_id']
 
     # def validate(self, attrs):
     #     # content_type = get_object_or_404(ContentType, pk=attrs.get('content_type'))

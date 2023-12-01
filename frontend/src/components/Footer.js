@@ -1,11 +1,12 @@
 import React from 'react';
 import '../styles/footerStyles.css';
+import Nav from 'react-bootstrap/Nav';
 
 const Footer = () => {
   return (
-    <div className="footer">
-      <p>© 2023 PetPal Inc.</p>
-    </div>
+    <Nav sticky="bottom" className="footer">
+        <p>© 2023 PetPal Inc.</p>
+    </Nav>
   );
 };
 

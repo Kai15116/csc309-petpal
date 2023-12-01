@@ -1,0 +1,6 @@
+.card-c:hover {
+    box-shadow: 0.1rem 0.5rem 6px rgba(24, 24, 24, 0.1);
+    transform: scale(101%);
+    /* border-width: 3px; */
+    cursor: pointer;
+  }

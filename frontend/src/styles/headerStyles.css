@@ -5,4 +5,24 @@
     max-width: 90%;
 }
   
-  
+/*.nav-bar {*/
+/*    min-width: 100vw !important;*/
+/*}*/
+
+.mobile-nav-item {
+    display: none !important;
+}
+
+@media only screen and (max-width: 992px) {
+    .def-nav-item {
+        display: none !important;
+    }
+
+    .mobile-nav-item {
+        display: inline-block !important;
+    }
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}

@@ -1,36 +1,179 @@
-import { useState,  useEffect } from "react";
+import { useState,  useEffect, useMemo } from "react";
 import LandingHeader from "../components/LandingHeader";
 import Footer from "../components/Footer";
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { Form, FloatingLabel, FormGroup, FormControl, FormLabel, Alert} from "react-bootstrap";
+import { Form, FloatingLabel, FormGroup, Alert, Col, Row} from "react-bootstrap";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import PetCard from "../components/PetCard";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import CPagination from "../components/CPagination";
+
+
+// Reference Lecture example: URL parser.
+function to_url_params(object) {
+    var result = [];
+    for (const key in object) {
+        if (Array.isArray(object[key])) {
+            for (const value of object[key]) {      
+                result.push(`${key}[]=${value}`);
+            }
+        }
+        else {
+            let value = object[key];
+            if (value !== "") {
+            result.push(`${key}=${value}`);
+            }
+            // }
+        }
+    }
+    return result.join('&');
+}
 
 function SearchFilter() {
-    // TODO: Change this to actual cards, with paginations
-    const [pets, setPets] = useState([]);
-    // const pets = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11]
+    // const [currentActivePage, setcurrentActivePage] = useState(1);
+    // const itemsPerPage = 5;
+    const [petsInfo, setPetsInfo] = useState(null);
+    // searchparam initial state
+    const [sortOption, setSortOption] = useState("");
+    const [filterOptions, setFilterOptions] = useState({age: "", weight: "", sex: ""});
+    
+    // const [colorFilter, setColorFilter] = useState("");
+    
+
+
+    // newly added (Not working)
+    const [ searchParams, setSearchParams ] = useSearchParams();
+    const query = useMemo(() => ({
+        page : parseInt(searchParams.get("page") ?? 1),
+        size: parseInt(searchParams.get("size") ?? 5),
+        age__gte : parseInt(searchParams.get("age__gte") ?? 0),
+        age__lte : parseInt(searchParams.get("age__lte") ?? 999),
+        weight__gte : parseInt(searchParams.get("weight__gte") ?? 0),
+        weight__lte : parseInt(searchParams.get("weight__lte") ?? 999),
+        sex : searchParams.get("sex") ?? "",
+        order_by : searchParams.get("order_by") ?? "name",
+    }), [searchParams]);
+    // (Not working)
+
+    // used for pagination state management
+    const setcurrentActivePage = (value) => {
+        setSearchParams({...query, page : value})
+    }
+
+    const submitFilterOptions = (e) => {
+        e.preventDefault()
+        var additionalQuery = {}
+        var queryAgeMin = 0;
+        var queryAgeMax = 999;
+        var queryWeightMin = 0;
+        var queryWeightMax = 9999;
+        var querySex = "";
+        switch(filterOptions?.age) {
+            case "":
+                queryAgeMin = 0;
+                queryAgeMax = 999;
+                break;
+            case "newborn":
+                queryAgeMin = 0;
+                queryAgeMax = 2;
+                break;
+            case "young":
+                queryAgeMin = 2;
+                queryAgeMax = 5;
+                break;
+            case "adult":
+                queryAgeMin = 5;
+                queryAgeMax = 9;
+                break;
+            case "old":
+                queryAgeMin = 9;
+                queryAgeMax = 999;
+                break;
+            default:
+                break;
+        }
+        switch(filterOptions?.weight) {
+            case "":
+                queryWeightMin = 0;
+                queryWeightMax = 999;
+                break;
+            case "sm":
+                queryWeightMin = 0;
+                queryWeightMax = 20;
+                break;
+            case "md":
+                queryWeightMin = 20;
+                queryWeightMax = 50;
+                break;
+            case "lg":
+                queryWeightMin = 50;
+                queryWeightMax = 73;
+                break;
+            case "xl":
+                queryWeightMin = 73;
+                queryWeightMax = 999;
+                break;
+            default:
+                break;
+        }
+        switch(filterOptions?.sex) {
+            case "":
+                querySex="";
+                break;
+            case "female":
+                querySex="female";
+                break;
+            case "male":
+                querySex="male";
+                break;
+            default:
+                break;
+        }
+
+        additionalQuery = {age__gte: queryAgeMin, 
+            age__lte: queryAgeMax, 
+            weight__gte: queryWeightMin, 
+            weight__lte: queryWeightMax,
+            sex: querySex,
+        }
+        
+
+        // delete query.sex;
+
+        setSearchParams(
+            {...query, 
+            ...additionalQuery,
+
+            page: 1
+        })
+    }
+
+    // filter side Offcanvas 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    // router navigation
     const navigate = useNavigate();
 
     useEffect(function () {
+        const urlParams = to_url_params(query);
         async function fetchPets() {
             try { 
-                const response = await fetch(`http://localhost:8000/pets`, {
+                const response = await fetch(`http://localhost:8000/pets?${urlParams}`, {
                 method: 'GET',
             });
             
             if (response.status >= 200 && response.status < 300) {
                 const data = await response.json();
-
-                setPets([...data])
+                setPetsInfo({...data})
+                
                 console.log(data)
                
-            } else {
+            } else if (response.status = 404) {
+                alert(404);
+            }
+            else {
                 console.log(response.status)
 
             }} catch (e) {
@@ -40,15 +183,21 @@ function SearchFilter() {
         }
         fetchPets();
 
-    }, [])
+    }, [query]);
+
+    const pagesCount = Math.ceil(petsInfo?.count / query?.size);
+    const noResult =petsInfo?.count === 0 || isNaN(pagesCount);
 
 
     return (
-        <div style={{background: `#F5F5F5`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition:"center", minHeight: "100vh", paddingBottom: "4.5rem"}}>
+        // TODO: filter using searchParams. (After backend is done)
+        <div style={{background: `#F5F5F5`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition:"center", minHeight: "100vh"}}>
             <LandingHeader />
-            <div>
-                <Alert variant="secondary" style={{marginTop: "5px", paddingLeft: "3rem"}}>
-                    Found *** matching results
+            <div style={{minHeight: "100vh"}}>
+                <Alert variant={noResult?"danger":"secondary"} style={{marginTop: "5px", paddingLeft: "3rem"}}>
+                    {noResult ? 
+                    <><i class="bi bi-exclamation-triangle"></i>"Sorry, no result is found. Try clear the filter and try again."</> :
+                    `Found ${petsInfo?.count??0} matching results in ${pagesCount??1} pages`}
                 </Alert>
                 <div style={{display: "flex", justifyContent: "right", paddingRight: "3rem"}}>
                 <Button variant="outline-primary" onClick={handleShow} style={{fontWeight: "500"}}>
@@ -56,9 +205,12 @@ function SearchFilter() {
                 </Button>
 
                 </div>
-                <div style={{display: "flex", justifyContent: "space-evenly", flexWrap: "wrap", alignItems: "center"}}>
-                    {pets.map((pet, index) => <PetCard key={index} {...pet}></PetCard>)}
+                <div style={{width: "90%", margin: "0 auto", minHeight: "60vh"}}>
+                <Row className="" xs={1} md={2} lg={3} xl={4} >
+                    {petsInfo?.results?.map((pet, index) => <Col  key={index}><PetCard {...pet}></PetCard></Col>)}
+                </Row>
                 </div>
+                
 
                 <Offcanvas show={show} onHide={handleClose} >
                     <Offcanvas.Header closeButton>
@@ -66,10 +218,8 @@ function SearchFilter() {
                     </Offcanvas.Header>
                     <hr></hr>
                     <Offcanvas.Body>
-                        
-                    
-                    <Form>
-                        <FormGroup className="mb-3">
+                    <Form onSubmit={(e) => submitFilterOptions(e)}>
+                        {/* <FormGroup className="mb-3">
                             <FloatingLabel label="Category">
                             <Form.Select className="border-secondary">
 
@@ -81,9 +231,9 @@ function SearchFilter() {
                                
                             </FloatingLabel>
                                 
-                        </FormGroup>
+                        </FormGroup> */}
 
-                        <FormGroup className="mb-3">
+                        {/* <FormGroup className="mb-3">
                             <FloatingLabel label="Breed">
                             <Form.Select className="border-secondary">
 
@@ -94,16 +244,17 @@ function SearchFilter() {
                                 </Form.Select>
                             </FloatingLabel>
                                 
-                        </FormGroup>
+                        </FormGroup> */}
 
                         <FormGroup className="mb-3">
                             <FloatingLabel label="Age">
-                                <Form.Select className="border-secondary">
+                                <Form.Select className="border-secondary" value={filterOptions?.age} onChange={(e) => setFilterOptions({...filterOptions, age: e.target.value})}>
 
-                                <option>Select All</option>
-                                <option>1</option>
-                                <option>2</option>
-
+                                <option value="">Select All</option>
+                                <option value="newborn">Newborn(0-2 year old)</option>
+                                <option value="young">Young(2-5 years old)</option>
+                                <option value="adult">Adult(5-9 years old)</option>
+                                <option value="old">Old(9+ years old)</option>
                                 </Form.Select>
                                 
                             </FloatingLabel>
@@ -112,37 +263,28 @@ function SearchFilter() {
 
                         <FormGroup className="mb-3">
                             <FloatingLabel label="Size">
-                            <Form.Select className="border-secondary">
-                                    <option>Select All</option>
-                                    <option>1</option>
-                                    <option>2</option>
+                                <Form.Select className="border-secondary" value={filterOptions?.weight} onChange={(e) => setFilterOptions({...filterOptions, weight: e.target.value})}>
+                                    <option value="">Select All</option>
+                                    <option value="sm">Small(0-20 lbs)</option>
+                                    <option value="md">Medium(20-50 lbs)</option>
+                                    <option value="lg">Large(50-73 lbs)</option>
+                                    <option value="xl">XL(73+ lbs)</option>
                                 </Form.Select>
                             </FloatingLabel>
                                 
                         </FormGroup>
                         <FormGroup className="mb-3">
                             <FloatingLabel label="Gender:">
-                            <Form.Select className="border-secondary">
-                                    <option>Select Both</option>
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                </Form.Select>
-                            </FloatingLabel>
-                                
-                        </FormGroup>
-
-                        <FormGroup className="mb-3">
-                            <FloatingLabel label="Color">
-                            <Form.Select className="border-secondary">
-                                    <option>Select All</option>
-                                    <option>1</option>
-                                    <option>2</option>
+                            <Form.Select className="border-secondary" value={filterOptions?.sex} onChange={(e) => setFilterOptions({...filterOptions, sex: e.target.value})}>
+                                    <option value="">Select Both</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
                                 </Form.Select>
                             </FloatingLabel>
                                 
                         </FormGroup>
                         <FormGroup className="mb-3">
-                        <Button className="w-100 outline-primary">Apply Filter</Button>
+                        <Button className="w-100 outline-primary" type="submit">Apply Filter</Button>
 
                         </FormGroup>
                         
@@ -150,25 +292,29 @@ function SearchFilter() {
                     </Form>
                     <hr style={{borderWidth: "2px"}}></hr>
                     
-                    <Form>
+                    <Form onSubmit={(e) => {
+                        e.preventDefault();
+                        setSearchParams({...query, order_by: sortOption, page: 1});
+                        setShow(false);
+                        }}>
                         <FormGroup className="mb-3 mt-4">
                             <FloatingLabel label="Sort By">
-                            <Form.Select className="border-primary">
+                            <Form.Select className="border-primary" value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
 
-                            <option>Relavence</option>
-                            <option>Name&#8593;(A to Z)</option>
-                            <option>Name&#8595;(Z to A)</option>
-                            <option>Age&#8595;(1 to 8+)</option>
-                            <option>Age&#8595;(8+ to 1)</option>
-                            <option>Size&#8595;(light to heavy)</option>
-                            <option>Size&#8595;(heavy to light)</option>
+                            <option value="">Relavence</option>
+                            <option value="name">Name&#8593;(A to Z)</option>
+                            <option value="-name">Name&#8595;(Z to A)</option>
+                            <option value="age">Age&#8595;(1 to 8+)</option>
+                            <option value="-age">Age&#8595;(8+ to 1)</option>
+                            <option value="weight">Size&#8595;(light to heavy)</option>
+                            <option value="-weight">Size&#8595;(heavy to light)</option>
                             </Form.Select>
                                
                             </FloatingLabel>
                                 
                         </FormGroup>
                         <FormGroup className="mb-3">
-                        <Button className="w-100">Start Sorting</Button>
+                        <Button className="w-100" type="submit">Start Sorting</Button>
 
                         </FormGroup>
 
@@ -176,10 +322,12 @@ function SearchFilter() {
                     </Offcanvas.Body>
                 </Offcanvas>
 
-                <div className="text-center border-danger border">Pagination right here</div>
+                
             </div>
+            {!noResult && <CPagination setcurrentActivePage={setcurrentActivePage} currentActivePage={query?.page} pagesCount={pagesCount}/>}
             <Footer />
       </div>
+   
     )
 }
 
