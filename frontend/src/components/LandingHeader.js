@@ -11,6 +11,7 @@ import {Button, Form, InputGroup, Image, Dropdown, Collapse, DropdownItem, Col} 
 import { userContext } from '../context/userContext';
 import { useNavigate } from "react-router-dom";
 
+
 const Header = () => {
     const { getContextUser, setContextUser} = useContext(userContext);
     const user = getContextUser()
@@ -93,6 +94,7 @@ const Header = () => {
           <Nav className="me-auto">
             <Nav.Item>
               <Form
+
                 role="search"
                 style={{ width: '400px', minWidth: '35%', maxWidth: '90%' }}
                 action="/searchpage"
@@ -187,5 +189,5 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default LandingHeader;
 
