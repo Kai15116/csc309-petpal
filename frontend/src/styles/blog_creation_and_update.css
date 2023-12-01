@@ -1,0 +1,16 @@
+.preview-container {
+    text-align: left;
+    max-width: 100%; /* Ensure the content doesn't overflow the container */
+    margin: 0 auto; /* Center the container */
+    padding: 10px; /* Add padding for better readability */
+  }
+  
+  .blog-details {
+    background-color: #ffffff; 
+    padding: 30px;
+    gap: 10px;
+    width: 1300px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
