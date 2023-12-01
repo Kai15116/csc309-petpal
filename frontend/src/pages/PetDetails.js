@@ -119,7 +119,7 @@ const PetDetails = () => {
               <h5>{petName} Is Waiting For Wonderful Parents </h5>
             </Carousel.Caption>
           </Carousel.Item>
-        </Carousel>
+      </Carousel>
       <div class="background-details">
           <div class="container" id="pet-details-container">
               <div class="pet-details">
