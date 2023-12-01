@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
-import LandingHeader from '../components/LandingHeader';
+import ProfileHeader from '../components/ProfileHeader';
 import Footer from '../components/Footer';
 import '../styles/details_and_adoption.css';
 import image1 from "../assets/images/image1.jpg"
@@ -98,7 +98,7 @@ const PetDetails = () => {
 
   return (
     <div className="wrapper">
-      <LandingHeader />
+      <ProfileHeader />
       <main class="page-content">        
       <Carousel>
           <Carousel.Item>
