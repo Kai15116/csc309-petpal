@@ -27,9 +27,10 @@ function ShelterProfile() {
             
             // setAllowAccess(false);
         } else if (response.status >= 200 && response.status < 300) {
-            const data = await response.json();
-            setUserInfo({...data})
-            console.log(userInfo)
+            return;
+            // const data = await response.json();
+            // setUserInfo({...data})
+            // console.log(userInfo)
             // setAllowAccess(true);
         }} catch (e) {
             console.log(e)

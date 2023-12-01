@@ -10,6 +10,7 @@ import ShelterProfile from './pages/ShelterProfile';
 import SearchFilter from './pages/SearchFilter';
 import ShelterList from './pages/ShelterList';
 import NotFound from './pages/NotFound';
+import NotificationPage from './pages/NotificationPage';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/seekerprofile/:userId" element={<SeekerProfile />} />
           <Route path="/shelterprofile/:userId" element={<ShelterProfile />} />
           <Route path='/shelters' element={<ShelterList/>}/>
+          <Route path='/notifications/:userId' element={<NotificationPage></NotificationPage>}/>
           <Route path='*' element={<NotFound/>}/>
 
           {/* Add more routes for additional pages */}
