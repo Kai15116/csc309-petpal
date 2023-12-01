@@ -108,6 +108,33 @@ function NotificationPage() {
 
     }
 
+    async function readNoteInfo(id) {
+        try { 
+            const response = await fetch(`http://localhost:8000/notifications/${id}`, {
+            method: 'GET',
+            headers: {
+
+                'Authorization': `Bearer ${accessToken}`,
+                
+            }
+        });
+        if (response.status === 403) {
+            navigate('/');
+            
+            // setAllowAccess(false);
+        } else if (response.status >= 200 && response.status < 300) {
+            const data = await response.json();
+            // console.log("this is " + data)
+            setNoteInfo([...data])
+            // setAllowAccess(true);
+        }} catch (e) {
+            console.log(e);
+            navigate('/');
+        }
+        
+        
+    }
+
 
     return (
         <div>
