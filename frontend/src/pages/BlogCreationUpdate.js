@@ -68,25 +68,32 @@ const BlogCreationUpdate = () => {
                 <div class="bg-white mt-4 p-4 rounded shadow">
                     <div class="container">
                           <div class="blog-details">
-                            <h4>1. Blog Content</h4>
-                            <div>
-                            <h4>Title</h4>
-                              <div>
+                          <h4>1. Blog Content</h4>
+                            <div style={{minWidth:"100%"}}>
+                              <div className="form-group">
+                                <label htmlFor="blogTitle" className="form-label">
+                                  Title
+                                </label>
                                 <input
                                   type="text"
                                   id="blogTitle"
+                                  className="form-control"
                                   value={title}
                                   onChange={handleTitleChange}
                                 />
                               </div>
-                              <div>
-                                <h4>Body</h4>
+                              <div className="form-group">
+                                <label htmlFor="blogContent" className="form-label">
+                                  Body
+                                </label>
                                 <textarea
                                   id="blogContent"
+                                  className="form-control"
                                   value={blogContent}
                                   onChange={handleContentChange}
                                   rows={10}
                                   cols={50}
+                                  style={{minWidth:"100%"}}
                                 />
                               </div>
                             </div>
@@ -94,13 +101,13 @@ const BlogCreationUpdate = () => {
                       </div>
                   </div>    
                 </div>
-                <div class="bg-white mt-4 p-4 rounded shadow">
-                  <div class="container">
-                    <div class="blog-details">
+                <div className="bg-white mt-4 p-4 rounded shadow">
+                  <div className="container">
+                    <div className="blog-details">
                       <h4>2. Content Preview</h4>
                       <h1>{title}</h1>
-                      <div>
-                        <ReactMarkdown className="preview-container left-align">{blogContent}</ReactMarkdown>
+                      <div className="preview-container left-align" style={{ overflow: 'hidden', wordWrap: 'break-word', maxWidth: '100%' }}>
+                        <ReactMarkdown>{blogContent}</ReactMarkdown>
                       </div>
                     </div>
                   </div>
