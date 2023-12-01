@@ -9,10 +9,15 @@ import noImage from '../assets/images/no_image_icon.png';
 import '../styles/blog_creation_and_update.css'; 
 
 const BlogCreationUpdate = () => {
+  const [title, setTitle] = useState('');
   const [shelterName, setShelterName] = useState('');
   const [blogContent, setBlogContent] = useState('');
   const [uploadedImages, setUploadedImages] = useState([noImage, noImage, noImage]);
   const [editMode, setEditMode] = useState(false);
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
 
   const handleContentChange = (event) => {
     setBlogContent(event.target.value);
@@ -65,7 +70,17 @@ const BlogCreationUpdate = () => {
                           <div class="blog-details">
                             <h4>1. Blog Content</h4>
                             <div>
+                            <h4>Title</h4>
                               <div>
+                                <input
+                                  type="text"
+                                  id="blogTitle"
+                                  value={title}
+                                  onChange={handleTitleChange}
+                                />
+                              </div>
+                              <div>
+                                <h4>Body</h4>
                                 <textarea
                                   id="blogContent"
                                   value={blogContent}
@@ -83,6 +98,7 @@ const BlogCreationUpdate = () => {
                   <div class="container">
                     <div class="blog-details">
                       <h4>2. Content Preview</h4>
+                      <h1>{title}</h1>
                       <div>
                         <ReactMarkdown className="preview-container left-align">{blogContent}</ReactMarkdown>
                       </div>

@@ -69,7 +69,7 @@ const ShelterBlogs = () => {
       <div className="d-flex">
         {/* left-hand sidebar */}
         <div className="bg-white mt-4 p-4 rounded shadow" style={{ height: 'fit-content' }}>
-          <h4>Search By Shelter Name:</h4>
+          <h4>Search By Blog Title:</h4>
           <div className="input-group">
             <input
               type="search"
