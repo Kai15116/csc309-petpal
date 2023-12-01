@@ -85,6 +85,7 @@ function ShelterProfile() {
                 <h2>{userInfo?.username}</h2>
                 <h2>{userInfo?.email}</h2>
                 <h2>{userInfo?.address}</h2>
+                <h2>{userInfo?.created_at}</h2>
             </div>
             <div>
                 {/* Just testing there might be changes you have to make later. */}
