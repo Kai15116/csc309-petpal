@@ -13,8 +13,9 @@ import Adoption from './pages/Adoption';
 import PetCreationUpdate from './pages/PetCreationUpdate';
 import Applications from './pages/Applications';
 import Application from './pages/Application';
+import BlogCreationUpdate from './pages/BlogCreationUpdate';
+import ShelterBlogs from './pages/ShelterBlogs';
 
-const App = () => {
   return (
     <userContext.Provider value={useUserContext()}>
     <Router>
@@ -24,19 +25,28 @@ const App = () => {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+
           <Route path="/details/:petId" element={<PetDetails />} />
           <Route path="/searchpage" element={<SearchFilter/>}/>
           <Route path="/seekerprofile/:userId" element={<SeekerProfile />} />
           <Route path="/shelterprofile/:userId" element={<ShelterProfile />} />
           <Route path="/mypets" element={<MyPets />} />
           <Route path="/adoption" element={<Adoption />} />
-          {/* below path is for creating */}
-          <Route path="/createUpdate" element={<PetCreationUpdate />} />
-          {/* below path is for updating */}
-          <Route path="/createUpdate/:petId" element={<PetCreationUpdate />} />
+
+          {/* creating pets by shelter */}
+          <Route path="/petCreateUpdate" element={<PetCreationUpdate />} />
+          {/* updating pets by shelter */}
+          <Route path="/petCreateUpdate/:petId" element={<PetCreationUpdate />} />
+
+          {/* creating blog by shelter */}
+          <Route path="/blogCreateUpdate" element={<BlogCreationUpdate />} />
+          {/* updating blog by shelter */}
+          <Route path="/blogCreateUpdate/:blogId" element={<BlogCreationUpdate />} />
+
+          {/* blogs by all shelters */}
+          <Route path="/blogs" element={<ShelterBlogs />} />
           <Route path="/applications" element={<Applications />} />
           <Route path="/application/:applicationId" element={<Application />} />
-          {/* Add more routes for additional pages */}
         </Routes>
       </div>
     </Router>

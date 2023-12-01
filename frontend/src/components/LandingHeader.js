@@ -11,7 +11,7 @@ import {Button, Form, InputGroup, Image, Dropdown, Collapse, DropdownItem, Col} 
 import { userContext } from '../context/userContext';
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const LandingHeader = () => {
     const { getContextUser, setContextUser} = useContext(userContext);
     const user = getContextUser()
     const navigate = useNavigate()
@@ -199,5 +199,5 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default LandingHeader;
 
