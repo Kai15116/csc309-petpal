@@ -167,7 +167,7 @@ header {
     align-items: start;
 }
 
-.form-group {
+.form-inputs > .form-group {
     margin-bottom: 30px;
     display: flex;
     flex-direction: row;
@@ -207,9 +207,9 @@ header {
 }
 
 /* add spacing between the table and the image */
-.col-lg-6 {
-    margin-right: 20px; /* adjust this value as needed for spacing */
-}
+/*.col-lg-6 {*/
+/*    margin-right: 20px; !* adjust this value as needed for spacing *!*/
+/*}*/
 
 /* apply Button Styles */
 .post-button {
