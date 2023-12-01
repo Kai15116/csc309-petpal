@@ -52,9 +52,12 @@ const ShelterBlogs = () => {
     </button>
   );
 
-  const handleLikeClick = (index) => {
+  const handleLikeClick = (shelterIndex) => {
+    // calculate the correct index based on the current active page
+    const adjustedIndex = startIndex + shelterIndex;
+  
     const updatedSheltersData = [...sheltersData];
-    updatedSheltersData[index].likes += 1;
+    updatedSheltersData[adjustedIndex].likes += 1;
     setSheltersData(updatedSheltersData);
   };
 
