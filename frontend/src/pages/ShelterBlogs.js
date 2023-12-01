@@ -1,45 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Carousel, Pagination } from 'react-bootstrap';
 import ProfileHeader from '../components/ProfileHeader';
 import Footer from '../components/Footer';
-import { Carousel, Pagination } from 'react-bootstrap';
-import shelterPortrait from "../assets/example_images/shelter_portrait.jpg";
-import image1 from "../assets/images/image1.jpg";
-import image2 from "../assets/images/image2.jpg";
-import image3 from "../assets/images/image3.jpg";
+import shelterPortrait from '../assets/example_images/shelter_portrait.jpg';
+import image1 from '../assets/images/image1.jpg';
+import image2 from '../assets/images/image2.jpg';
+import image3 from '../assets/images/image3.jpg';
 
 const ShelterBlogs = () => {
-  const sheltersData = [
+  const [sheltersData, setSheltersData] = useState([
     {
-      name: "Shelter A",
+      name: 'Shelter A',
       profilePic: shelterPortrait,
-      blogContent: "Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...",
+      blogContent: 'Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...',
       images: [image1, image2, image3],
+      likes: 0, // Add likes property and initialize it to 0
     },
     {
-      name: "Shelter B",
+      name: 'Shelter B',
       profilePic: shelterPortrait,
-      blogContent: "Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...",
+      blogContent: 'Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...',
       images: [image1, image2, image3],
+      likes: 0,
     },
     {
-      name: "Shelter C",
+      name: 'Shelter C',
       profilePic: shelterPortrait,
-      blogContent: "Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...",
+      blogContent: 'Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...',
       images: [image1, image2, image3],
+      likes: 0,
     },
     {
-      name: "Shelter D",
+      name: 'Shelter D',
       profilePic: shelterPortrait,
-      blogContent: "Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...",
+      blogContent: 'Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...',
       images: [image1, image2, image3],
+      likes: 0,
     },
-  ];
+  ]);
 
   const SheltersPerPage = 2; // Number of shelters to display per page
-  const [activePage, setActivePage] = React.useState(1);
+  const [activePage, setActivePage] = useState(1);
 
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
+  };
+
+  const LikeButton = ({ likes, onLikeClick }) => (
+    <button className="btn btn-outline-primary" onClick={onLikeClick}>
+      Like: {likes}
+    </button>
+  );
+
+  const handleLikeClick = (index) => {
+    const updatedSheltersData = [...sheltersData];
+    updatedSheltersData[index].likes += 1;
+    setSheltersData(updatedSheltersData);
   };
 
   const startIndex = (activePage - 1) * SheltersPerPage;
@@ -47,14 +63,12 @@ const ShelterBlogs = () => {
 
   const sheltersToDisplay = sheltersData.slice(startIndex, endIndex);
 
-
   return (
     <div style={{ backgroundColor: '#f2f8fe' }}>
       <ProfileHeader />
-        <div className="d-flex">
-          
-          {/* left-hand sidebar */}
-          <div className="bg-white mt-4 p-4 rounded shadow" style={{ height: 'fit-content' }}>
+      <div className="d-flex">
+        {/* left-hand sidebar */}
+        <div className="bg-white mt-4 p-4 rounded shadow" style={{ height: 'fit-content' }}>
           <h4>Search By Shelter Name:</h4>
           <div className="input-group">
             <input
@@ -81,7 +95,7 @@ const ShelterBlogs = () => {
             </select>
           </div>
 
-          <div style={{marginTop: "10px"}}>
+          <div style={{ marginTop: '10px' }}>
             <h4>Page:</h4>
             <Pagination>
               {Array.from({ length: Math.ceil(sheltersData.length / SheltersPerPage) }).map((_, index) => (
@@ -95,14 +109,15 @@ const ShelterBlogs = () => {
               ))}
             </Pagination>
           </div>
-
         </div>
 
         {/* main content area */}
         <div id="lst-container" style={{ margin: '50px', flex: 1 }}>
-          <div class="d-flex" style={{ marginBottom: '20px', flex: 1 }}>
-            <h1 class="ms-1 mb-0">Shelter Blogs</h1>
-            <a class="btn btn-secondary ms-auto align-self-end" href="pet_creation.html">Add New Blog</a>
+          <div className="d-flex" style={{ marginBottom: '20px', flex: 1 }}>
+            <h1 className="ms-1 mb-0">Shelter Blogs</h1>
+            <a className="btn btn-secondary ms-auto align-self-end" href="pet_creation.html">
+              Add New Blog
+            </a>
           </div>
           <hr />
           {sheltersToDisplay.map((shelter, index) => (
@@ -115,7 +130,6 @@ const ShelterBlogs = () => {
                   style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }}
                 />
               </div>
-
               <div>
                 <h3>{`${shelter.name} Blog`}</h3>
                 <p>{shelter.blogContent}</p>
@@ -129,6 +143,9 @@ const ShelterBlogs = () => {
                     </Carousel.Item>
                   ))}
                 </Carousel>
+                <div className="like-button-container">
+                  <LikeButton likes={shelter.likes} onLikeClick={() => handleLikeClick(index)} />
+                </div>
               </div>
             </div>
           ))}
