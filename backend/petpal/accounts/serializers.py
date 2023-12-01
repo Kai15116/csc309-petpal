@@ -37,7 +37,7 @@ class PetSeekerSerializer(ModelSerializer):
     class Meta:
         model = PetSeeker
         fields = ["id","username", "password", "phone_number", "email", "first_name", "last_name", "address", \
-                  "description","banner", "profile_picture"]
+                  "description","banner", "profile_picture", "created_at"]
     
     def create(self, data):
         password = data.pop("password")
@@ -54,7 +54,7 @@ class PetShelterSerializer(ModelSerializer):
     class Meta:
         model = PetShelter
         fields = ["id", "username", "password", "phone_number", "email", "first_name", "last_name", "address", \
-                  "description","banner", "profile_picture", "mission_title", "mission_statement"]
+                  "description","banner", "profile_picture", "mission_title", "mission_statement", "created_at"]
 
     def create(self, data):
         password = data.pop("password")

@@ -8,13 +8,22 @@ import { userContext, useUserContext } from './context/userContext';
 import SeekerProfile from './pages/SeekerProfile';
 import ShelterProfile from './pages/ShelterProfile';
 import SearchFilter from './pages/SearchFilter';
+
+
+import ShelterList from './pages/ShelterList';
+import NotFound from './pages/NotFound';
+import NotificationPage from './pages/NotificationPage';
+
+
 import MyPets from './pages/MyPets';
+
 import Adoption from './pages/Adoption';
 import PetCreationUpdate from './pages/PetCreationUpdate';
 import Applications from './pages/Applications';
 import Application from './pages/Application';
 import BlogCreationUpdate from './pages/BlogCreationUpdate';
 import ShelterBlogs from './pages/ShelterBlogs';
+
 
 function App() {
 
@@ -32,7 +41,14 @@ function App() {
           <Route path="/searchpage" element={<SearchFilter/>}/>
           <Route path="/seekerprofile/:userId" element={<SeekerProfile />} />
           <Route path="/shelterprofile/:userId" element={<ShelterProfile />} />
+
+          <Route path='/shelters' element={<ShelterList/>}/>
+          <Route path='/notifications/:userId' element={<NotificationPage></NotificationPage>}/>
+
+          <Route path="/details/:petId" element={<PetDetails />} />
+
           <Route path="/mypets" element={<MyPets />} />
+
           <Route path="/adoption" element={<Adoption />} />
 
           {/* creating pets by shelter */}
@@ -47,8 +63,14 @@ function App() {
 
           {/* blogs by all shelters */}
           <Route path="/blogs" element={<ShelterBlogs />} />
+
+          
+          
+
+
           <Route path="/applications" element={<Applications />} />
           <Route path="/application/:applicationId" element={<Application />} />
+          <Route path='*' element={<NotFound/>}/>
         </Routes>
       </div>
     </Router>

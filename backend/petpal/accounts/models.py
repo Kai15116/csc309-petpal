@@ -15,6 +15,7 @@ class User(AbstractUser):
 
     banner = models.ImageField(upload_to='banners/', blank=True, null=True, help_text="user profile banner")
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True, help_text="user profile picture")
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):
