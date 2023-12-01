@@ -14,7 +14,7 @@ const ShelterBlogs = () => {
       profilePic: shelterPortrait,
       blogContent: 'Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...',
       images: [image1, image2, image3],
-      likes: 0, // Add likes property and initialize it to 0
+      likes: 0, 
     },
     {
       name: 'Shelter B',
