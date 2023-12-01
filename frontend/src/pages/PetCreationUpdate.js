@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect } from 'react'; 
-import LandingHeader from '../components/LandingHeader';
+import ProfileHeader from '../components/ProfileHeader';
 import Footer from '../components/Footer';
 import '../styles/pet_creation_and_update.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
@@ -177,7 +177,7 @@ const PetCreationUpdate = () => {
 
   return (
     <div className="wrapper">
-      <LandingHeader />
+      <ProfileHeader />
       <main class="page-content">  
         <div>
           {editMode ? (

@@ -4,7 +4,7 @@ import '../styles/headerStyles.css';
 import logoImage from '../assets/images/logo-1.png'; 
 
 
-const Header = () => {
+const LandingHeader = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-white shadow-sm">
       <div className="container-fluid">
@@ -64,5 +64,5 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default LandingHeader;
 
