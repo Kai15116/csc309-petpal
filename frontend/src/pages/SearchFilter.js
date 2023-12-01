@@ -43,7 +43,7 @@ function SearchFilter() {
     
 
 
-    // newly added (Not working)
+
     const [ searchParams, setSearchParams ] = useSearchParams();
     const query = useMemo(() => ({
         page : parseInt(searchParams.get("page") ?? 1),
@@ -55,7 +55,7 @@ function SearchFilter() {
         sex : searchParams.get("sex") ?? "",
         order_by : searchParams.get("order_by") ?? "name",
     }), [searchParams]);
-    // (Not working)
+    
 
     // used for pagination state management
     const setcurrentActivePage = (value) => {
