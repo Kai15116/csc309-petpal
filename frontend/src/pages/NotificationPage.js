@@ -51,6 +51,34 @@ function NotificationPage() {
 
     }, [ userId ])
 
+
+    async function fetchNoteInfo2() {
+        try { 
+            const response = await fetch(`http://localhost:8000/notifications/`, {
+            method: 'GET',
+            headers: {
+
+                'Authorization': `Bearer ${accessToken}`,
+                
+            }
+        });
+        if (response.status === 403) {
+            navigate('/');
+            
+            // setAllowAccess(false);
+        } else if (response.status >= 200 && response.status < 300) {
+            const data = await response.json();
+            // console.log("this is " + data)
+            setNoteInfo([...data])
+            // setAllowAccess(true);
+        }} catch (e) {
+            console.log(e);
+            navigate('/');
+        }
+        
+        
+    }
+
     // delete Notifications
     const deleteNotification = async (id) => {
         try { 
@@ -67,6 +95,7 @@ function NotificationPage() {
             
             // setAllowAccess(false);
         } else if (response.status >= 200 && response.status < 300) {
+            fetchNoteInfo2();
             
             return
             // console.log("this is " + data)
@@ -84,7 +113,7 @@ function NotificationPage() {
         <div>
             <Header></Header>
             <h1>Notifications<i className="bi bi-bell-fill"></i></h1>
-            <Tabs defaultActiveKey="second" className="justify-content-center" onClick={(e) => {e.preventDefault();}}> 
+            <Tabs defaultActiveKey="first" className="justify-content-center" onClick={(e) => {e.preventDefault();}}> 
                 <Tab eventKey="first" title="Unread" > 
                   <h2>6 unread notifications</h2>
                     <Button onClick={() => {
