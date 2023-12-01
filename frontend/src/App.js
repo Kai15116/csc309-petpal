@@ -16,6 +16,8 @@ import Application from './pages/Application';
 import BlogCreationUpdate from './pages/BlogCreationUpdate';
 import ShelterBlogs from './pages/ShelterBlogs';
 
+function App() {
+
   return (
     <userContext.Provider value={useUserContext()}>
     <Router>
