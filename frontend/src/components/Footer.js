@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 
 const Footer = () => {
   return (
-    <Nav fixed="bottom" className="footer">
+    <Nav sticky="bottom" className="footer">
         <p>© 2023 PetPal Inc.</p>
     </Nav>
   );
