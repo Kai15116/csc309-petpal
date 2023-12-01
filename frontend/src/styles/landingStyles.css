@@ -18,11 +18,6 @@
     height: 70vh;
 }
 
-/*.card:hover {*/
-/*    box-shadow: 0.1rem 0.5rem 6px rgba(24, 24, 24, 0.199);*/
-/*    transform: scale(101%);*/
-/*}*/
-
 @media only screen and (max-width: 1000px) {
 
     .card-container {

@@ -73,7 +73,7 @@ class CommentApplicationListCreateView(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        object_id = self.request.data.get('object_id')
+        object_id = self.kwargs.get('object_id')
         user = self.request.user
 
         if not object_id:
@@ -85,7 +85,7 @@ class CommentApplicationListCreateView(ListCreateAPIView):
             app_shelter = application.pet.owner
 
             if (user.pk == app_seeker.pk) or (user.pk == app_shelter.pk):
-                return Comment.objects.filter(object_id=self.request.data.get('object_id'),
+                return Comment.objects.filter(object_id=object_id,
                                               content_type=ContentType.objects.get_for_model(Application)).order_by('-created_at')
             else:
                 raise ValidationError({'object_id': 'Cannot view foreign Application comments.'})
@@ -93,15 +93,15 @@ class CommentApplicationListCreateView(ListCreateAPIView):
             raise Http404('Application does not exist.')
 
     def perform_create(self, serializer):
-        
+        object_id = self.kwargs.get('object_id')
         user = self.request.user
         try:
-            application = Application.objects.get(id=serializer.validated_data.get('object_id'))
+            application = Application.objects.get(id=object_id)
             reply_to = serializer.validated_data.get('reply_to')
 
             if reply_to and reply_to.content_type != ContentType.objects.get_for_model(Application):
                 raise ValidationError({'reply_to': 'You have to reply to the comment of same type.'})
-            if reply_to and reply_to.object_id != serializer.validated_data.get('object_id'):
+            if reply_to and reply_to.object_id != object_id:
                 raise ValidationError({'reply_to': 'You have to reply to the comment that corresponds to the same object.'})
 
             app_seeker = application.user
@@ -109,7 +109,7 @@ class CommentApplicationListCreateView(ListCreateAPIView):
 
             if (user.pk == app_seeker.pk) or (user.pk == app_shelter.pk):
                 Comment.objects.create(**serializer.validated_data, user=user,
-                                    content_type=ContentType.objects.get_for_model(Application))
+                                    content_type=ContentType.objects.get_for_model(Application), object_id=object_id)
             else:
                 raise PermissionDenied('Permission Denied: You may only comment on your own applications.')
             
@@ -130,25 +130,24 @@ class PetShelterCommentListCreateView(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        object_id = self.request.data.get('object_id')
+        object_id = self.kwargs.get('object_id')
 
         if not object_id:
             raise ValidationError({"object_id": "This field is required."})
         
-        return Comment.objects.filter(object_id=self.request.data.get('object_id'),
+        return Comment.objects.filter(object_id=object_id,
                 content_type=ContentType.objects.get_for_model(PetShelter)).order_by('-created_at')
 
     def perform_create(self, serializer):
         user = self.request.user
         reply_to = serializer.validated_data.get('reply_to')
-        object_id = self.request.data.get('object_id')
-
-        try: 
+        object_id = self.kwargs.get('object_id')
+        try:
             if User.objects.get(id=object_id).is_pet_seeker():
                 raise ValidationError({'object_id': 'Expected object_id to refer to a shelter.'})
             if reply_to and reply_to.content_type != ContentType.objects.get_for_model(PetShelter):
                 raise ValidationError({'reply_to': 'You have to reply to the comment of same type.'})
-            if reply_to and reply_to.object_id != serializer.validated_data.get('object_id'):
+            if reply_to and reply_to.object_id != object_id:
                 raise ValidationError({'reply_to': 'You have to reply to the comment that corresponds to the same object.'})
 
             Comment.objects.create(**serializer.validated_data, user=user,

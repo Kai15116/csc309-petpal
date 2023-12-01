@@ -125,7 +125,7 @@ const PetDetails = () => {
               <div class="pet-details">
                   <h1>Get To Know Lalo</h1>
                   <div class="d-flex pet_details_and_shelter">
-                      <div class="col-lg-6">
+                      <div class="col-lg-6" style={{"marginRight": "20px"}}>
                           <table class="table">
                               <tbody>
                               <tr>
@@ -167,12 +167,12 @@ const PetDetails = () => {
                               </tbody>
                           </table>
                       </div>
-                      <div className="pet_details_and_shelter">
+                      <div className="pet_details_and_shelter" style={{marginLeft: "32px"}}>
                         {/* Replace the existing shelter card code with the Shelter component */}
                         <ShelterCard
                           name="Toronto Zoo Escapees"
                           profileLink="shelter_profile_view_unauth.html"
-                          stars={['', '', '', '']} // Add stars as needed
+                          stars={4} // Add stars as needed
                           reviewCount={123}
                           joinDate="Sep. 21, 2023"
                         />

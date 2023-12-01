@@ -11,9 +11,12 @@ import SearchFilter from './pages/SearchFilter';
 import MyPets from './pages/MyPets';
 import Adoption from './pages/Adoption';
 import PetCreationUpdate from './pages/PetCreationUpdate';
+import Applications from './pages/Applications';
+import Application from './pages/Application';
 
 const App = () => {
   return (
+    <userContext.Provider value={useUserContext()}>
     <Router>
       <div>
         {/* Your common layout or navigation goes here */}
@@ -31,10 +34,13 @@ const App = () => {
           <Route path="/createUpdate" element={<PetCreationUpdate />} />
           {/* below path is for updating */}
           <Route path="/createUpdate/:petId" element={<PetCreationUpdate />} />
+          <Route path="/applications" element={<Applications />} />
+          <Route path="/application/:applicationId" element={<Application />} />
           {/* Add more routes for additional pages */}
         </Routes>
       </div>
     </Router>
+    </userContext.Provider>
   );
 };
 

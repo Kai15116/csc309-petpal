@@ -33,7 +33,7 @@ const Header = () => {
                   method: 'GET',
                   headers: {
                         'Authorization': `Bearer ${user.accessToken}`,
-                    }
+                  }
               });
 
               if (response.status >= 200 && response.status < 300) {
@@ -79,7 +79,6 @@ const Header = () => {
       }
     }
 
-
     return (
     <Navbar expand="lg" className="bg-white shadow-sm">
       <Container fluid>
@@ -90,26 +89,39 @@ const Header = () => {
         <Navbar.Toggle aria-controls="navbarSupportedContent"></Navbar.Toggle>
 
         <Navbar.Collapse id="navbarSupportedContent">
-          <Nav className="me-auto">
-            <Nav.Item>
-              <Form
-                role="search"
-                style={{ width: '400px', minWidth: '35%', maxWidth: '90%' }}
-                action="/searchpage"
-              >
-                <InputGroup>
-                  <Form.Control
-                    type="search"
-                    placeholder="Search here..."
-                    aria-label="Search"
-                    aria-describedby="search-btn"
-                    required
-                  />
-                  <Button variant="outline-success" type="submit" id="search-btn">Search
-                  </Button>
-                </InputGroup>
-              </Form>
-            </Nav.Item>
+          <Nav className="me-auto" activeKey={window.location.pathname}>
+              {(!isLoggedIn || user.contextUserType === "seeker") && <>
+              <Nav.Item>
+                <Form
+                  role="search"
+                  style={{ width: '400px', minWidth: '35%', maxWidth: '90%' }}
+                  action="/searchpage"
+                >
+                  <InputGroup>
+                    <Form.Control
+                      type="search"
+                      placeholder="Search pets here..."
+                      aria-label="Search"
+                      aria-describedby="search-btn"
+                      required
+                    />
+                    <Button variant="outline-success" type="submit" id="search-btn">Search
+                    </Button>
+                  </InputGroup>
+                </Form>
+              </Nav.Item>
+              <Nav.Item><Nav.Link href="/">Home</Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link href="/shelters">All shelters</Nav.Link></Nav.Item>
+              </>}
+              {user.contextUserType === "shelter" && <>
+                  <Nav.Item>
+                      <Nav.Link href="/mypets">My Pets</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                      <Nav.Link href="/applications">Applications</Nav.Link>
+                  </Nav.Item>
+              </>
+              }
               <hr className="mobile-nav-item"></hr>
 
               {!isLoggedIn && <>
@@ -121,7 +133,7 @@ const Header = () => {
                   </Nav.Item></>}
               {isLoggedIn && <>
               <Nav.Item>
-                <Nav.Link className="mobile-nav-item" href={profileUrl}>Profile</Nav.Link>
+                  <Nav.Link className="mobile-nav-item" href={profileUrl}>Profile</Nav.Link>
               </Nav.Item>
               <Nav.Item className="mobile-nav-item">
                 <Nav.Link onClick={() => setOpen(!open)}>Notifications</Nav.Link>
