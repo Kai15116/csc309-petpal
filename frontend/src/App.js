@@ -8,8 +8,6 @@ import { userContext, useUserContext } from './context/userContext';
 import SeekerProfile from './pages/SeekerProfile';
 import ShelterProfile from './pages/ShelterProfile';
 import SearchFilter from './pages/SearchFilter';
-import NotFound from './pages/NotFound';
-import ShelterList from './pages/ShelterList';
 
 const App = () => {
   return (
@@ -25,9 +23,6 @@ const App = () => {
           <Route path="/searchpage" element={<SearchFilter/>}/>
           <Route path="/seekerprofile/:userId" element={<SeekerProfile />} />
           <Route path="/shelterprofile/:userId" element={<ShelterProfile />} />
-          <Route path="/shelters" element={<ShelterList/>}/>
-          <Route path="*" element={<NotFound></NotFound>}/>
-          
           {/* Add more routes for additional pages */}
         </Routes>
       </div>

@@ -78,7 +78,8 @@ const Login = () => {
     } 
   
     return (
-      <div style={{background: `url(${bgLogin})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition:"bottom", minHeight: "100vh"}}>
+        <>
+      <div style={{background: `url(${bgLogin})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition:"bottom", minHeight: "calc(100vh - 4rem)"}}>
         <LandingHeader />
         
         <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
@@ -136,9 +137,9 @@ const Login = () => {
           </form> */}
         
         </div>
-        <Footer />
       </div>
-  
+        <Footer />
+        </>
     );
   };
   

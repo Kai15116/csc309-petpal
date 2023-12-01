@@ -204,9 +204,9 @@ function SearchFilter() {
 
     return (
         // TODO: filter using searchParams. (After backend is done)
-        <div style={{background: `#F5F5F5`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition:"center", minHeight: "100vh", paddingBottom: "4.5rem"}}>
+        <div style={{background: `#F5F5F5`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition:"center", minHeight: "100vh"}}>
             <LandingHeader />
-            <div>
+            <div style={{minHeight: "100vh"}}>
                 <Alert variant={noResult?"danger":"secondary"} style={{marginTop: "5px", paddingLeft: "3rem"}}>
                     {noResult ? 
                     <><i class="bi bi-exclamation-triangle"></i>"Sorry, no result is found. Try clear the filter and try again."</> :
