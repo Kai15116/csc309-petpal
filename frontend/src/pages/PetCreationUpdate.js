@@ -1,30 +1,34 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect, useContext } from 'react';
 import ProfileHeader from '../components/ProfileHeader';
 import Footer from '../components/Footer';
-import '../styles/pet_creation_and_update.css'; 
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import '../styles/pet_creation_and_update.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import image1 from "../assets/images/image1.jpg"
 import image2 from "../assets/images/image2.jpg"
 import image3 from "../assets/images/image3.jpg"
-import noImage from '../assets/images/no_image_icon.png'; 
+import noImage from '../assets/images/no_image_icon.png';
 import { useNavigate, useParams } from 'react-router-dom';
+import { userContext } from '../context/userContext';
+
 
 const PetCreationUpdate = () => {
+  const {getContextUser} = useContext(userContext);
   const navigate = useNavigate();
-  const { petId } = useParams();
+  const { petId, shelterId } = useParams();
   const [petInfo, setPetInfo] = useState(null);
+  const {accessToken, refreshToken, contextUserId, contextUserType} = getContextUser();
 
   // initialize with values from props for editing, or set to initial values if we are creating a pet
   const [petName, setPetName] = useState('');
   const [petType, setPetType] = useState('');
   const [petSex, setPetSex] = useState('');
-  const [petBreed, setPetBreed] = useState(''); 
+  const [petBreed, setPetBreed] = useState('');
   const [petAge, setPetAge] = useState(null);
   const [petWeight, setPetWeight] = useState( null);
   const [petFee, setPetFee] = useState(null);
   const [petLocation, setPetLocation] = useState('');
-  const [petMedicalHistory, setPetMedicalHistory] = useState(''); 
+  const [petMedicalHistory, setPetMedicalHistory] = useState('');
   const [uploadedImages, setUploadedImages] = useState([noImage, noImage, noImage]);
   const [additionalNotes, setAdditionalNotes] = useState('');
   const [editMode, setEditMode] = useState(false);
@@ -58,7 +62,7 @@ const PetCreationUpdate = () => {
 
               setPetInfo({...data})
               console.log(data)
-              
+             
               // set each value based on the data received
               setPetName(data.name || '');
               setPetType(data.breed || '');
@@ -75,7 +79,7 @@ const PetCreationUpdate = () => {
                 getPetImage(data.picture_3),
               ]);
               setAdditionalNotes(data.notes || '');
-              
+             
               if (petId) {
                 setEditMode(true);
               }
@@ -129,6 +133,8 @@ const PetCreationUpdate = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+
         },
         body: JSON.stringify({
           name: petName,
@@ -145,40 +151,40 @@ const PetCreationUpdate = () => {
           notes: additionalNotes,
         }),
       });
-  
+ 
       if (response.status === 403) {
         navigate('/');
       } else if (response.status >= 200 && response.status < 300) {
-        const data = await response.json();
-  
+        // const data = await response.json();
+ 
         // after creation navigate to its details page for now
-        navigate(`/details/${data.id}`);
+        navigate(`/searchpage`);
       } else {
         // other error in pet creation
         console.error('Failed to create pet:', response.statusText);
       }
     } catch (e) {
       console.log(e);
-      navigate('/');
+      // navigate('/');
     }
   };
-  
-  // handle button click 
+ 
+  // handle button click
   const handleButtonClick = () => {
-    if (editMode) {
+    // if (editMode) {
       // edit the pet
       // navigate("edit_pets.html");
-      return;
-    } else {
+    //   return;
+    // } else {
       // create a new pet
       createPet();
-    }
+    // }
   };
 
   return (
     <div className="wrapper">
       <ProfileHeader />
-      <main class="page-content">  
+      <main class="page-content"> 
         <div>
           {editMode ? (
             <h3>Edit Pet Listing: {petName}</h3>
@@ -239,7 +245,7 @@ const PetCreationUpdate = () => {
                             </form>
                             </div>
                         </div>
-                    </div>    
+                    </div>   
                 </div>
                 <div class="bg-white mt-4 p-4 rounded shadow">
                   <div class="container">
@@ -286,14 +292,14 @@ const PetCreationUpdate = () => {
                         </div>
                     </div>
                     <div class="confirm-button"> 
-                      <a
+                      <button
                         className="btn btn-primary btn-lg btn-xl post-button"
-                        href={editMode ? "edit_pets.html" : "my_pets.html"}
+                        // href={editMode ? "edit_pets.html" : "my_pets.html"}
                         role="button"
-                        onClick={handleButtonClick}
+                        onClick={()=>{handleButtonClick();}}
                       >
                         {editMode ? "Edit Pet Listing" : "Post Pet Listing"}
-                      </a>   
+                      </button>   
                     <div>
                 </div>
             </div> 
@@ -316,7 +322,7 @@ const PetCreationUpdate = () => {
                   this wonderful journey of compassion and companionship!
                 </p>
               </div>;
-            </div>      
+            </div>     
       </main>
       <Footer />
     </div>
