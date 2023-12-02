@@ -123,7 +123,7 @@ const PetDetails = () => {
       <div class="background-details">
           <div class="container" id="pet-details-container">
               <div class="pet-details">
-                  <h1>Get To Know Lalo</h1>
+                  <h1>Get To Know {petName}</h1>
                   <div class="d-flex pet_details_and_shelter">
                       <div class="col-lg-6" style={{"marginRight": "20px"}}>
                           <table class="table">
@@ -178,7 +178,7 @@ const PetDetails = () => {
                         />
                       </div>
                   </div>
-                  <div class="col-lg-12" id="owner-notes">
+                  <div class="col-lg-12" id="owner-notes" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                     <h2>Owner Notes:</h2>
                     <ul>
                       {additionalNotes &&
