@@ -18,3 +18,12 @@
 .form-group {
   width: 100%;
 }
+
+.preview-container{
+  overflow: 'hidden';
+  word-wrap: 'break-word';
+  max-width: '100%';
+  display: 'flex';
+  justify-content: 'flex-start';
+  text-align: 'left';
+}

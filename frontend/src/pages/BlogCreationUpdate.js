@@ -67,11 +67,18 @@ const BlogCreationUpdate = () => {
             <div class="background-details">
                 <div class="bg-white mt-4 p-4 rounded shadow">
                     <div class="container">
-                          <div class="blog-details">
+                          <div class="blog-details" style={{ overflow: 'hidden', wordWrap: 'break-word', maxWidth: '100%',
+                        display: 'flex',
+                        justifyContent: 'flex-start',
+                      }}>
                           <h4>1. Blog Content</h4>
                             <div style={{minWidth:"100%"}}>
                               <div className="form-group">
-                                <label htmlFor="blogTitle" className="form-label">
+                                <label htmlFor="blogTitle" className="form-label"
+                                style={{ 
+                                display: 'flex',
+                                justifyContent: 'flex-start',
+                                fontWeight: 'bold'}}>
                                   Title
                                 </label>
                                 <input
@@ -83,7 +90,11 @@ const BlogCreationUpdate = () => {
                                 />
                               </div>
                               <div className="form-group">
-                                <label htmlFor="blogContent" className="form-label">
+                                <label htmlFor="blogContent" className="form-label" 
+                                style={{ 
+                                display: 'flex',
+                                justifyContent: 'flex-start',
+                                fontWeight: 'bold'}}>
                                   Body
                                 </label>
                                 <textarea
@@ -103,18 +114,25 @@ const BlogCreationUpdate = () => {
                 </div>
                 <div className="bg-white mt-4 p-4 rounded shadow">
                   <div className="container">
-                    <div className="blog-details">
+                    <div className="blog-details" style={{ overflow: 'hidden', wordWrap: 'break-word', maxWidth: '100%', display: 'flex', justifyContent: 'flex-start'}}>
                       <h4>2. Content Preview</h4>
                       <h1>{title}</h1>
-                      <div className="preview-container left-align" style={{ overflow: 'hidden', wordWrap: 'break-word', maxWidth: '100%' }}>
-                        <ReactMarkdown>{blogContent}</ReactMarkdown>
-                      </div>
+                        <div 
+                          style={{ 
+                            overflow: 'hidden', wordBreak: 'break-word', maxWidth: '100%', display: 'flex', justifyContent: 'flex-start', textAlign: 'left', flexWrap: 'wrap'
+                          }}
+                        >
+                          <ReactMarkdown >{blogContent}</ReactMarkdown>
+                        </div>
                     </div>
                   </div>
                 </div>
                 <div class="bg-white mt-4 p-4 rounded shadow">
                   <div class="container">
-                    <div class="blog-details">
+                    <div class="blog-details" style={{ overflow: 'hidden', wordWrap: 'break-word', maxWidth: '100%',
+                        display: 'flex',
+                        justifyContent: 'flex-start',
+                      }}>
                       <h4>3. Media</h4>
                         <h6>Include photos with different angles and environments (4:3 Aspect Ratio Recomended)</h6>
                         <div className="row">
