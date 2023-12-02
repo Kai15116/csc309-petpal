@@ -63,14 +63,14 @@ const Landing = () => {
               <div className="d-flex flex-column" style={{backgroundColor: "rgb(237, 237, 237)"}}>
                 <h1 className="m-4">Dogs Near By:</h1>
                 <Row className="card-container mx-4" xs={1} md={2} lg={3} xl={5}>
-                    {topDogs?.results?.map((pet, index) => <Col key={index}><PetCard {...pet}></PetCard></Col>)}
+                    {topDogs?.results?.map((pet, index) => <Col key={index}><PetCard pet={{...pet}}></PetCard></Col>)}
                 </Row>
               </div>
 
               <div className="d-flex flex-column pb-4" style={{backgroundColor: "rgb(237, 237, 237)"}}>
                 <h1 className="m-4">Cats Near By:</h1>
                 <Row className="card-container mx-4" xs={1} md={2} lg={3} xl={5}>
-                    {topCats?.results?.map((pet, index) => <Col key={index}><PetCard {...pet}></PetCard></Col>)}
+                    {topCats?.results?.map((pet, index) => <Col key={index}><PetCard pet={{...pet}}></PetCard></Col>)}
                 </Row>
               </div>
 

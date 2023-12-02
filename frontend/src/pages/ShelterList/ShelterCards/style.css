@@ -1,0 +1,17 @@
+.shelter-card {
+    background-image: linear-gradient(to right, #3c9ec1 0%, #edf3f4dd  30%, white 60%, #239fa6  100%);
+    background-position: left;
+    background-size: 200% auto;
+    transition: all 0.7s;
+}
+
+.shelter-card:hover {
+    background-position: right center;
+    cursor: pointer;
+  }
+  
+.shelter-card:hover .shelter-card_title{
+    transform: translateX(5px);
+    font-weight: bold;
+    font-style: italic;
+  }

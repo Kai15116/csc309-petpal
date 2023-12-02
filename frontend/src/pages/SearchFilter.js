@@ -10,6 +10,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import CPagination from "../components/CPagination";
 
 
+
 // Reference Lecture example: URL parser.
 function to_url_params(object) {
     var result = [];
@@ -42,7 +43,7 @@ function SearchFilter() {
     
 
 
-    // newly added (Not working)
+
     const [ searchParams, setSearchParams ] = useSearchParams();
     const query = useMemo(() => ({
         page : parseInt(searchParams.get("page") ?? 1),
@@ -54,7 +55,7 @@ function SearchFilter() {
         sex : searchParams.get("sex") ?? "",
         order_by : searchParams.get("order_by") ?? "name",
     }), [searchParams]);
-    // (Not working)
+    
 
     // used for pagination state management
     const setcurrentActivePage = (value) => {
@@ -149,6 +150,18 @@ function SearchFilter() {
         })
     }
 
+
+
+    const clearOptions = () => {
+        setFilterOptions({sex:"", age:"", weight:""});
+        setSortOption("");
+    }
+
+    const resetFilters = () => {
+        clearOptions();
+        navigate('/searchpage');
+    }
+
     // filter side Offcanvas 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -199,28 +212,33 @@ function SearchFilter() {
                     <><i class="bi bi-exclamation-triangle"></i>"Sorry, no result is found. Try clear the filter and try again."</> :
                     `Found ${petsInfo?.count??0} matching results in ${pagesCount??1} pages`}
                 </Alert>
-                <div style={{display: "flex", justifyContent: "right", paddingRight: "3rem"}}>
+                <div style={{display: "flex", justifyContent: "right", paddingRight: "3rem", gap:"2px"}}>
+                <Button variant="outline-primary" onClick={resetFilters}
+                    
+                    style={{fontWeight: "500"}}>
+                    Reset All
+                </Button>
                 <Button variant="outline-primary" onClick={handleShow} style={{fontWeight: "500"}}>
                     Show Filters<i className="bi bi-sort-down"></i>
                 </Button>
 
                 </div>
-                <div style={{width: "90%", margin: "0 auto", minHeight: "60vh"}}>
+                <div style={{width: "90%", margin: "1rem auto", minHeight: "60vh"}}>
                 <Row className="" xs={1} md={2} lg={3} xl={4} >
-                    {petsInfo?.results?.map((pet, index) => <Col  key={index}><PetCard {...pet}></PetCard></Col>)}
+                    {petsInfo?.results?.map((pet, index) => <Col  key={index}><PetCard pet={{...pet}}></PetCard></Col>)}
                 </Row>
                 </div>
                 
 
                 <Offcanvas show={show} onHide={handleClose} >
                     <Offcanvas.Header closeButton>
-                    <Offcanvas.Title style={{fontSize: "33px"}}> Dream Pet Access </Offcanvas.Title>
+                    <Offcanvas.Title style={{fontSize: "33px", fontFamily:"Georgia"}}> Dream Pet Access </Offcanvas.Title>
                     </Offcanvas.Header>
                     <hr></hr>
                     <Offcanvas.Body>
                     <Form onSubmit={(e) => submitFilterOptions(e)}>
-                        {/* <FormGroup className="mb-3">
-                            <FloatingLabel label="Category">
+                        <FormGroup className="mb-3">
+                            <FloatingLabel label="Category:(Not supported)">
                             <Form.Select className="border-secondary">
 
                             <option>Select All</option>
@@ -231,10 +249,10 @@ function SearchFilter() {
                                
                             </FloatingLabel>
                                 
-                        </FormGroup> */}
+                        </FormGroup>
 
-                        {/* <FormGroup className="mb-3">
-                            <FloatingLabel label="Breed">
+                        <FormGroup className="mb-3">
+                            <FloatingLabel label="Breed:(Not supported)">
                             <Form.Select className="border-secondary">
 
                                 <option>Select All</option>
@@ -244,10 +262,10 @@ function SearchFilter() {
                                 </Form.Select>
                             </FloatingLabel>
                                 
-                        </FormGroup> */}
+                        </FormGroup>
 
                         <FormGroup className="mb-3">
-                            <FloatingLabel label="Age">
+                            <FloatingLabel label="Age:">
                                 <Form.Select className="border-secondary" value={filterOptions?.age} onChange={(e) => setFilterOptions({...filterOptions, age: e.target.value})}>
 
                                 <option value="">Select All</option>
@@ -262,7 +280,7 @@ function SearchFilter() {
                         </FormGroup>
 
                         <FormGroup className="mb-3">
-                            <FloatingLabel label="Size">
+                            <FloatingLabel label="Size:">
                                 <Form.Select className="border-secondary" value={filterOptions?.weight} onChange={(e) => setFilterOptions({...filterOptions, weight: e.target.value})}>
                                     <option value="">Select All</option>
                                     <option value="sm">Small(0-20 lbs)</option>
@@ -283,10 +301,23 @@ function SearchFilter() {
                             </FloatingLabel>
                                 
                         </FormGroup>
+
                         <FormGroup className="mb-3">
-                        <Button className="w-100 outline-primary" type="submit">Apply Filter</Button>
+                            <FloatingLabel label="Color:(Not supported)">
+                            <Form.Select className="border-secondary">
+                                    <option>Select All</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                </Form.Select>
+                            </FloatingLabel>
+                                
+                        </FormGroup>
+                        <FormGroup className="mb-3" style={{display: "flex", justifyContent: "space-between"}}>
+                        <Button className=" outline-primary" type="submit" style={{width: "45%"}}>Apply Filters</Button>
+                        <Button className="" onClick={(e)=>{e.preventDefault(); clearOptions();}} style={{width: "45%"}}>Clear Filters</Button>
 
                         </FormGroup>
+
                         
                         
                     </Form>
@@ -317,6 +348,10 @@ function SearchFilter() {
                         <Button className="w-100" type="submit">Start Sorting</Button>
 
                         </FormGroup>
+
+                        <hr></hr>
+
+                        
 
                     </Form>        
                     </Offcanvas.Body>
