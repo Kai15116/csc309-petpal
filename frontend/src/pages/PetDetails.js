@@ -187,8 +187,8 @@ const PetDetails = () => {
                         ))}
                     </ul>
                   </div>
-                  <Link to="/adoption" role="button">
-                    <a class="btn btn-primary btn-lg apply-button" href="adoption.html" role="button">Apply For Adoption</a>
+                  <Link to={`/adoption/${petId}`} role="button">
+                    <button class="btn btn-primary btn-lg apply-button" >Apply For Adoption</button>
                   </Link>
                   </div>
                 </div>
