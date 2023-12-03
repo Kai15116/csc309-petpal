@@ -74,9 +74,19 @@ const PetCreationUpdate = () => {
               setPetFee(data.adoption_fee || null);
               setPetLocation(data.adoption_location || '');
               setPetMedicalHistory(data.medical_history || '');
-              setSelectedImage1(data.picture_1)
-              setSelectedImage2(data.picture_2)
-              setSelectedImage3(data.picture_3)
+
+              const blob1 = await fetch(data.picture_1).then((r) => r.blob());
+              const file1 = new File([blob1], "filename.jpg", { type: "image/jpeg" });
+              setSelectedImage1(file1);
+
+              const blob2 = await fetch(data.picture_1).then((r) => r.blob());
+              const file2 = new File([blob2], "filename.jpg", { type: "image/jpeg" });
+              setSelectedImage2(file2);
+
+              const blob3 = await fetch(data.picture_1).then((r) => r.blob());
+              const file3 = new File([blob3], "filename.jpg", { type: "image/jpeg" });
+              setSelectedImage3(file3);
+
               setAdditionalNotes(data.notes || '');
              
               if (petId) {
@@ -130,7 +140,7 @@ const PetCreationUpdate = () => {
       });
   };
 
-  const editPet = (petId) => {
+  const editPet = () => {
     // append fields
     const formData = new FormData();
     formData.append('name', petName);
@@ -147,10 +157,9 @@ const PetCreationUpdate = () => {
     formData.append('picture_1', selectedImage1);
     formData.append('picture_2', selectedImage2);
     formData.append('picture_3', selectedImage3);
-    formData.append('id', petId)
   
-    // Make a PUT request to update the pet
-    fetch(`http://localhost:8000/pets/`, {
+    // make a PUT request to update the pet
+    fetch(`http://localhost:8000/pets/${petId}/`, {
       method: 'PUT', // TODO: put and patch is not allowed
       body: formData,
       headers: {
