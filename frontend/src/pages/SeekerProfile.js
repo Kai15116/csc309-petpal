@@ -1,6 +1,7 @@
 import {useContext, useState, useEffect} from "react";
 import { userContext } from "../context/userContext";
 import { useParams, useNavigate } from "react-router-dom";
+import LandingHeader from "../components/LandingHeader";
 function SeekerProfile() {
     const {getContextUser} = useContext(userContext);
     const [userInfo, setUserInfo] = useState(null);
@@ -43,6 +44,7 @@ function SeekerProfile() {
     
     return (
         <div>
+            <LandingHeader></LandingHeader>
             SeekerProfileFake
             <div>
                 <h1>This is from user context</h1>
