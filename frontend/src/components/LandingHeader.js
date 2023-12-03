@@ -176,6 +176,7 @@ const LandingHeader = () => {
                   <Dropdown.Menu className="dropdown-menu">
                       {notifications?.map((item, index) => <NotificationItem className="dropdown-item text-wrap" key={index} notification={item}></NotificationItem>)}
                       {notifications?.length === 0 && <Dropdown.Item className="text-wrap" href="#">No notifications...</Dropdown.Item>}
+                      <Dropdown.Item style={{textDecoration: "underline"}} onClick={()=>navigate(`/notifications/${user?.contextUserId}`)}>View History</Dropdown.Item>
                   </Dropdown.Menu>
               </Dropdown>
               <div className="vr mx-2 def-nav-item"></div>
