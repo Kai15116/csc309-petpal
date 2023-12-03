@@ -10,7 +10,7 @@ import image3 from "../assets/images/image3.jpg"
 import noImage from '../assets/images/no_image_icon.png';
 import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/userContext';
-
+const baseURL = "http://localhost:8000/media/pet_images/";
 
 const PetCreationUpdate = () => {
   const {getContextUser} = useContext(userContext);
@@ -30,6 +30,7 @@ const PetCreationUpdate = () => {
   const [petLocation, setPetLocation] = useState('');
   const [petMedicalHistory, setPetMedicalHistory] = useState('');
   const [uploadedImages, setUploadedImages] = useState([noImage, noImage, noImage]);
+  const [uploadedImagesToStr, setUploadedImagesToStr] = useState(["noImage.jpg", "noImage.jpg", "noImage.jpg"]);
   const [additionalNotes, setAdditionalNotes] = useState('');
   const [editMode, setEditMode] = useState(false);
 
@@ -61,7 +62,7 @@ const PetCreationUpdate = () => {
               const data = await response.json();
 
               setPetInfo({...data})
-              console.log(data)
+              console.log("dataaaaa", data)
              
               // set each value based on the data received
               setPetName(data.name || '');
@@ -113,26 +114,14 @@ const PetCreationUpdate = () => {
   };
 
   const createPet = async () => {
-    // console.log('Request Body:', JSON.stringify({
-    //   name: petName,
-    //   breed: petBreed,
-    //   sex: petSex,
-    //   age: Number(petAge),
-    //   weight: Number(petWeight),
-    //   adoption_fee: Number(petFee).toFixed(2),
-    //   adoption_location: petLocation,
-    //   medical_history: petMedicalHistory,
-    //   picture_1: uploadedImages[0],
-    //   picture_2: uploadedImages[1],
-    //   picture_3: uploadedImages[2],
-    //   notes: additionalNotes,
-    // }));
+
+    const updatedImages = uploadedImagesToStr.map(image => baseURL + image);
 
     try {
       const response = await fetch(`http://localhost:8000/pets/`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/json',
           'Authorization': `Bearer ${accessToken}`,
 
         },
@@ -145,40 +134,51 @@ const PetCreationUpdate = () => {
           adoption_fee: Number(petFee).toFixed(2),
           adoption_location: petLocation,
           medical_history: petMedicalHistory,
-          picture_1: uploadedImages[0],
-          picture_2: uploadedImages[1],
-          picture_3: uploadedImages[2],
+          // picture_1: updatedImages[0],
+          // picture_2: updatedImages[1],
+          // picture_3: updatedImages[2],
+          picture_1: "http://localhost:8000/media/pet_images/image1.jpg",
+          picture_2: "http://localhost:8000/media/pet_images/image2.jpg",
+          picture_3: "http://localhost:8000/media/pet_images/image3.jpg",
+          
           notes: additionalNotes,
         }),
       });
  
       if (response.status === 403) {
+        const data = await response.json();
+        console.log("my data 1", data);
         navigate('/');
       } else if (response.status >= 200 && response.status < 300) {
         // const data = await response.json();
+        const data = await response.json();
+        console.log("my data 2", data);
  
         // after creation navigate to its details page for now
         navigate(`/searchpage`);
       } else {
+        const data = await response.json();
+        console.log("my data else", data);
         // other error in pet creation
         console.error('Failed to create pet:', response.statusText);
       }
     } catch (e) {
       console.log(e);
+      
       // navigate('/');
     }
   };
  
   // handle button click
   const handleButtonClick = () => {
-    // if (editMode) {
-      // edit the pet
-      // navigate("edit_pets.html");
-    //   return;
-    // } else {
-      // create a new pet
-      createPet();
-    // }
+      if (editMode) {
+        // edit the pet
+        navigate("edit_pets.html");
+        return;
+      } else {
+        // create a new pet
+        createPet();
+      }
   };
 
   return (
@@ -295,8 +295,7 @@ const PetCreationUpdate = () => {
                       <button
                         className="btn btn-primary btn-lg btn-xl post-button"
                         // href={editMode ? "edit_pets.html" : "my_pets.html"}
-                        role="button"
-                        onClick={()=>{handleButtonClick();}}
+                        onClick={()=>{handleButtonClick()}}
                       >
                         {editMode ? "Edit Pet Listing" : "Post Pet Listing"}
                       </button>   
