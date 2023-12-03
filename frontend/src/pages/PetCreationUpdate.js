@@ -41,11 +41,9 @@ const PetCreationUpdate = () => {
   const handleImageChange1 = (e) => {
     setSelectedImage1(e.target.files[0]);
   };
-
   const handleImageChange2 = (e) => {
     setSelectedImage2(e.target.files[0]);
   };
-
   const handleImageChange3 = (e) => {
     setSelectedImage3(e.target.files[0]);
   };
@@ -90,11 +88,14 @@ const PetCreationUpdate = () => {
               setPetFee(data.adoption_fee || null);
               setPetLocation(data.adoption_location || '');
               setPetMedicalHistory(data.medical_history || '');
-              setUploadedImages([
-                getPetImage(data.picture_1),
-                getPetImage(data.picture_2),
-                getPetImage(data.picture_3),
-              ]);
+              // setUploadedImages([
+              //   getPetImage(data.picture_1),
+              //   getPetImage(data.picture_2),
+              //   getPetImage(data.picture_3),
+              // ]);
+              setSelectedImage1(data.picture_1)
+              setSelectedImage2(data.picture_2)
+              setSelectedImage3(data.picture_3)
               setAdditionalNotes(data.notes || '');
              
               if (petId) {
@@ -166,6 +167,8 @@ const PetCreationUpdate = () => {
     formData.append('notes', additionalNotes);
 
     formData.append('picture_1', selectedImage1);
+    formData.append('picture_2', selectedImage2);
+    formData.append('picture_3', selectedImage3);
   
     // Make a POST request to your server with the FormData
     fetch(`http://localhost:8000/pets/`, {
