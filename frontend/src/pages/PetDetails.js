@@ -28,8 +28,15 @@ const PetDetails = () => {
   const [petLocation, setPetLocation] = useState('');
   const [petMedicalHistory, setPetMedicalHistory] = useState('');
   const [petStatus, setPetStatus] = useState(false);
-  const [uploadedImages, setUploadedImages] = useState([noImage, noImage, noImage]);
+  const [selectedImage1, setSelectedImage1] = useState(null);
+  const [selectedImage2, setSelectedImage2] = useState(null);
+  const [selectedImage3, setSelectedImage3] = useState(null);
   const [additionalNotes, setAdditionalNotes] = useState('');
+
+  const extractFileName = (url) => {
+    const parts = url.split('/');
+    return parts[parts.length - 1];
+  };
 
   useEffect(function() {
       async function fetchUserInfo() {
@@ -57,11 +64,19 @@ const PetDetails = () => {
               setPetLocation(data.adoption_location || '');
               setPetMedicalHistory(data.medical_history || '');
               setPetStatus(data.status || '');
-              setUploadedImages([
-                getPetImage(data.picture_1),
-                getPetImage(data.picture_2),
-                getPetImage(data.picture_3),
-              ]);
+
+              const blob1 = await fetch(data.picture_1).then((r) => r.blob());
+              const file1 = new File([blob1], extractFileName(data.picture_1), { type: "image/jpeg" });
+              setSelectedImage1(file1);
+
+              const blob2 = await fetch(data.picture_2).then((r) => r.blob());
+              const file2 = new File([blob2], extractFileName(data.picture_2), { type: "image/jpeg" });
+              setSelectedImage2(file2);
+
+              const blob3 = await fetch(data.picture_3).then((r) => r.blob());
+              const file3 = new File([blob3], extractFileName(data.picture_3), { type: "image/jpeg" });
+              setSelectedImage3(file3);
+
               setAdditionalNotes(data.notes || '');
 
               // setAllowAccess(true);
@@ -73,20 +88,6 @@ const PetDetails = () => {
       fetchUserInfo();
 
   }, [ petId ])
-
-  // helper function to get image given url that is stored in object
-  const getPetImage = (key) => {
-    // Create a dictionary for images within the function
-    const petImages = {
-      "http://localhost:8000/media/pet_images/image1.jpg": image1,
-      "http://localhost:8000/media/pet_images/image2.jpg": image2,
-      "http://localhost:8000/media/pet_images/image3.jpg": image3,
-    };
-
-    // return no image photo if image not found
-    return petImages[key] || noImage;
-  };
-
 
   // helper function to format date
   const formatDate = (timestamp) => {
@@ -102,19 +103,31 @@ const PetDetails = () => {
       <main class="page-content">
       <Carousel>
           <Carousel.Item>
-            <img className="d-block w-100" src={uploadedImages[0]} alt="Image 1"/>
+            <img
+              src={selectedImage1 ? URL.createObjectURL(selectedImage1) : noImage}
+              alt="Image 1"
+              className="d-block w-100"
+            />
             <Carousel.Caption>
               <h2>Meet {petName}!</h2>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="d-block w-100" src={uploadedImages[1]} alt="Image 2" />
+            <img
+              src={selectedImage2 ? URL.createObjectURL(selectedImage2) : noImage}
+              alt="Image 2"
+              className="d-block w-100"
+            />
             <Carousel.Caption>
               <h5>Give {petName} A Loving Home</h5>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="d-block w-100" src={uploadedImages[2]} alt="Image 3" />
+            <img
+              src={selectedImage3 ? URL.createObjectURL(selectedImage3) : noImage}
+              alt="Image 3"
+              className="d-block w-100"
+            />
             <Carousel.Caption>
               <h5>{petName} Is Waiting For Wonderful Parents </h5>
             </Carousel.Caption>

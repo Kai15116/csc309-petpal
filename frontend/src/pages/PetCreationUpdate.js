@@ -29,8 +29,6 @@ const PetCreationUpdate = () => {
   const [petFee, setPetFee] = useState(null);
   const [petLocation, setPetLocation] = useState('');
   const [petMedicalHistory, setPetMedicalHistory] = useState('');
-  const [uploadedImages, setUploadedImages] = useState([noImage, noImage, noImage]);
-  const [uploadedImagesToStr, setUploadedImagesToStr] = useState(["noImage.jpg", "noImage.jpg", "noImage.jpg"]);
   const [additionalNotes, setAdditionalNotes] = useState('');
   const [editMode, setEditMode] = useState(false);
 
