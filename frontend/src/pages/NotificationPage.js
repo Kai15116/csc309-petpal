@@ -137,7 +137,7 @@ function NotificationPage() {
         <div style={{minHeight: "100vh", background: "#F5F5F5"}} className="notification_layout">
             <Header></Header>
             <div style={{minHeight: "95vh"}}>
-            <h1 style={{fontFamily: "Georgia", paddingTop: "1rem", paddingLeft: "1rem"}}>Notifications<i className="bi bi-bell-fill"></i></h1>
+            <h1 style={{fontFamily: "Georgia", paddingTop: "3rem", paddingLeft: "3rem"}}>Notifications<i className="bi bi-bell-fill"></i></h1>
             <div style={{display: "flex", justifyContent: "end", paddingRight: "3rem"}}>
             <Button variant={"danger"} onClick={() => {
                         setToggleDelete(!toggleDelete)

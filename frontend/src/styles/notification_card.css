@@ -1,0 +1,17 @@
+.notification-card {
+    background-image: linear-gradient(to right, #ffffff 0%, #edf3f4dd  30%, #cfcfcf  100%);
+    background-position: left;
+    background-size: 200% auto;
+    transition: all 0.7s;
+}
+
+.notification-card:hover {
+    background-position: right center;
+    cursor: pointer;
+  }
+  
+.notification-card:hover .notification-card_title{
+    transform: translateX(5px);
+    font-weight: bold;
+    font-style: italic;
+  }
