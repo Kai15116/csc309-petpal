@@ -47,6 +47,11 @@ const PetCreationUpdate = () => {
   const handleImageChange3 = (e) => {
     setSelectedImage3(e.target.files[0]);
   };
+
+  const extractFileName = (url) => {
+    const parts = url.split('/');
+    return parts[parts.length - 1];
+  };
   
   useEffect(function() {
       async function fetchUserInfo() {
@@ -76,15 +81,15 @@ const PetCreationUpdate = () => {
               setPetMedicalHistory(data.medical_history || '');
 
               const blob1 = await fetch(data.picture_1).then((r) => r.blob());
-              const file1 = new File([blob1], "filename.jpg", { type: "image/jpeg" });
+              const file1 = new File([blob1], extractFileName(data.picture_1), { type: "image/jpeg" });
               setSelectedImage1(file1);
 
-              const blob2 = await fetch(data.picture_1).then((r) => r.blob());
-              const file2 = new File([blob2], "filename.jpg", { type: "image/jpeg" });
+              const blob2 = await fetch(data.picture_2).then((r) => r.blob());
+              const file2 = new File([blob2], extractFileName(data.picture_2), { type: "image/jpeg" });
               setSelectedImage2(file2);
 
-              const blob3 = await fetch(data.picture_1).then((r) => r.blob());
-              const file3 = new File([blob3], "filename.jpg", { type: "image/jpeg" });
+              const blob3 = await fetch(data.picture_3).then((r) => r.blob());
+              const file3 = new File([blob3], extractFileName(data.picture_3), { type: "image/jpeg" });
               setSelectedImage3(file3);
 
               setAdditionalNotes(data.notes || '');
@@ -257,37 +262,65 @@ const PetCreationUpdate = () => {
                   <div class="container">
                     <div class="pet-details">
                       <h4>2. Media</h4>
-                        <h6>Include photos with different angles and environments (4:3 Aspect Ratio Recomended)</h6>
+                        <h6>Include photos with different angles and environments (JPEG Required)</h6>
                         <div className="row">
-                          {/* {[1, 2, 3].map((index) => (
-                            <div className="col-4" key={index}>
-                              <label htmlFor={`image${index}`} className="image-label">
-                                <input
-                                  type="file"
-                                  className="image-input"
-                                  id={`image${index}`}
-                                  accept="image/*"
-                                  style={{ display: 'none' }}
-                                  onChange={(e) => handleImageSelect(index - 1, e.target.files[0])}
-                                />
+                          <div className="col-4">
+                            <label htmlFor="image1" className="image-label">
+                              <input
+                                type="file"
+                                className="image-input"
+                                id="image1"
+                                accept="image/*"
+                                style={{ display: 'none' }}
+                                onChange={handleImageChange1}
+                              />
+                              <div className="image-container">
                                 <img
-                                  src={uploadedImages[index - 1]}
-                                  alt={`Image ${index}`}
+                                  src={selectedImage1 ? URL.createObjectURL(selectedImage1) : noImage}
+                                  alt="Image 1"
                                   className="img-fluid image-preview"
                                 />
-                              </label>
-                            </div>
-                          ))} */}
-                            <div>
-                              <input type="file" accept="image/*" onChange={handleImageChange1} />
-                            </div>
-                            <div>
-                              <input type="file" accept="image/*" onChange={handleImageChange2} />
-                            </div>
-                            <div>
-                              <input type="file" accept="image/*" onChange={handleImageChange3} />
-                            </div>
-                            
+                              </div>
+                            </label>
+                          </div>
+                          <div className="col-4">
+                            <label htmlFor="image2" className="image-label">
+                              <input
+                                type="file"
+                                className="image-input"
+                                id="image2"
+                                accept="image/*"
+                                style={{ display: 'none' }}
+                                onChange={handleImageChange2}
+                              />
+                              <div className="image-container">
+                                <img
+                                  src={selectedImage2 ? URL.createObjectURL(selectedImage2) : noImage}
+                                  alt="Image 2"
+                                  className="img-fluid image-preview"
+                                />
+                              </div>
+                            </label>
+                          </div>
+                          <div className="col-4">
+                            <label htmlFor="image3" className="image-label">
+                              <input
+                                type="file"
+                                className="image-input"
+                                id="image3"
+                                accept="image/*"
+                                style={{ display: 'none' }}
+                                onChange={handleImageChange3}
+                              />
+                              <div className="image-container">
+                                <img
+                                  src={selectedImage3 ? URL.createObjectURL(selectedImage3) : noImage}
+                                  alt="Image 3"
+                                  className="img-fluid image-preview"
+                                />
+                              </div>
+                            </label>
+                          </div>
                         </div>
                     </div>
                   </div>
