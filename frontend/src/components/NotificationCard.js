@@ -4,6 +4,7 @@ import PlaceHolder from "./../assets/images/placeholderprofile.png"
 import { useNavigate } from "react-router-dom";
 import Badge from 'react-bootstrap/Badge';
 import { formatTimeGap } from "../utils";
+import "../styles/notification_card.css"
 
 const formatNotificationType = (note_type) => {
     switch (note_type) {
@@ -11,32 +12,40 @@ const formatNotificationType = (note_type) => {
         case "status_update":
             return {note_category:"Application", msg:"Application status updated! Please checkout the existing applications. ", contentType: "application", color: "danger"}
         case "application_creation":
+            // 
             return {note_category:"Application", msg:"There is a new application created for you!", contentType: "application", color: "danger"}
         case "new_review":
-            // TODO: make it to proper id
+            // 
             return {note_category:"Review", msg:"You just received a new review from our seeker. Please take a look.", contentType: "pet", color: "info"}
         case "new_message":
-            // TODO: make it to proper id
-            return {note_category:"Message", msg:"Note: New message received! Please checkout here.", contentType: "pet", color: "success"}
+            // conversation //
+            return {note_category:"Message", msg:"Note: New message received! Please checkout here.", contentType: "pet", color: "success", }
         case "new_pet_listing":
+            // Details/id
             return {note_category:"Pet", msg:"New pet added! Click to view detail.", contentType: "pet", color: "primary"}
         default:
+            // landing/profile
             return {note_category:"Notification", msg:"Seems like there is a new notification.", contentType: "pet", color:"secondary"}
     }
 }
 
+
+
 function NotificationCard(props) {
-    const {created_at, notification_type, read, id} = props.note;
+    const {created_at, notification_type, read, id, object_id} = props.note;
     const {note_category, msg, contentType, color} = formatNotificationType(notification_type);
+    const navigate = useNavigate();
 
     const handleClick = async (id) => {
         
+        
+        // url + object_id
         props.readNotification(id)
     }
 
 	
 	return (
-		<Card className="w-100 " style={{ paddingLeft: "3rem", lineHeight: "1", marginBottom: "0rem"}} onClick={() => handleClick(id)}>
+		<Card className="w-100 notification-card" style={{ paddingLeft: "3rem", lineHeight: "1", marginBottom: "0rem"}} onClick={() => handleClick(id)}>
 			<Card.Body>
                     <div style={{display: "grid", gridTemplateColumns: "1fr 80px auto"}}>
                     {/* <div style={{paddingLeft: "1rem" }}>

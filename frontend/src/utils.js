@@ -30,6 +30,6 @@ export function formatTimeGap(created_at) {
       return parseInt(Math.ceil(secAgo / 3600)) + 'h ago';
     }
     else {
-      return created_at.getDate();
+      return new Date(Date.parse(created_at)).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })
     }
   }
