@@ -59,11 +59,11 @@
 .test-div {
     position: relative;
     bottom: 10rem;
-    left: calc(50% - 8rem);
+    left: calc(50% - 7rem);
     background-image: url('../assets/example_images/milky3.jpg');
     background-size: cover;
-    width: 16rem;
-    height: 16rem;
+    width: 15rem;
+    height: 15rem;
     border-radius: 50%;
     border: 5px solid #C8F4FF;
 }

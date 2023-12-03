@@ -21,7 +21,7 @@ function ShelterReviewsCard(props) {
                     { commentInformation.map((comment) => (
                         <Container className="shelter-review-card pt-2" style={{ backgroundColor: "#fffaf0"}}>
                             <Row>
-                                <Col className="d-flex justify-content-start">
+                                <Col>
                                     <p>{comment.name}</p>
                                 </Col>
                             </Row>

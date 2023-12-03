@@ -23,20 +23,24 @@ function ShelterPetCarouselCard() {
   ];
 
   return (
-    <Card className="" style={{ minWidth: "20rem", maxWidth: "40rem", height: "max-content"}}>
+    
       <Carousel>
         {petInformation.map((pet) => (
             <Carousel.Item key={pet.id}>
-                <Card.Img variant="top" src={ExampleBean} alt={pet.name}/>
-                <Card.Body>
-                    <Card.Title>{pet.name}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">{pet.breed}</Card.Subtitle>
-                    <Card.Text>{pet.description}</Card.Text>
-                </Card.Body>
+                <Card style={{ minWidth: "20rem", maxWidth: "40rem"}}>
+                    <Card.Img variant="top" src={ExampleBean} alt={pet.name}/>
+                    <Card.Body>
+                        <Card.Title>{pet.name}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">{pet.breed}</Card.Subtitle>
+                        <Card.Text>{pet.description}</Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                        Updated Today
+                    </Card.Footer>
+                </Card>
             </Carousel.Item>
         ))}
       </Carousel>
-    </Card>
   );
 }
 
