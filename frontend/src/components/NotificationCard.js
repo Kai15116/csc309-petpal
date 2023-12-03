@@ -4,6 +4,7 @@ import PlaceHolder from "./../assets/images/placeholderprofile.png"
 import { useNavigate } from "react-router-dom";
 import Badge from 'react-bootstrap/Badge';
 import { formatTimeGap } from "../utils";
+import "../styles/notification_card.css"
 
 const formatNotificationType = (note_type) => {
     switch (note_type) {
@@ -44,7 +45,7 @@ function NotificationCard(props) {
 
 	
 	return (
-		<Card className="w-100 " style={{ paddingLeft: "3rem", lineHeight: "1", marginBottom: "0rem"}} onClick={() => handleClick(id)}>
+		<Card className="w-100 notification-card" style={{ paddingLeft: "3rem", lineHeight: "1", marginBottom: "0rem"}} onClick={() => handleClick(id)}>
 			<Card.Body>
                     <div style={{display: "grid", gridTemplateColumns: "1fr 80px auto"}}>
                     {/* <div style={{paddingLeft: "1rem" }}>
