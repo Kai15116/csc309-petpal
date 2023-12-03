@@ -34,6 +34,22 @@ const PetCreationUpdate = () => {
   const [additionalNotes, setAdditionalNotes] = useState('');
   const [editMode, setEditMode] = useState(false);
 
+  const [selectedImage1, setSelectedImage1] = useState(null);
+  const [selectedImage2, setSelectedImage2] = useState(null);
+  const [selectedImage3, setSelectedImage3] = useState(null);
+
+  const handleImageChange1 = (e) => {
+    setSelectedImage1(e.target.files[0]);
+  };
+
+  const handleImageChange2 = (e) => {
+    setSelectedImage2(e.target.files[0]);
+  };
+
+  const handleImageChange3 = (e) => {
+    setSelectedImage3(e.target.files[0]);
+  };
+  
   // helper function to get image given url that is stored in object
   const getPetImage = (key) => {
     // Create a dictionary for images within the function
@@ -98,79 +114,32 @@ const PetCreationUpdate = () => {
 
   const handleImageSelect = (index, file) => {
     if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const newPreviews = [...uploadedImages];
-        newPreviews[index] = e.target.result;
-        setUploadedImages(newPreviews);
-      };
-      reader.readAsDataURL(file);
+      // const reader = new FileReader();
+      // reader.onload = function (e) {
+      const newPreviews = [...uploadedImages];
+      newPreviews[index] = file;
+      setUploadedImages(newPreviews);
+
+        // update uploadedImagesToStr with the file name
+        // const newFileNames = [...uploadedImagesToStr];
+        // newFileNames[index] = file.name;
+        // setUploadedImagesToStr(newFileNames);
+      // };
+      // reader.readAsDataURL(file);
     } else {
       // reset to the default image
       const newPreviews = [...uploadedImages];
       newPreviews[index] = 'images/no_image_icon.png';
       setUploadedImages(newPreviews);
+
+      const newFileNames = [...uploadedImagesToStr];
+      newFileNames[index] = 'noImage.jpg'; 
+      setUploadedImagesToStr(newFileNames);
     }
   };
 
-  const createPet = async () => {
-
-    const updatedImages = uploadedImagesToStr.map(image => baseURL + image);
-
-    try {
-      const response = await fetch(`http://localhost:8000/pets/`, {
-        method: 'POST',
-        headers: {
-          // 'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`,
-
-        },
-        body: JSON.stringify({
-          name: petName,
-          breed: petBreed,
-          sex: petSex,
-          age: Number(petAge),
-          weight: Number(petWeight),
-          adoption_fee: Number(petFee).toFixed(2),
-          adoption_location: petLocation,
-          medical_history: petMedicalHistory,
-          // picture_1: updatedImages[0],
-          // picture_2: updatedImages[1],
-          // picture_3: updatedImages[2],
-          picture_1: "http://localhost:8000/media/pet_images/image1.jpg",
-          picture_2: "http://localhost:8000/media/pet_images/image2.jpg",
-          picture_3: "http://localhost:8000/media/pet_images/image3.jpg",
-          
-          notes: additionalNotes,
-        }),
-      });
- 
-      if (response.status === 403) {
-        const data = await response.json();
-        console.log("my data 1", data);
-        navigate('/');
-      } else if (response.status >= 200 && response.status < 300) {
-        // const data = await response.json();
-        const data = await response.json();
-        console.log("my data 2", data);
- 
-        // after creation navigate to its details page for now
-        navigate(`/searchpage`);
-      } else {
-        const data = await response.json();
-        console.log("my data else", data);
-        // other error in pet creation
-        console.error('Failed to create pet:', response.statusText);
-      }
-    } catch (e) {
-      console.log(e);
-      
-      // navigate('/');
-    }
-  };
- 
-  // handle button click
-  const handleButtonClick = () => {
+    // handle button click
+    const handleButtonClick = () => {
       if (editMode) {
         // edit the pet
         navigate("edit_pets.html");
@@ -179,6 +148,40 @@ const PetCreationUpdate = () => {
         // create a new pet
         createPet();
       }
+    };
+
+  const createPet = () => {  
+    // append fields
+    const formData = new FormData();
+    formData.append('name', petName);
+    formData.append('pet_type', petType);
+    formData.append('sex', petSex);
+    formData.append('breed', petBreed);
+    formData.append('age', Number(petAge));
+    formData.append('weight', Number(petWeight));
+    formData.append('adoption_fee', Number(petFee).toFixed(2));
+    formData.append('adoption_location', petLocation);
+    formData.append('age', petAge);
+    formData.append('medical_history', petMedicalHistory);
+    formData.append('notes', additionalNotes);
+
+    formData.append('picture_1', selectedImage1);
+  
+    // Make a POST request to your server with the FormData
+    fetch(`http://localhost:8000/pets/`, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      }
+    }).then(response => response.json())
+      .then(data => {
+        // Handle the response from the server
+        console.log('Upload successful:', data);
+      })
+      .catch(error => {
+        console.error('Error uploading image:', error);
+      });
   };
 
   return (
@@ -253,7 +256,7 @@ const PetCreationUpdate = () => {
                       <h4>2. Media</h4>
                         <h6>Include photos with different angles and environments (4:3 Aspect Ratio Recomended)</h6>
                         <div className="row">
-                          {[1, 2, 3].map((index) => (
+                          {/* {[1, 2, 3].map((index) => (
                             <div className="col-4" key={index}>
                               <label htmlFor={`image${index}`} className="image-label">
                                 <input
@@ -271,8 +274,18 @@ const PetCreationUpdate = () => {
                                 />
                               </label>
                             </div>
-                          ))}
-                      </div>
+                          ))} */}
+                            <div>
+                              <input type="file" accept="image/*" onChange={handleImageChange1} />
+                            </div>
+                            <div>
+                              <input type="file" accept="image/*" onChange={handleImageChange2} />
+                            </div>
+                            <div>
+                              <input type="file" accept="image/*" onChange={handleImageChange3} />
+                            </div>
+                            
+                        </div>
                     </div>
                   </div>
                 </div>
