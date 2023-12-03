@@ -2,6 +2,7 @@ import {useContext, useState, useEffect} from "react";
 import { userContext } from "../context/userContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import LandingHeader from "../components/LandingHeader";
 function ShelterProfile() {
     const {getContextUser} = useContext(userContext);
     const [userInfo, setUserInfo] = useState(null);
@@ -73,6 +74,7 @@ function ShelterProfile() {
     return (
         <div>
             ShelterProfileFake
+            <LandingHeader></LandingHeader>
             <div>
                 <h1>This is from user context</h1>
                 <h2>{accessToken}</h2>
