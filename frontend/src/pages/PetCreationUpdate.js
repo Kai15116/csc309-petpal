@@ -48,19 +48,6 @@ const PetCreationUpdate = () => {
     setSelectedImage3(e.target.files[0]);
   };
   
-  // helper function to get image given url that is stored in object
-  const getPetImage = (key) => {
-    // Create a dictionary for images within the function
-    const petImages = {
-      "http://localhost:8000/media/pet_images/image1.jpg": image1,
-      "http://localhost:8000/media/pet_images/image2.jpg": image2,
-      "http://localhost:8000/media/pet_images/image3.jpg": image3,
-    };
-
-    // return no image photo if image not found
-    return petImages[key] || noImage;
-  };
-
   useEffect(function() {
       async function fetchUserInfo() {
           try {
@@ -76,7 +63,6 @@ const PetCreationUpdate = () => {
               const data = await response.json();
 
               setPetInfo({...data})
-              console.log("dataaaaa", data)
              
               // set each value based on the data received
               setPetName(data.name || '');
@@ -88,11 +74,6 @@ const PetCreationUpdate = () => {
               setPetFee(data.adoption_fee || null);
               setPetLocation(data.adoption_location || '');
               setPetMedicalHistory(data.medical_history || '');
-              // setUploadedImages([
-              //   getPetImage(data.picture_1),
-              //   getPetImage(data.picture_2),
-              //   getPetImage(data.picture_3),
-              // ]);
               setSelectedImage1(data.picture_1)
               setSelectedImage2(data.picture_2)
               setSelectedImage3(data.picture_3)
@@ -112,44 +93,6 @@ const PetCreationUpdate = () => {
 
 
   }, [ petId ])
-
-  const handleImageSelect = (index, file) => {
-    if (file) {
-      // const reader = new FileReader();
-      // reader.onload = function (e) {
-      const newPreviews = [...uploadedImages];
-      newPreviews[index] = file;
-      setUploadedImages(newPreviews);
-
-        // update uploadedImagesToStr with the file name
-        // const newFileNames = [...uploadedImagesToStr];
-        // newFileNames[index] = file.name;
-        // setUploadedImagesToStr(newFileNames);
-      // };
-      // reader.readAsDataURL(file);
-    } else {
-      // reset to the default image
-      const newPreviews = [...uploadedImages];
-      newPreviews[index] = 'images/no_image_icon.png';
-      setUploadedImages(newPreviews);
-
-      const newFileNames = [...uploadedImagesToStr];
-      newFileNames[index] = 'noImage.jpg'; 
-      setUploadedImagesToStr(newFileNames);
-    }
-  };
-
-    // handle button click
-    const handleButtonClick = () => {
-      if (editMode) {
-        // edit the pet
-        navigate("edit_pets.html");
-        return;
-      } else {
-        // create a new pet
-        createPet();
-      }
-    };
 
   const createPet = () => {  
     // append fields
@@ -187,13 +130,61 @@ const PetCreationUpdate = () => {
       });
   };
 
+  const editPet = (petId) => {
+    // append fields
+    const formData = new FormData();
+    formData.append('name', petName);
+    formData.append('pet_type', petType);
+    formData.append('sex', petSex);
+    formData.append('breed', petBreed);
+    formData.append('age', Number(petAge));
+    formData.append('weight', Number(petWeight));
+    formData.append('adoption_fee', Number(petFee).toFixed(2));
+    formData.append('adoption_location', petLocation);
+    formData.append('medical_history', petMedicalHistory);
+    formData.append('notes', additionalNotes);
+  
+    formData.append('picture_1', selectedImage1);
+    formData.append('picture_2', selectedImage2);
+    formData.append('picture_3', selectedImage3);
+    formData.append('id', petId)
+  
+    // Make a PUT request to update the pet
+    fetch(`http://localhost:8000/pets/`, {
+      method: 'PUT', // TODO: put and patch is not allowed
+      body: formData,
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      }
+    }).then(response => response.json())
+      .then(data => {
+        // Handle the response from the server
+        console.log('Edit successful:', data);
+      })
+      .catch(error => {
+        console.error('Error editing pet:', error);
+      });
+  };
+  
+  // handle button click
+  const handleButtonClick = () => {
+    if (editMode) {
+      // edit the pet
+      editPet();
+    } 
+    else {
+      // create a new pet
+      createPet();
+    }
+  };
+
   return (
     <div className="wrapper">
       <ProfileHeader />
       <main class="page-content"> 
         <div>
           {editMode ? (
-            <h3>Edit Pet Listing: {petName}</h3>
+            <h3>Edit Pet Listing</h3>
           ) : (
             <h3>Post your pet for adoption, it's quick and easy!</h3>
           )}
