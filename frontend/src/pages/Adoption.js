@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect, useContext } from 'react';
-import ProfileHeader from '../components/LandingHeader';
+import LandingHeader from '../components/LandingHeader';
 import Footer from '../components/Footer';
 import '../styles/details_and_adoption.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -44,7 +44,7 @@ const Adoption = () => {
 
   return (
     <div className="wrapper">
-      <ProfileHeader />
+      <LandingHeader />
       <main className="page-content">
         <div className="background-adoption">
           <div className="container" id="pet-details-container">
