@@ -75,7 +75,7 @@ function ShelterProfile() {
             
         }
         fetchUserInfo();
-
+        console.log("bruh " + userId);
     }, [ userId ])
 
     return (
@@ -91,6 +91,7 @@ function ShelterProfile() {
                         <div className="test-div"></div>
                         <ShelterProfileDetailsCard
                             userInfo={userInfo}
+                            userId={userId}
                         /> 
                     </Col>
                     <Col xs={12} sm={6}>

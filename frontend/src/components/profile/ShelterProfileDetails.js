@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 // Props should be userInfo object to display appropriate information
 function ShelterProfileDetailsCard(props) {
+    const userId = props.userId;
     const userInfo = props.userInfo;
     const [contactOpen, setContactOpen] = useState(false);
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ function ShelterProfileDetailsCard(props) {
                     facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.
                 </Card.Text>
                 <div className="mb-2" style={{ display: "flex", justifyContent: "space-evenly"}}>
-                    <Button variant="primary" onClick={() => navigate(`/viewshelterpets/${userInfo?.id}`)}>
+                    <Button variant="primary" onClick={() => navigate(`/viewshelterpets/${userId}`)}>
                         View Pets
                     </Button>
                     <Button variant="terniary" onClick={() => setContactOpen(!contactOpen)}
