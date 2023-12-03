@@ -1,14 +1,15 @@
 import { Carousel, Card } from "react-bootstrap";
 import ExampleBean from "../../assets/example_images/bean1.jpg";
 
-function ShelterPetCarousel() {
+function ShelterPetCarouselCard() {
   const petInformation = [
     {
          id: 1, 
          name: "Bean", 
          breed: "Cat", 
          image: ExampleBean,
-         description: "Loves to play with toys, especially ones that look like fish!"
+         description: "Loves to play with toys, especially ones that look like fish!",
+         date: "Today",
     },
     { 
         id: 2, 
@@ -16,21 +17,22 @@ function ShelterPetCarousel() {
         breed: "Dog", 
         image: "buddy.jpg",
         description: "Has a big heart, almost as big as his appetite.",
+        date: "Today",
     },
     // Add more pet information as needed
   ];
 
   return (
-    <Card style={{ width: "40rem",}}>
+    <Card className="" style={{ minWidth: "20rem", maxWidth: "40rem", height: "max-content"}}>
       <Carousel>
         {petInformation.map((pet) => (
             <Carousel.Item key={pet.id}>
-            <Card.Img variant="top" src={ExampleBean} alt={pet.name} />
-            <Card.Body>
-                <Card.Title>{pet.name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{pet.breed}</Card.Subtitle>
-                <Card.Text>{pet.description}</Card.Text>
-            </Card.Body>
+                <Card.Img variant="top" src={ExampleBean} alt={pet.name}/>
+                <Card.Body>
+                    <Card.Title>{pet.name}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">{pet.breed}</Card.Subtitle>
+                    <Card.Text>{pet.description}</Card.Text>
+                </Card.Body>
             </Carousel.Item>
         ))}
       </Carousel>
@@ -38,4 +40,4 @@ function ShelterPetCarousel() {
   );
 }
 
-export default ShelterPetCarousel;
+export default ShelterPetCarouselCard;
