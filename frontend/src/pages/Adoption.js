@@ -12,6 +12,7 @@ const Adoption = () => {
   const {getContextUser} = useContext(userContext);
   const { petId } = useParams();
   const {accessToken} = getContextUser();
+  const navigate = useNavigate();
 
   const handleApplicationSubmit = (adoptionInputs) => {
     console.log("Form submitted with data:", adoptionInputs);
@@ -36,6 +37,7 @@ const Adoption = () => {
       .then(data => {
         // Handle the response from the server
         console.log('Upload successful:', data);
+        navigate(`/application/${data.id}`)
       })
       .catch(error => {
         console.error('Error uploading image:', error);
