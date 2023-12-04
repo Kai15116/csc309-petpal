@@ -18,10 +18,12 @@ const PetCreationUpdate = () => {
   const { petId, shelterId } = useParams();
   const [petInfo, setPetInfo] = useState(null);
   const {accessToken, refreshToken, contextUserId, contextUserType} = getContextUser();
+  const [petTypes, setPetTypes] = useState([]);
+  const [breeds, setBreeds] = useState([]);
 
   // initialize with values from props for editing, or set to initial values if we are creating a pet
   const [petName, setPetName] = useState('');
-  const [petType, setPetType] = useState('');
+  const [petType, setPetType] = useState(1);
   const [petSex, setPetSex] = useState('');
   const [petBreed, setPetBreed] = useState('');
   const [petAge, setPetAge] = useState(null);
@@ -50,7 +52,56 @@ const PetCreationUpdate = () => {
     const parts = url.split('/');
     return parts[parts.length - 1];
   };
-  
+
+  useEffect(function() {
+      async function fetchPetTypes() {
+          try {
+              const response = await fetch(`http://localhost:8000/pets/pettype/`, {
+              method: 'GET',
+          });
+          if (response.status === 403) {
+              navigate('/');
+
+              // setAllowAccess(false);
+          } else if (response.status >= 200 && response.status < 300) {
+              const data = await response.json();
+              setPetTypes([...data])
+              console.log(data)
+
+          }} catch (e) {
+              console.log(e);
+              navigate('/');
+          }
+      }
+      fetchPetTypes();
+
+  }, [])
+
+
+  useEffect(function() {
+      async function fetchBreeds() {
+          try {
+              const response = await fetch(`http://localhost:8000/pets/pettype/${petType}/breed`, {
+              method: 'GET',
+          });
+          if (response.status === 403) {
+              navigate('/');
+
+              // setAllowAccess(false);
+          } else if (response.status >= 200 && response.status < 300) {
+              const data = await response.json();
+              setBreeds([...data])
+              console.log(data)
+
+          }} catch (e) {
+              console.log(e);
+              navigate('/');
+          }
+      }
+      fetchBreeds();
+
+  }, [petType])
+
   useEffect(function() {
       async function fetchUserInfo() {
           try {
@@ -214,8 +265,9 @@ const PetCreationUpdate = () => {
                                 <div class="form-group">
                                     <label for="pet_type">Pet Type:</label>
                                     <select class="form-control" id="pet_type" name="pet_type" value={petType} onChange={(e) => setPetType(e.target.value)}>
-                                        <option value="Dog">Dog</option>
-                                        <option value="Cat">Cat</option>
+                                        {petTypes?.map((item, index) =>
+                                            <option value={item.id} key={item.id}>{item.name}</option>
+                                        )}
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -227,7 +279,12 @@ const PetCreationUpdate = () => {
                                 </div>
                                 <div class="form-group">
                                   <label for="breed">Breed:</label>
-                                  <input type="text" class="form-control" id="breed" name="breed" placeholder="ex: Shih Tzu" value={petBreed} onChange={(e) => setPetBreed(e.target.value)}/>
+                                  <select className="form-control" id="breed" name="breed" onChange={(e) => setPetBreed(e.target.value)}>
+                                        {breeds?.map((item, index) =>
+                                            <option value={item.id} key={item.id}>{item.name}</option>
+                                        )}
+                                  </select>
+                                  {/*<input type="text" class="form-control" id="breed" name="breed" placeholder="ex: Shih Tzu" value={petBreed} onChange={(e) => setPetBreed(e.target.value)}/>*/}
                                 </div>
 
                                 <div class="form-group">
@@ -260,6 +317,7 @@ const PetCreationUpdate = () => {
                   <div class="container">
                     <div class="pet-details">
                       <h4>2. Media</h4>
+                        <h6>Include photos with different angles and environments (JPEG Required)</h6>
                         <h6>Include photos with different angles and environments (JPEG Required)</h6>
                         <div className="row">
                           <div className="col-4">

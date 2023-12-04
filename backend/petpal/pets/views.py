@@ -1,7 +1,7 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import SAFE_METHODS, IsAuthenticatedOrReadOnly
-from .models import Pet
-from .serializers import PetSerializer, PetSearchSerializer
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
+from rest_framework.permissions import SAFE_METHODS, IsAuthenticatedOrReadOnly, AllowAny
+from .models import Pet, PetType, Breed
+from .serializers import PetSerializer, PetSearchSerializer, PetTypeSerializer, BreedSerializer
 
 from accounts.permissions import IsPetShelterOrReadOnly
 
@@ -62,3 +62,18 @@ class RetrieveUpdateDestroyPetView(RetrieveUpdateDestroyAPIView):
         if self.request.method in SAFE_METHODS or getattr(self, 'swagger_fake_view', False):
             return Pet.objects.all()
         return Pet.objects.filter(owner=self.request.user.petshelter)
+
+
+class ListPetTypeView(ListAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = PetTypeSerializer
+    queryset = PetType.objects.all()
+
+
+class ListBreadView(ListAPIView):
+    serializer_class = BreedSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        return Breed.objects.filter(pet_type=self.kwargs["pk"])
+
