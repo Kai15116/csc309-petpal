@@ -20,9 +20,15 @@ export default function Application(props) {
     const [messageType, setMessageType] = useState("comment");
     const { applicationId } = useParams();
 
-    async function fetchComments() {
+    async function fetchComments(reset) {
+
         try {
-            const response = await fetch(`http://localhost:8000/comments/application/${applicationId}?size=6&page=${page}`, {
+            let actualpage;
+            if (reset)
+                actualpage = 1
+            else
+                actualpage = page
+            const response = await fetch(`http://localhost:8000/comments/application/${applicationId}?size=6&page=${actualpage}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${user.accessToken}`,
@@ -31,10 +37,16 @@ export default function Application(props) {
             if (response.status >= 200 && response.status < 300) {
                 const data = await response.json();
                 console.log([...comments, ...data.results])
-                setComments([...comments, ...data.results])
                 console.log(!!data.next)
                 setHasMore(!!data.next)
-                setPage(page + 1)
+
+                if (reset){
+                    setPage( 2)
+                    setComments([...data.results])
+                } else {
+                    setPage(page + 1)
+                    setComments([...comments, ...data.results])
+                }
             } else if (response.status === 404) {
                 alert(404);
             } else {
@@ -70,7 +82,7 @@ export default function Application(props) {
         }
 
         fetchApplication();
-        fetchComments()
+        fetchComments(false)
     }, []);
 
 
@@ -92,7 +104,7 @@ export default function Application(props) {
                 if (response.status >= 200 && response.status < 300) {
                     const data = await response.json();
                     console.log(data)
-                    fetchComments()
+                    fetchComments(true)
                 } else if (response.status === 404) {
                     alert(404);
                 } else {
@@ -140,7 +152,7 @@ export default function Application(props) {
             <div className="chat-container">
                 <div className="mb-0">
                     <div className="messages-container overflow-scroll mb-0 d-flex flex-column-reverse" id="messages-container">
-                        <InfiniteScroll dataLength={comments.length} hasMore={hasMore} next={fetchComments} inverse={true}
+                        <InfiniteScroll dataLength={comments.length} hasMore={hasMore} next={() => fetchComments(false)} inverse={true}
                                         scrollableTarget="messages-container">
                         </InfiniteScroll>
 
