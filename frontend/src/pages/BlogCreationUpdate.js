@@ -98,15 +98,6 @@ const BlogCreationUpdate = () => {
                                 fontWeight: 'bold'}}>
                                   Body
                                 </label>
-                                {/* <textarea
-                                  id="blogContent"
-                                  className="form-control"
-                                  value={blogContent}
-                                  onChange={handleContentChange}
-                                  rows={10}
-                                  cols={50}
-                                  style={{minWidth:"100%"}}
-                                /> */}
                                 <MDEditor height={200} value={blogContent} onChange={setBlogContent} style={{width: "100%"}}/>
                               </div>
                             </div>
