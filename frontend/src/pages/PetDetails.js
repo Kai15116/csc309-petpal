@@ -103,12 +103,12 @@ const PetDetails = () => {
     <div className="wrapper">
       <LandingHeader />
       <main class="page-content">
-      <Carousel>
+      <Carousel style={{height: "40vh"}}>
           <Carousel.Item>
             <img
               src={selectedImage1 ? URL.createObjectURL(selectedImage1) : noImage}
               alt="Image 1"
-              className="d-block w-100"
+              className="d-block"
             />
             <Carousel.Caption>
               <h2>Meet {petName}!</h2>
@@ -118,7 +118,7 @@ const PetDetails = () => {
             <img
               src={selectedImage2 ? URL.createObjectURL(selectedImage2) : noImage}
               alt="Image 2"
-              className="d-block w-100"
+              className="d-block"
             />
             <Carousel.Caption>
               <h5>Give {petName} A Loving Home</h5>
@@ -128,7 +128,7 @@ const PetDetails = () => {
             <img
               src={selectedImage3 ? URL.createObjectURL(selectedImage3) : noImage}
               alt="Image 3"
-              className="d-block w-100"
+              className="d-block"
             />
             <Carousel.Caption>
               <h5>{petName} Is Waiting For Wonderful Parents </h5>
