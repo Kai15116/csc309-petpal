@@ -54,6 +54,7 @@ function SearchFilter() {
         weight__lte : parseInt(searchParams.get("weight__lte") ?? 999),
         sex : searchParams.get("sex") ?? "",
         order_by : searchParams.get("order_by") ?? "name",
+        name: searchParams.get("name") ?? ""
     }), [searchParams]);
     
 

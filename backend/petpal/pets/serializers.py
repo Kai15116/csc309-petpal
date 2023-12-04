@@ -49,4 +49,4 @@ class PetSearchSerializer(ModelSerializer):
 
     class Meta:
         model = Pet
-        exclude = ['id', 'name', 'adoption_location', 'medical_history', 'notes', 'picture_1', 'picture_2', 'picture_3']
+        exclude = ['id', 'adoption_location', 'medical_history', 'notes', 'picture_1', 'picture_2', 'picture_3']
