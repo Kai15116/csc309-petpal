@@ -7,19 +7,22 @@ import shelterImage from "../assets/example_images/shelter_portrait.jpg"
 import React, {useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {userContext} from "../context/userContext";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default function Application(props) {
     const { getContextUser, setContextUser} = useContext(userContext);
     const user = getContextUser()
     const [comments, setComments] = useState([]);
     const [application, setApplication] = useState(null);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
 
     const [messageType, setMessageType] = useState("comment");
     const { applicationId } = useParams();
 
     async function fetchComments() {
         try {
-            const response = await fetch(`http://localhost:8000/comments/application/${applicationId}`, {
+            const response = await fetch(`http://localhost:8000/comments/application/${applicationId}?size=6&page=${page}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${user.accessToken}`,
@@ -27,8 +30,11 @@ export default function Application(props) {
             });
             if (response.status >= 200 && response.status < 300) {
                 const data = await response.json();
-                console.log(data)
-                setComments([...data].reverse())
+                console.log([...comments, ...data.results])
+                setComments([...comments, ...data.results])
+                console.log(!!data.next)
+                setHasMore(!!data.next)
+                setPage(page + 1)
             } else if (response.status === 404) {
                 alert(404);
             } else {
@@ -64,8 +70,9 @@ export default function Application(props) {
         }
 
         fetchApplication();
-        fetchComments();
+        fetchComments()
     }, []);
+
 
 
     const sendMessage = async (e) => {
@@ -124,7 +131,6 @@ export default function Application(props) {
 
     }
 
-
     return (<>
         <LandingHeader/>
         <main className="d-flex flex-column justify-content-center align-items-center background-color">
@@ -133,24 +139,11 @@ export default function Application(props) {
 
             <div className="chat-container">
                 <div className="mb-0">
-                    <div className="messages-container overflow-scroll mb-0 d-flex flex-column" id="messages-container">
-                        {comments?.map((item, index) => {
-                            if (item.user === user.contextUserId){
-                                return <div key={index} className="user-message  message-shelter align-self-end rounded bg-dark-subtle p-3 my-3 d-flex flex-row-reverse align-items-center"
-                                            style={{height: "auto", "maxWidth": "80%"}}>
-                                            <img src={shelterImage} className="rounded-circle border ms-3 me-1 align-self-start"
-                                                style={{width: "50px", aspectRatio: "1 / 1"}} alt="Pet shelter icon"></img>
-                                            <div className="text-wrap w-100">{item.text}</div>
-                                        </div>
-                            } else {
-                                return <div key={index} className="user-message message-seeker align-self-start rounded bg-body-tertiary p-3 my-3 d-flex align-items-center"
-                                            style={{height: "auto", "maxWidth": "80%"}}>
-                                            <img src={seekerImage} className="rounded-circle border me-3 ms-1 align-self-start"
-                                                 style={{width: "50px", aspectRatio: "1 / 1"}} alt="Pet seeker icon"></img>
-                                            <div className="text-wrap w-100">{item.text}</div>
-                                        </div>
-                            }
-                        })}
+                    <div className="messages-container overflow-scroll mb-0 d-flex flex-column-reverse" id="messages-container">
+                        <InfiniteScroll dataLength={comments.length} hasMore={hasMore} next={fetchComments} inverse={true}
+                                        scrollableTarget="messages-container">
+                        </InfiniteScroll>
+
                         {application?.status === "accepted" && <div className="system-message accepted-message w-100 justify-content-center align-items-center d-flex flex-column my-3">
                             <div className=" text-success d-flex justify-content-center align-items-center text-center" style={{width: "90%"}}>
                                 <p className="fw-bold align-self-center my-auto mx-1">Application was accepted!</p>
@@ -178,6 +171,23 @@ export default function Application(props) {
                                 </svg>
                             </div>
                         </div>}
+                        {comments?.map((item, index) => {
+                            if (item.user === user.contextUserId){
+                                return <div key={index} className="user-message  message-shelter align-self-end rounded bg-dark-subtle p-3 my-3 d-flex flex-row-reverse align-items-center"
+                                            style={{height: "auto", "maxWidth": "80%"}}>
+                                            <img src={shelterImage} className="rounded-circle border ms-3 me-1 align-self-start"
+                                                style={{width: "50px", aspectRatio: "1 / 1"}} alt="Pet shelter icon"></img>
+                                            <div className="text-wrap w-100">{item.text}</div>
+                                        </div>
+                            } else {
+                                return <div key={index} className="user-message message-seeker align-self-start rounded bg-body-tertiary p-3 my-3 d-flex align-items-center"
+                                            style={{height: "auto", "maxWidth": "80%"}}>
+                                            <img src={seekerImage} className="rounded-circle border me-3 ms-1 align-self-start"
+                                                 style={{width: "50px", aspectRatio: "1 / 1"}} alt="Pet seeker icon"></img>
+                                            <div className="text-wrap w-100">{item.text}</div>
+                                        </div>
+                            }
+                        })}
                     </div>
 
                 </div>

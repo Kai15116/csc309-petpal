@@ -34,6 +34,8 @@ const PetDetails = () => {
   const [additionalNotes, setAdditionalNotes] = useState('');
 
   const extractFileName = (url) => {
+    if (!url)
+        return noImage
     const parts = url.split('/');
     return parts[parts.length - 1];
   };
