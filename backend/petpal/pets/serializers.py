@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer, FloatField, DecimalField, DateTimeField, ChoiceField, IntegerField
 
-from .models import Pet
+from .models import Pet, Breed, PetType
 import copy
 
 
@@ -49,4 +49,17 @@ class PetSearchSerializer(ModelSerializer):
 
     class Meta:
         model = Pet
-        exclude = ['id', 'name', 'adoption_location', 'medical_history', 'notes', 'picture_1', 'picture_2', 'picture_3']
+        exclude = ['id', 'adoption_location', 'medical_history', 'notes', 'picture_1', 'picture_2', 'picture_3']
+
+
+class PetTypeSerializer(ModelSerializer):
+
+    class Meta:
+        model = PetType
+        fields = '__all__'
+
+class BreedSerializer(ModelSerializer):
+
+    class Meta:
+        model = Breed
+        fields = '__all__'

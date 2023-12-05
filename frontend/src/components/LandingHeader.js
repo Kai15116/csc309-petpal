@@ -96,14 +96,15 @@ const LandingHeader = () => {
                   role="search"
                   style={{ width: '400px', minWidth: '35%', maxWidth: '90%' }}
                   action="/searchpage"
+                  method="GET"
                 >
                   <InputGroup>
                     <Form.Control
                       type="search"
+                      name="name"
                       placeholder="Search pets here..."
                       aria-label="Search"
                       aria-describedby="search-btn"
-                      required
                     />
                     <Button variant="outline-success" type="submit" id="search-btn">Search
                     </Button>
@@ -112,6 +113,7 @@ const LandingHeader = () => {
               </Nav.Item>
               <Nav.Item><Nav.Link href="/">Home</Nav.Link></Nav.Item>
               <Nav.Item><Nav.Link href="/shelters">All shelters</Nav.Link></Nav.Item>
+              {user.contextUserType === "seeker" && <Nav.Item><Nav.Link href="/applications">Applications</Nav.Link></Nav.Item>}
               </>}
               {user.contextUserType === "shelter" && <>
                   <Nav.Item>

@@ -55,7 +55,8 @@ class ListCreateApplicationView(ListCreateAPIView):
 
         if pet.status != 'available':
             raise ValidationError({'pet': 'The pet you specified isn\'t available.'})
-        Application.objects.create(**validated_data, user=pet_seeker)
+        application = Application.objects.create(**validated_data, user=pet_seeker)
+        serializer.validated_data['id'] = application.id
 
 
 class RetrieveUpdateApplicationView(RetrieveUpdateAPIView):
