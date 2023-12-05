@@ -10,7 +10,6 @@ import image3 from "../assets/images/image3.jpg"
 import noImage from '../assets/images/no_image_icon.png';
 import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/userContext';
-const baseURL = "http://localhost:8000/media/pet_images/";
 
 const PetCreationUpdate = () => {
   const {getContextUser} = useContext(userContext);
@@ -190,7 +189,7 @@ const PetCreationUpdate = () => {
         console.log('Upload successful:', data);
       })
       .catch(error => {
-        console.error('Error uploading image:', error);
+        console.error('Error creating pet:', error);
       });
   };
 
