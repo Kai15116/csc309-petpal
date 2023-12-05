@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Carousel, Pagination } from 'react-bootstrap';
 import ProfileHeader from '../components/ProfileHeader';
 import Footer from '../components/Footer';
@@ -6,8 +6,19 @@ import shelterPortrait from '../assets/example_images/shelter_portrait.jpg';
 import image1 from '../assets/images/image1.jpg';
 import image2 from '../assets/images/image2.jpg';
 import image3 from '../assets/images/image3.jpg';
+import noImage from "../assets/images/image-not-found-scaled.png"
+import { useNavigate, useParams } from 'react-router-dom';
+import { userContext } from '../context/userContext';
+import YourComponent from './YourComponent';
 
 const ShelterBlogs = () => {
+  const {getContextUser} = useContext(userContext);
+  const navigate = useNavigate();
+  const { blogId, shelterId } = useParams();
+  const [blogInfo, setBlogInfo] = useState(null);
+  const {accessToken, refreshToken, contextUserId, contextUserType} = getContextUser();
+
+  const [allShelters, setAllShelters] = useState([{}]);
   const [sheltersData, setSheltersData] = useState([
     {
       name: 'Shelter A',
@@ -30,17 +41,46 @@ const ShelterBlogs = () => {
       images: [image1, image2, image3],
       likes: 0,
     },
-    {
-      name: 'Shelter D',
-      profilePic: shelterPortrait,
-      blogContent: 'Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...',
-      images: [image1, image2, image3],
-      likes: 0,
-    },
+    // {
+    //   name: 'Shelter D',
+    //   profilePic: shelterPortrait,
+    //   blogContent: 'Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...',
+    //   images: [image1, image2, image3],
+    //   likes: 0,
+    // },
   ]);
 
   const SheltersPerPage = 2; // Number of shelters to display per page
   const [activePage, setActivePage] = useState(1);
+
+  // get all blogs
+  useEffect(function() {
+    async function fetchUserInfo() {
+        try {
+            const response = await fetch(`http://localhost:8000/blogs/`, {
+            method: 'GET',
+        });
+        if (response.status === 403) {
+            navigate('/');
+
+
+            // setAllowAccess(false);
+        } else if (response.status >= 200 && response.status < 300) {
+            const data = await response.json();
+            setAllShelters(convertObjectToArray({...data}))
+            // console.log("allShelters", processImages({...data}))
+            console.log("allShelters", convertObjectToArray({...data}))
+            console.log("sheltersData", sheltersData)
+
+            // setAllowAccess(true);
+        }} catch (e) {
+            console.log(e);
+            navigate('/');
+        }
+    }
+    fetchUserInfo();
+
+}, [])
 
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
@@ -61,10 +101,60 @@ const ShelterBlogs = () => {
     setSheltersData(updatedSheltersData);
   };
 
+  function convertObjectToArray(inputObject) {
+    const resultArray = [];
+  
+    Object.keys(inputObject).forEach((key) => {
+      resultArray[parseInt(key, 10)] = inputObject[key];
+    });
+  
+    return resultArray.filter(Boolean); 
+  }
+
+  const extractFileName = (url) => {
+    if (!url)
+        return noImage
+    const parts = url.split('/');
+    return parts[parts.length - 1];
+  };
+
+  async function fetchAndReturnFile(data) {
+    const blob = await fetch(data).then((response) => response.blob());
+    const fileName = extractFileName(data);
+    return new File([blob], fileName, { type: "image/jpeg" });
+  }
+  
+  // async function processImages(shelterData) {
+  //   const processedShelters = [];
+  
+  //   async function processImage(imageUrl) {
+  //     const blob = await fetch(imageUrl).then((r) => r.blob());
+  //     const fileName = extractFileName(imageUrl);
+  //     return new File([blob], fileName, { type: "image/jpeg" });
+  //   }
+  
+  //   for (const shelter of shelterData) {
+  //     const file1 = await processImage(shelter.picture_1);
+  //     const file2 = await processImage(shelter.picture_2);
+  //     const file3 = await processImage(shelter.picture_3);
+  
+  //     processedShelters.push({
+  //       ...shelter,
+  //       picture_1: file1,
+  //       picture_2: file2,
+  //       picture_3: file3,
+  //     });
+  //   }
+  
+  //   return processedShelters;
+  // }
+
   const startIndex = (activePage - 1) * SheltersPerPage;
   const endIndex = startIndex + SheltersPerPage;
 
-  const sheltersToDisplay = sheltersData.slice(startIndex, endIndex);
+  // const sheltersToDisplay = allShelters.slice(startIndex, endIndex);
+  console.log("fetchAndReturnFile", fetchAndReturnFile("http://localhost:8000/media/blog_images/team_picture_ZQJks6N.jpg"));
+  const sheltersToDisplay = allShelters.slice(startIndex, endIndex);
 
   return (
     <div style={{ backgroundColor: '#f2f8fe' }}>
@@ -126,26 +216,19 @@ const ShelterBlogs = () => {
           {sheltersToDisplay.map((shelter, index) => (
             <div key={index} className="bg-white p-4 rounded shadow mb-4">
               <div className="d-flex align-items-center">
-                <h2 className="me-3">{shelter.name}</h2>
+                <h2 className="me-3">{shelter.title}</h2>
                 <img
                   src={shelter.profilePic}
-                  alt={`${shelter.name} Profile Pic`}
+                  alt={`${shelter.title} Profile Pic`}
                   style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }}
                 />
               </div>
               <div>
-                <h3>{`${shelter.name} Blog`}</h3>
-                <p>{shelter.blogContent}</p>
+                <p>{shelter.content}</p>
 
-                {/* image Carousel */}
-                <Carousel>
-                  {shelter.images.map((image, imageIndex) => (
-                    <Carousel.Item key={imageIndex}>
-                      <img className="d-block w-100" src={image} alt={`${shelter.name} ${imageIndex + 1}`} />
-                      <Carousel.Caption></Carousel.Caption>
-                    </Carousel.Item>
-                  ))}
-                </Carousel>
+                {/* image carousel component */}
+                <YourComponent shelter={shelter} />
+              
                 <div className="like-button-container">
                   <LikeButton likes={shelter.likes} onLikeClick={() => handleLikeClick(index)} />
                 </div>
