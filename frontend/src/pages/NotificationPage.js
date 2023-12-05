@@ -65,8 +65,11 @@ function NotificationPage() {
 
 
     useEffect(function() {
+        if (Number(userId) !== contextUserId) {
+            navigate('/');
+        }
         fetchNoteInfo();
-    }, [ userId, query ])
+    }, [userId, query])
 
 
     
