@@ -35,9 +35,12 @@ function SearchFilter() {
     // const [currentActivePage, setcurrentActivePage] = useState(1);
     // const itemsPerPage = 5;
     const [petsInfo, setPetsInfo] = useState(null);
+    const [petType, setPetType] = useState(null);
     // searchparam initial state
     const [sortOption, setSortOption] = useState("");
-    const [filterOptions, setFilterOptions] = useState({age: "", weight: "", sex: "", fee: ""});
+    const [filterOptions, setFilterOptions] = useState({age: "", weight: "", sex: "", fee: "", pet_type:"", breed: ""});
+    const [petTypes, setPetTypes] = useState([]);
+    const [breeds, setBreeds] = useState([]);
     
     // const [colorFilter, setColorFilter] = useState("");
     
@@ -56,7 +59,9 @@ function SearchFilter() {
         adoption_fee__lte : searchParams.get("adoption_fee__lte") ?? "",
         sex : searchParams.get("sex") ?? "",
         order_by : searchParams.get("order_by") ?? "name",
-        name: searchParams.get("name") ?? ""
+        name: searchParams.get("name") ?? "",
+        pet_type: searchParams.get("pet_type") ?? "",
+        breed: searchParams.get("breed") ?? "",
     }), [searchParams]);
     
 
@@ -64,6 +69,56 @@ function SearchFilter() {
     const setcurrentActivePage = (value) => {
         setSearchParams({...query, page : value})
     }
+
+    useEffect(function() {
+        async function fetchPetTypes() {
+            try {
+                const response = await fetch(`http://localhost:8000/pets/pettype/`, {
+                method: 'GET',
+            });
+            if (response.status === 403) {
+                navigate('/');
+  
+                // setAllowAccess(false);
+            } else if (response.status >= 200 && response.status < 300) {
+                const data = await response.json();
+                setPetTypes([...data])
+                console.log(data)
+  
+            }} catch (e) {
+                console.log(e);
+                navigate('/');
+            }
+        }
+        fetchPetTypes();
+  
+    }, [])
+  
+  
+    useEffect(function() {
+        async function fetchBreeds() {
+            try {
+                const response = await fetch(`http://localhost:8000/pets/pettype/${petType}/breed`, {
+                method: 'GET',
+            });
+            if (response.status === 403) {
+                navigate('/');
+  
+                // setAllowAccess(false);
+            } else if (response.status >= 200 && response.status < 300) {
+                const data = await response.json();
+                setBreeds([...data])
+                console.log(data)
+  
+            }} catch (e) {
+                console.log(e);
+                navigate('/');
+            }
+        }
+        fetchBreeds();
+  
+    }, [petType])
+  
 
     const submitFilterOptions = (e) => {
         e.preventDefault()
@@ -75,6 +130,7 @@ function SearchFilter() {
         var queryFeeMin = "";
         var queryFeeMax = "";
         var querySex = "";
+        
         switch(filterOptions?.age) {
             case "":
                 queryAgeMin = "";
@@ -165,6 +221,8 @@ function SearchFilter() {
             adoption_fee__gte: queryFeeMin,
             adoption_fee__lte: queryFeeMax,
             sex: querySex,
+            pet_type: filterOptions?.pet_type,
+            breed: filterOptions?.breed,
         }
         
 
@@ -182,7 +240,7 @@ function SearchFilter() {
 
 
     const clearOptions = () => {
-        setFilterOptions({sex:"", age:"", weight:"", fee:""});
+        setFilterOptions({sex:"", age:"", weight:"", fee:"", pet_type: "", breed: ""});
         setSortOption("");
     }
 
@@ -268,11 +326,12 @@ function SearchFilter() {
                     <Form onSubmit={(e) => submitFilterOptions(e)}>
                         <FormGroup className="mb-3">
                             <FloatingLabel label="Category:(Not supported)">
-                            <Form.Select className="border-secondary">
+                            <Form.Select className="border-secondary" value={filterOptions?.pet_type} onChange={(e)=> {setFilterOptions({...filterOptions, pet_type: e.target.value, breed: ""}); if (e.target.value !== "")setPetType(e.target.value)}}>
 
-                            <option>Select All</option>
-                            <option>1</option>
-                            <option>2</option>
+                            <option value="">Select All</option>
+                            {petTypes?.map((item, index) =>
+                                <option value={item.id} key={item.id}>{item.name}</option>
+                            )}
 
                             </Form.Select>
                                
@@ -282,11 +341,12 @@ function SearchFilter() {
 
                         <FormGroup className="mb-3">
                             <FloatingLabel label="Breed:(Not supported)">
-                            <Form.Select className="border-secondary">
+                            <Form.Select className="border-secondary" value={filterOptions?.breed} onChange={(e) => {setFilterOptions({...filterOptions, breed: e.target.value})}}>
 
-                                <option>Select All</option>
-                                <option>1</option>
-                                <option>2</option>
+                                <option value="">Select All</option>
+                                {breeds?.map((item, index) =>
+                                            <option value={item.id} key={item.id}>{item.name}</option>
+                                )}
 
                                 </Form.Select>
                             </FloatingLabel>
