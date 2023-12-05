@@ -2,7 +2,6 @@ django
 djangorestframework
 djangorestframework-simplejwt
 Pillow
-pygraphviz
 drf-yasg
 django-extensions
 django
