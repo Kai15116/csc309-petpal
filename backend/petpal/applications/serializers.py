@@ -7,7 +7,7 @@ class CreateApplicationSerializer(ModelSerializer):
     class Meta:
         model = Application
         fields = '__all__'
-        read_only_fields = ['id', 'created_at', 'last_updated', 'user']
+        read_only_fields = ['created_at', 'last_updated', 'user']
         extra_kwargs = {'id': {'help_text': 'Identifier of the application.'}}
 
 

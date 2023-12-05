@@ -51,10 +51,10 @@ const Landing = () => {
             <div>
               <div className="d-flex flex-column justify-content-center text-center" id="landing-main-container">
                 <h1 className="text-light pb-3">Find your lovely pets!</h1>
-                <form className="mx-auto" role="search" style={{width: "600px", minWidth: "35%", maxWidth: "90%"}} action="/searchpage">
+                <form className="mx-auto" role="search" style={{width: "600px", minWidth: "35%", maxWidth: "90%"}} action="/searchpage" method="GET">
                   <div className="input-group">
                     <input type="search" className="form-control" placeholder="Search here..." aria-label="Search"
-                           aria-describedby="search-btn-nav" required></input>
+                           aria-describedby="search-btn-nav" name="name"></input>
                     <button className="btn btn-primary" type="submit" id="search-btn-nav">Search</button>
                   </div>
                 </form>

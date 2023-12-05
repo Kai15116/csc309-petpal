@@ -1,28 +1,23 @@
 from rest_framework.serializers import ModelSerializer, FloatField, DecimalField, DateTimeField, ChoiceField, IntegerField
 
-from .models import Pet, Breed, PetType
+from .models import Blog
 import copy
 
-
-class PetSerializer(ModelSerializer):
-
+class BlogSerializer(ModelSerializer):
     class Meta:
-        model = Pet
+        model = Blog
         fields = '__all__'
         read_only_fields = ['id', 'last_modified', 'owner']
-        extra_kwargs = {'id': {'help_text': 'Id of the pet.'}}
+        extra_kwargs = {'id': {'help_text': 'Id of the blog.'}}
 
-
-class PetSearchSerializer(ModelSerializer):
+class BlogSearchSerializer(ModelSerializer):
     ORDER_BY_CHOICES = [
-        'name', '-name',
-        'age', '-age',
-        'weight', '-weight',
-        'adoption_fee', '-adoption_fee'
+        'title', '-title',
+        'likes', '-likes',
+        'last_modified', '-last_modified'
     ]
     order_by = ChoiceField(choices=ORDER_BY_CHOICES, required=False,
                            help_text='Options for sorting. Negative sign (-) indicates descending order.')
-    status = ChoiceField(choices=Pet.STATUS_CHOICES, default="available")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -48,18 +43,5 @@ class PetSearchSerializer(ModelSerializer):
                 self.fields[f'{key}__lte'].required = False
 
     class Meta:
-        model = Pet
-        exclude = ['id', 'adoption_location', 'medical_history', 'notes', 'picture_1', 'picture_2', 'picture_3']
-
-
-class PetTypeSerializer(ModelSerializer):
-
-    class Meta:
-        model = PetType
-        fields = '__all__'
-
-class BreedSerializer(ModelSerializer):
-
-    class Meta:
-        model = Breed
-        fields = '__all__'
+        model = Blog
+        exclude = ['id', 'title', 'content', 'picture_1', 'picture_2', 'picture_3', 'likes', 'last_modified']

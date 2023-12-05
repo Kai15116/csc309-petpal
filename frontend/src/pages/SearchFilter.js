@@ -56,6 +56,7 @@ function SearchFilter() {
         adoption_fee__lte : searchParams.get("adoption_fee__lte") ?? "",
         sex : searchParams.get("sex") ?? "",
         order_by : searchParams.get("order_by") ?? "name",
+        name: searchParams.get("name") ?? ""
     }), [searchParams]);
     
 

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default function (props) {
     console.log(props?.application)
     const [name, setName] = useState(props.application?.name);
@@ -47,8 +48,21 @@ export default function (props) {
               </div>
 
               <div className="col-lg-12">
-                <h2>Fill Out The Following Information</h2>
-                <form action="/application">
+              <h2>Fill Out The Following Information</h2>
+                <form onSubmit={(e) => {
+                  e.preventDefault(); 
+                  if (props.onSubmit) {
+                    props.onSubmit({
+                      name,
+                      phone,
+                      email,
+                      isOver18,
+                      address,
+                      qualitiesDescription,
+                      signature
+                    });
+                  }
+                }}>
                   <div className="form-group">
                     <label htmlFor="name">Name:</label>
                     <input type="text" id="name" name="name" className="form-control" value={name} onChange={(e) => setName(e.target.value)} readOnly={readonly} required />

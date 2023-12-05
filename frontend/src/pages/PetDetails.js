@@ -28,8 +28,17 @@ const PetDetails = () => {
   const [petLocation, setPetLocation] = useState('');
   const [petMedicalHistory, setPetMedicalHistory] = useState('');
   const [petStatus, setPetStatus] = useState(false);
-  const [uploadedImages, setUploadedImages] = useState([noImage, noImage, noImage]);
+  const [selectedImage1, setSelectedImage1] = useState(null);
+  const [selectedImage2, setSelectedImage2] = useState(null);
+  const [selectedImage3, setSelectedImage3] = useState(null);
   const [additionalNotes, setAdditionalNotes] = useState('');
+
+  const extractFileName = (url) => {
+    if (!url)
+        return noImage
+    const parts = url.split('/');
+    return parts[parts.length - 1];
+  };
 
   useEffect(function() {
       async function fetchUserInfo() {
@@ -57,11 +66,19 @@ const PetDetails = () => {
               setPetLocation(data.adoption_location || '');
               setPetMedicalHistory(data.medical_history || '');
               setPetStatus(data.status || '');
-              setUploadedImages([
-                getPetImage(data.picture_1),
-                getPetImage(data.picture_2),
-                getPetImage(data.picture_3),
-              ]);
+
+              const blob1 = await fetch(data.picture_1).then((r) => r.blob());
+              const file1 = new File([blob1], extractFileName(data.picture_1), { type: "image/jpeg" });
+              setSelectedImage1(file1);
+
+              const blob2 = await fetch(data.picture_2).then((r) => r.blob());
+              const file2 = new File([blob2], extractFileName(data.picture_2), { type: "image/jpeg" });
+              setSelectedImage2(file2);
+
+              const blob3 = await fetch(data.picture_3).then((r) => r.blob());
+              const file3 = new File([blob3], extractFileName(data.picture_3), { type: "image/jpeg" });
+              setSelectedImage3(file3);
+
               setAdditionalNotes(data.notes || '');
 
               // setAllowAccess(true);
@@ -73,20 +90,6 @@ const PetDetails = () => {
       fetchUserInfo();
 
   }, [ petId ])
-
-  // helper function to get image given url that is stored in object
-  const getPetImage = (key) => {
-    // Create a dictionary for images within the function
-    const petImages = {
-      "http://localhost:8000/media/pet_images/image1.jpg": image1,
-      "http://localhost:8000/media/pet_images/image2.jpg": image2,
-      "http://localhost:8000/media/pet_images/image3.jpg": image3,
-    };
-
-    // return no image photo if image not found
-    return petImages[key] || noImage;
-  };
-
 
   // helper function to format date
   const formatDate = (timestamp) => {
@@ -100,21 +103,33 @@ const PetDetails = () => {
     <div className="wrapper">
       <LandingHeader />
       <main class="page-content">
-      <Carousel>
+      <Carousel style={{height: "40vh"}}>
           <Carousel.Item>
-            <img className="d-block w-100" src={uploadedImages[0]} alt="Image 1"/>
+            <img
+              src={selectedImage1 ? URL.createObjectURL(selectedImage1) : noImage}
+              alt="Image 1"
+              className="d-block"
+            />
             <Carousel.Caption>
               <h2>Meet {petName}!</h2>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="d-block w-100" src={uploadedImages[1]} alt="Image 2" />
+            <img
+              src={selectedImage2 ? URL.createObjectURL(selectedImage2) : noImage}
+              alt="Image 2"
+              className="d-block"
+            />
             <Carousel.Caption>
               <h5>Give {petName} A Loving Home</h5>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="d-block w-100" src={uploadedImages[2]} alt="Image 3" />
+            <img
+              src={selectedImage3 ? URL.createObjectURL(selectedImage3) : noImage}
+              alt="Image 3"
+              className="d-block"
+            />
             <Carousel.Caption>
               <h5>{petName} Is Waiting For Wonderful Parents </h5>
             </Carousel.Caption>
@@ -123,7 +138,7 @@ const PetDetails = () => {
       <div class="background-details">
           <div class="container" id="pet-details-container">
               <div class="pet-details">
-                  <h1>Get To Know Lalo</h1>
+                  <h1>Get To Know {petName}</h1>
                   <div class="d-flex pet_details_and_shelter">
                       <div class="col-lg-6" style={{"marginRight": "20px"}}>
                           <table class="table">
@@ -178,7 +193,7 @@ const PetDetails = () => {
                         />
                       </div>
                   </div>
-                  <div class="col-lg-12" id="owner-notes">
+                  <div class="col-lg-12" id="owner-notes" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                     <h2>Owner Notes:</h2>
                     <ul>
                       {additionalNotes &&
@@ -187,8 +202,8 @@ const PetDetails = () => {
                         ))}
                     </ul>
                   </div>
-                  <Link to="/adoption" role="button">
-                    <a class="btn btn-primary btn-lg apply-button" href="adoption.html" role="button">Apply For Adoption</a>
+                  <Link to={`/adoption/${petId}`} role="button">
+                    <button class="btn btn-primary btn-lg apply-button" >Apply For Adoption</button>
                   </Link>
                   </div>
                 </div>
