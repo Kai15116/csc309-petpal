@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Carousel, Pagination } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import ProfileHeader from '../components/ProfileHeader';
 import Footer from '../components/Footer';
 import shelterPortrait from '../assets/example_images/shelter_portrait.jpg';
@@ -13,47 +14,13 @@ import BlogImagesCarousel from '../components/BlogImagesCarousel';
 
 const ShelterBlogs = () => {
   const {getContextUser} = useContext(userContext);
+  const user = getContextUser()
   const navigate = useNavigate();
   const { blogId, shelterId } = useParams();
   const [blogInfo, setBlogInfo] = useState(null);
   const {accessToken, refreshToken, contextUserId, contextUserType} = getContextUser();
 
-  const [allShelters, setAllShelters] = useState([{}]);
-  const [sheltersData, setSheltersData] = useState([
-    {
-      name: 'Shelter A',
-      profilePic: shelterPortrait,
-      blogContent: 'Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...',
-      images: [image1, image2, image3],
-      likes: 0, 
-    },
-    {
-      name: 'Shelter B',
-      profilePic: shelterPortrait,
-      blogContent: 'Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...',
-      images: [image1, image2, image3],
-      likes: 0,
-    },
-    {
-      name: 'Shelter C',
-      profilePic: shelterPortrait,
-      blogContent: 'Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...',
-      images: [image1, image2, image3],
-      likes: 0,
-    },
-    // {
-    //   name: 'Shelter D',
-    //   profilePic: shelterPortrait,
-    //   blogContent: 'Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...',
-    //   images: [image1, image2, image3],
-    //   likes: 0,
-    // },
-  ]);
-
-  // selected images for liking mechanisim
-  const [selectedImage1, setSelectedImage1] = useState(null);
-  const [selectedImage2, setSelectedImage2] = useState(null);
-  const [selectedImage3, setSelectedImage3] = useState(null);
+  const [allBlogs, setAllBlogs] = useState([{}]);
 
   const SheltersPerPage = 2; // Number of shelters to display per page
   const [activePage, setActivePage] = useState(1);
@@ -72,10 +39,8 @@ const ShelterBlogs = () => {
             // setAllowAccess(false);
         } else if (response.status >= 200 && response.status < 300) {
             const data = await response.json();
-            setAllShelters(convertObjectToArray({...data}))
-            // console.log("allShelters", processImages({...data}))
-            console.log("allShelters", convertObjectToArray({...data}))
-            console.log("sheltersData", sheltersData)
+            setAllBlogs(convertObjectToArray({...data}))
+            console.log("allBlogs", convertObjectToArray({...data}))
 
             // setAllowAccess(true);
         }} catch (e) {
@@ -85,7 +50,7 @@ const ShelterBlogs = () => {
     }
     fetchUserInfo();
 
-}, [])
+  }, [])
 
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
@@ -106,24 +71,24 @@ const ShelterBlogs = () => {
 
   // increment like count of blog at index shelterIndex
   const handleLikeClick = async (shelterIndex) => {
-    const blogId = allShelters[shelterIndex].id
-    const currLikes = allShelters[shelterIndex].likes;
+    const blogId = allBlogs[shelterIndex].id
+    const currLikes = allBlogs[shelterIndex].likes;
 
     const formData = new FormData();
-    formData.append('title', allShelters[shelterIndex].title);
-    formData.append('content', allShelters[shelterIndex].content);
+    formData.append('title', allBlogs[shelterIndex].title);
+    formData.append('content', allBlogs[shelterIndex].content);
     // append like count + 1
     formData.append('likes', currLikes + 1);
 
     // convert images
-    const blob1 = await fetch(allShelters[shelterIndex].picture_1).then((r) => r.blob());
-    const file1 = new File([blob1], extractFileName(allShelters[shelterIndex].picture_1), { type: "image/jpeg" });
+    const blob1 = await fetch(allBlogs[shelterIndex].picture_1).then((r) => r.blob());
+    const file1 = new File([blob1], extractFileName(allBlogs[shelterIndex].picture_1), { type: "image/jpeg" });
 
-    const blob2 = await fetch(allShelters[shelterIndex].picture_2).then((r) => r.blob());
-    const file2 = new File([blob2], extractFileName(allShelters[shelterIndex].picture_2), { type: "image/jpeg" });
+    const blob2 = await fetch(allBlogs[shelterIndex].picture_2).then((r) => r.blob());
+    const file2 = new File([blob2], extractFileName(allBlogs[shelterIndex].picture_2), { type: "image/jpeg" });
 
-    const blob3 = await fetch(allShelters[shelterIndex].picture_3).then((r) => r.blob());
-    const file3 = new File([blob3], extractFileName(allShelters[shelterIndex].picture_3), { type: "image/jpeg" });
+    const blob3 = await fetch(allBlogs[shelterIndex].picture_3).then((r) => r.blob());
+    const file3 = new File([blob3], extractFileName(allBlogs[shelterIndex].picture_3), { type: "image/jpeg" });
 
     formData.append('picture_1', file1);
     formData.append('picture_2', file2);
@@ -145,19 +110,34 @@ const ShelterBlogs = () => {
         const updatedLikes = currLikes + 1;
 
         // create a copy of the allShelters array
-        const updatedShelters = [...allShelters];
+        const updatedShelters = [...allBlogs];
         
         // update the likes in the copy
         updatedShelters[shelterIndex] = {
-          ...allShelters[shelterIndex],
+          ...allBlogs[shelterIndex],
           likes: updatedLikes,
         };
 
-        setAllShelters(updatedShelters);
+        setAllBlogs(updatedShelters);
       })
       .catch(error => {
         console.error('Error editing pet:', error);
       });
+  };
+
+  const handleAddClick = () => {
+    if (user.contextUserType === "shelter") {
+      navigate(`/blogCreateUpdate`)
+    }
+  };
+
+  const handleEditClick = (shelterIndex) => {
+    const ownerId = allBlogs[shelterIndex].ownerId; 
+    if (user.userContextId === ownerId) {
+      // user is the owner, navigate to edit page
+      const blogId = allBlogs[shelterIndex].id;
+      navigate(`/blogCreateUpdate/${blogId}`)
+    }
   };
 
   function convertObjectToArray(inputObject) {
@@ -172,7 +152,7 @@ const ShelterBlogs = () => {
 
   const startIndex = (activePage - 1) * SheltersPerPage;
   const endIndex = startIndex + SheltersPerPage;
-  const sheltersToDisplay = allShelters.slice(startIndex, endIndex);
+  const sheltersToDisplay = allBlogs.slice(startIndex, endIndex);
 
   return (
     <div style={{ backgroundColor: '#f2f8fe' }}>
@@ -209,7 +189,7 @@ const ShelterBlogs = () => {
           <div style={{ marginTop: '10px' }}>
             <h4>Page:</h4>
             <Pagination>
-              {Array.from({ length: Math.ceil(sheltersData.length / SheltersPerPage) }).map((_, index) => (
+              {Array.from({ length: Math.ceil(allBlogs.length / SheltersPerPage) }).map((_, index) => (
                 <Pagination.Item
                   key={index + 1}
                   active={index + 1 === activePage}
@@ -226,29 +206,67 @@ const ShelterBlogs = () => {
         <div id="lst-container" style={{ margin: '50px', flex: 1 }}>
           <div className="d-flex" style={{ marginBottom: '20px', flex: 1 }}>
             <h1 className="ms-1 mb-0">Shelter Blogs</h1>
-            <a className="btn btn-secondary ms-auto align-self-end" href="pet_creation.html">
+            {/* <a className="btn btn-secondary ms-auto align-self-end" href="pet_creation.html">
               Add New Blog
-            </a>
+            </a> */}
+            {/* disable for non shelter users */}
+            <button
+              className="btn btn-secondary ms-auto align-self-end"
+              onClick={() => handleAddClick()}
+              disabled={user.contextUserType !== "shelter"}
+            >
+              Add New Blog
+            </button>
           </div>
           <hr />
-          {sheltersToDisplay.map((shelter, index) => (
+          {sheltersToDisplay.map((blog, index) => (
             <div key={index} className="bg-white p-4 rounded shadow mb-4">
               <div className="d-flex align-items-center">
-                <h2 className="me-3">{shelter.title}</h2>
-                <img
-                  src={shelter.profilePic}
-                  alt={`${shelter.title} Profile Pic`}
-                  style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }}
-                />
+                <div>
+                  <h2 className="me-3">{blog.title}</h2>
+                  {/* <img
+                    src={shelter.profilePic}
+                    alt={`${shelter.title} Profile Pic`}
+                    style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }}
+                  /> */}
+                  <h5 className="me-3">Owner: {blog.owner}</h5>
+                </div>
+                <div className="ms-auto">
+                  <Link to={`/blogDetails/${blog.id}`}>
+                    <div className="confirm-button">
+                      <button className="btn btn-primary btn-lg btn-xl post-button">
+                        Show More
+                      </button>
+                    </div>
+                  </Link>
+                </div>
               </div>
               <div>
-                <p>{shelter.content}</p>
+                {/* <p>{shelter.content}</p> */}
 
                 {/* image carousel component */}
-                <BlogImagesCarousel shelter={shelter} />
-              
-                <div className="like-button-container">
-                  <LikeButton likes={shelter.likes} onLikeClick={() => handleLikeClick(index)} />
+                <BlogImagesCarousel blog={blog} />
+
+                <div className="d-flex align-items-center">
+                  <div 
+                    className="like-button-container"
+                    style={{padding: "20px"}}
+                  >
+                    <LikeButton likes={blog.likes} onLikeClick={() => handleLikeClick(index)} />
+                  </div>
+                  <div 
+                    className="ms-auto"
+                    style={{padding: "20px"}}
+                  >
+                    {/* users who are not owner of tweet can't edit it */}
+                    <button
+                      className="btn btn-secondary ms-auto align-self-end"
+                      onClick={() => handleEditClick(index)}
+                      disabled={user.userContextId !== blog.ownerId}
+                    >
+                      Edit
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

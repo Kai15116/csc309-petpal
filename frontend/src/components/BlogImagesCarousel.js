@@ -10,7 +10,7 @@ import noImage from "../assets/images/image-not-found-scaled.png"
 import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/userContext';
 
-const BlogImagesCarousel = ({ shelter }) => {
+const BlogImagesCarousel = ({ blog }) => {
     const [imageUrls, setImageUrls] = useState([noImage, noImage, noImage]);
 
     const extractFileName = (url) => {
@@ -29,9 +29,9 @@ const BlogImagesCarousel = ({ shelter }) => {
     useEffect(() => {
       const fetchImages = async () => {
         const urls = await Promise.all([
-          fetchAndReturnFile(shelter.picture_1),
-          fetchAndReturnFile(shelter.picture_2),
-          fetchAndReturnFile(shelter.picture_3)
+          fetchAndReturnFile(blog.picture_1),
+          fetchAndReturnFile(blog.picture_2),
+          fetchAndReturnFile(blog.picture_3)
         ]);
   
         const sanitizedUrls = urls.map(url => (url ? URL.createObjectURL(url) : noImage));
@@ -40,7 +40,7 @@ const BlogImagesCarousel = ({ shelter }) => {
       };
   
       fetchImages();
-    }, [shelter]);
+    }, [blog]);
   
     return (
       <Carousel style={{ height: "40vh" }}>
