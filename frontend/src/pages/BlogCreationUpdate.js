@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import ProfileHeader from '../components/ProfileHeader';
+import LandingHeader from '../components/LandingHeader';
 import Footer from '../components/Footer';
 import image1 from "../assets/images/image1.jpg"
 import image2 from "../assets/images/image2.jpg"
@@ -56,7 +56,7 @@ const BlogCreationUpdate = () => {
 
   return (
     <div className="wrapper">
-      <ProfileHeader />
+      <LandingHeader />
       <main class="page-content">  
         <div>
           {editMode ? (
@@ -126,8 +126,8 @@ const BlogCreationUpdate = () => {
                         display: 'flex',
                         justifyContent: 'flex-start',
                       }}>
-                      <h4>3. Media</h4>
-                        <h6>Include photos with different angles and environments (4:3 Aspect Ratio Recomended)</h6>
+                      <h4>3. Thumbnails</h4>
+                        <h6>Include photos with different angles and environments</h6>
                         <div className="row">
                           {[1, 2, 3].map((index) => (
                             <div className="col-4" key={index}>

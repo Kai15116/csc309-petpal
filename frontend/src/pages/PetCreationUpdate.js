@@ -317,8 +317,7 @@ const PetCreationUpdate = () => {
                   <div class="container">
                     <div class="pet-details">
                       <h4>2. Media</h4>
-                        <h6>Include photos with different angles and environments (JPEG Required)</h6>
-                        <h6>Include photos with different angles and environments (JPEG Required)</h6>
+                        <h6>Include photos with different angles and environments</h6>
                         <div className="row">
                           <div className="col-4">
                             <label htmlFor="image1" className="image-label">
