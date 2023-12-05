@@ -26,7 +26,7 @@ function ShelterProfileDetailsCard(props) {
                     facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.
                 </Card.Text>
                 <div className="mb-2" style={{ display: "flex", justifyContent: "space-evenly"}}>
-                    <Button variant="primary" onClick={() => navigate(`/viewshelterpets/${userId}`)}>
+                    <Button variant="primary" onClick={() => navigate(`/mypets/`)}>
                         View Pets
                     </Button>
                     <Button variant="terniary" onClick={() => setContactOpen(!contactOpen)}
