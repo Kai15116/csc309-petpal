@@ -15,7 +15,7 @@ function ShelterProfileDetailsCard(props) {
         <Card style={{ position: "relative", bottom: "9rem", maxWidth: "30rem"}}>
             <Card.Body >
                 <Card.Title> 
-                    <h2>{userInfo?.username} </h2>
+                    <h3>{userInfo?.username} </h3>
                 </Card.Title>
                 <Card.Subtitle className="text-muted" style={{ fontSize: "14px" }}> 
                     {userInfo?.address} 

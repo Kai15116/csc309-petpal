@@ -1,6 +1,7 @@
 import { Image } from "react-bootstrap";
 import "../../styles/profiles.css";
 import ExampleBanner from "../../assets/example_images/yosemite_banner.jpg";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Displays the banner and title on the shelter profile.
@@ -8,6 +9,7 @@ import ExampleBanner from "../../assets/example_images/yosemite_banner.jpg";
  * @param {contextUserId, userInfo} props 
  */
 function ShelterProfileBanner(props) {
+    const navigate = useNavigate();
     
     return (
         <div id="shelter-profile-banner">
@@ -15,8 +17,11 @@ function ShelterProfileBanner(props) {
                 <h1 id="banner-title">
                     Toronto Zoo Escapees {' '}
                     {   // Check if viewer is same as page owner
-                        (props.contextUserId === props.userInfo?.id) && 
-                        (<i className="bi bi-pencil-square shelter-profile-edit-icon"></i>)
+                        (props.contextUserId === props.userInfo?.id) && (
+                            <a href="" onClick={() => { navigate("/shelterprofileedit") }}>
+                                <i className="bi bi-pencil-square shelter-profile-edit-icon"></i>
+                            </a>
+                        )
                     }
                 </h1>
             </div>

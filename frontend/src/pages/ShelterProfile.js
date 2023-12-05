@@ -1,7 +1,7 @@
 import {useContext, useState, useEffect} from "react";
 import { userContext } from "../context/userContext";
 import { useParams, useNavigate } from "react-router-dom";
-import { Container, Row, Col, Stack, Image } from "react-bootstrap";
+import { Container, Row, Col, Stack, Image, Card } from "react-bootstrap";
 import LandingHeader from "../components/LandingHeader";
 import Footer from "../components/Footer";
 import ShelterPetCarouselCard from "../components/profile/ShelterPetCarousel";
@@ -96,6 +96,17 @@ function ShelterProfile() {
                     </Col>
                     <Col xs={12} sm={6}>
                         <Stack gap={3}>
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title><h4>Our Mission</h4></Card.Title>
+                                    <Card.Text>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                        Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, 
+                                        ullam neque adipisci facere delectus aut nisi porro, 
+                                        nemo nihil quidem autem laudantium? Perspiciatis.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
                             <ShelterPetCarouselCard />
                         </Stack>
                     </Col>
