@@ -9,7 +9,7 @@ import image3 from '../assets/images/image3.jpg';
 import noImage from "../assets/images/image-not-found-scaled.png"
 import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/userContext';
-import YourComponent from './YourComponent';
+import BlogImagesCarousel from '../components/BlogImagesCarousel';
 
 const ShelterBlogs = () => {
   const {getContextUser} = useContext(userContext);
@@ -49,6 +49,11 @@ const ShelterBlogs = () => {
     //   likes: 0,
     // },
   ]);
+
+  // selected images for liking mechanisim
+  const [selectedImage1, setSelectedImage1] = useState(null);
+  const [selectedImage2, setSelectedImage2] = useState(null);
+  const [selectedImage3, setSelectedImage3] = useState(null);
 
   const SheltersPerPage = 2; // Number of shelters to display per page
   const [activePage, setActivePage] = useState(1);
@@ -92,13 +97,67 @@ const ShelterBlogs = () => {
     </button>
   );
 
-  const handleLikeClick = (shelterIndex) => {
-    // calculate the correct index based on the current active page
-    const adjustedIndex = startIndex + shelterIndex;
+  const extractFileName = (url) => {
+    if (!url)
+        return noImage
+    const parts = url.split('/');
+    return parts[parts.length - 1];
+  };
+
+  // increment like count of blog at index shelterIndex
+  const handleLikeClick = async (shelterIndex) => {
+    const blogId = allShelters[shelterIndex].id
+    const currLikes = allShelters[shelterIndex].likes;
+
+    const formData = new FormData();
+    formData.append('title', allShelters[shelterIndex].title);
+    formData.append('content', allShelters[shelterIndex].content);
+    // append like count + 1
+    formData.append('likes', currLikes + 1);
+
+    // convert images
+    const blob1 = await fetch(allShelters[shelterIndex].picture_1).then((r) => r.blob());
+    const file1 = new File([blob1], extractFileName(allShelters[shelterIndex].picture_1), { type: "image/jpeg" });
+
+    const blob2 = await fetch(allShelters[shelterIndex].picture_2).then((r) => r.blob());
+    const file2 = new File([blob2], extractFileName(allShelters[shelterIndex].picture_2), { type: "image/jpeg" });
+
+    const blob3 = await fetch(allShelters[shelterIndex].picture_3).then((r) => r.blob());
+    const file3 = new File([blob3], extractFileName(allShelters[shelterIndex].picture_3), { type: "image/jpeg" });
+
+    formData.append('picture_1', file1);
+    formData.append('picture_2', file2);
+    formData.append('picture_3', file3);
   
-    const updatedSheltersData = [...sheltersData];
-    updatedSheltersData[adjustedIndex].likes += 1;
-    setSheltersData(updatedSheltersData);
+    // make a PUT request to update the blog
+    fetch(`http://localhost:8000/blogs/${blogId}/`, {
+      method: 'PUT',
+      body: formData,
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      }
+    }).then(response => response.json())
+      .then(data => {
+        // Handle the response from the server
+        console.log('Edit successful:', data);
+
+        // increment the likes locally
+        const updatedLikes = currLikes + 1;
+
+        // create a copy of the allShelters array
+        const updatedShelters = [...allShelters];
+        
+        // update the likes in the copy
+        updatedShelters[shelterIndex] = {
+          ...allShelters[shelterIndex],
+          likes: updatedLikes,
+        };
+
+        setAllShelters(updatedShelters);
+      })
+      .catch(error => {
+        console.error('Error editing pet:', error);
+      });
   };
 
   function convertObjectToArray(inputObject) {
@@ -111,49 +170,8 @@ const ShelterBlogs = () => {
     return resultArray.filter(Boolean); 
   }
 
-  const extractFileName = (url) => {
-    if (!url)
-        return noImage
-    const parts = url.split('/');
-    return parts[parts.length - 1];
-  };
-
-  async function fetchAndReturnFile(data) {
-    const blob = await fetch(data).then((response) => response.blob());
-    const fileName = extractFileName(data);
-    return new File([blob], fileName, { type: "image/jpeg" });
-  }
-  
-  // async function processImages(shelterData) {
-  //   const processedShelters = [];
-  
-  //   async function processImage(imageUrl) {
-  //     const blob = await fetch(imageUrl).then((r) => r.blob());
-  //     const fileName = extractFileName(imageUrl);
-  //     return new File([blob], fileName, { type: "image/jpeg" });
-  //   }
-  
-  //   for (const shelter of shelterData) {
-  //     const file1 = await processImage(shelter.picture_1);
-  //     const file2 = await processImage(shelter.picture_2);
-  //     const file3 = await processImage(shelter.picture_3);
-  
-  //     processedShelters.push({
-  //       ...shelter,
-  //       picture_1: file1,
-  //       picture_2: file2,
-  //       picture_3: file3,
-  //     });
-  //   }
-  
-  //   return processedShelters;
-  // }
-
   const startIndex = (activePage - 1) * SheltersPerPage;
   const endIndex = startIndex + SheltersPerPage;
-
-  // const sheltersToDisplay = allShelters.slice(startIndex, endIndex);
-  console.log("fetchAndReturnFile", fetchAndReturnFile("http://localhost:8000/media/blog_images/team_picture_ZQJks6N.jpg"));
   const sheltersToDisplay = allShelters.slice(startIndex, endIndex);
 
   return (
@@ -227,7 +245,7 @@ const ShelterBlogs = () => {
                 <p>{shelter.content}</p>
 
                 {/* image carousel component */}
-                <YourComponent shelter={shelter} />
+                <BlogImagesCarousel shelter={shelter} />
               
                 <div className="like-button-container">
                   <LikeButton likes={shelter.likes} onLikeClick={() => handleLikeClick(index)} />

@@ -10,7 +10,7 @@ import noImage from "../assets/images/image-not-found-scaled.png"
 import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/userContext';
 
-const YourComponent = ({ shelter }) => {
+const BlogImagesCarousel = ({ shelter }) => {
     const [imageUrls, setImageUrls] = useState([noImage, noImage, noImage]);
 
     const extractFileName = (url) => {
@@ -57,4 +57,4 @@ const YourComponent = ({ shelter }) => {
     );
   };
   
-  export default YourComponent;
+  export default BlogImagesCarousel;

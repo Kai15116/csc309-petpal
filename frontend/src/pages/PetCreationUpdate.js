@@ -213,7 +213,7 @@ const PetCreationUpdate = () => {
   
     // make a PUT request to update the pet
     fetch(`http://localhost:8000/pets/${petId}/`, {
-      method: 'PUT', // TODO: put and patch is not allowed
+      method: 'PUT', 
       body: formData,
       headers: {
         'Authorization': `Bearer ${accessToken}`,
