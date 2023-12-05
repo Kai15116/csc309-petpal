@@ -1,8 +1,15 @@
 import {useContext, useState, useEffect} from "react";
 import { userContext } from "../context/userContext";
 import { useParams, useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Container, Row, Col, Stack, Image, Card } from "react-bootstrap";
 import LandingHeader from "../components/LandingHeader";
+import Footer from "../components/Footer";
+import ShelterPetCarouselCard from "../components/profile/ShelterPetCarousel";
+import ShelterProfileDetailsCard from "../components/profile/ShelterProfileDetails";
+import ShelterReviewsCard from "../components/profile/ShelterReviews";
+import ExampleBanner from "../assets/example_images/yosemite_banner.jpg"
+import ShelterProfileBanner from "../components/profile/ShelterProfileBanner";
+
 function ShelterProfile() {
     const {getContextUser} = useContext(userContext);
     const [userInfo, setUserInfo] = useState(null);
@@ -68,34 +75,68 @@ function ShelterProfile() {
             
         }
         fetchUserInfo();
-
+        console.log("bruh " + userId);
     }, [ userId ])
-    
+
     return (
-        <div>
-            ShelterProfileFake
-            <LandingHeader></LandingHeader>
-            <div>
-                <h1>This is from user context</h1>
-                <h2>{accessToken}</h2>
-                <h2>{contextUserId}</h2>
-                <h2>{contextUserType}</h2>
-                <input></input>
-            </div>
-            <div>
-                <h1>This is from the api.</h1>
-                <h2>{userInfo?.id}</h2>
-                <h2>{userInfo?.username}</h2>
-                <h2>{userInfo?.email}</h2>
-                <h2>{userInfo?.address}</h2>
-                <h2>{userInfo?.created_at}</h2>
-            </div>
-            <div>
-                {/* Just testing there might be changes you have to make later. */}
-                {userInfo?.id === contextUserId && <Button onClick={deleteShelter}>Delete Shelter</Button>}
-            </div>
+        <div style={{ backgroundColor: "#C8F4FF"}}>
+            <LandingHeader />
+            <ShelterProfileBanner
+                contextUserId={contextUserId} 
+                userInfo={userInfo}
+            />
+            <Container className="pt-3 pb-5" style={{ backgroundColor: "#C8F4FF"}}>
+                <Row style={{ width: "100%" }}>
+                    <Col className="shelter-profile-col" xs={12} sm={3}>
+                        <div className="test-div"></div>
+                        <ShelterProfileDetailsCard
+                            userInfo={userInfo}
+                            userId={userId}
+                        /> 
+                    </Col>
+                    <Col xs={12} sm={6}>
+                        <Stack gap={3}>
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title><h4>Our Mission</h4></Card.Title>
+                                    <Card.Text>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                        Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, 
+                                        ullam neque adipisci facere delectus aut nisi porro, 
+                                        nemo nihil quidem autem laudantium? Perspiciatis.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                            <ShelterPetCarouselCard />
+                        </Stack>
+                    </Col>
+                    <Col xs={12} sm={3}>
+                        <ShelterReviewsCard />
+                    </Col>
+                </Row>
+
+                {/* <div>
+                    <h1>This is from user context</h1>
+                    <h2>{accessToken}</h2>
+                    <h2>{contextUserId}</h2>
+                    <h2>{contextUserType}</h2>
+                    <input></input>
+                </div>
+                <div>
+                    <h1>This is from the api.</h1>
+                    <h2>{userInfo?.id}</h2>
+                    <h2>{userInfo?.username}</h2>
+                    <h2>{userInfo?.email}</h2>
+                    <h2>{userInfo?.address}</h2>
+                    <h2>{userInfo?.created_at}</h2>
+                </div> */}
+            </Container>
+            <Footer />
         </div>
     )
 }
-
+                // <div>
+                //     {/* Just testing there might be changes you have to make later. */}
+                //     {userInfo?.id === contextUserId && <Button onClick={deleteShelter}>Delete Shelter</Button>}
+                // </div>
 export default ShelterProfile;

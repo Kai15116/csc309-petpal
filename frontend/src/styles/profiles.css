@@ -1,0 +1,69 @@
+/* #shelter-profile-banner {
+    position: relative;
+    background-image: url('../assets/example_images/bean1.jpg');
+    background-size: cover;
+    height: 30%;
+} */
+* {
+    box-sizing: border-box;
+}
+
+#shelter-profile-banner {
+    background-image: url('../assets/example_images/yosemite_banner.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 20rem;
+}
+#banner-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 20rem;
+    background: rgba(0, 0, 0, 0.45); /* Last value Darkness */
+}
+#banner-title {
+    color: whitesmoke;
+}
+.shelter-profile-edit-icon {
+    margin-left: 1rem;
+    color: white;
+  }
+  .shelter-profile-edit-icon:hover {
+    color: #00aab6;
+  }
+  
+/* Profile Banner and Circle*/
+/* .profile-banner {
+  position: relative;
+  background-image: url('example_images/yosemite_banner.jpg');
+  background-size: cover;
+  height: 30%;
+} */
+
+/* Review Styling */
+.shelter-review-card {
+    border-radius: 5px;
+    border: 1px solid goldenrod;
+    background-color: floralwhite;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    width: auto;
+    max-width: 18rem;
+    height: auto;
+}
+
+.test-div {
+    position: relative;
+    bottom: 10rem;
+    left: calc(50% - 7rem);
+    background-image: url('../assets/example_images/milky3.jpg');
+    background-size: cover;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    border: 5px solid #C8F4FF;
+}
