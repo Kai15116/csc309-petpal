@@ -171,7 +171,7 @@ class PetShelterCommentListCreateView(ListCreateAPIView):
                 user=comment.content_object,
                 content_type=ContentType.objects.get_for_model(Comment),
                 object_id=comment.id,
-                notification_type='new_message'
+                notification_type='new_review'
             )
         except User.DoesNotExist:
             raise Http404('User does not exist.')

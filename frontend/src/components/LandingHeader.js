@@ -29,7 +29,7 @@ const LandingHeader = () => {
     useEffect(function () {
       async function fetchNotifications() {
           try {
-              const response = await fetch(`http://localhost:8000/notifications?read=False`, {
+              const response = await fetch(`http://localhost:8000/notifications?read=False&size=3&page=1`, {
                   method: 'GET',
                   headers: {
                         'Authorization': `Bearer ${user.accessToken}`,
@@ -39,7 +39,7 @@ const LandingHeader = () => {
               if (response.status >= 200 && response.status < 300) {
                   const data = await response.json();
                   console.log(data)
-                  setNotifications(data)
+                  setNotifications(data.results)
               } else if (response.status === 404) {
                   alert(404);
               } else {
@@ -61,19 +61,18 @@ const LandingHeader = () => {
     const NotificationItem = (props) => {
       const notification = props.notification;
       const id = notification.object_id;
+      const comment_object_id = notification.comment_object_id;
       switch (notification.notification_type) {
           case "status_update":
-              return <DropdownItem className="text-wrap" href={`/applications/${id}`}>Application status updated!</DropdownItem>
+              return <DropdownItem className="text-wrap" href={`/application/${id}`}>Application status updated!</DropdownItem>
           case "application_creation":
-              return <DropdownItem className="text-wrap" href={`/applications/${id}`}>New application was created for you!</DropdownItem>
+              return <DropdownItem className="text-wrap" href={`/application/${id}`}>New application was created for you!</DropdownItem>
           case "new_review":
-              // TODO: make it to proper id
-              return <DropdownItem className="text-wrap" href={`/shelterprofile/${id}`}>New review!</DropdownItem>
+              return <DropdownItem className="text-wrap" href={`/shelterprofile/${comment_object_id}`}>New review!</DropdownItem>
           case "new_message":
-              // TODO: make it to proper id
-              return <DropdownItem className="text-wrap" href={`/applications/${id}`}>New message for your application!</DropdownItem>
+              return <DropdownItem className="text-wrap" href={`/application/${comment_object_id}`}>New message for your application!</DropdownItem>
           case "new_pet_listing":
-              return <DropdownItem className="text-wrap" href={`/pet/${id}`}>New pet added!</DropdownItem>
+              return <DropdownItem className="text-wrap" href={`/details/${id}`}>New pet added!</DropdownItem>
           default:
               return <DropdownItem className="text-wrap">New notification!</DropdownItem>
       }
