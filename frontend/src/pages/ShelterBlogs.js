@@ -8,6 +8,7 @@ import image1 from '../assets/images/image1.jpg';
 import image2 from '../assets/images/image2.jpg';
 import image3 from '../assets/images/image3.jpg';
 import noImage from "../assets/images/image-not-found-scaled.png"
+import '../styles/blog_shelters.css'; 
 import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/userContext';
 import BlogImagesCarousel from '../components/BlogImagesCarousel';
@@ -277,8 +278,8 @@ const ShelterBlogs = () => {
           </div>
           <hr />
           {blogsToDisplay.map((blog, index) => (
-            <div key={index} className="bg-white p-4 rounded shadow mb-4">
-              <div className="d-flex align-items-center">
+            <div key={index} className="blog-card bg-white p-4 rounded shadow mb-4">
+              <div className="blog-card d-flex align-items-center">
                 <div>
                   <h2 className="me-3">{blog.title}</h2>
                   <h5 className="me-3">Owner: {blog.owner}</h5>

@@ -1,0 +1,22 @@
+/* responsive design */
+@media (max-width: 1400px) {
+  .blog-card.blog-card {
+    width: calc(100vw - 20rem);
+    padding: 25px;
+    margin-bottom: 20px;
+  }
+
+  .blog-card.bg-white {
+    width: calc(100vw - 20rem);
+  }
+
+  .blog-card .confirm-button {
+    margin-top: 10px; 
+  }
+
+  .blog-card button.post-button {
+    width: 100%; 
+  }
+}
+
+
