@@ -102,12 +102,12 @@ class RetrieveUpdateApplicationView(RetrieveUpdateAPIView):
 
         if user.is_pet_seeker():
             if old_status not in {'pending', 'accepted'}:
-                raise ValidationError(f'Pet seeker cannot update {old_status} to {new_status}')
+                raise ValidationError({'status': f'Pet seeker cannot update {old_status} to {new_status}'})
             if new_status != 'withdrawn':
                 raise ValidationError({'status': f'Pet seeker cannot update {old_status} to {new_status}'})
         elif user.is_pet_shelter():
             if old_status != 'pending':
-                raise ValidationError(f'Pet shelter cannot update {old_status} to {new_status}')
+                raise ValidationError({'status': f'Pet shelter cannot update {old_status} to {new_status}'})
             if new_status not in {'accepted', 'denied'}:
                 raise ValidationError({'status': f'Pet shelter cannot update {old_status} to {new_status}'})
         else:

@@ -8,11 +8,13 @@ import React, {useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {userContext} from "../context/userContext";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Form from 'react-bootstrap/Form';
 
 export default function Application(props) {
     const { getContextUser, setContextUser} = useContext(userContext);
     const user = getContextUser()
     const [comments, setComments] = useState([]);
+    const [formErrors, setFormErrors] = useState({});
     const [application, setApplication] = useState(null);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
@@ -89,32 +91,6 @@ export default function Application(props) {
 
     const sendMessage = async (e) => {
         e.preventDefault();
-        if (e.target.chatInput.value){
-            try {
-                const response = await fetch(`http://localhost:8000/comments/application/${applicationId}/`, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                      text: e.target.chatInput.value
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${user.accessToken}`,
-                    }
-                });
-                if (response.status >= 200 && response.status < 300) {
-                    const data = await response.json();
-                    console.log(data)
-                    fetchComments(true)
-                } else if (response.status === 404) {
-                    alert(404);
-                } else {
-                    console.log(response)
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        }
-
         if (messageType !== "comment") {
             try {
                 const response = await fetch(`http://localhost:8000/applications/${applicationId}/`, {
@@ -127,10 +103,15 @@ export default function Application(props) {
                         'Authorization': `Bearer ${user.accessToken}`,
                     }
                 });
+                const data = await response.json();
                 if (response.status >= 200 && response.status < 300) {
-                    const data = await response.json();
                     setApplication({...application, status: messageType})
+                    setFormErrors({})
                     console.log(data)
+                } else if (response.status === 400) {
+                    console.log(data)
+                    setFormErrors({...data})
+                    return
                 } else if (response.status === 404) {
                     alert(404);
                 } else {
@@ -140,7 +121,36 @@ export default function Application(props) {
                 console.log(e);
             }
         }
-
+         if (e.target.chatInput.value || messageType === "comment"){
+            try {
+                const response = await fetch(`http://localhost:8000/comments/application/${applicationId}/`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                      text: e.target.chatInput.value
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${user.accessToken}`,
+                    }
+                });
+                const data = await response.json();
+                if (response.status >= 200 && response.status < 300) {
+                    setFormErrors({})
+                    console.log(data)
+                    e.target.chatInput.value = ""
+                    fetchComments(true)
+                } else if (response.status === 400){
+                    console.log(data)
+                    setFormErrors({...data})
+                } else if (response.status === 404) {
+                    alert(404);
+                } else {
+                    console.log(response)
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        }
     }
 
     return (<>
@@ -205,10 +215,10 @@ export default function Application(props) {
                 </div>
 
                 <div className="sticky-bottom pb-3 chat-form-container">
-                    <form method="post" className="bg-body-tertiary p-3 rounded w-100 shadow" id="chat-form" onSubmit={sendMessage}>
-                        <div className="form-group mb-2">
+                    <Form method="post" className="bg-body-tertiary p-3 rounded w-100 shadow" id="chat-form" onSubmit={sendMessage}>
+                        <Form.Group className="mb-2">
                             <div className="d-flex">
-                                <label htmlFor="chat-input" className="fw-bold mb-2 align-self-end">Message:</label>
+                                <Form.Label htmlFor="chat-input" className="fw-bold mb-2 align-self-end">Message:</Form.Label>
                                 <select className="form-select ms-auto mb-2" style={{width: "fit-content"}} id="message-type" defaultValue="comment" onChange={(e) => setMessageType(e.target.value)}>
                                     <option value="comment">Comment</option>
                                     {user?.contextUserType === "seeker" && <option value="withdrawn">Withdraw</option>}
@@ -216,12 +226,16 @@ export default function Application(props) {
                                     {user?.contextUserType === "shelter" && <option value="denied">Reject</option>}
                                 </select>
                             </div>
-                            <textarea className="form-control" id="chat-input" rows="5" name="chatInput" required={messageType === "comment"}></textarea>
-                        </div>
+
+                            <Form.Control as="textarea" id="chat-input" rows="5" name="chatInput"
+                                          isInvalid={formErrors?.status || formErrors?.text} controlId="chat-input"></Form.Control>
                         <div className="d-flex flex-row-reverse">
                             <button className="btn btn-success px-3 mt-1" type="submit">Send Message</button>
-                        </div>
-                    </form>
+                            {formErrors?.status && <p className="text-danger me-auto mt-1">{formErrors.status}</p>}
+                            {formErrors?.text && <p className="text-danger me-auto mt-1">{formErrors.text}</p>}
+                    </div></Form.Group>
+
+                    </Form>
                 </div>
 
             </div>
