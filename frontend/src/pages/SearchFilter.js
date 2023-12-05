@@ -174,7 +174,8 @@ function SearchFilter() {
             ...additionalQuery,
 
             page: 1
-        })
+        });
+        setShow(false);
     }
 
 
@@ -363,10 +364,12 @@ function SearchFilter() {
                             <option value="">Relavence</option>
                             <option value="name">Name&#8593;(A to Z)</option>
                             <option value="-name">Name&#8595;(Z to A)</option>
-                            <option value="age">Age&#8595;(1 to 8+)</option>
+                            <option value="age">Age&#8593;(1 to 8+)</option>
                             <option value="-age">Age&#8595;(8+ to 1)</option>
-                            <option value="weight">Size&#8595;(light to heavy)</option>
+                            <option value="weight">Size&#8593;(light to heavy)</option>
                             <option value="-weight">Size&#8595;(heavy to light)</option>
+                            <option value="adoption_fee">Fee&#8593;(cheap to expensive)</option>
+                            <option value="-adoption_fee">Fee&#8595;(expensive to cheap)</option>
                             </Form.Select>
                                
                             </FloatingLabel>
