@@ -90,7 +90,9 @@ function ShelterProfileEdit() {
         setPhone(e.target.value);
     };
 
-    const handleContactPatchSubmit = async (inputs) => {
+    const handleContactPatchSubmit = async (inputs, e) => {
+        e.preventDefault();
+
         const contactFormData = new FormData();
         contactFormData.append('mission_title', inputs.name);
         contactFormData.append('email', inputs.email);
@@ -98,14 +100,19 @@ function ShelterProfileEdit() {
         contactFormData.append('phone_number', inputs.phone);
         contactFormData.append('address', inputs.address);
 
+        console.log(inputs);
+
         if (validateEmail(email) && validatePhone(phone)) {
             try {
                 const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
                     method: 'PATCH',
-                    body: contactFormData,
                     headers: {
-                        Authorization: `Bearer ${accessToken}`,
+                        "Content-Type": "application/json",
+                        'Authorization': `Bearer ${accessToken}`,
                     },
+                    body: JSON.stringify({
+                        email: "hans@gmail.com"
+                    }),
                 });
 
                 if (response.ok) {
@@ -132,6 +139,7 @@ function ShelterProfileEdit() {
         contactFormData.append("description", contactInputs.email);
         contactFormData.append("mission_title", contactInputs.name);
         contactFormData.append("mission_statement", contactInputs.statement);
+        console.log(email);
 
         fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
             method: 'PATCH',
@@ -140,7 +148,10 @@ function ShelterProfileEdit() {
                 'Authorization': `Bearer ${accessToken}`,
             }
         })
-        .then(response => response.JSON())
+        .then(response => {
+            response.JSON();
+            console.log(response);
+        })
         .then(data => {
             console.log("Information Updated", data);
         })
@@ -176,7 +187,8 @@ function ShelterProfileEdit() {
                     <h1 className='ms-4 mt-3'> Edit Profile Information </h1>
                     <Accordion.Collapse eventKey='contact'>
                         <Card.Body>
-                            <Form onSubmit={handleContactPatchSubmit}>
+
+                            <Form>
                                 <Form.Group className="mb-3" controlId="formName">
                                     <Form.Label>Shelter Name</Form.Label>
                                     <Form.Control
@@ -185,9 +197,6 @@ function ShelterProfileEdit() {
                                         onChange={(e) => setName(e.target.value)}
                                         placeholder="e.g. Example Shelter Name"
                                     />
-                                    {!validateEmail(email) && email !== '' && (
-                                    <Form.Text className="text-danger">Invalid email address</Form.Text>
-                                    )}
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formEmail">
                                     <Form.Label>Email Address</Form.Label>
@@ -238,7 +247,7 @@ function ShelterProfileEdit() {
                                 {formError && <Alert variant="danger">{formError}</Alert>}
 
                                 <div >
-                                    <Button className='me-3' variant="primary" type="submit">
+                                    <Button className='me-3' variant="primary" onSubmit={handleContactPatchSubmit}>
                                         Submit
                                     </Button>
                                     <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
