@@ -1,12 +1,12 @@
 import { Card, Row, Col } from "react-bootstrap";
 import {Image, Button} from "react-bootstrap";
-import PlaceHolder from "./../assets/images/placeholderprofile.png"
+import PlaceHolder from "../../assets/images/placeholderprofile.png"
 import { useNavigate } from "react-router-dom";
 import Badge from 'react-bootstrap/Badge';
-import { formatTimeGap } from "../utils";
-import "../styles/notification_card.css"
-import { userContext } from '../context/userContext';
+import { formatTimeGap } from "../../utils";
+import { userContext } from '../../context/userContext';
 import {useContext} from "react";
+import "./style.css";
 
 const formatNotificationType = (note_type) => {
     switch (note_type) {
@@ -42,6 +42,7 @@ function NotificationCard(props) {
 
     const handleClick = async (id) => {
         // url + object_id
+        
         props.readNotification(id)
 
         switch (notification_type) {
@@ -88,7 +89,7 @@ function NotificationCard(props) {
                         </ul>                
 					</div>	
                     <div style={{display:"flex", alignItems: "center"}}>
-                        <Button hidden={!props.delOption} variant="secondary" style={{verticalAlign:"center"}} onClick={()=> {props.deleteNotification(id)}}><i className="bi bi-x-lg"></i></Button></div>
+                        <Button hidden={!props.delOption} variant="secondary" style={{verticalAlign:"center"}} onClick={(event)=> {event.stopPropagation();props.deleteNotification(id);}}><i className="bi bi-x-lg"></i></Button></div>
                     <div style={{display: "flex", flexDirection: "column", gap: "2rem", paddingTop:"10px", paddingRight: "1rem"}}>
                         
                         {<div style={{width: "10px", height:"10px", borderRadius: "50%",background: `${read? "transparent": "blue"}`}}></div>}

@@ -1,11 +1,11 @@
 
-import LandingHeader from '../components/LandingHeader';
-import Footer from '../components/Footer';
+import LandingHeader from '../../components/LandingHeader';
+import Footer from '../../components/Footer';
 import React, { useState } from 'react';
 import { FloatingLabel, Card, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import bgSignup from '../assets/images/pets-image-2.jpg';
-import SignupModal from '../components/SignupModal';
+import bgSignup from '../../assets/images/pets-image-2.jpg';
+import SignupModal from '../../components/SignupModal';
 
 const SignUp = () => {
   const [showModal, setShowModal] = useState(false);
