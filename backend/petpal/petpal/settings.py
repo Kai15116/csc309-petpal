@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'pets',
     'comments',
+    'blogs',
     'notifications',
     'applications',
     'drf_yasg',
