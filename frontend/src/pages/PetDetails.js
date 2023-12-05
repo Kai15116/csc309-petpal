@@ -22,6 +22,7 @@ const PetDetails = () => {
   const [petName, setPetName] = useState('');
   const [petSex, setPetSex] = useState('');
   const [petBreed, setPetBreed] = useState('');
+  const [petBreedName, setPetBreedName] = useState('');
   const [petAge, setPetAge] = useState(null);
   const [petWeight, setPetWeight] = useState( null);
   const [petFee, setPetFee] = useState(null);
@@ -60,6 +61,7 @@ const PetDetails = () => {
               setPetName(data.name || '');
               setPetSex(data.sex || '');
               setPetBreed(data.breed || '');
+              setPetBreedName(data.breed_name || '');
               setPetAge(data.age || null);
               setPetWeight(data.weight || null);
               setPetFee(data.adoption_fee || null);
@@ -149,7 +151,7 @@ const PetDetails = () => {
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Breed:</strong></th>
-                                <td>{petBreed}</td>
+                                <td>{petBreedName}</td>
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Age:</strong></th>
