@@ -1,6 +1,6 @@
 import LandingHeader from '../components/LandingHeader';
 import Footer from '../components/Footer';
-import { Container, Accordion, useAccordionButton, Button, ListGroup, Card, Row, Col, AccordionContext} from 'react-bootstrap';
+import { Alert, Container, Accordion, useAccordionButton, Button, ListGroup, Card, Row, Col, AccordionContext, Form} from 'react-bootstrap';
 import { useContext, useEffect, useState } from 'react';
 import { userContext } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
@@ -33,10 +33,19 @@ function ShelterProfileEdit() {
     const [userInfo, setUserInfo ] = useState(null);
     const navigate = useNavigate();
 
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+    const [description, setDescription] = useState('');
+    const [website, setWebsite] = useState('');
+    const [formError, setFormError] = useState(null);
+
+
     useEffect( function () {
         async function fetchUserInfo() {
             try {
-                const response = await fetch(`http://localhost:8000/accounts/shelter/${user?.contextUserId}`, {
+                const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
                     method: 'GET'
                 });
                 if (response.status >= 400) {
@@ -44,6 +53,12 @@ function ShelterProfileEdit() {
                 } else if (response.status >= 200 && response.status < 300) {
                     const data = await response.json();
                     setUserInfo({...data});
+
+                    setEmail(data?.email);
+                    setPhone(data?.phone_number);
+                    setAddress(data?.address);
+                    setDescription(data?.description);
+                    setWebsite(data?.website);
                 }
             }
             catch (e) {
@@ -55,11 +70,90 @@ function ShelterProfileEdit() {
         fetchUserInfo();
     }, []);
 
+    const validateEmail = (value) => {
+        // You can use a regular expression for email validation
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailPattern.test(value);
+    };
+
+    const validatePhone = (value) => {
+        // You can customize this validation logic for phone numbers
+        // For simplicity, let's assume a valid phone number is at least 10 digits
+        return value.length >= 10;
+    };
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    };
+
+    const handlePhoneChange = (e) => {
+        setPhone(e.target.value);
+    };
+
+    const handleContactPatchSubmit = async (inputs) => {
+        const contactFormData = new FormData();
+        contactFormData.append('mission_title', inputs.name);
+        contactFormData.append('email', inputs.email);
+        contactFormData.append('website', inputs.website);
+        contactFormData.append('phone_number', inputs.phone);
+        contactFormData.append('address', inputs.address);
+
+        if (validateEmail(email) && validatePhone(phone)) {
+            try {
+                const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
+                    method: 'PATCH',
+                    body: contactFormData,
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                });
+
+                if (response.ok) {
+                    console.log('Information Updated');
+                    setFormError(null);
+                } else {
+                    const errorData = await response.json();
+                    console.error('Failed to update information', errorData);
+                    console.log(contactFormData);
+
+                    setFormError(errorData.message || 'Failed to update information');
+                }
+            } catch (error) {
+                console.error(error);
+                setFormError('An unexpected error occurred');
+            }
+        } else {
+            setFormError('Invalid email or phone number. Please check your inputs.');
+        }
+    };
+
+    const handleDescriptionPatchSubmit = (contactInputs) => {
+        const contactFormData = new FormData();
+        contactFormData.append("description", contactInputs.email);
+        contactFormData.append("mission_title", contactInputs.name);
+        contactFormData.append("mission_statement", contactInputs.statement);
+
+        fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
+            method: 'PATCH',
+            body: contactFormData,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            }
+        })
+        .then(response => response.JSON())
+        .then(data => {
+            console.log("Information Updated", data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }
+
     return (
         <div style={{ backgroundColor: "#C8F4FF" }}>
             <LandingHeader />
 <Container className='p-5' fluid style={{ backgroundColor: "#C8F4FF", minHeight: "82vh"}}>
-    <Accordion defaultActiveKey="0">
+    <Accordion defaultActiveKey="contact">
         <Row>
             <Col xs={12} sm={3}>
                 <ListGroup>
@@ -79,12 +173,79 @@ function ShelterProfileEdit() {
             </Col>
             <Col xs={12} sm={9}>
                 <Card>
-                    <h1 className='ms-4 my-3'> Edit Profile Information </h1>
+                    <h1 className='ms-4 mt-3'> Edit Profile Information </h1>
                     <Accordion.Collapse eventKey='contact'>
                         <Card.Body>
-                            <Card.Text>
-                                Shelter Contact
-                            </Card.Text>
+                            <Form onSubmit={handleContactPatchSubmit}>
+                                <Form.Group className="mb-3" controlId="formName">
+                                    <Form.Label>Shelter Name</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        placeholder="e.g. Example Shelter Name"
+                                    />
+                                    {!validateEmail(email) && email !== '' && (
+                                    <Form.Text className="text-danger">Invalid email address</Form.Text>
+                                    )}
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formEmail">
+                                    <Form.Label>Email Address</Form.Label>
+                                    <Form.Control
+                                        type="email"
+                                        value={email}
+                                        onChange={handleEmailChange}
+                                        placeholder="e.g. shelter.name@example.com"
+                                    />
+                                    {!validateEmail(email) && email !== '' && (
+                                    <Form.Text className="text-danger">Invalid email address</Form.Text>
+                                    )}
+                                </Form.Group>
+
+                                <Form.Group className="mb-3" controlId="formPhone">
+                                    <Form.Label>Phone Number</Form.Label>
+                                    <Form.Control
+                                        type="tel"
+                                        value={phone}
+                                        onChange={handlePhoneChange}
+                                        placeholder="e.g. 1234567890"
+                                    />
+                                    {!validatePhone(phone) && phone !== '' && (
+                                    <Form.Text className="text-danger">Invalid phone number</Form.Text>
+                                    )}
+                                </Form.Group>
+
+                                <Form.Group className="mb-3" controlId="formAddress">
+                                    <Form.Label>Address</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={address}
+                                        onChange={(e) => setAddress(e.target.value)}
+                                        placeholder="e.g. Main Street, Toronto ON"
+                                    />
+                                </Form.Group>
+
+                                <Form.Group className="mb-3" controlId="formWebsite">
+                                    <Form.Label>Website</Form.Label>
+                                    <Form.Control 
+                                        type="text"
+                                        value={website}
+                                        onChange={(e) => setWebsite(e.target.value)}
+                                        placeholder="e.g. example.com"
+                                    />
+                                </Form.Group>
+                                
+                                {formError && <Alert variant="danger">{formError}</Alert>}
+
+                                <div >
+                                    <Button className='me-3' variant="primary" type="submit">
+                                        Submit
+                                    </Button>
+                                    <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                        Cancel
+                                    </Button>
+                                </div>
+                            </Form>
                         </Card.Body>
                     </Accordion.Collapse>
                     <Accordion.Collapse eventKey='descriptions'>
