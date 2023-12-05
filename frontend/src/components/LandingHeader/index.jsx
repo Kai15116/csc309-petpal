@@ -51,9 +51,14 @@ const LandingHeader = () => {
           }
       }
       async function fetchUserInfo() {
+            let headers = user.accessToken ? {
+                'Authorization': `Bearer ${user.accessToken}`,
+            } : {}
+
             try {
                 const response = await fetch(`http://localhost:8000/accounts/${user.contextUserType}/${user.contextUserId}`, {
-                    method: 'GET'
+                    method: 'GET',
+                    headers: headers
                 }
             );
             if (response.status >= 400) {
