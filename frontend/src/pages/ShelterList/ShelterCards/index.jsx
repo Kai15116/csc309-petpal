@@ -14,7 +14,7 @@ function ShelterCard(props) {
 	return (
 		<Card className="w-100 shelter-card" style={{ paddingLeft: "3rem", lineHeight: "1", marginBottom: "0.5rem"}} onClick={() => handleClick(id)}>
 			<Card.Body>
-				<Row xs={1} md={2} lg={3} xl={4}>
+				<Row xs={1} md={2} xl={4}>
 					<Col style={{paddingLeft: "2rem"}}>
 						<Image src={profile_picture||PlaceHolder} width={50} height={50} style={{borderRadius:"100%"}}></Image>
 					</Col>

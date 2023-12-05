@@ -26,7 +26,8 @@ class ListCreatePetView(ListCreateAPIView):
         return super().get(request, *args, **kwargs)
 
     def perform_create(self, serializer):
-        Pet.objects.create(**serializer.validated_data, owner=self.request.user.petshelter)
+        pet = Pet.objects.create(**serializer.validated_data, owner=self.request.user.petshelter)
+        serializer.validated_data['id'] = pet.id
 
     def get_queryset(self):
         serializer = PetSearchSerializer(data=self.request.query_params)
