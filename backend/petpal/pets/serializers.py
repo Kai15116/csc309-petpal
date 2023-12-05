@@ -13,18 +13,18 @@ class PetSerializer(ModelSerializer):
     class Meta:
         model = Pet
         fields = '__all__'
-        read_only_fields = ['id', 'last_modified', 'owner']
+        read_only_fields = ['id', 'last_modified', 'owner', 'pet_type_name', 'breed_name']
         extra_kwargs = {'id': {'help_text': 'Id of the pet.'}}
 
     @swagger_serializer_method(serializer_or_field=CharField(help_text="String representation of pet type."))
     def get_pet_type_name(self, obj):
-        if obj.pet_type:
+        if hasattr(obj, 'pet_type') and obj.pet_type:
             return obj.pet_type.name
         return None
 
     @swagger_serializer_method(serializer_or_field=CharField(help_text="String representation of breed."))
     def get_breed_name(self, obj):
-        if obj.breed:
+        if hasattr(obj, 'breed') and obj.breed:
             return obj.breed.name
         return None
 

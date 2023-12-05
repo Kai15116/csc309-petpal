@@ -8,6 +8,7 @@ from applications.models import Application
 from django.contrib.contenttypes.models import ContentType
 from accounts.models import User, PetShelter
 from django.http import Http404
+from notifications.models import Notification
 
 class CommentListCreateView(ListCreateAPIView):
     """
@@ -56,7 +57,6 @@ class CommentListCreateView(ListCreateAPIView):
 
         elif isinstance(content_object, apps.get_model('accounts', 'PetShelter')):
             Comment.objects.create(**serializer.validated_data, user=user)
-
 
 class CommentApplicationListCreateView(ListCreateAPIView):
     """
@@ -108,8 +108,22 @@ class CommentApplicationListCreateView(ListCreateAPIView):
             app_shelter = application.pet.owner
 
             if (user.pk == app_seeker.pk) or (user.pk == app_shelter.pk):
-                Comment.objects.create(**serializer.validated_data, user=user,
+                comment = Comment.objects.create(**serializer.validated_data, user=user,
                                     content_type=ContentType.objects.get_for_model(Application), object_id=object_id)
+                if user.pk == app_seeker.pk:
+                    Notification.objects.create(
+                        user=app_shelter,
+                        content_type=ContentType.objects.get_for_model(Comment),
+                        object_id=comment.id,
+                        notification_type='new_message'
+                    )
+                elif user.pk == app_shelter.pk:
+                    Notification.objects.create(
+                        user=app_seeker,
+                        content_type=ContentType.objects.get_for_model(Comment),
+                        object_id=comment.id,
+                        notification_type='new_message'
+                    )
             else:
                 raise PermissionDenied('Permission Denied: You may only comment on your own applications.')
             
@@ -150,9 +164,15 @@ class PetShelterCommentListCreateView(ListCreateAPIView):
             if reply_to and reply_to.object_id != object_id:
                 raise ValidationError({'reply_to': 'You have to reply to the comment that corresponds to the same object.'})
 
-            Comment.objects.create(**serializer.validated_data, user=user,
-                                content_type=ContentType.objects.get_for_model(PetShelter))
-            
+            comment = Comment.objects.create(**serializer.validated_data, user=user,
+                                content_type=ContentType.objects.get_for_model(PetShelter),
+                                             object_id=object_id)
+            Notification.objects.create(
+                user=comment.content_object,
+                content_type=ContentType.objects.get_for_model(Comment),
+                object_id=comment.id,
+                notification_type='new_message'
+            )
         except User.DoesNotExist:
             raise Http404('User does not exist.')
 
