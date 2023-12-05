@@ -7,6 +7,7 @@ import image2 from "../assets/images/image2.jpg"
 import image3 from "../assets/images/image3.jpg"
 import noImage from '../assets/images/no_image_icon.png'; 
 import '../styles/blog_creation_and_update.css'; 
+import MDEditor, { selectWord } from "@uiw/react-md-editor";
 
 const BlogCreationUpdate = () => {
   const [title, setTitle] = useState('');
@@ -97,15 +98,7 @@ const BlogCreationUpdate = () => {
                                 fontWeight: 'bold'}}>
                                   Body
                                 </label>
-                                <textarea
-                                  id="blogContent"
-                                  className="form-control"
-                                  value={blogContent}
-                                  onChange={handleContentChange}
-                                  rows={10}
-                                  cols={50}
-                                  style={{minWidth:"100%"}}
-                                />
+                                <MDEditor height={200} value={blogContent} onChange={setBlogContent} style={{width: "100%"}}/>
                               </div>
                             </div>
                           </div>
