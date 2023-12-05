@@ -4,9 +4,9 @@ import PlaceHolder from "../../assets/images/placeholderprofile.png"
 import { useNavigate } from "react-router-dom";
 import Badge from 'react-bootstrap/Badge';
 import { formatTimeGap } from "../../utils";
-import "../../styles/notification_card.css"
 import { userContext } from '../../context/userContext';
 import {useContext} from "react";
+import "./style.css";
 
 const formatNotificationType = (note_type) => {
     switch (note_type) {

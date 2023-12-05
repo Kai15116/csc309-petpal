@@ -1,6 +1,6 @@
 import { Card, ListGroup, Button} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "../../styles/petCardStyles.css";
+import "./style.css";
 import PlaceholderPet from "../../assets/images/placeholderpet.png"
 
 function PetCard(props) {
