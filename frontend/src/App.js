@@ -23,6 +23,7 @@ import Applications from './pages/Applications';
 import Application from './pages/Application';
 import BlogCreationUpdate from './pages/BlogCreationUpdate';
 import ShelterBlogs from './pages/ShelterBlogs';
+import BlogDetails from './pages/BlogDetails';
 import ViewShelterPets from './pages/ViewShelterPets';
 import ShelterProfileEdit from './pages/ShelterProfileEdit';
 
@@ -67,6 +68,9 @@ function App() {
 
           {/* blogs by all shelters */}
           <Route path="/blogs" element={<ShelterBlogs />} />
+
+          {/* blogs by all shelters */}
+          <Route path="/blogDetails/:blogId" element={<BlogDetails />} />
 
           
           
