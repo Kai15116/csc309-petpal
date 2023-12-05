@@ -14,7 +14,7 @@ const ShelterBlogs = () => {
       profilePic: shelterPortrait,
       blogContent: 'Lorem ipsum dolor sit amet consectetur adipiscing elit mus ornare metus...',
       images: [image1, image2, image3],
-      likes: 0, // Add likes property and initialize it to 0
+      likes: 0, 
     },
     {
       name: 'Shelter B',
@@ -52,9 +52,12 @@ const ShelterBlogs = () => {
     </button>
   );
 
-  const handleLikeClick = (index) => {
+  const handleLikeClick = (shelterIndex) => {
+    // calculate the correct index based on the current active page
+    const adjustedIndex = startIndex + shelterIndex;
+  
     const updatedSheltersData = [...sheltersData];
-    updatedSheltersData[index].likes += 1;
+    updatedSheltersData[adjustedIndex].likes += 1;
     setSheltersData(updatedSheltersData);
   };
 
@@ -69,7 +72,7 @@ const ShelterBlogs = () => {
       <div className="d-flex">
         {/* left-hand sidebar */}
         <div className="bg-white mt-4 p-4 rounded shadow" style={{ height: 'fit-content' }}>
-          <h4>Search By Shelter Name:</h4>
+          <h4>Search By Blog Title:</h4>
           <div className="input-group">
             <input
               type="search"

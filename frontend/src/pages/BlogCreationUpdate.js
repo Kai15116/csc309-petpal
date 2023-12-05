@@ -7,12 +7,18 @@ import image2 from "../assets/images/image2.jpg"
 import image3 from "../assets/images/image3.jpg"
 import noImage from '../assets/images/no_image_icon.png'; 
 import '../styles/blog_creation_and_update.css'; 
+import MDEditor, { selectWord } from "@uiw/react-md-editor";
 
 const BlogCreationUpdate = () => {
+  const [title, setTitle] = useState('');
   const [shelterName, setShelterName] = useState('');
   const [blogContent, setBlogContent] = useState('');
   const [uploadedImages, setUploadedImages] = useState([noImage, noImage, noImage]);
   const [editMode, setEditMode] = useState(false);
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
 
   const handleContentChange = (event) => {
     setBlogContent(event.target.value);
@@ -62,36 +68,64 @@ const BlogCreationUpdate = () => {
             <div class="background-details">
                 <div class="bg-white mt-4 p-4 rounded shadow">
                     <div class="container">
-                          <div class="blog-details">
-                            <h4>1. Blog Content</h4>
-                            <div>
-                              <div>
-                                <textarea
-                                  id="blogContent"
-                                  value={blogContent}
-                                  onChange={handleContentChange}
-                                  rows={10}
-                                  cols={50}
+                          <div class="blog-details" style={{ overflow: 'hidden', wordWrap: 'break-word', maxWidth: '100%',
+                        display: 'flex',
+                        justifyContent: 'flex-start',
+                      }}>
+                          <h4>1. Blog Content</h4>
+                            <div style={{minWidth:"100%"}}>
+                              <div className="form-group">
+                                <label htmlFor="blogTitle" className="form-label"
+                                style={{ 
+                                display: 'flex',
+                                justifyContent: 'flex-start',
+                                fontWeight: 'bold'}}>
+                                  Title
+                                </label>
+                                <input
+                                  type="text"
+                                  id="blogTitle"
+                                  className="form-control"
+                                  value={title}
+                                  onChange={handleTitleChange}
                                 />
+                              </div>
+                              <div className="form-group">
+                                <label htmlFor="blogContent" className="form-label" 
+                                style={{ 
+                                display: 'flex',
+                                justifyContent: 'flex-start',
+                                fontWeight: 'bold'}}>
+                                  Body
+                                </label>
+                                <MDEditor height={200} value={blogContent} onChange={setBlogContent} style={{width: "100%"}}/>
                               </div>
                             </div>
                           </div>
                       </div>
                   </div>    
                 </div>
-                <div class="bg-white mt-4 p-4 rounded shadow">
-                  <div class="container">
-                    <div class="blog-details">
+                <div className="bg-white mt-4 p-4 rounded shadow">
+                  <div className="container">
+                    <div className="blog-details" style={{ overflow: 'hidden', wordWrap: 'break-word', maxWidth: '100%', display: 'flex', justifyContent: 'flex-start'}}>
                       <h4>2. Content Preview</h4>
-                      <div>
-                        <ReactMarkdown className="preview-container left-align">{blogContent}</ReactMarkdown>
-                      </div>
+                      <h1>{title}</h1>
+                        <div 
+                          style={{ 
+                            overflow: 'hidden', wordBreak: 'break-word', maxWidth: '100%', display: 'flex', justifyContent: 'flex-start', textAlign: 'left', flexWrap: 'wrap'
+                          }}
+                        >
+                          <ReactMarkdown >{blogContent}</ReactMarkdown>
+                        </div>
                     </div>
                   </div>
                 </div>
                 <div class="bg-white mt-4 p-4 rounded shadow">
                   <div class="container">
-                    <div class="blog-details">
+                    <div class="blog-details" style={{ overflow: 'hidden', wordWrap: 'break-word', maxWidth: '100%',
+                        display: 'flex',
+                        justifyContent: 'flex-start',
+                      }}>
                       <h4>3. Media</h4>
                         <h6>Include photos with different angles and environments (4:3 Aspect Ratio Recomended)</h6>
                         <div className="row">

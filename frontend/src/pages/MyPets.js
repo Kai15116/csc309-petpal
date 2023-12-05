@@ -80,7 +80,12 @@ const MyPets = () => {
           <div id="lst-container">
             <div className="d-flex">
               <h1 className="ms-1 mb-0">My Pets</h1>
-              <a className="btn btn-secondary ms-auto align-self-end" href="/petscreation">Add New Pet</a>
+                <button
+                    className="btn btn-secondary ms-auto align-self-end"
+                    onClick={() => navigate("/petCreateUpdate")}
+                    >
+                    Add New Pet
+                </button>
             </div>
             <hr></hr>
             <div className="d-grid" id="pets-grid">
