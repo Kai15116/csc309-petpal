@@ -1,7 +1,7 @@
 import { Card, ListGroup, Button} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "../styles/petCardStyles.css";
-import PlaceholderPet from "../assets/images/placeholderpet.png"
+import "../../styles/petCardStyles.css";
+import PlaceholderPet from "../../assets/images/placeholderpet.png"
 
 function PetCard(props) {
     const {name, id, picture_1, breed_name, age, weight, status } = props?.pet;
