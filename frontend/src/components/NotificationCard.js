@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Badge from 'react-bootstrap/Badge';
 import { formatTimeGap } from "../utils";
 import "../styles/notification_card.css"
+import { userContext } from '../context/userContext';
+import {useContext} from "react";
 
 const formatNotificationType = (note_type) => {
     switch (note_type) {
@@ -32,15 +34,35 @@ const formatNotificationType = (note_type) => {
 
 
 function NotificationCard(props) {
-    const {created_at, notification_type, read, id, object_id} = props.note;
+    const {created_at, notification_type, read, id, object_id, comment_object_id} = props.note;
     const {note_category, msg, contentType, color} = formatNotificationType(notification_type);
     const navigate = useNavigate();
+    const { getContextUser } = useContext(userContext)
+    const user = getContextUser()
 
     const handleClick = async (id) => {
-        
-        
         // url + object_id
         props.readNotification(id)
+
+        switch (notification_type) {
+            case "status_update":
+                navigate(`/application/${object_id}`)
+                return
+            case "application_creation":
+                navigate(`/application/${object_id}`)
+                return
+            case "new_review":
+                navigate(`/shelterprofile/${comment_object_id}`)
+                return
+            case "new_message":
+                navigate(`/application/${comment_object_id}`)
+                return
+            case "new_pet_listing":
+                navigate(`/details/${object_id}`)
+                return
+            default:
+                return
+        }
     }
 
 	
