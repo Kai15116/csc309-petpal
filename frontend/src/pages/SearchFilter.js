@@ -318,7 +318,7 @@ function SearchFilter() {
 
                 </div>
                 <div style={{width: "90%", margin: "1rem auto", minHeight: "60vh"}}>
-                <Row className="" xs={1} md={2} lg={3} xl={4} >
+                <Row className="align-self-center" xs={1} md={2} lg={3} xl={4} >
                     {noResult&& <NoMatchingResult></NoMatchingResult>}
                     {petsInfo?.results?.map((pet, index) => <Col  key={index}><PetCard pet={{...pet}}></PetCard></Col>)}
                 </Row>

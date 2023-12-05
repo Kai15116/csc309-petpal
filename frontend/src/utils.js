@@ -26,7 +26,7 @@ export function formatTimeGap(created_at) {
     else if (secAgo < 60 * 60) {
       return parseInt(Math.ceil(secAgo / 60)) + 'm ago';
     }
-    else if (secAgo <= 60 * 60 * 60) {
+    else if (secAgo < 60 * 60 * 24) {
       return parseInt(Math.ceil(secAgo / 3600)) + 'h ago';
     }
     else {
