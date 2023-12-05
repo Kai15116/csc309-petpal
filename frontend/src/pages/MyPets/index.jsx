@@ -1,12 +1,12 @@
 import React, {useContext, useEffect, useMemo, useState} from 'react';
-import '../styles/shelterManagement.css'
-import LandingHeader from "../components/LandingHeader";
-import Footer from "../components/Footer";
-import {userContext} from "../context/userContext";
-import SimplePetCard from "../components/SimplePetCard";
-import ShelterCard from "../components/ShelterCard";
+import './style.css'
+import LandingHeader from "../../components/LandingHeader";
+import Footer from "../../components/Footer";
+import {userContext} from "../../context/userContext";
+import SimplePetCard from "../../components/SimplePetCard";
+import ShelterCard from "../../components/ShelterCard";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
-import CPagination from "../components/CPagination";
+import CPagination from "../../components/CPagination";
 
 // Reference Lecture example: URL parser.
 function to_url_params(object) {

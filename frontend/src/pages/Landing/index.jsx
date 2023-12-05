@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
-import LandingHeader from '../components/LandingHeader';
-import Footer from '../components/Footer';
-import '../styles/landingStyles.css'
-import PetCard from '../components/PetCard'
+import LandingHeader from '../../components/LandingHeader';
+import Footer from '../../components/Footer';
+import './style.css'
+import PetCard from '../../components/PetCard'
 import {Col, Row} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-import { userContext } from '../context/userContext';
+import { userContext } from '../../context/userContext';
 
 const Landing = () => {
     const { getContextUser } = useContext(userContext);

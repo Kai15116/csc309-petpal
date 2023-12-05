@@ -3,7 +3,7 @@
 }
 
 #landing-main-container {
-    background-image: url('../assets/images/pets-image-2-resized.jpg'), linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
+    background-image: url('../../assets/images/pets-image-2-resized.jpg'), linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
     background-blend-mode: overlay;
     background-size: cover;
     background-repeat: no-repeat;
@@ -11,7 +11,7 @@
 }
 
 #become-pet-shelter{
-    background-image: url('../assets/images/cat-image-3.jpg');
+    background-image: url('../../assets/images/cat-image-3.jpg');
     background-blend-mode: overlay;
     background-size: cover;
     background-repeat: no-repeat;

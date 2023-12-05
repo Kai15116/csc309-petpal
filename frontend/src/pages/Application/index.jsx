@@ -1,12 +1,12 @@
-import ApplicationForm from "../components/ApplicationForm";
-import "../styles/application.css"
-import LandingHeader from "../components/LandingHeader";
-import Footer from "../components/Footer";
-import seekerImage from "../assets/images/user.png"
-import shelterImage from "../assets/example_images/shelter_portrait.jpg"
+import ApplicationForm from "../../components/ApplicationForm";
+import "./style.css"
+import LandingHeader from "../../components/LandingHeader";
+import Footer from "../../components/Footer";
+import seekerImage from "../../assets/images/user.png"
+import shelterImage from "../../assets/example_images/shelter_portrait.jpg"
 import React, {useContext, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {userContext} from "../context/userContext";
+import {userContext} from "../../context/userContext";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Form from 'react-bootstrap/Form';
 

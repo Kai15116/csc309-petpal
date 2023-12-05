@@ -1,15 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom'; 
-import '../styles/headerStyles.css'; 
-import logoImage from '../assets/images/logo-1.png';
+import './style.css';
+import logoImage from '../../assets/images/logo-1.png';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {Button, Form, InputGroup, Image, Dropdown, Collapse, DropdownItem, Col} from "react-bootstrap";
-import { userContext } from '../context/userContext';
+import { userContext } from '../../context/userContext';
 import { useNavigate } from "react-router-dom";
-import placeholderProfile from "../assets/images/placeholderprofile.png";
+import placeholderProfile from "../../assets/images/placeholderprofile.png";
 
 const LandingHeader = () => {
     const { getContextUser, setContextUser} = useContext(userContext);
@@ -17,6 +17,7 @@ const LandingHeader = () => {
     const navigate = useNavigate()
     const [notifications, setNotifications] = useState(null);
     const [open, setOpen] = useState(false);
+    const [userInfo, setUserInfo] = useState(null);
 
     const isLoggedIn = !!user.accessToken
 
@@ -49,7 +50,26 @@ const LandingHeader = () => {
               console.log(e);
           }
       }
-      fetchNotifications().then((res) => console.log("notifications loaded"))
+      async function fetchUserInfo() {
+            try {
+                const response = await fetch(`http://localhost:8000/accounts/shelter/${user.contextUserId}`, {
+                    method: 'GET'
+                }
+            );
+            if (response.status >= 400) {
+                navigate('/');
+            } else if (response.status >= 200 && response.status < 300) {
+                const data = await response.json();
+                setUserInfo({...data})
+                console.log(data)
+            }} catch (e) {
+                console.log(e)
+                navigate('/');
+            }
+      }
+      fetchNotifications()
+      if (user.contextUserType)
+          fetchUserInfo()
     }, []);
 
 
@@ -183,8 +203,8 @@ const LandingHeader = () => {
               <div className="vr mx-2 def-nav-item"></div>
               <Dropdown className="my-auto def-nav-item">
                   <Dropdown.Toggle type="button" variant="" data-bs-toggle="dropdown">
-                      <Image className="border rounded-circle" src={user.profilePicUrl ? user.profilePicUrl : placeholderProfile}
-                             style={{backgroundColor: "cornsilk", width: "50px"}} alt="user icon"></Image>
+                      <Image className="border rounded-circle" src={userInfo?.profile_picture ? userInfo?.profile_picture : placeholderProfile}
+                             style={{backgroundColor: "cornsilk", width: "50px", height: "50px"}} alt="user icon"></Image>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                       <Dropdown.Item href={profileUrl}>Profile</Dropdown.Item>

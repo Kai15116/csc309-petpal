@@ -1,13 +1,12 @@
 import React, {useContext, useEffect, useMemo, useState} from 'react';
-import '../styles/shelterManagement.css'
-import LandingHeader from "../components/LandingHeader";
-import Footer from "../components/Footer";
-import {userContext} from "../context/userContext";
-import ShelterCard from "../components/ShelterCard";
+import LandingHeader from "../../components/LandingHeader";
+import Footer from "../../components/Footer";
+import {userContext} from "../../context/userContext";
+import ShelterCard from "../../components/ShelterCard";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import Form from 'react-bootstrap/Form';
-import CPagination from "../components/CPagination";
-
+import CPagination from "../../components/CPagination";
+import "./style.css"
 
 // Reference Lecture example: URL parser.
 function to_url_params(object) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/footerStyles.css';
+import './style.css';
 import Nav from 'react-bootstrap/Nav';
 
 const Footer = () => {
