@@ -9,7 +9,14 @@ import PetCard from "../components/PetCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import CPagination from "../components/CPagination";
 
-
+function NoMatchingResult() {
+    return (
+        <div style={{display: "flex", justifyContent: "center", width: "100%", flexDirection: "column", alignItems: "center"}}>
+        <i className="bi bi-journal-x"  style={{fontSize: "300px", color: "grey"}}></i>
+        <p>No Matching Result Found</p>
+        </div>
+    )
+}
 
 // Reference Lecture example: URL parser.
 function to_url_params(object) {
@@ -296,8 +303,8 @@ function SearchFilter() {
             <div style={{minHeight: "100vh"}}>
                 <Alert variant={noResult?"danger":"secondary"} style={{marginTop: "5px", paddingLeft: "3rem"}}>
                     {noResult ? 
-                    <><i class="bi bi-exclamation-triangle"></i>"Sorry, no result is found. Try clear the filter and try again."</> :
-                    `Found ${petsInfo?.count??0} matching results in ${pagesCount??1} pages`}
+                    <><i class="bi bi-exclamation-triangle"></i>Sorry, no result is found. Try clear the filter and try again.</> :
+                    <>Found <span style={{fontWeight: "bold"}}>{petsInfo?.count??0}</span> matching results in {pagesCount??1} pages</>}
                 </Alert>
                 <div style={{display: "flex", justifyContent: "right", paddingRight: "3rem", gap:"2px"}}>
                 <Button variant="outline-primary" onClick={resetFilters}
@@ -312,6 +319,7 @@ function SearchFilter() {
                 </div>
                 <div style={{width: "90%", margin: "1rem auto", minHeight: "60vh"}}>
                 <Row className="" xs={1} md={2} lg={3} xl={4} >
+                    {noResult&& <NoMatchingResult></NoMatchingResult>}
                     {petsInfo?.results?.map((pet, index) => <Col  key={index}><PetCard pet={{...pet}}></PetCard></Col>)}
                 </Row>
                 </div>
