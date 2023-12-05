@@ -7,7 +7,8 @@ import banner from "../assets/example_images/yosemite_banner.jpg"
 
 
 const ShelterCard = ({ name, profileLink, stars, reviewCount, joinDate }) => {
-  console.log(banner)
+  const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+  const dateStr = joinDate.toLocaleDateString("en-US", dateOptions)
   return (
     // <div className="col-lg-6" style={{ width: '500px' }}>
       <div className="card text-center" id="profile-card">
@@ -42,7 +43,7 @@ const ShelterCard = ({ name, profileLink, stars, reviewCount, joinDate }) => {
             <div className="vr mx-2"></div>
             <div className="my-auto text-muted" style={{ width: '30%' }}>{reviewCount} reviews</div>
             <div className="vr mx-2"></div>
-            <div className="text-muted my-auto" style={{ width: '30%' }}>Joined {joinDate}</div>
+            <div className="text-muted my-auto" style={{ width: '30%' }}>Joined {dateStr}</div>
           </div>
         </div>
       </div>
