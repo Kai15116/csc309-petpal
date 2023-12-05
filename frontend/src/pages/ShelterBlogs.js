@@ -11,7 +11,6 @@ import noImage from "../assets/images/image-not-found-scaled.png"
 import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/userContext';
 import BlogImagesCarousel from '../components/BlogImagesCarousel';
-import '../styles/blog_creation_and_update.css';
 
 const ShelterBlogs = () => {
   const {getContextUser} = useContext(userContext);
@@ -278,7 +277,7 @@ const ShelterBlogs = () => {
           </div>
           <hr />
           {blogsToDisplay.map((blog, index) => (
-            <div key={index} className="blog-card bg-white p-4 rounded shadow mb-4">
+            <div key={index} className="bg-white p-4 rounded shadow mb-4">
               <div className="d-flex align-items-center">
                 <div>
                   <h2 className="me-3">{blog.title}</h2>
