@@ -67,7 +67,7 @@ function NotificationCard(props) {
 
 	
 	return (
-		<Card className="w-100 notification-card" style={{ paddingLeft: "3rem", lineHeight: "1", marginBottom: "0rem"}} onClick={() => handleClick(id)}>
+		<Card className="w-100 notification-card" style={{ lineHeight: "1", marginBottom: "0rem"}} onClick={() => handleClick(id)}>
 			<Card.Body>
                     <div style={{display: "grid", gridTemplateColumns: "1fr 80px auto"}}>
                     {/* <div style={{paddingLeft: "1rem" }}>

@@ -9,7 +9,14 @@ import PetCard from "../components/PetCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import CPagination from "../components/CPagination";
 
-
+function NoMatchingResult() {
+    return (
+        <div style={{display: "flex", justifyContent: "center", width: "100%", flexDirection: "column", alignItems: "center"}}>
+        <i className="bi bi-journal-x"  style={{fontSize: "300px", color: "grey"}}></i>
+        <p>No Matching Result Found.</p>
+        </div>
+    )
+}
 
 // Reference Lecture example: URL parser.
 function to_url_params(object) {
@@ -23,7 +30,7 @@ function to_url_params(object) {
         else {
             let value = object[key];
             if (value !== "") {
-            result.push(`${key}=${value}`);
+                result.push(`${key}=${value}`);
             }
             // }
         }
@@ -35,9 +42,12 @@ function SearchFilter() {
     // const [currentActivePage, setcurrentActivePage] = useState(1);
     // const itemsPerPage = 5;
     const [petsInfo, setPetsInfo] = useState(null);
+    const [petType, setPetType] = useState(null);
     // searchparam initial state
     const [sortOption, setSortOption] = useState("");
-    const [filterOptions, setFilterOptions] = useState({age: "", weight: "", sex: ""});
+    const [filterOptions, setFilterOptions] = useState({age: "", weight: "", sex: "", fee: "", pet_type:"", breed: ""});
+    const [petTypes, setPetTypes] = useState([]);
+    const [breeds, setBreeds] = useState([]);
     
     // const [colorFilter, setColorFilter] = useState("");
     
@@ -47,14 +57,18 @@ function SearchFilter() {
     const [ searchParams, setSearchParams ] = useSearchParams();
     const query = useMemo(() => ({
         page : parseInt(searchParams.get("page") ?? 1),
-        size: parseInt(searchParams.get("size") ?? 5),
-        age__gte : parseInt(searchParams.get("age__gte") ?? 0),
-        age__lte : parseInt(searchParams.get("age__lte") ?? 999),
-        weight__gte : parseInt(searchParams.get("weight__gte") ?? 0),
-        weight__lte : parseInt(searchParams.get("weight__lte") ?? 999),
+        size: parseInt(searchParams.get("size") ?? 10),
+        age__gte : searchParams.get("age__gte") ?? "",
+        age__lte : searchParams.get("age__lte") ?? "",
+        weight__gte : searchParams.get("weight__gte") ?? "",
+        weight__lte : searchParams.get("weight__lte") ?? "",
+        adoption_fee__gte : searchParams.get("adoption_fee__gte") ?? "",
+        adoption_fee__lte : searchParams.get("adoption_fee__lte") ?? "",
         sex : searchParams.get("sex") ?? "",
         order_by : searchParams.get("order_by") ?? "name",
-        name: searchParams.get("name") ?? ""
+        name: searchParams.get("name") ?? "",
+        pet_type: searchParams.get("pet_type") ?? "",
+        breed: searchParams.get("breed") ?? "",
     }), [searchParams]);
     
 
@@ -63,58 +77,131 @@ function SearchFilter() {
         setSearchParams({...query, page : value})
     }
 
+    useEffect(function() {
+        async function fetchPetTypes() {
+            try {
+                const response = await fetch(`http://localhost:8000/pets/pettype/`, {
+                method: 'GET',
+            });
+            if (response.status === 403) {
+                navigate('/');
+  
+                // setAllowAccess(false);
+            } else if (response.status >= 200 && response.status < 300) {
+                const data = await response.json();
+                setPetTypes([...data])
+                console.log(data)
+  
+            }} catch (e) {
+                console.log(e);
+                navigate('/');
+            }
+        }
+        fetchPetTypes();
+  
+    }, [])
+  
+  
+    useEffect(function() {
+        async function fetchBreeds() {
+            try {
+                const response = await fetch(`http://localhost:8000/pets/pettype/${petType}/breed`, {
+                method: 'GET',
+            });
+            if (response.status === 403) {
+                navigate('/');
+  
+                // setAllowAccess(false);
+            } else if (response.status >= 200 && response.status < 300) {
+                const data = await response.json();
+                setBreeds([...data])
+                console.log(data)
+  
+            }} catch (e) {
+                console.log(e);
+                navigate('/');
+            }
+        }
+        fetchBreeds();
+  
+    }, [petType])
+  
+
     const submitFilterOptions = (e) => {
         e.preventDefault()
         var additionalQuery = {}
-        var queryAgeMin = 0;
-        var queryAgeMax = 999;
-        var queryWeightMin = 0;
-        var queryWeightMax = 9999;
+        var queryAgeMin = "";
+        var queryAgeMax = "";
+        var queryWeightMin = "";
+        var queryWeightMax = "";
+        var queryFeeMin = "";
+        var queryFeeMax = "";
         var querySex = "";
+        
         switch(filterOptions?.age) {
             case "":
-                queryAgeMin = 0;
-                queryAgeMax = 999;
+                queryAgeMin = "";
+                queryAgeMax = "";
                 break;
             case "newborn":
-                queryAgeMin = 0;
-                queryAgeMax = 2;
+                queryAgeMin = "0";
+                queryAgeMax = "2";
                 break;
             case "young":
-                queryAgeMin = 2;
-                queryAgeMax = 5;
+                queryAgeMin = "2";
+                queryAgeMax = "5";
                 break;
             case "adult":
-                queryAgeMin = 5;
-                queryAgeMax = 9;
+                queryAgeMin = "5";
+                queryAgeMax = "9";
                 break;
             case "old":
-                queryAgeMin = 9;
-                queryAgeMax = 999;
+                queryAgeMin = "9";
+                queryAgeMax = "999";
                 break;
             default:
                 break;
         }
         switch(filterOptions?.weight) {
             case "":
-                queryWeightMin = 0;
-                queryWeightMax = 999;
+                queryWeightMin = "";
+                queryWeightMax = "";
                 break;
             case "sm":
-                queryWeightMin = 0;
-                queryWeightMax = 20;
+                queryWeightMin = "0";
+                queryWeightMax = "20";
                 break;
             case "md":
-                queryWeightMin = 20;
-                queryWeightMax = 50;
+                queryWeightMin = "20";
+                queryWeightMax = "50";
                 break;
             case "lg":
-                queryWeightMin = 50;
-                queryWeightMax = 73;
+                queryWeightMin = "50";
+                queryWeightMax = "73";
                 break;
             case "xl":
-                queryWeightMin = 73;
-                queryWeightMax = 999;
+                queryWeightMin = "73";
+                queryWeightMax = "999";
+                break;
+            default:
+                break;
+        }
+        switch(filterOptions?.fee) {
+            case "":
+                queryFeeMin = "";
+                queryFeeMax = "";
+                break;
+            case "cheap":
+                queryFeeMin = "1";
+                queryFeeMax = "100";
+                break;
+            case "medium":
+                queryFeeMin = "100";
+                queryFeeMax = "1000";
+                break;
+            case "high":
+                queryFeeMin = "1000";
+                queryFeeMax = "99999";
                 break;
             default:
                 break;
@@ -133,11 +220,16 @@ function SearchFilter() {
                 break;
         }
 
+
         additionalQuery = {age__gte: queryAgeMin, 
             age__lte: queryAgeMax, 
             weight__gte: queryWeightMin, 
             weight__lte: queryWeightMax,
+            adoption_fee__gte: queryFeeMin,
+            adoption_fee__lte: queryFeeMax,
             sex: querySex,
+            pet_type: filterOptions?.pet_type,
+            breed: filterOptions?.breed,
         }
         
 
@@ -148,13 +240,14 @@ function SearchFilter() {
             ...additionalQuery,
 
             page: 1
-        })
+        });
+        setShow(false);
     }
 
 
 
     const clearOptions = () => {
-        setFilterOptions({sex:"", age:"", weight:""});
+        setFilterOptions({sex:"", age:"", weight:"", fee:"", pet_type: "", breed: ""});
         setSortOption("");
     }
 
@@ -204,14 +297,14 @@ function SearchFilter() {
 
 
     return (
-        // TODO: filter using searchParams. (After backend is done)
+        
         <div style={{background: `#F5F5F5`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition:"center", minHeight: "100vh"}}>
             <LandingHeader />
             <div style={{minHeight: "100vh"}}>
                 <Alert variant={noResult?"danger":"secondary"} style={{marginTop: "5px", paddingLeft: "3rem"}}>
                     {noResult ? 
-                    <><i class="bi bi-exclamation-triangle"></i>"Sorry, no result is found. Try clear the filter and try again."</> :
-                    `Found ${petsInfo?.count??0} matching results in ${pagesCount??1} pages`}
+                    <><i class="bi bi-exclamation-triangle"></i>Sorry, no result is found. Try clear the filter and try again.</> :
+                    <>Found <span style={{fontWeight: "bold"}}>{petsInfo?.count??0}</span> matching results in {pagesCount??1} pages</>}
                 </Alert>
                 <div style={{display: "flex", justifyContent: "right", paddingRight: "3rem", gap:"2px"}}>
                 <Button variant="outline-primary" onClick={resetFilters}
@@ -224,8 +317,9 @@ function SearchFilter() {
                 </Button>
 
                 </div>
-                <div style={{width: "90%", margin: "1rem auto", minHeight: "60vh"}}>
-                <Row className="" xs={1} md={2} lg={3} xl={4} >
+                <div style={{width: "85%", margin: "1rem auto", minHeight: "60vh"}}>
+                <Row xs={1} s={2} md={2} lg={3} xl={4} >
+                    {noResult&& <NoMatchingResult></NoMatchingResult>}
                     {petsInfo?.results?.map((pet, index) => <Col  key={index}><PetCard pet={{...pet}}></PetCard></Col>)}
                 </Row>
                 </div>
@@ -239,12 +333,13 @@ function SearchFilter() {
                     <Offcanvas.Body>
                     <Form onSubmit={(e) => submitFilterOptions(e)}>
                         <FormGroup className="mb-3">
-                            <FloatingLabel label="Category:(Not supported)">
-                            <Form.Select className="border-secondary">
+                            <FloatingLabel label="Category:">
+                            <Form.Select className="border-secondary" value={filterOptions?.pet_type} onChange={(e)=> {setFilterOptions({...filterOptions, pet_type: e.target.value, breed: ""}); if (e.target.value !== "")setPetType(e.target.value)}}>
 
-                            <option>Select All</option>
-                            <option>1</option>
-                            <option>2</option>
+                            <option value="">Select All</option>
+                            {petTypes?.map((item, index) =>
+                                <option value={item.id} key={item.id}>{item.name}</option>
+                            )}
 
                             </Form.Select>
                                
@@ -253,12 +348,13 @@ function SearchFilter() {
                         </FormGroup>
 
                         <FormGroup className="mb-3">
-                            <FloatingLabel label="Breed:(Not supported)">
-                            <Form.Select className="border-secondary">
+                            <FloatingLabel label="Breed:">
+                            <Form.Select className="border-secondary" value={filterOptions?.breed} onChange={(e) => {setFilterOptions({...filterOptions, breed: e.target.value})}}>
 
-                                <option>Select All</option>
-                                <option>1</option>
-                                <option>2</option>
+                                <option value="">Select All</option>
+                                {breeds?.map((item, index) =>
+                                            <option value={item.id} key={item.id}>{item.name}</option>
+                                )}
 
                                 </Form.Select>
                             </FloatingLabel>
@@ -304,11 +400,12 @@ function SearchFilter() {
                         </FormGroup>
 
                         <FormGroup className="mb-3">
-                            <FloatingLabel label="Color:(Not supported)">
-                            <Form.Select className="border-secondary">
-                                    <option>Select All</option>
-                                    <option>1</option>
-                                    <option>2</option>
+                            <FloatingLabel label="Adoption Fee:">
+                            <Form.Select className="border-secondary" value={filterOptions?.fee} onChange={(e) => setFilterOptions({...filterOptions, fee: e.target.value})}>
+                                    <option value="">Select All</option>
+                                    <option value="cheap">$0-100</option>
+                                    <option value="medium">$100-1000</option>
+                                    <option value="high">$1000+</option>
                                 </Form.Select>
                             </FloatingLabel>
                                 
@@ -336,10 +433,12 @@ function SearchFilter() {
                             <option value="">Relavence</option>
                             <option value="name">Name&#8593;(A to Z)</option>
                             <option value="-name">Name&#8595;(Z to A)</option>
-                            <option value="age">Age&#8595;(1 to 8+)</option>
+                            <option value="age">Age&#8593;(1 to 8+)</option>
                             <option value="-age">Age&#8595;(8+ to 1)</option>
-                            <option value="weight">Size&#8595;(light to heavy)</option>
+                            <option value="weight">Size&#8593;(light to heavy)</option>
                             <option value="-weight">Size&#8595;(heavy to light)</option>
+                            <option value="adoption_fee">Fee&#8593;(cheap to expensive)</option>
+                            <option value="-adoption_fee">Fee&#8595;(expensive to cheap)</option>
                             </Form.Select>
                                
                             </FloatingLabel>

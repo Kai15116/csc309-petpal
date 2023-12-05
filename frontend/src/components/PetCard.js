@@ -7,7 +7,7 @@ function PetCard(props) {
     const {name, id, picture_1, breed_name, age, weight, status } = props?.pet;
     const navigate = useNavigate();
     return (
-        <Card style={{ width: '300px', marginBottom: "0.7rem"}} className="card-c">
+        <Card style={{ width: '280px', marginBottom: "0.7rem"}} className="card-c">
         <Card.Img variant="top" src={picture_1} style={{height: "12rem", objectFit: "cover"}}/>
         <Card.Body>
             <Card.Title style={{fontWeight: "bold"}}>{name}</Card.Title>
