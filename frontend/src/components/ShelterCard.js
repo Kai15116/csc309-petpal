@@ -1,22 +1,34 @@
 import React from 'react';
-import shelterPortrait from "../assets/example_images/shelter_portrait.jpg"
-import '../styles/details_and_adoption.css'; 
+import '../styles/details_and_adoption.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-import banner from "../assets/example_images/yosemite_banner.jpg"
+import placeholderProfile from "../assets/images/placeholderprofile.png"
 
 
-const ShelterCard = ({ name, profileLink, stars, reviewCount, joinDate }) => {
+const ShelterCard = ({ name, profileLink, stars, reviewCount, joinDate, profilePicUrl, bannerPicUrl}) => {
   const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
   const dateStr = joinDate.toLocaleDateString("en-US", dateOptions)
+  let bannerStyle;
+  if (bannerPicUrl) {
+      bannerStyle = {
+          backgroundImage: `url(${bannerPicUrl})`,
+          backgroundSize: "cover"
+      }
+  } else {
+      bannerStyle = {
+          backgroundColor: `lightblue`,
+          backgroundSize: "cover"
+      }
+  }
+
+
   return (
     // <div className="col-lg-6" style={{ width: '500px' }}>
       <div className="card text-center" id="profile-card">
-        <div className="mb-4 banner" style={{backgroundImage: `url(${banner})`,
-                                             backgroundSize: "cover"}}>
+        <div className="mb-4 banner" style={bannerStyle}>
           <img
             className="mt-3 mx-auto rounded-circle border text-center d-flex flex-column justify-content-center"
-            src={shelterPortrait}
+            src={profilePicUrl ? profilePicUrl : placeholderProfile}
             alt="Shelter Portrait"
             style={{ width: '80px', height: '80px', transform: 'translate(0, 50%)' }}
           />

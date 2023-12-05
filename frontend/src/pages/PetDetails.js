@@ -211,7 +211,8 @@ const PetDetails = () => {
                         {/* Replace the existing shelter card code with the Shelter component */}
                         <ShelterCard name={userInfo?.username} profileLink={`shelterprofile/${userInfo?.id}`} stars={userInfo?.avg_rating}
                                      reviewCount={userInfo?.review_count}
-                                     joinDate={new Date(Date.parse(userInfo?.created_at))}>
+                                     joinDate={new Date(Date.parse(userInfo?.created_at))}
+                                     profilePicUrl={userInfo?.profile_picture} bannerPicUrl={userInfo?.banner}>
                         </ShelterCard>
                       </div>
                   </div>

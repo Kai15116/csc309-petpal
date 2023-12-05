@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import seekerImage from "../assets/images/user.png"
 import shelterImage from "../assets/example_images/shelter_portrait.jpg"
 import React, {useContext, useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {userContext} from "../context/userContext";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Form from 'react-bootstrap/Form';
@@ -21,6 +21,7 @@ export default function Application(props) {
 
     const [messageType, setMessageType] = useState("comment");
     const { applicationId } = useParams();
+    const navigate = useNavigate();
 
     async function fetchComments(reset) {
 
@@ -49,13 +50,11 @@ export default function Application(props) {
                     setPage(page + 1)
                     setComments([...comments, ...data.results])
                 }
-            } else if (response.status === 404) {
-                alert(404);
             } else {
-                console.log(response)
+                navigate("/")
             }
         } catch (e) {
-            console.log(e);
+            navigate("/")
         }
     }
 
@@ -73,13 +72,11 @@ export default function Application(props) {
                     const data = await response.json();
                     console.log(data)
                     setApplication(data)
-                } else if (response.status === 404) {
-                    alert(404);
                 } else {
-                    console.log(response)
+                    navigate("/")
                 }
             } catch (e) {
-                console.log(e);
+                navigate("/")
             }
         }
 

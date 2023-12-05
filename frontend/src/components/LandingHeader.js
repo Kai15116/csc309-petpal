@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom'; 
 import '../styles/headerStyles.css'; 
 import logoImage from '../assets/images/logo-1.png';
-import userImage from '../assets/images/user.png';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -10,6 +9,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import {Button, Form, InputGroup, Image, Dropdown, Collapse, DropdownItem, Col} from "react-bootstrap";
 import { userContext } from '../context/userContext';
 import { useNavigate } from "react-router-dom";
+import placeholderProfile from "../assets/images/placeholderprofile.png";
 
 const LandingHeader = () => {
     const { getContextUser, setContextUser} = useContext(userContext);
@@ -79,9 +79,9 @@ const LandingHeader = () => {
     }
 
     return (
-    <Navbar expand="lg" className="bg-white shadow-sm">
+    <Navbar expand="lg" className="bg-white shadow-sm" style={{whiteSpace: "nowrap"}}>
       <Container fluid>
-        <Navbar.Brand href="/">
+        <Navbar.Brand href={user.contextUserType === "shelter" ? "/mypets" : "/"}>
           <img src={logoImage} width="150" alt="logo"/>
         </Navbar.Brand>
 
@@ -160,7 +160,7 @@ const LandingHeader = () => {
                 Sign up
               </Link>
           </div>}
-          {isLoggedIn && <div className="ms-auto d-flex" style={{marginRight: "6rem"}}>
+          {isLoggedIn && <><div className="ms-auto d-flex">
               <Dropdown className="my-auto def-nav-item">
                   <Dropdown.Toggle className="d-flex" variant="" type="button" data-bs-toggle="dropdown">
                       {/*https://icons.getbootstrap.com/icons/bell/*/}
@@ -183,7 +183,7 @@ const LandingHeader = () => {
               <div className="vr mx-2 def-nav-item"></div>
               <Dropdown className="my-auto def-nav-item">
                   <Dropdown.Toggle type="button" variant="" data-bs-toggle="dropdown">
-                      <Image className="border rounded-circle" src={userImage}
+                      <Image className="border rounded-circle" src={user.profilePicUrl ? user.profilePicUrl : placeholderProfile}
                              style={{backgroundColor: "cornsilk", width: "50px"}} alt="user icon"></Image>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
@@ -194,7 +194,7 @@ const LandingHeader = () => {
                       <Dropdown.Item onClick={logout}>Log out</Dropdown.Item>
                   </Dropdown.Menu>
               </Dropdown>
-          </div>}
+          </div><div style={{width: "100%", maxWidth: "6rem"}}></div></>}
         </Navbar.Collapse>
       </Container>
     </Navbar>
