@@ -174,8 +174,12 @@ const PetCreationUpdate = () => {
     formData.append('notes', additionalNotes);
 
     formData.append('picture_1', selectedImage1);
-    formData.append('picture_2', selectedImage2);
-    formData.append('picture_3', selectedImage3);
+
+    if (selectedImage2)
+        formData.append('picture_2', selectedImage2);
+
+    if (selectedImage3)
+        formData.append('picture_3', selectedImage3);
   
     // Make a POST request to your server with the FormData
     fetch(`http://localhost:8000/pets/`, {
@@ -186,7 +190,9 @@ const PetCreationUpdate = () => {
       }
     }).then(response => response.json())
       .then(data => {
-        // Handle the response from the server
+       // Handle the response from the server
+        if (data.id)
+            navigate(`/details/${data.id}`)
         console.log('Upload successful:', data);
       })
       .catch(error => {
@@ -273,8 +279,8 @@ const PetCreationUpdate = () => {
                                 <div class="form-group">
                                     <label for="sex">Sex:</label>
                                     <select class="form-control" id="sex" name="sex" value={petSex} onChange={(e) => setPetSex(e.target.value)}>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -317,8 +323,7 @@ const PetCreationUpdate = () => {
                   <div class="container">
                     <div class="pet-details">
                       <h4>2. Media</h4>
-                        <h6>Include photos with different angles and environments (JPEG Required)</h6>
-                        <h6>Include photos with different angles and environments (JPEG Required)</h6>
+                        <h6>Include photos with different angles and environments</h6>
                         <div className="row">
                           <div className="col-4">
                             <label htmlFor="image1" className="image-label">
