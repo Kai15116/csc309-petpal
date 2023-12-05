@@ -20,7 +20,7 @@ const MyPets = () => {
         id = shelterId
     else
         id = user?.contextUserId
-    const isOwner = user?.contextUserId === Number(shelterId)
+    const isOwner = user?.contextUserId === Number(shelterId) || !shelterId
 
     useEffect(function () {
         async function fetchPets() {
