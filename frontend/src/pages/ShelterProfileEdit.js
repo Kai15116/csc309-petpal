@@ -40,6 +40,7 @@ function ShelterProfileEdit() {
     const [description, setDescription] = useState('');
     const [website, setWebsite] = useState('');
     const [formError, setFormError] = useState(null);
+    const [mission, setMission] = useState('');
 
 
     useEffect( function () {
@@ -53,12 +54,14 @@ function ShelterProfileEdit() {
                 } else if (response.status >= 200 && response.status < 300) {
                     const data = await response.json();
                     setUserInfo({...data});
-
+                    
+                    setName(data?.mission_title)
                     setEmail(data?.email);
                     setPhone(data?.phone_number);
                     setAddress(data?.address);
                     setDescription(data?.description);
                     setWebsite(data?.website);
+                    setMission(data?.mission_statement);
                 }
             }
             catch (e) {
@@ -70,15 +73,38 @@ function ShelterProfileEdit() {
         fetchUserInfo();
     }, []);
 
+    async function fetchUserInfo() {
+        try {
+            const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
+                method: 'GET'
+            });
+            if (response.status >= 400) {
+                navigate("/");
+            } else if (response.status >= 200 && response.status < 300) {
+                const data = await response.json();
+                setUserInfo({...data});
+
+                setEmail(data?.email);
+                setPhone(data?.phone_number);
+                setAddress(data?.address);
+                setDescription(data?.description);
+                setWebsite(data?.website);
+                setName(data?.mission_title);
+                setMission(data?.mission_statement);
+            }
+        }
+        catch (e) {
+            console.log(e);
+            navigate("/");
+        }
+    }
+
     const validateEmail = (value) => {
-        // You can use a regular expression for email validation
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         return emailPattern.test(value);
     };
 
     const validatePhone = (value) => {
-        // You can customize this validation logic for phone numbers
-        // For simplicity, let's assume a valid phone number is at least 10 digits
         return value.length >= 10;
     };
 
@@ -90,74 +116,132 @@ function ShelterProfileEdit() {
         setPhone(e.target.value);
     };
 
-    const handleContactPatchSubmit = async (inputs, e) => {
+    // const handleContactPatchSubmit = async (inputs, e) => {
+    //     e.preventDefault();
+
+    //     if (validateEmail(email) && validatePhone(phone)) {
+    //         try {
+    //             const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
+    //                 method: 'PATCH',
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                     'Authorization': `Bearer ${accessToken}`,
+    //                 },
+    //                 body: JSON.stringify({
+    //                     email: "hans@gmail.com"
+    //                 }),
+    //             });
+
+    //             if (response.ok) {
+    //                 console.log('Information Updated');
+    //                 setFormError(null);
+    //             } else {
+    //                 const errorData = await response.json();
+    //                 console.error('Failed to update information', errorData);
+    //                 console.log(contactFormData);
+
+    //                 setFormError(errorData.message || 'Failed to update information');
+    //             }
+    //         } catch (error) {
+    //             console.error(error);
+    //             setFormError('An unexpected error occurred');
+    //         }
+    //     } else {
+    //         setFormError('Invalid email or phone number. Please check your inputs.');
+    //     }
+    // };
+
+    // const handleDescriptionPatchSubmit = (contactInputs) => {
+    //     const contactFormData = new FormData();
+    //     contactFormData.append("description", contactInputs.email);
+    //     contactFormData.append("mission_title", contactInputs.name);
+    //     contactFormData.append("mission_statement", contactInputs.statement);
+    //     console.log(email);
+
+    //     fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
+    //         method: 'PATCH',
+    //         body: contactFormData,
+    //         headers: {
+    //             'Authorization': `Bearer ${accessToken}`,
+    //         }
+    //     })
+    //     .then(response => {
+    //         response.j();
+    //         console.log(response);
+    //     })
+    //     .then(data => {
+    //         console.log("Information Updated", data);
+    //     })
+    //     .catch(error => {
+    //         console.error(error);
+    //     });
+    // }
+    
+    const handleContactPatchSubmit = (e) => {
         e.preventDefault();
 
-        const contactFormData = new FormData();
-        contactFormData.append('mission_title', inputs.name);
-        contactFormData.append('email', inputs.email);
-        contactFormData.append('website', inputs.website);
-        contactFormData.append('phone_number', inputs.phone);
-        contactFormData.append('address', inputs.address);
-
-        console.log(inputs);
-
         if (validateEmail(email) && validatePhone(phone)) {
-            try {
-                const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
-                    method: 'PATCH',
-                    headers: {
-                        "Content-Type": "application/json",
-                        'Authorization': `Bearer ${accessToken}`,
-                    },
-                    body: JSON.stringify({
-                        email: "hans@gmail.com"
-                    }),
-                });
-
-                if (response.ok) {
-                    console.log('Information Updated');
-                    setFormError(null);
-                } else {
-                    const errorData = await response.json();
-                    console.error('Failed to update information', errorData);
-                    console.log(contactFormData);
-
-                    setFormError(errorData.message || 'Failed to update information');
+            fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    email, 
+                    phone_number: phone, 
+                    website, 
+                    mission_title: name, 
+                    address, 
+                }),
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
                 }
-            } catch (error) {
+            })
+            .then(response => {
+                response.json();
+                console.log(response);
+                fetchUserInfo();
+                setFormError(null);
+            })
+            .then(data => {
+                console.log("Contacts Updated", data);
+            })
+            .catch(error => {
                 console.error(error);
-                setFormError('An unexpected error occurred');
-            }
+            });
         } else {
             setFormError('Invalid email or phone number. Please check your inputs.');
         }
-    };
+    }
 
-    const handleDescriptionPatchSubmit = (contactInputs) => {
-        const contactFormData = new FormData();
-        contactFormData.append("description", contactInputs.email);
-        contactFormData.append("mission_title", contactInputs.name);
-        contactFormData.append("mission_statement", contactInputs.statement);
-        console.log(email);
+    const handleDescriptionPatchSubmit = (e) => {
+        e.preventDefault();
 
-        fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
-            method: 'PATCH',
-            body: contactFormData,
-            headers: {
-                'Authorization': `Bearer ${accessToken}`,
-            }
-        })
-        .then(response => {
-            response.JSON();
-            console.log(response);
-        })
-        .then(data => {
-            console.log("Information Updated", data);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+        if (validateEmail(email) && validatePhone(phone)) {
+            fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    mission_statement: mission,
+                    description,
+                }),
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                response.json();
+                console.log(response);
+                fetchUserInfo();
+                setFormError(null);
+            })
+            .then(data => {
+                console.log("Description Updated", data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        } else {
+            setFormError('Invalid inputs.');
+        }
     }
 
     return (
@@ -187,8 +271,7 @@ function ShelterProfileEdit() {
                     <h1 className='ms-4 mt-3'> Edit Profile Information </h1>
                     <Accordion.Collapse eventKey='contact'>
                         <Card.Body>
-
-                            <Form>
+                            <Form id="contactForm">
                                 <Form.Group className="mb-3" controlId="formName">
                                     <Form.Label>Shelter Name</Form.Label>
                                     <Form.Control
@@ -247,7 +330,7 @@ function ShelterProfileEdit() {
                                 {formError && <Alert variant="danger">{formError}</Alert>}
 
                                 <div >
-                                    <Button className='me-3' variant="primary" onSubmit={handleContactPatchSubmit}>
+                                    <Button className='me-3' variant="primary" onClick={(e) => handleContactPatchSubmit(e)}>
                                         Submit
                                     </Button>
                                     <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
@@ -259,22 +342,50 @@ function ShelterProfileEdit() {
                     </Accordion.Collapse>
                     <Accordion.Collapse eventKey='descriptions'>
                         <Card.Body>
-                            <Card.Text>
-                                Bruhhhh
-                            </Card.Text>
+                            <Form id="descriptionForm">
+                                <Form.Group className="mb-3" controlId="formDescription">
+                                    <Form.Label>Shelter Description</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={description}
+                                        onChange={(e) => setDescription(e.target.value)}
+                                        placeholder="e.g. At our shelter ..."
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formMission">
+                                    <Form.Label>Email Address</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={mission}
+                                        onChange={(e) => setMission(e.target.value)}
+                                        placeholder="e.g. Our mission is ..."
+                                    />
+                                </Form.Group>
+                                
+                                {formError && <Alert variant="danger">{formError}</Alert>}
+
+                                <div >
+                                    <Button className='me-3' variant="primary" onClick={(e) => handleDescriptionPatchSubmit(e)}>
+                                        Submit
+                                    </Button>
+                                    <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                        Cancel
+                                    </Button>
+                                </div>
+                            </Form>
                         </Card.Body>
                     </Accordion.Collapse>
                     <Accordion.Collapse eventKey='images'>
                         <Card.Body>
                             <Card.Text>
-                                Bruhhhh
+                                Insert Profile Image Form Here
                             </Card.Text>
                         </Card.Body>
                     </Accordion.Collapse>
                     <Accordion.Collapse eventKey='pets'>
                         <Card.Body>
                             <Card.Text>
-                                Bruhhhh
+                                Insert Pet Selection Form Here
                             </Card.Text>
                         </Card.Body>
                     </Accordion.Collapse>
