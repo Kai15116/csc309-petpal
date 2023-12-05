@@ -39,8 +39,11 @@ function ShelterProfileEdit() {
     const [address, setAddress] = useState('');
     const [description, setDescription] = useState('');
     const [website, setWebsite] = useState('');
-    const [formError, setFormError] = useState(null);
     const [mission, setMission] = useState('');
+    const [profpic, setProfPic] = useState('');
+    const [banner, setBanner] = useState('');
+
+    const [formError, setFormError] = useState(null);
 
 
     useEffect( function () {
@@ -84,12 +87,12 @@ function ShelterProfileEdit() {
                 const data = await response.json();
                 setUserInfo({...data});
 
+                setName(data?.mission_title)
                 setEmail(data?.email);
                 setPhone(data?.phone_number);
                 setAddress(data?.address);
                 setDescription(data?.description);
                 setWebsite(data?.website);
-                setName(data?.mission_title);
                 setMission(data?.mission_statement);
             }
         }
@@ -186,7 +189,7 @@ function ShelterProfileEdit() {
                 body: JSON.stringify({
                     email, 
                     phone_number: phone, 
-                    website, 
+                    website: "https://bruh.com", 
                     mission_title: name, 
                     address, 
                 }),
@@ -200,6 +203,9 @@ function ShelterProfileEdit() {
                 console.log(response);
                 fetchUserInfo();
                 setFormError(null);
+                console.log(website);
+                console.log(userInfo?.website);
+                // navigate(`/shelterprofile/${contextUserId}`);
             })
             .then(data => {
                 console.log("Contacts Updated", data);
@@ -232,6 +238,7 @@ function ShelterProfileEdit() {
                 console.log(response);
                 fetchUserInfo();
                 setFormError(null);
+                navigate(`/shelterprofile/${contextUserId}`);
             })
             .then(data => {
                 console.log("Description Updated", data);
@@ -244,13 +251,17 @@ function ShelterProfileEdit() {
         }
     }
 
+    const handlePicturePatchSubmit = (e) => {
+
+    }
+
     return (
         <div style={{ backgroundColor: "#C8F4FF" }}>
             <LandingHeader />
 <Container className='p-5' fluid style={{ backgroundColor: "#C8F4FF", minHeight: "82vh"}}>
     <Accordion defaultActiveKey="contact">
         <Row>
-            <Col xs={12} sm={3}>
+            <Col className="mb-4" xs={12} sm={3}>
                 <ListGroup>
                     <CollapseButton eventKey="contact">
                         Shelter Contact
@@ -261,14 +272,11 @@ function ShelterProfileEdit() {
                     <CollapseButton eventKey="images">
                         Profile Images
                     </CollapseButton>
-                    <CollapseButton eventKey="pets">
-                        Featured Pets
-                    </CollapseButton>
                 </ListGroup>
             </Col>
             <Col xs={12} sm={9}>
                 <Card>
-                    <h1 className='ms-4 mt-3'> Edit Profile Information </h1>
+                    <h1 className='ms-4 mt-3 mb-3'> Edit Profile Information </h1>
                     <Accordion.Collapse eventKey='contact'>
                         <Card.Body>
                             <Form id="contactForm">
@@ -320,7 +328,7 @@ function ShelterProfileEdit() {
                                 <Form.Group className="mb-3" controlId="formWebsite">
                                     <Form.Label>Website</Form.Label>
                                     <Form.Control 
-                                        type="text"
+                                        type="url"
                                         value={website}
                                         onChange={(e) => setWebsite(e.target.value)}
                                         placeholder="e.g. example.com"
@@ -346,16 +354,18 @@ function ShelterProfileEdit() {
                                 <Form.Group className="mb-3" controlId="formDescription">
                                     <Form.Label>Shelter Description</Form.Label>
                                     <Form.Control
-                                        type="text"
+                                        as="textarea"
+                                        rows={5}
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                         placeholder="e.g. At our shelter ..."
                                     />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formMission">
-                                    <Form.Label>Email Address</Form.Label>
+                                    <Form.Label>Mission Statement</Form.Label>
                                     <Form.Control
-                                        type="text"
+                                        as="textarea"
+                                        rows={5}
                                         value={mission}
                                         onChange={(e) => setMission(e.target.value)}
                                         placeholder="e.g. Our mission is ..."
@@ -377,16 +387,35 @@ function ShelterProfileEdit() {
                     </Accordion.Collapse>
                     <Accordion.Collapse eventKey='images'>
                         <Card.Body>
-                            <Card.Text>
-                                Insert Profile Image Form Here
-                            </Card.Text>
-                        </Card.Body>
-                    </Accordion.Collapse>
-                    <Accordion.Collapse eventKey='pets'>
-                        <Card.Body>
-                            <Card.Text>
-                                Insert Pet Selection Form Here
-                            </Card.Text>
+                        <Form id="pictureForm">
+                                <Form.Group className="mb-3" controlId="formBanner">
+                                    <Form.Label> Banner Picture </Form.Label>
+                                    <Form.Control
+                                        type="file"
+                                        value={banner}
+                                        onChange={(e) => setBanner(e.target.value)}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formProfPic">
+                                    <Form.Label> Profile Picture </Form.Label>
+                                    <Form.Control
+                                        type="file"
+                                        value={profpic}
+                                        onChange={(e) => setProfPic(e.target.value)}
+                                    />
+                                </Form.Group>
+                                
+                                {formError && <Alert variant="danger">{formError}</Alert>}
+
+                                <div >
+                                    <Button className='me-3' variant="primary" onClick={(e) => handlePicturePatchSubmit(e)}>
+                                        Submit
+                                    </Button>
+                                    <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                        Cancel
+                                    </Button>
+                                </div>
+                            </Form>
                         </Card.Body>
                     </Accordion.Collapse>
                 </Card>

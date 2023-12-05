@@ -13,17 +13,18 @@ function ShelterProfileDetailsCard(props) {
 
     return (
         <Card style={{ position: "relative", bottom: "9rem", maxWidth: "30rem"}}>
-            <Card.Body >
+            <Card.Body className="pb-2" >
                 <Card.Title> 
-                    <h3>{userInfo?.username} </h3>
+                    <h3>{userInfo?.mission_title} </h3>
                 </Card.Title>
                 <Card.Subtitle className="text-muted" style={{ fontSize: "14px" }}> 
                     {userInfo?.address} 
                 </Card.Subtitle>
                 <Card.Text className="mt-2"> 
-                    Small description of the shelter Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    {userInfo?.description}
+                    {/* Since you have no small description of the shelter Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                     Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci 
-                    facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis.
+                    facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis. */}
                 </Card.Text>
                 <div className="mb-2" style={{ display: "flex", justifyContent: "space-evenly"}}>
                     <Button variant="primary" onClick={() => navigate(`/mypets/`)}>
@@ -35,17 +36,17 @@ function ShelterProfileDetailsCard(props) {
                     </Button>
                 </div>
                 <Collapse in={contactOpen}>
-                    <div>
+                    <div className="" >
                         <Card className="m-0 p-0" id="shelter-contact-collapse">
                             <Card.Body>
-                                <p>Addr: {userInfo?.address}</p>
                                 <p>Email: {userInfo?.email}</p>
+                                <p>Phone: {userInfo?.phone_number}</p>
+                                <p>Site: {userInfo?.website}</p>
                             </Card.Body>
                         </Card>
                     </div>
                 </Collapse>
             </Card.Body>
-
         </Card>
     );
 }
