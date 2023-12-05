@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Carousel, Pagination } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import ProfileHeader from '../components/ProfileHeader';
+import LandingHeader from '../components/LandingHeader';
 import Footer from '../components/Footer';
 import shelterPortrait from '../assets/example_images/shelter_portrait.jpg';
 import image1 from '../assets/images/image1.jpg';
@@ -22,7 +22,7 @@ const ShelterBlogs = () => {
 
   const [allBlogs, setAllBlogs] = useState([{}]);
 
-  const SheltersPerPage = 2; // Number of shelters to display per page
+  const blogsPerPage = 2; // Number of shelters to display per page
   const [activePage, setActivePage] = useState(1);
 
   // get all blogs
@@ -149,19 +149,65 @@ const ShelterBlogs = () => {
   
     return resultArray.filter(Boolean); 
   }
+  
+  const [selectedOwner, setSelectedOwner] = useState('all'); // 'all' means select all owners
 
-  const startIndex = (activePage - 1) * SheltersPerPage;
-  const endIndex = startIndex + SheltersPerPage;
-  const sheltersToDisplay = allBlogs.slice(startIndex, endIndex);
+  const handleOwnerChange = (event) => {
+    setSelectedOwner(event.target.value);
+  };
+
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  const filteredBlogs = (blogs) => {
+    if (searchTerm.trim() === '' && selectedOwner === 'all') {
+      return blogs;
+    }
+
+    // assuming owner is a id number
+    return blogs.filter(blog => {
+      const titleMatch = blog.title.toLowerCase().startsWith(searchTerm.toLowerCase());
+      const ownerMatch = selectedOwner === 'all' || blog.owner === parseInt(selectedOwner, 10);
+      console.log("blog.owner", blog.owner)
+      console.log("selectedOwner", selectedOwner)
+
+      return titleMatch && ownerMatch;
+    });
+  };
+  
+  const [selectedFilter, setSelectedFilter] = useState('mostLiked'); 
+  // Sort the blogs based on the selected filter
+  const sortedBlogs = (blogs) => {
+    switch (selectedFilter) {
+      case 'newestFirst':
+        return blogs.slice().sort((a, b) => new Date(b.last_modified) - new Date(a.last_modified));
+      case 'leastLiked':
+        return blogs.slice().sort((a, b) => a.likes - b.likes);
+      case 'oldestFirst':
+        return blogs.slice().sort((a, b) => new Date(a.last_modified) - new Date(b.last_modified));
+      default:
+        // 'mostLiked' or invalid filter
+        return blogs.slice().sort((a, b) => b.likes - a.likes);
+    }
+  };
+
+  const handleFilterChange = (event) => {
+    setSelectedFilter(event.target.value);
+  };
+
+  const startIndex = (activePage - 1) * blogsPerPage;
+  const endIndex = startIndex + blogsPerPage;
+  const blogsToDisplay = sortedBlogs(filteredBlogs(allBlogs)).slice(startIndex, endIndex);
 
   return (
     <div style={{ backgroundColor: '#f2f8fe' }}>
-      <ProfileHeader />
+      <LandingHeader />
       <div className="d-flex">
         {/* left-hand sidebar */}
         <div className="bg-white mt-4 p-4 rounded shadow" style={{ height: 'fit-content' }}>
           <h4>Search By Blog Title:</h4>
-          <div className="input-group">
+          <div className="input-group"
+            style={{padding: "10px"}}
+          >
             <input
               type="search"
               className="form-control"
@@ -169,27 +215,41 @@ const ShelterBlogs = () => {
               aria-label="Search"
               aria-describedby="search-btn"
               required
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
             <button className="btn btn-outline-success" type="submit" id="search-btn">
               Search
             </button>
           </div>
 
-          <div className="mt-3">
-            {/* filter options dropdown */}
+          <div className="mb-3">
             <h4>Filter by:</h4>
-            <select className="form-select">
-              <option value="mostLiked">Likes: Most liked</option>
-              <option value="newestFirst">Posted: Newest first</option>
-              <option value="leastLiked">Likes: Least liked</option>
-              <option value="oldestFirst">Post: Oldest first</option>
-            </select>
+            <div className="input-group" style={{padding: "10px"}}>
+              <select className="form-select" value={selectedFilter} onChange={handleFilterChange} >
+                <option value="mostLiked">Likes: Most liked</option>
+                <option value="newestFirst">Last Edited: Newest first</option>
+                <option value="leastLiked">Likes: Least liked</option>
+                <option value="oldestFirst">Last Edited: Oldest first</option>
+              </select>
+            </div>
+
+            <h4>Filter by Owner:</h4>
+            <div className="input-group" style={{padding: "10px"}}>
+              <select className="form-select" value={selectedOwner} onChange={handleOwnerChange}>
+                <option value="all">Select All</option>
+                {/* Use a Set to filter out duplicate owners */}
+                {[...new Set(allBlogs.map(blog => blog.ownerId))].map(ownerId => (
+                  <option key={ownerId} value={ownerId}>{allBlogs.find(blog => blog.ownerId === ownerId).owner}</option>
+                ))}
+              </select>
+            </div>
           </div>
 
           <div style={{ marginTop: '10px' }}>
             <h4>Page:</h4>
             <Pagination>
-              {Array.from({ length: Math.ceil(allBlogs.length / SheltersPerPage) }).map((_, index) => (
+              {Array.from({ length: Math.ceil(allBlogs.length / blogsPerPage) }).map((_, index) => (
                 <Pagination.Item
                   key={index + 1}
                   active={index + 1 === activePage}
@@ -206,9 +266,6 @@ const ShelterBlogs = () => {
         <div id="lst-container" style={{ margin: '50px', flex: 1 }}>
           <div className="d-flex" style={{ marginBottom: '20px', flex: 1 }}>
             <h1 className="ms-1 mb-0">Shelter Blogs</h1>
-            {/* <a className="btn btn-secondary ms-auto align-self-end" href="pet_creation.html">
-              Add New Blog
-            </a> */}
             {/* disable for non shelter users */}
             <button
               className="btn btn-secondary ms-auto align-self-end"
@@ -219,16 +276,11 @@ const ShelterBlogs = () => {
             </button>
           </div>
           <hr />
-          {sheltersToDisplay.map((blog, index) => (
+          {blogsToDisplay.map((blog, index) => (
             <div key={index} className="bg-white p-4 rounded shadow mb-4">
               <div className="d-flex align-items-center">
                 <div>
                   <h2 className="me-3">{blog.title}</h2>
-                  {/* <img
-                    src={shelter.profilePic}
-                    alt={`${shelter.title} Profile Pic`}
-                    style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }}
-                  /> */}
                   <h5 className="me-3">Owner: {blog.owner}</h5>
                 </div>
                 <div className="ms-auto">
@@ -242,8 +294,6 @@ const ShelterBlogs = () => {
                 </div>
               </div>
               <div>
-                {/* <p>{shelter.content}</p> */}
-
                 {/* image carousel component */}
                 <BlogImagesCarousel blog={blog} />
 
