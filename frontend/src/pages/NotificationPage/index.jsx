@@ -1,14 +1,14 @@
-import NotificationCard from "../components/NotificationCard";
-import Header from "../components/LandingHeader";
-import Footer from "../components/Footer";
+import NotificationCard from "../../components/NotificationCard";
+import Header from "../../components/LandingHeader";
+import Footer from "../../components/Footer";
 import Tabs from 'react-bootstrap/Tabs'; 
 import Tab from 'react-bootstrap/Tab'; 
 import {useContext, useState, useEffect} from "react";
-import { userContext } from "../context/userContext";
+import { userContext } from "../../context/userContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Alert } from "react-bootstrap";
-import { to_url_params } from "../utils";
-import CPagination from "../components/CPagination";
+import { to_url_params } from "../../utils";
+import CPagination from "../../components/CPagination";
 
 function NoNotifications({message}) {
     return (

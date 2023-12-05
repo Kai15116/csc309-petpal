@@ -1,13 +1,13 @@
 import { useState,  useEffect, useMemo } from "react";
-import LandingHeader from "../components/LandingHeader";
-import Footer from "../components/Footer";
+import LandingHeader from "../../components/LandingHeader";
+import Footer from "../../components/Footer";
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Form, FloatingLabel, FormGroup, Alert, Col, Row} from "react-bootstrap";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import PetCard from "../components/PetCard";
+import PetCard from "../../components/PetCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import CPagination from "../components/CPagination";
+import CPagination from "../../components/CPagination";
 
 function NoMatchingResult() {
     return (

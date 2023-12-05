@@ -1,14 +1,14 @@
 import React, { useState, useContext } from 'react';
-import LandingHeader from '../components/LandingHeader';
-import Footer from '../components/Footer';
-import { userContext } from '../context/userContext';
+import LandingHeader from '../../components/LandingHeader';
+import Footer from '../../components/Footer';
+import { userContext } from '../../context/userContext';
 import Button from 'react-bootstrap/Button';
 
 import Form from 'react-bootstrap/Form';
 
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import {Card} from 'react-bootstrap';
-import bgLogin from '../assets/images/login-signup-images/bglogin.jpg';
+import bgLogin from '../../assets/images/login-signup-images/bglogin.jpg';
 import {Link, useNavigate} from "react-router-dom";
 
 const Login = () => {
