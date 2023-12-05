@@ -71,11 +71,8 @@ function ShelterProfile() {
                 console.log(e)
                 navigate('/');
             }
-            
-            
         }
         fetchUserInfo();
-        console.log("bruh " + userId);
     }, [ userId ])
 
     return (
