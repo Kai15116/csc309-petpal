@@ -52,7 +52,7 @@ const LandingHeader = () => {
       }
       async function fetchUserInfo() {
             try {
-                const response = await fetch(`http://localhost:8000/accounts/shelter/${user.contextUserId}`, {
+                const response = await fetch(`http://localhost:8000/accounts/${user.contextUserType}/${user.contextUserId}`, {
                     method: 'GET'
                 }
             );
