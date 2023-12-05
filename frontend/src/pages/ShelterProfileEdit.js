@@ -1,31 +1,117 @@
 import LandingHeader from '../components/LandingHeader';
 import Footer from '../components/Footer';
-import { Container, Accordion, useAccordionButton, Button, ListGroup, Card} from 'react-bootstrap';
+import { Container, Accordion, useAccordionButton, Button, ListGroup, Card, Row, Col, AccordionContext} from 'react-bootstrap';
+import { useContext, useEffect, useState } from 'react';
+import { userContext } from '../context/userContext';
+import { useNavigate } from 'react-router-dom';
 
-function CollapseButton({ children, eventKey }) {
-    const decoratedOnClick = useAccordionButton(eventKey, () =>
-        console.log('totally custom!'),
-    );
-  
-    return (
-        <ListGroup.Item action onClick={decoratedOnClick}>
-            {children}
-        </ListGroup.Item>
-    );
-  }
+function CollapseButton({ children, eventKey, callback }) {
+  const { activeEventKey } = useContext(AccordionContext);
+
+  const decoratedOnClick = useAccordionButton(
+    eventKey,
+    () => callback && callback(eventKey),
+  );
+
+  const isCurrentEventKey = activeEventKey === eventKey;
+
+  return (
+    <ListGroup.Item 
+        action 
+        onClick={decoratedOnClick}
+        // style={{ backgroundColor: isCurrentEventKey ? "#EEEEEE" : "100%" }}
+    >
+        {children}
+    </ListGroup.Item>
+  );
+}
 
 function ShelterProfileEdit() {
+    const { getContextUser, setGetContextUser} = useContext(userContext);
+    const user = getContextUser();
+    const {accessToken, refreshToken, contextUserId, contextUserType} = getContextUser();
+    const [userInfo, setUserInfo ] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect( function () {
+        async function fetchUserInfo() {
+            try {
+                const response = await fetch(`http://localhost:8000/accounts/shelter/${user?.contextUserId}`, {
+                    method: 'GET'
+                });
+                if (response.status >= 400) {
+                    navigate("/");
+                } else if (response.status >= 200 && response.status < 300) {
+                    const data = await response.json();
+                    setUserInfo({...data});
+                }
+            }
+            catch (e) {
+                console.log(e);
+                navigate("/");
+            }
+        }
+
+        fetchUserInfo();
+    }, []);
 
     return (
         <div style={{ backgroundColor: "#C8F4FF" }}>
             <LandingHeader />
-<Container className='p-5' fluid style={{ backgroundColor: "#C8F4FF" }}>
+<Container className='p-5' fluid style={{ backgroundColor: "#C8F4FF", minHeight: "82vh"}}>
     <Accordion defaultActiveKey="0">
-        <ListGroup>
-            <CollapseButton eventKey="0">
-                Acting as a button
-            </CollapseButton>
-        </ListGroup>
+        <Row>
+            <Col xs={12} sm={3}>
+                <ListGroup>
+                    <CollapseButton eventKey="contact">
+                        Shelter Contact
+                    </CollapseButton>
+                    <CollapseButton eventKey="descriptions">
+                        Shelter Descriptions
+                    </CollapseButton>
+                    <CollapseButton eventKey="images">
+                        Profile Images
+                    </CollapseButton>
+                    <CollapseButton eventKey="pets">
+                        Featured Pets
+                    </CollapseButton>
+                </ListGroup>
+            </Col>
+            <Col xs={12} sm={9}>
+                <Card>
+                    <h1 className='ms-4 my-3'> Edit Profile Information </h1>
+                    <Accordion.Collapse eventKey='contact'>
+                        <Card.Body>
+                            <Card.Text>
+                                Shelter Contact
+                            </Card.Text>
+                        </Card.Body>
+                    </Accordion.Collapse>
+                    <Accordion.Collapse eventKey='descriptions'>
+                        <Card.Body>
+                            <Card.Text>
+                                Bruhhhh
+                            </Card.Text>
+                        </Card.Body>
+                    </Accordion.Collapse>
+                    <Accordion.Collapse eventKey='images'>
+                        <Card.Body>
+                            <Card.Text>
+                                Bruhhhh
+                            </Card.Text>
+                        </Card.Body>
+                    </Accordion.Collapse>
+                    <Accordion.Collapse eventKey='pets'>
+                        <Card.Body>
+                            <Card.Text>
+                                Bruhhhh
+                            </Card.Text>
+                        </Card.Body>
+                    </Accordion.Collapse>
+                </Card>
+            </Col>
+        </Row>
+
       {/* <Accordion.Item eventKey="0">
         <Accordion.Header>Accordion Item #2</Accordion.Header>
         <Accordion.Body>
@@ -39,16 +125,7 @@ function ShelterProfileEdit() {
         </Accordion.Body>
       </Accordion.Item> */}
     </Accordion>
-    <Card>
-        <Card.Header> Edit Profile </Card.Header>
-        <Accordion.Collapse eventKey='0'>
-            <Card.Body>
-                <Card.Text>
 
-                </Card.Text>
-            </Card.Body>
-        </Accordion.Collapse>
-    </Card>
 </Container>
             <Footer />
         </div>
