@@ -13,7 +13,7 @@ function NoMatchingResult() {
     return (
         <div style={{display: "flex", justifyContent: "center", width: "100%", flexDirection: "column", alignItems: "center"}}>
         <i className="bi bi-journal-x"  style={{fontSize: "300px", color: "grey"}}></i>
-        <p>No Matching Result Found</p>
+        <p>No Matching Result Found.</p>
         </div>
     )
 }
@@ -297,7 +297,7 @@ function SearchFilter() {
 
 
     return (
-        // TODO: filter using searchParams. (After backend is done)
+        
         <div style={{background: `#F5F5F5`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition:"center", minHeight: "100vh"}}>
             <LandingHeader />
             <div style={{minHeight: "100vh"}}>
@@ -333,7 +333,7 @@ function SearchFilter() {
                     <Offcanvas.Body>
                     <Form onSubmit={(e) => submitFilterOptions(e)}>
                         <FormGroup className="mb-3">
-                            <FloatingLabel label="Category:(Not supported)">
+                            <FloatingLabel label="Category:">
                             <Form.Select className="border-secondary" value={filterOptions?.pet_type} onChange={(e)=> {setFilterOptions({...filterOptions, pet_type: e.target.value, breed: ""}); if (e.target.value !== "")setPetType(e.target.value)}}>
 
                             <option value="">Select All</option>
@@ -348,7 +348,7 @@ function SearchFilter() {
                         </FormGroup>
 
                         <FormGroup className="mb-3">
-                            <FloatingLabel label="Breed:(Not supported)">
+                            <FloatingLabel label="Breed:">
                             <Form.Select className="border-secondary" value={filterOptions?.breed} onChange={(e) => {setFilterOptions({...filterOptions, breed: e.target.value})}}>
 
                                 <option value="">Select All</option>
