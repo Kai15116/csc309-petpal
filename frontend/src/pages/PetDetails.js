@@ -129,7 +129,7 @@ const PetDetails = () => {
   return (
     <div className="wrapper">
       <LandingHeader />
-      <main class="page-content">
+      <main className="page-content kareem-carousel-container">
       <Carousel id="kcarousel" style={{height: "40vh"}}>
           <Carousel.Item id="kcarousel">
             <img
