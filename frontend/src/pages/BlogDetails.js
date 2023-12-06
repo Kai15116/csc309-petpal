@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import BlogImagesCarousel from '../components/BlogImagesCarousel';
+import Markdown from 'react-markdown';
 
 
 const BlogDetails = () => {
@@ -59,21 +60,19 @@ const BlogDetails = () => {
   return (
     <div className="wrapper">
       <LandingHeader />
-      <main class="page-content">
+      <main>
       {blogInfo && <BlogImagesCarousel blog={blogInfo} />}
       <div class="background-details">
           <div class="container" id="pet-details-container">
-              <div class="pet-details">
+                <div className="pet-details">
                   <h1>{title}</h1>
-                  <div class="d-flex pet_details_and_shelter">
-                      <div class="col-lg-6" style={{"marginRight": "20px"}}>
-                        {blogContent}
-                      </div>
+                  <div style={{textAlign: "left !important"}}>
+                      <Markdown>{blogContent}</Markdown>
                   </div>
                   <Link to={`/blogs/`} role="button">
                     <button class="btn btn-primary btn-lg apply-button" >Blogs</button>
                   </Link>
-                  </div>
+                </div>
                 </div>
             </div>
         </main>
