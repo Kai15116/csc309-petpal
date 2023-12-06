@@ -10,7 +10,6 @@ import image3 from "../assets/images/image3.jpg"
 import noImage from '../assets/images/no_image_icon.png';
 import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/userContext';
-const baseURL = "http://localhost:8000/media/pet_images/";
 
 const PetCreationUpdate = () => {
   const {getContextUser} = useContext(userContext);
@@ -34,18 +33,83 @@ const PetCreationUpdate = () => {
   const [additionalNotes, setAdditionalNotes] = useState('');
   const [editMode, setEditMode] = useState(false);
 
+  const [petNameError, setPetNameError] = useState('')
+  const [petAgeError, setPetAgeError] = useState('');
+  const [petWeightError, setPetWeightError] = useState( '');
+  const [petFeeError, setPetFeeError] = useState('');
+  const [petLocationError, setPetLocationError] = useState('');
+  const [petMedicalHistoryError, setPetMedicalHistoryError] = useState('');
+
   const [selectedImage1, setSelectedImage1] = useState(null);
   const [selectedImage2, setSelectedImage2] = useState(null);
   const [selectedImage3, setSelectedImage3] = useState(null);
 
+  // image upload error states
+  const [imageError1, setImageError1] = useState('');
+  const [imageError2, setImageError2] = useState('');
+  const [imageError3, setImageError3] = useState('');
+
+  // success message
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const handlePetNameChange = (e) => {
+    setPetName(e.target.value);
+    if (e.target.value !== '') {
+      setPetNameError('');
+    }
+  };
+  
+  const handlePetAgeChange = (e) => {
+    setPetAge(e.target.value);
+    if (e.target.value !== '') {
+      setPetAgeError('');
+    }
+  };
+  
+  const handlePetWeightChange = (e) => {
+    setPetWeight(e.target.value);
+    if (e.target.value !== '') {
+      setPetWeightError('');
+    }
+  };
+  
+  const handlePetFeeChange = (e) => {
+    setPetFee(e.target.value);
+    if (e.target.value !== '') {
+      setPetFeeError('');
+    }
+  };
+  
+  const handlePetLocationChange = (e) => {
+    setPetLocation(e.target.value);
+    if (e.target.value !== '') {
+      setPetLocationError('');
+    }
+  };
+  
+  const handlePetMedicalHistoryChange = (e) => {
+    setPetMedicalHistory(e.target.value);
+    if (e.target.value !== '') {
+      setPetMedicalHistoryError('');
+    }
+  };
+  
   const handleImageChange1 = (e) => {
     setSelectedImage1(e.target.files[0]);
+    // clear any previous error message when a new image is selected
+    setImageError1('');
   };
+
   const handleImageChange2 = (e) => {
     setSelectedImage2(e.target.files[0]);
+    // clear any previous error message when a new image is selected
+    setImageError2('');
   };
+
   const handleImageChange3 = (e) => {
     setSelectedImage3(e.target.files[0]);
+    // clear any previous error message when a new image is selected
+    setImageError3('');
   };
 
   const extractFileName = (url) => {
@@ -196,7 +260,7 @@ const PetCreationUpdate = () => {
         console.log('Upload successful:', data);
       })
       .catch(error => {
-        console.error('Error uploading image:', error);
+        console.error('Error creating pet:', error);
       });
   };
 
@@ -220,7 +284,7 @@ const PetCreationUpdate = () => {
   
     // make a PUT request to update the pet
     fetch(`http://localhost:8000/pets/${petId}/`, {
-      method: 'PUT', // TODO: put and patch is not allowed
+      method: 'PUT', 
       body: formData,
       headers: {
         'Authorization': `Bearer ${accessToken}`,
@@ -234,16 +298,84 @@ const PetCreationUpdate = () => {
         console.error('Error editing pet:', error);
       });
   };
+
+  const validateForm = () => {
+    console.log("VALIDATION")
+    let formIsValid = true;
+
+    // validate each required field
+    if (petName.trim() === '') {
+      console.log("BOOM")
+      setPetNameError('Name is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
+    if (petAge === null) {
+      setPetAgeError('Age is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
+    if (petWeight === null) {
+      setPetWeightError('Weight is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
+    if (petFee === null) {
+      setPetFeeError('Fee is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
+    if (petLocation.trim() === '') {
+      setPetLocationError('Location is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
+    if (petMedicalHistory.trim() === '') {
+      setPetMedicalHistoryError('Medical History is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
+    // validate images
+    if (!selectedImage1) {
+      setImageError1('Image 1 is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
+    if (!selectedImage2) {
+      setImageError2('Image 2 is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
+    if (!selectedImage3) {
+      setImageError3('Image 3 is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
+    return formIsValid;
+  };
   
   // handle button click
   const handleButtonClick = () => {
-    if (editMode) {
-      // edit the pet
-      editPet();
-    } 
-    else {
-      // create a new pet
-      createPet();
+    if (validateForm()) {
+      if (editMode) {
+        // edit the pet
+        editPet();
+        setSuccessMessage('Pet edited successfully!');
+      } 
+      else {
+        // create a new pet
+        setSuccessMessage('Pet created successfully!');
+        createPet();
+      }
     }
   };
 
@@ -264,13 +396,32 @@ const PetCreationUpdate = () => {
                         <div class="pet-details">
                             <h4>1. Pet Details</h4>
                             <form class="form-inputs" action="submit_pet_listing.php" method="POST">
-                            <div class="form-group">
-                              <label for="name">Pet Name:</label>
-                              <input type="text" class="form-control" id="name" name="breed" value={petName} onChange={(e) => setPetName(e.target.value)} />
-                            </div>
+                              <div class="form-group">
+                                <label for="name" class="col-sm-2 col-form-label">Pet Name:</label>
+                                <div class="col-sm-10">
+                                    <input 
+                                        type="text" 
+                                        class={`form-control ${petNameError ? 'is-invalid' : ''}`}
+                                        id="name" 
+                                        name="breed" 
+                                        value={petName} 
+                                        onChange={handlePetNameChange}
+                                        required 
+                                    />
+                                    {petNameError && (
+                                        <div className="invalid-feedback">{petNameError}</div>
+                                    )}
+                                </div>
+                              </div>
                                 <div class="form-group">
                                     <label for="pet_type">Pet Type:</label>
-                                    <select class="form-control" id="pet_type" name="pet_type" value={petType} onChange={(e) => setPetType(e.target.value)}>
+                                    <select class="form-control" 
+                                      id="pet_type" 
+                                      name="pet_type" 
+                                      value={petType} 
+                                      onChange={(e) => setPetType(e.target.value)}
+                                      required  
+                                    >
                                         {petTypes?.map((item, index) =>
                                             <option value={item.id} key={item.id}>{item.name}</option>
                                         )}
@@ -278,14 +429,25 @@ const PetCreationUpdate = () => {
                                 </div>
                                 <div class="form-group">
                                     <label for="sex">Sex:</label>
-                                    <select class="form-control" id="sex" name="sex" value={petSex} onChange={(e) => setPetSex(e.target.value)}>
+                                    <select 
+                                      class="form-control" 
+                                      id="sex" name="sex" 
+                                      value={petSex} 
+                                      onChange={(e) => setPetSex(e.target.value)}
+                                      required
+                                    >
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                   <label for="breed">Breed:</label>
-                                  <select className="form-control" id="breed" name="breed" onChange={(e) => setPetBreed(e.target.value)}>
+                                  <select 
+                                    className="form-control" 
+                                    id="breed" name="breed" 
+                                    onChange={(e) => setPetBreed(e.target.value)}
+                                    required
+                                  >
                                         {breeds?.map((item, index) =>
                                             <option value={item.id} key={item.id}>{item.name}</option>
                                         )}
@@ -294,26 +456,58 @@ const PetCreationUpdate = () => {
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="age">Age:</label>
-                                    <input type="number" class="form-control" id="age" name="age" min="0" max="99" placeholder="0-99" value={petAge} onChange={(e) => setPetAge(e.target.value)}/>
+                                  <label for="age" class="col-sm-2 col-form-label">Age:</label>
+                                  <div class="col-sm-10">
+                                      <input type="number" class={`form-control ${petAgeError ? 'is-invalid' : ''}`} id="age" name="age" min="0" max="99" placeholder="0-99" value={petAge} onChange={handlePetAgeChange} required/>
+                                      {petAgeError && (
+                                          <div class="invalid-feedback">{petAgeError}</div>
+                                      )}
+                                  </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="weight">Weight (lbs):</label>
-                                    <input type="number" class="form-control" id="weight" name="weight" min="0" max="999" placeholder="0-999" value={petWeight} onChange={(e) => setPetWeight(e.target.value)}/>
+
+                              <div class="form-group">
+                                <label for="weight" class="col-sm-2 col-form-label">Weight (lbs):</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class={`form-control ${petWeightError ? 'is-invalid' : ''}`} id="weight" name="weight" min="0" max="999" placeholder="0-999" value={petWeight} onChange={handlePetWeightChange} required/>
+                                    {petWeightError && (
+                                        <div class="invalid-feedback">{petWeightError}</div>
+                                    )}
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label for="weight">Adoption Fee (CAD):</label>
-                                    <span class="input-group-text">$</span>
-                                    <input type="number" class="form-control" id="adoption_fee" name="adoption_fee" step="0.01" placeholder="Use 0 for free adoption" value={petFee} onChange={(e) => setPetFee(e.target.value)}/>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="adoption_fee" class="col-sm-2 col-form-label">Adoption Fee (CAD):</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class={`form-control ${petFeeError ? 'is-invalid' : ''}`} id="adoption_fee" name="adoption_fee" step="0.01" placeholder="Use 0 for free adoption" value={petFee} onChange={handlePetFeeChange} required/>
+                                    </div>
+                                    {petFeeError && (
+                                        <div class="invalid-feedback">{petFeeError}</div>
+                                    )}
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label for="addressLine1" class="form-label">Adoption Location:</label>
-                                    <input type="text" class="form-control" id="addressLine1" placeholder="ex: address, city" value={petLocation} onChange={(e) => setPetLocation(e.target.value)}/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="medical_history">Medical History:</label>
-                                    <input type="text" class="form-control" id="medical_history" name="medical_history" placeholder="vaccines received, allergies, etc" value={petMedicalHistory} onChange={(e) => setPetMedicalHistory(e.target.value)}/>
-                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="addressLine1" class="col-sm-2 col-form-label">Adoption Location:</label>
+                                  <div class="col-sm-10">
+                                      <input type="text" class={`form-control ${petLocationError ? 'is-invalid' : ''}`} id="addressLine1" placeholder="ex: address, city" value={petLocation} onChange={handlePetLocationChange} required/>
+                                      {petLocationError && (
+                                          <div class="invalid-feedback">{petLocationError}</div>
+                                      )}
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="medical_history" class="col-sm-2 col-form-label">Medical History:</label>
+                                  <div class="col-sm-10">
+                                      <input type="text" class={`form-control ${petMedicalHistoryError ? 'is-invalid' : ''}`} id="medical_history" name="medical_history" placeholder="vaccines received, allergies, etc" value={petMedicalHistory} onChange={handlePetMedicalHistoryChange} required/>
+                                      {petMedicalHistoryError && (
+                                          <div class="invalid-feedback">{petMedicalHistoryError}</div>
+                                      )}
+                                  </div>
+                              </div>
+
                             </form>
                             </div>
                         </div>
@@ -395,7 +589,7 @@ const PetCreationUpdate = () => {
                             <form class="form-inputs" action="submit_pet_listing.php" method="POST">
                                 <div class="form-group">
                                     <label for="additional_notes">Additional Notes:</label>
-                                    <textarea class="form-control" id="additional_notes" name="additional_notes" rows="4" value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)}></textarea>
+                                    <textarea class="form-control" id="additional_notes" name="additional_notes" rows="4" value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)} required></textarea>
                                 </div>
                             </form>
                             </div>
@@ -408,7 +602,29 @@ const PetCreationUpdate = () => {
                         onClick={()=>{handleButtonClick()}}
                       >
                         {editMode ? "Edit Pet Listing" : "Post Pet Listing"}
-                      </button>   
+                      </button>
+                      {imageError1 && (
+                      <div className="alert alert-danger mt-4" role="alert">
+                        {imageError1}
+                      </div>
+                    )}
+
+                    {imageError2 && (
+                      <div className="alert alert-danger mt-4" role="alert">
+                        {imageError2}
+                      </div>
+                    )}
+
+                    {imageError3 && (
+                      <div className="alert alert-danger mt-4" role="alert">
+                        {imageError3}
+                      </div>
+                    )}
+                    {successMessage && (
+                      <div className="alert alert-success mt-4" role="alert">
+                        {successMessage}
+                      </div>
+                    )}    
                     <div>
                 </div>
             </div> 
