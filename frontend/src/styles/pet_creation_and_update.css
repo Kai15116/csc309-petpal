@@ -108,7 +108,7 @@ header {
 /* adjust the horizontal position as needed */
 .kareem-carousel-container .carousel-control-prev {
     left: 0; /* place the previous button at the left edge */
-    margin-top: 50px;
+    /*margin-top: 50px;*/
 }
 
 .kareem-carousel-container .carousel-control-next {
@@ -157,7 +157,7 @@ header {
     width: 100%;
 }
 
-.pet-details {
+.pet-change-details {
     background-color: #ffffff; 
     padding: 30px;
     gap: 10px;
@@ -187,22 +187,22 @@ header {
     flex: 2; /* allow input/select to expand to fill available space */
 }
 
-.pet-details ul {
+.pet-change-details ul {
     list-style-type: disc !important; /* add bullet points */
     margin-left: 20px; /* adjust the margin for proper spacing */
 }
 
-.pet-details h2 {
+.pet-change-details h2 {
     font-size: 24px;
     margin-bottom: 10px;
 }
 
-.pet-details ul {
+.pet-change-details ul {
     list-style-type: none;
     padding: 0;
 }
 
-.pet-details ul li {
+.pet-change-details ul li {
     margin-bottom: 10px;
 }
 
@@ -255,7 +255,7 @@ header {
 
 /* responsive design */
 @media (max-width: 1000px) {
-    .pet-details {
+    .pet-change-details {
         width: calc(100vw - 5rem);
     }
 

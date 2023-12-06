@@ -127,7 +127,7 @@ const PetDetails = () => {
 
 
   return (
-    <div className="wrapper">
+    <div className="wrapper pet-details-page">
       <LandingHeader />
       <main className="page-content kareem-carousel-container">
       <Carousel id="kcarousel" style={{height: "40vh"}}>
@@ -164,7 +164,7 @@ const PetDetails = () => {
       </Carousel>
       <div class="background-details">
           <div class="container" id="pet-details-container">
-              <div className="pet-details">
+              <div className="pet-details ">
                   <div className="d-flex justify-content-center align-items-center">
                       <h1>Get To Know {petName}</h1>
                       {petInfo?.owner === user?.contextUserId && <a className="btn btn-secondary ms-3 mb-auto" href={`/petCreateUpdate/${petInfo?.owner}`}>
@@ -218,7 +218,7 @@ const PetDetails = () => {
                               </tbody>
                           </table>
                       </div>
-                      <div className="pet_details_and_shelter" style={{marginLeft: "32px"}}>
+                      <div className="pet_details_and_shelter shelter-card-wrapper" style={{marginLeft: "32px"}}>
                         {/* Replace the existing shelter card code with the Shelter component */}
                         <ShelterCard name={userInfo?.username} profileLink={`shelterprofile/${userInfo?.id}`} stars={userInfo?.avg_rating}
                                      reviewCount={userInfo?.review_count}

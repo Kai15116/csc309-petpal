@@ -44,4 +44,4 @@ class BlogSearchSerializer(ModelSerializer):
 
     class Meta:
         model = Blog
-        exclude = ['id', 'title', 'content', 'picture_1', 'picture_2', 'picture_3', 'likes', 'last_modified']
+        exclude = ['id', 'content', 'picture_1', 'picture_2', 'picture_3', 'likes', 'last_modified']
