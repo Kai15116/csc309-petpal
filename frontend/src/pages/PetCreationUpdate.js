@@ -396,7 +396,7 @@ const PetCreationUpdate = () => {
                         <div class="pet-details">
                             <h4>1. Pet Details</h4>
                             <form class="form-inputs" action="submit_pet_listing.php" method="POST">
-                              <div class="form-group row">
+                              <div class="form-group">
                                 <label for="name" class="col-sm-2 col-form-label">Pet Name:</label>
                                 <div class="col-sm-10">
                                     <input 
@@ -455,7 +455,7 @@ const PetCreationUpdate = () => {
                                   {/*<input type="text" class="form-control" id="breed" name="breed" placeholder="ex: Shih Tzu" value={petBreed} onChange={(e) => setPetBreed(e.target.value)}/>*/}
                                 </div>
 
-                                <div class="form-group row">
+                                <div class="form-group">
                                   <label for="age" class="col-sm-2 col-form-label">Age:</label>
                                   <div class="col-sm-10">
                                       <input type="number" class={`form-control ${petAgeError ? 'is-invalid' : ''}`} id="age" name="age" min="0" max="99" placeholder="0-99" value={petAge} onChange={handlePetAgeChange} required/>
@@ -465,7 +465,7 @@ const PetCreationUpdate = () => {
                                   </div>
                                 </div>
 
-                              <div class="form-group row">
+                              <div class="form-group">
                                 <label for="weight" class="col-sm-2 col-form-label">Weight (lbs):</label>
                                 <div class="col-sm-10">
                                     <input type="number" class={`form-control ${petWeightError ? 'is-invalid' : ''}`} id="weight" name="weight" min="0" max="999" placeholder="0-999" value={petWeight} onChange={handlePetWeightChange} required/>
@@ -475,7 +475,7 @@ const PetCreationUpdate = () => {
                                 </div>
                               </div>
 
-                              <div class="form-group row mb-3">
+                              <div class="form-group">
                                 <label for="adoption_fee" class="col-sm-2 col-form-label">Adoption Fee (CAD):</label>
                                 <div class="col-sm-10">
                                     <div class="input-group">
@@ -488,7 +488,7 @@ const PetCreationUpdate = () => {
                                 </div>
                               </div>
 
-                              <div class="form-group row mb-3">
+                              <div class="form-group">
                                   <label for="addressLine1" class="col-sm-2 col-form-label">Adoption Location:</label>
                                   <div class="col-sm-10">
                                       <input type="text" class={`form-control ${petLocationError ? 'is-invalid' : ''}`} id="addressLine1" placeholder="ex: address, city" value={petLocation} onChange={handlePetLocationChange} required/>
@@ -498,7 +498,7 @@ const PetCreationUpdate = () => {
                                   </div>
                               </div>
 
-                              <div class="form-group row">
+                              <div class="form-group">
                                   <label for="medical_history" class="col-sm-2 col-form-label">Medical History:</label>
                                   <div class="col-sm-10">
                                       <input type="text" class={`form-control ${petMedicalHistoryError ? 'is-invalid' : ''}`} id="medical_history" name="medical_history" placeholder="vaccines received, allergies, etc" value={petMedicalHistory} onChange={handlePetMedicalHistoryChange} required/>
