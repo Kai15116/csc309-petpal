@@ -40,7 +40,7 @@ function ShelterProfileDetailsCard(props) {
 
                 </Card.Text>
                 <div className="mb-2" style={{ display: "flex", justifyContent: "space-evenly"}}>
-                    <Button variant="primary" onClick={() => navigate(`/mypets/`)}>
+                    <Button variant="primary" onClick={() => navigate(`/pets/${userId}`)}>
                         View Pets
                     </Button>
                     <Button 
