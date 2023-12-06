@@ -6,5 +6,4 @@ __pycache__/
 */migrations/0*.py
 *.pyc
 *.pyo
-media/
 /.env
