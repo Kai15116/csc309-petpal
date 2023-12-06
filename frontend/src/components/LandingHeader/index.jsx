@@ -135,7 +135,7 @@ const LandingHeader = () => {
                   </InputGroup>
                 </Form>
               </Nav.Item>
-              <Nav.Item><Nav.Link href="/">Home</Nav.Link></Nav.Item>
+              {/*<Nav.Item><Nav.Link href="/">Home</Nav.Link></Nav.Item>*/}
               <Nav.Item><Nav.Link href="/shelters">All shelters</Nav.Link></Nav.Item>
               {user.contextUserType === "seeker" && 
                 <Nav.Item>

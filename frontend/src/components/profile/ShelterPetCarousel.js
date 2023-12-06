@@ -1,4 +1,4 @@
-import { Carousel, Card } from "react-bootstrap";
+import { Carousel, Card, Container} from "react-bootstrap";
 import ExampleBean from "../../assets/example_images/bean1.jpg";
 
 function ShelterPetCarouselCard() {
@@ -23,8 +23,7 @@ function ShelterPetCarouselCard() {
   ];
 
   return (
-    
-      <Carousel>
+    <Carousel indicators={false} >
         {petInformation.map((pet) => (
             <Carousel.Item key={pet.id}>
                 <Card style={{ minWidth: "20rem", maxWidth: "40rem"}}>
@@ -40,7 +39,7 @@ function ShelterPetCarouselCard() {
                 </Card>
             </Carousel.Item>
         ))}
-      </Carousel>
+    </Carousel>
   );
 }
 

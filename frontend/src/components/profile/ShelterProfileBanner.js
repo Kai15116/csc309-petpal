@@ -9,16 +9,22 @@ import { useNavigate } from "react-router-dom";
  * @param {contextUserId, userInfo} props 
  */
 function ShelterProfileBanner(props) {
+    const userInfo = props.userInfo;
     const navigate = useNavigate();
     
     return (
         <div id="shelter-profile-banner">
             <div id="banner-overlay">
                 <h1 id="banner-title">
-                    Toronto Zoo Escapees {' '}
+                    {
+                        (userInfo?.mission_title !== null && userInfo?.mission_title !== '') ? 
+                        userInfo?.mission_title : 
+                        "Example Shelter Name"
+                    }
+
                     {   // Check if viewer is same as page owner
-                        (props.contextUserId === props.userInfo?.id) && (
-                            <a href="" onClick={() => { navigate("/shelterprofileedit") }}>
+                        (props.contextUserId === userInfo?.id) && (
+                            <a href="" onClick={() => { navigate("/profileedit") }}>
                                 <i className="bi bi-pencil-square shelter-profile-edit-icon"></i>
                             </a>
                         )

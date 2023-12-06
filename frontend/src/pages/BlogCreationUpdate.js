@@ -129,6 +129,8 @@ const BlogCreationUpdate = () => {
             console.log("Mydata", data);
 
             setBlogInfo({...data})
+            if (data.owner !== contextUserId)
+                navigate("/")
            
             // set each value based on the data received
             setTitle(data.title || '');

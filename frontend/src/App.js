@@ -25,7 +25,7 @@ import BlogCreationUpdate from './pages/BlogCreationUpdate';
 import ShelterBlogs from './pages/ShelterBlogs';
 import BlogDetails from './pages/BlogDetails';
 import ViewShelterPets from './pages/ViewShelterPets';
-import ShelterProfileEdit from './pages/ShelterProfileEdit';
+import ProfileEdit from './pages/ProfileEdit';
 
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
           <Route path="/seekerprofile/:userId" element={<SeekerProfile />} />
           <Route path="/shelterprofile/:userId" element={<ShelterProfile />} />
           <Route path="/viewshelterpets/:userId" element={<ViewShelterPets />} />
-          <Route path="/shelterprofileedit" element={<ShelterProfileEdit />} />
+          <Route path="/profileedit" element={<ProfileEdit />} />
 
           <Route path='/shelters' element={<ShelterList/>}/>
           <Route path='/notifications/:userId' element={<NotificationPage></NotificationPage>}/>

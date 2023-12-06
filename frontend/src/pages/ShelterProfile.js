@@ -71,11 +71,8 @@ function ShelterProfile() {
                 console.log(e)
                 navigate('/');
             }
-            
-            
         }
         fetchUserInfo();
-        console.log("bruh " + userId);
     }, [ userId ])
 
     return (
@@ -100,10 +97,11 @@ function ShelterProfile() {
                                 <Card.Body>
                                     <Card.Title><h4>Our Mission</h4></Card.Title>
                                     <Card.Text>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                        Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, 
-                                        ullam neque adipisci facere delectus aut nisi porro, 
-                                        nemo nihil quidem autem laudantium? Perspiciatis.
+                                        {
+                                            (userInfo?.mission_statement !== null && userInfo?.mission_statement !== '') ? 
+                                            userInfo?.mission_statement : 
+                                            "It looks like you do not have a mission statement. Here is some filler text to simulate what it would be like. You may set one up in the edit profile section by clicking the icon next to the banner title. This instruction text is meant to fill the space so you can see what it is like to have a mission statement."
+                                        }
                                     </Card.Text>
                                 </Card.Body>
                             </Card>

@@ -2,6 +2,11 @@ import {useContext, useState, useEffect} from "react";
 import { userContext } from "../context/userContext";
 import { useParams, useNavigate } from "react-router-dom";
 import LandingHeader from "../components/LandingHeader";
+import Footer from "../components/Footer";
+import ShelterCard from "../components/ShelterCard";
+import SeekerProfileDetailsCard from "../components/profile/SeekerProfileDetails";
+
+
 function SeekerProfile() {
     const {getContextUser} = useContext(userContext);
     const [userInfo, setUserInfo] = useState(null);
@@ -43,23 +48,57 @@ function SeekerProfile() {
     }, [ userId ])
     
     return (
-        <div>
-            <LandingHeader></LandingHeader>
-            SeekerProfileFake
-            <div>
-                <h1>This is from user context</h1>
-                <h2>{accessToken}</h2>
-                <h2>{contextUserId}</h2>
-                <h2>{contextUserType}</h2>
-            </div>
-            <div>
-                <h1>This is from the api.</h1>
-                <h2>{userInfo?.username}</h2>
-                <h2>{userInfo?.email}</h2>
-                <h2>{userInfo?.address}</h2>
-            </div>
+        <div className="bg-body-tertiary my-0 ">
+            <LandingHeader/>
+                <div className="container-fluid d-flex flex-column justify-content-center py-5" >
+                    <div className="d-flex mx-auto" id="my-pets-main-container">
+
+                        <div className="d-flex flex-column justify-content-center align-items-e" id="profile-container">
+                            {/* <ShelterCard 
+                                name={userInfo?.username} 
+                                profileLink={`/seekerprofile/${contextUserId}`} 
+                                reviewCount={123} 
+                                joinDate={new Date(Date.parse(userInfo?.created_at))}
+                            /> */}
+                            <SeekerProfileDetailsCard 
+                                contextUserId={contextUserId}
+                                userInfo={userInfo}
+                            />
+                        </div>
+
+                        <div id="lst-container">
+                            <div className="d-flex">
+                                <h1 className="ms-1 mb-0"> Reviews </h1>
+                            </div>
+                            <hr></hr>
+                            <div className="d-grid" id="pets-grid">
+                                {/* {myPets?.map((pet, index) => <SimplePetCard key={index} size="12rem" {...pet}></SimplePetCard>)} */}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <Footer />
         </div>
     )
 }
 
 export default SeekerProfile;
+
+
+
+        // <div>
+        //     <LandingHeader></LandingHeader>
+        //     SeekerProfileFake
+        //     <div>
+        //         <h1>This is from user context</h1>
+        //         <h2>{accessToken}</h2>
+        //         <h2>{contextUserId}</h2>
+        //         <h2>{contextUserType}</h2>
+        //     </div>
+        //     <div>
+        //         <h1>This is from the api.</h1>
+        //         <h2>{userInfo?.username}</h2>
+        //         <h2>{userInfo?.email}</h2>
+        //         <h2>{userInfo?.address}</h2>
+        //     </div>
+        // </div>
