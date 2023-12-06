@@ -43,11 +43,13 @@ function SearchFilter() {
     // const itemsPerPage = 5;
     const [petsInfo, setPetsInfo] = useState(null);
     const [petType, setPetType] = useState(null);
+    
     // searchparam initial state
     const [sortOption, setSortOption] = useState("");
-    const [filterOptions, setFilterOptions] = useState({age: "", weight: "", sex: "", fee: "", pet_type:"", breed: ""});
+    const [filterOptions, setFilterOptions] = useState({age: "", weight: "", sex: "", fee: "", pet_type:"", breed: "", owner: "", status: ""});
     const [petTypes, setPetTypes] = useState([]);
     const [breeds, setBreeds] = useState([]);
+    const [shelters, setShelters] = useState([]);    
     
     // const [colorFilter, setColorFilter] = useState("");
     
@@ -69,6 +71,8 @@ function SearchFilter() {
         name: searchParams.get("name") ?? "",
         pet_type: searchParams.get("pet_type") ?? "",
         breed: searchParams.get("breed") ?? "",
+        owner: searchParams.get("owner") ?? "",
+        status: searchParams.get("status") ?? "",
     }), [searchParams]);
     
 
@@ -100,6 +104,33 @@ function SearchFilter() {
         fetchPetTypes();
   
     }, [])
+
+    useEffect(function () {
+        async function fetchShelters() {
+            try { 
+                const response = await fetch(`http://localhost:8000/accounts/shelter`);
+            
+                if (response.status >= 200 && response.status < 302) {
+                    const data = await response.json();
+                    setShelters([...data])
+                    console.log(data)
+                    
+                    // console.log(shelterList)
+                
+                } else if (response.status = 404) {
+                    alert(404);
+                }
+                else {
+                    console.log(response.status)
+
+                }} catch (e) {
+                    console.log(e);
+                    navigate('/');
+                }
+        }
+        fetchShelters();
+
+    }, []);
   
   
     useEffect(function() {
@@ -230,6 +261,8 @@ function SearchFilter() {
             sex: querySex,
             pet_type: filterOptions?.pet_type,
             breed: filterOptions?.breed,
+            owner: filterOptions?.owner,
+            status: filterOptions?.status,
         }
         
 
@@ -247,7 +280,7 @@ function SearchFilter() {
 
 
     const clearOptions = () => {
-        setFilterOptions({sex:"", age:"", weight:"", fee:"", pet_type: "", breed: ""});
+        setFilterOptions({sex:"", age:"", weight:"", fee:"", pet_type: "", breed: "", owner: "", status: ""});
         setSortOption("");
     }
 
@@ -357,6 +390,34 @@ function SearchFilter() {
                                 )}
 
                                 </Form.Select>
+                            </FloatingLabel>
+                                
+                        </FormGroup>
+
+                        <FormGroup className="mb-3">
+                            <FloatingLabel label="Shelter:">
+                            <Form.Select className="border-secondary" value={filterOptions?.owner} onChange={(e) => {setFilterOptions({...filterOptions, owner: e.target.value})}}>
+
+                                <option value="">Select All</option>
+                                {shelters?.map((item, index) =>
+                                            <option value={item.id} key={item.id}>{item.username}</option>
+                                )}
+
+                                </Form.Select>
+                            </FloatingLabel>
+                                
+                        </FormGroup>
+                        <FormGroup className="mb-3">
+                            <FloatingLabel label="Status:">
+                                <Form.Select className="border-secondary" value={filterOptions?.status} onChange={(e) => setFilterOptions({...filterOptions, status: e.target.value})}>
+
+                                <option value="">Select Available</option>
+                                <option value="pending">Pending</option>
+                                <option value="withdrawn">Withdrawn</option>
+                                <option value="adopted">Adopted</option>
+                            
+                                </Form.Select>
+                                
                             </FloatingLabel>
                                 
                         </FormGroup>
