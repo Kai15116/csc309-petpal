@@ -238,8 +238,12 @@ const PetCreationUpdate = () => {
     formData.append('notes', additionalNotes);
 
     formData.append('picture_1', selectedImage1);
-    formData.append('picture_2', selectedImage2);
-    formData.append('picture_3', selectedImage3);
+
+    if (selectedImage2)
+        formData.append('picture_2', selectedImage2);
+
+    if (selectedImage3)
+        formData.append('picture_3', selectedImage3);
   
     // Make a POST request to your server with the FormData
     fetch(`http://localhost:8000/pets/`, {
@@ -250,7 +254,9 @@ const PetCreationUpdate = () => {
       }
     }).then(response => response.json())
       .then(data => {
-        // Handle the response from the server
+       // Handle the response from the server
+        if (data.id)
+            navigate(`/details/${data.id}`)
         console.log('Upload successful:', data);
       })
       .catch(error => {
@@ -430,8 +436,8 @@ const PetCreationUpdate = () => {
                                       onChange={(e) => setPetSex(e.target.value)}
                                       required
                                     >
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

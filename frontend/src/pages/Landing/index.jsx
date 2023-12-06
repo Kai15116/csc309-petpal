@@ -1,16 +1,25 @@
-import React, {useEffect, useState} from 'react';
-import LandingHeader from '../components/LandingHeader';
-import Footer from '../components/Footer';
-import '../styles/landingStyles.css'
-import PetCard from '../components/PetCard'
+import React, {useContext, useEffect, useState} from 'react';
+import LandingHeader from '../../components/LandingHeader';
+import Footer from '../../components/Footer';
+import './style.css'
+import PetCard from '../../components/PetCard'
 import {Col, Row} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import { userContext } from '../../context/userContext';
 
 const Landing = () => {
+    const { getContextUser } = useContext(userContext);
+    const {contextUserType} = getContextUser();
     const [topDogs, setTopDogs] = useState(null);
     const [topCats, setTopCats] = useState(null);
+    const navigate = useNavigate();
+
+    if (contextUserType === "shelter"){
+        navigate("/mypets")
+    }
 
     useEffect(function () {
+
         async function fetchPets(type) {
             try {
                 const response = await fetch(`http://localhost:8000/pets?size=5&page=1&pet_type=${type}`, {

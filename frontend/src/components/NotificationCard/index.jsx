@@ -1,10 +1,12 @@
 import { Card, Row, Col } from "react-bootstrap";
 import {Image, Button} from "react-bootstrap";
-import PlaceHolder from "./../assets/images/placeholderprofile.png"
+import PlaceHolder from "../../assets/images/placeholderprofile.png"
 import { useNavigate } from "react-router-dom";
 import Badge from 'react-bootstrap/Badge';
-import { formatTimeGap } from "../utils";
-import "../styles/notification_card.css"
+import { formatTimeGap } from "../../utils";
+import { userContext } from '../../context/userContext';
+import {useContext} from "react";
+import "./style.css";
 
 const formatNotificationType = (note_type) => {
     switch (note_type) {
@@ -32,20 +34,41 @@ const formatNotificationType = (note_type) => {
 
 
 function NotificationCard(props) {
-    const {created_at, notification_type, read, id, object_id} = props.note;
+    const {created_at, notification_type, read, id, object_id, comment_object_id} = props.note;
     const {note_category, msg, contentType, color} = formatNotificationType(notification_type);
     const navigate = useNavigate();
+    const { getContextUser } = useContext(userContext)
+    const user = getContextUser()
 
     const handleClick = async (id) => {
-        
-        
         // url + object_id
+        
         props.readNotification(id)
+
+        switch (notification_type) {
+            case "status_update":
+                navigate(`/application/${object_id}`)
+                return
+            case "application_creation":
+                navigate(`/application/${object_id}`)
+                return
+            case "new_review":
+                navigate(`/shelterprofile/${comment_object_id}`)
+                return
+            case "new_message":
+                navigate(`/application/${comment_object_id}`)
+                return
+            case "new_pet_listing":
+                navigate(`/details/${object_id}`)
+                return
+            default:
+                return
+        }
     }
 
 	
 	return (
-		<Card className="w-100 notification-card" style={{ paddingLeft: "3rem", lineHeight: "1", marginBottom: "0rem"}} onClick={() => handleClick(id)}>
+		<Card className="w-100 notification-card" style={{ lineHeight: "1", marginBottom: "0rem"}} onClick={() => handleClick(id)}>
 			<Card.Body>
                     <div style={{display: "grid", gridTemplateColumns: "1fr 80px auto"}}>
                     {/* <div style={{paddingLeft: "1rem" }}>
@@ -66,7 +89,7 @@ function NotificationCard(props) {
                         </ul>                
 					</div>	
                     <div style={{display:"flex", alignItems: "center"}}>
-                        <Button hidden={!props.delOption} variant="secondary" style={{verticalAlign:"center"}} onClick={()=> {props.deleteNotification(id)}}><i className="bi bi-x-lg"></i></Button></div>
+                        <Button hidden={!props.delOption} variant="secondary" style={{verticalAlign:"center"}} onClick={(event)=> {event.stopPropagation();props.deleteNotification(id);}}><i className="bi bi-x-lg"></i></Button></div>
                     <div style={{display: "flex", flexDirection: "column", gap: "2rem", paddingTop:"10px", paddingRight: "1rem"}}>
                         
                         {<div style={{width: "10px", height:"10px", borderRadius: "50%",background: `${read? "transparent": "blue"}`}}></div>}

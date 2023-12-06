@@ -14,7 +14,7 @@ export default function (props) {
 
     return (
         <div className="application-form" style={{textAlign: "left", alignItems: "flex-start"}}>
-              <h1 className="fw-bold">Just One More Step To Adoption!</h1>
+              <h1 className="fw-bold" style={{overflow: "hidden"}}>Just One More Step To Adoption!</h1>
 
               <div className="col-lg-12">
                 <h2>Adoption Process:</h2>
@@ -85,7 +85,7 @@ export default function (props) {
                   </div>
                   <div className="form-group">
                     <label htmlFor="suitability">What qualities or characteristics make you suitable candidates to become pet owners?</label>
-                    <textarea id="suitability" name="suitability" className="form-control" rows="4" value={qualitiesDescription} onChange={(e) => setDescriptionQualities(e.target.value)} required></textarea>
+                    <textarea id="suitability" name="suitability" className="form-control" rows="4" value={qualitiesDescription} onChange={(e) => setDescriptionQualities(e.target.value)} readOnly={readonly} required></textarea>
                   </div>
                   <div className="form-group">
                     <label htmlFor="signature">Digital Signature: (I agree to the terms and conditions)</label>

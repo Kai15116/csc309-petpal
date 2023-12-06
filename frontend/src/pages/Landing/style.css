@@ -3,7 +3,7 @@
 }
 
 #landing-main-container {
-    background-image: url('../assets/images/pets-image-2-resized.jpg'), linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
+    background-image: url('../../assets/images/pets-image-2-resized.jpg'), linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
     background-blend-mode: overlay;
     background-size: cover;
     background-repeat: no-repeat;
@@ -11,22 +11,28 @@
 }
 
 #become-pet-shelter{
-    background-image: url('../assets/images/cat-image-3.jpg');
+    background-image: url('../../assets/images/cat-image-3.jpg');
     background-blend-mode: overlay;
     background-size: cover;
     background-repeat: no-repeat;
     height: 70vh;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1555px) {
+    .card-container .card {
+        max-width: 100%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
 
     .card-container {
         display: grid;
         grid-template-columns: auto;
     }
 
-    .card-container > * {
-        width: 100%;
+    .card-container > * , .card-container .card{
+        width: 100% !important;
     }
 }
 

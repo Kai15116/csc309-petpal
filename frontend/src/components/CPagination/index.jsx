@@ -73,10 +73,6 @@ function CPagination({
   return (
     <div className="text-center d-flex justify-content-center">
       <Pagination>
-        <Pagination.First
-          variant="danger"
-          onClick={() => onActivePageChange("first")}
-        />
         <Pagination.Prev onClick={() => onActivePageChange("prev")} />
         {array.map((pageElem, index) => {
           // Left Ellipse and Right Ellipse
@@ -96,7 +92,6 @@ function CPagination({
           );
         })}
         <Pagination.Next onClick={() => onActivePageChange("next")} />
-        <Pagination.Last onClick={() => onActivePageChange("last")} />
       </Pagination>
     </div>
   );

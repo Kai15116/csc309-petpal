@@ -2,8 +2,9 @@ django
 djangorestframework
 djangorestframework-simplejwt
 Pillow
-pygraphviz
 drf-yasg
 django-extensions
 django
 django-cors-headers
+django-environ
+psycopg2-binary

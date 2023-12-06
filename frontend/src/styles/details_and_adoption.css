@@ -224,10 +224,10 @@ footer {
 /*    margin-left: 32px;*/
 /*}*/
 
-.banner {
-    background-image: url("../assets/example_images/yosemite_banner.jpg");
-    background-size: cover;
-}
+/*.banner {*/
+/*    background-image: url("../assets/example_images/yosemite_banner.jpg");*/
+/*    background-size: cover;*/
+/*}*/
 
 body {
     margin: 0;

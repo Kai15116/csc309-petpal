@@ -22,6 +22,7 @@ const PetDetails = () => {
   const [petName, setPetName] = useState('');
   const [petSex, setPetSex] = useState('');
   const [petBreed, setPetBreed] = useState('');
+  const [petBreedName, setPetBreedName] = useState('');
   const [petAge, setPetAge] = useState(null);
   const [petWeight, setPetWeight] = useState( null);
   const [petFee, setPetFee] = useState(null);
@@ -32,6 +33,7 @@ const PetDetails = () => {
   const [selectedImage2, setSelectedImage2] = useState(null);
   const [selectedImage3, setSelectedImage3] = useState(null);
   const [additionalNotes, setAdditionalNotes] = useState('');
+  const [userInfo, setUserInfo] = useState(null);
 
   const extractFileName = (url) => {
     if (!url)
@@ -41,7 +43,7 @@ const PetDetails = () => {
   };
 
   useEffect(function() {
-      async function fetchUserInfo() {
+      async function fetchPet() {
           try {
               const response = await fetch(`http://localhost:8000/pets/${petId}`, {
               method: 'GET',
@@ -60,6 +62,7 @@ const PetDetails = () => {
               setPetName(data.name || '');
               setPetSex(data.sex || '');
               setPetBreed(data.breed || '');
+              setPetBreedName(data.breed_name || '');
               setPetAge(data.age || null);
               setPetWeight(data.weight || null);
               setPetFee(data.adoption_fee || null);
@@ -87,9 +90,31 @@ const PetDetails = () => {
               navigate('/');
           }
       }
-      fetchUserInfo();
+      fetchPet();
 
   }, [ petId ])
+
+    useEffect(function () {
+        async function fetchUserInfo() {
+            try {
+                const response = await fetch(`http://localhost:8000/accounts/shelter/${petInfo?.owner}`, {
+                    method: 'GET'
+                }
+            );
+            if (response.status >= 400) {
+                navigate('/');
+            } else if (response.status >= 200 && response.status < 300) {
+                const data = await response.json();
+                setUserInfo({...data})
+                console.log(data)
+            }} catch (e) {
+                console.log(e)
+                navigate('/');
+            }
+        }
+        if (petInfo)
+            fetchUserInfo();
+    }, [petInfo]);
 
   // helper function to format date
   const formatDate = (timestamp) => {
@@ -149,7 +174,7 @@ const PetDetails = () => {
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Breed:</strong></th>
-                                <td>{petBreed}</td>
+                                <td>{petBreedName}</td>
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Age:</strong></th>
@@ -184,13 +209,11 @@ const PetDetails = () => {
                       </div>
                       <div className="pet_details_and_shelter" style={{marginLeft: "32px"}}>
                         {/* Replace the existing shelter card code with the Shelter component */}
-                        <ShelterCard
-                          name="Toronto Zoo Escapees"
-                          profileLink="shelter_profile_view_unauth.html"
-                          stars={4} // Add stars as needed
-                          reviewCount={123}
-                          joinDate="Sep. 21, 2023"
-                        />
+                        <ShelterCard name={userInfo?.username} profileLink={`shelterprofile/${userInfo?.id}`} stars={userInfo?.avg_rating}
+                                     reviewCount={userInfo?.review_count}
+                                     joinDate={new Date(Date.parse(userInfo?.created_at))}
+                                     profilePicUrl={userInfo?.profile_picture} bannerPicUrl={userInfo?.banner}>
+                        </ShelterCard>
                       </div>
                   </div>
                   <div class="col-lg-12" id="owner-notes" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>

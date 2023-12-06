@@ -3,6 +3,7 @@
     background-position: left;
     background-size: 200% auto;
     transition: all 0.7s;
+    padding-left: 3rem;
 }
 
 .notification-card:hover {
@@ -15,3 +16,10 @@
     font-weight: bold;
     font-style: italic;
   }
+
+
+@media screen and (max-width: 500px) {
+  .notification-card {
+    padding-left: 0rem;
+  }
+}

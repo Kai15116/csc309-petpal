@@ -1,15 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom'; 
-import '../styles/headerStyles.css'; 
-import logoImage from '../assets/images/logo-1.png';
-import userImage from '../assets/images/user.png';
+import './style.css';
+import logoImage from '../../assets/images/logo-1.png';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {Button, Form, InputGroup, Image, Dropdown, Collapse, DropdownItem, Col} from "react-bootstrap";
-import { userContext } from '../context/userContext';
+import { userContext } from '../../context/userContext';
 import { useNavigate } from "react-router-dom";
+import placeholderProfile from "../../assets/images/placeholderprofile.png";
 
 const LandingHeader = () => {
     const { getContextUser, setContextUser} = useContext(userContext);
@@ -17,6 +17,7 @@ const LandingHeader = () => {
     const navigate = useNavigate()
     const [notifications, setNotifications] = useState(null);
     const [open, setOpen] = useState(false);
+    const [userInfo, setUserInfo] = useState(null);
 
     const isLoggedIn = !!user.accessToken
 
@@ -29,7 +30,7 @@ const LandingHeader = () => {
     useEffect(function () {
       async function fetchNotifications() {
           try {
-              const response = await fetch(`http://localhost:8000/notifications?read=False`, {
+              const response = await fetch(`http://localhost:8000/notifications?read=False&size=3&page=1`, {
                   method: 'GET',
                   headers: {
                         'Authorization': `Bearer ${user.accessToken}`,
@@ -39,7 +40,7 @@ const LandingHeader = () => {
               if (response.status >= 200 && response.status < 300) {
                   const data = await response.json();
                   console.log(data)
-                  setNotifications(data)
+                  setNotifications(data.results)
               } else if (response.status === 404) {
                   alert(404);
               } else {
@@ -49,7 +50,31 @@ const LandingHeader = () => {
               console.log(e);
           }
       }
-      fetchNotifications().then((res) => console.log("notifications loaded"))
+      async function fetchUserInfo() {
+            let headers = user.accessToken ? {
+                'Authorization': `Bearer ${user.accessToken}`,
+            } : {}
+
+            try {
+                const response = await fetch(`http://localhost:8000/accounts/${user.contextUserType}/${user.contextUserId}`, {
+                    method: 'GET',
+                    headers: headers
+                }
+            );
+            if (response.status >= 400) {
+                navigate('/');
+            } else if (response.status >= 200 && response.status < 300) {
+                const data = await response.json();
+                setUserInfo({...data})
+                console.log(data)
+            }} catch (e) {
+                console.log(e)
+                navigate('/');
+            }
+      }
+      fetchNotifications()
+      if (user.contextUserType)
+          fetchUserInfo()
     }, []);
 
 
@@ -61,28 +86,27 @@ const LandingHeader = () => {
     const NotificationItem = (props) => {
       const notification = props.notification;
       const id = notification.object_id;
+      const comment_object_id = notification.comment_object_id;
       switch (notification.notification_type) {
           case "status_update":
-              return <DropdownItem className="text-wrap" href={`/applications/${id}`}>Application status updated!</DropdownItem>
+              return <DropdownItem className="text-wrap" href={`/application/${id}`}>Application status updated!</DropdownItem>
           case "application_creation":
-              return <DropdownItem className="text-wrap" href={`/applications/${id}`}>New application was created for you!</DropdownItem>
+              return <DropdownItem className="text-wrap" href={`/application/${id}`}>New application was created for you!</DropdownItem>
           case "new_review":
-              // TODO: make it to proper id
-              return <DropdownItem className="text-wrap" href={`/shelterprofile/${id}`}>New review!</DropdownItem>
+              return <DropdownItem className="text-wrap" href={`/shelterprofile/${comment_object_id}`}>New review!</DropdownItem>
           case "new_message":
-              // TODO: make it to proper id
-              return <DropdownItem className="text-wrap" href={`/applications/${id}`}>New message for your application!</DropdownItem>
+              return <DropdownItem className="text-wrap" href={`/application/${comment_object_id}`}>New message for your application!</DropdownItem>
           case "new_pet_listing":
-              return <DropdownItem className="text-wrap" href={`/pet/${id}`}>New pet added!</DropdownItem>
+              return <DropdownItem className="text-wrap" href={`/details/${id}`}>New pet added!</DropdownItem>
           default:
               return <DropdownItem className="text-wrap">New notification!</DropdownItem>
       }
     }
 
     return (
-    <Navbar expand="lg" className="bg-white shadow-sm">
+    <Navbar expand="lg" className="bg-white shadow-sm" style={{whiteSpace: "nowrap"}}>
       <Container fluid>
-        <Navbar.Brand href="/">
+        <Navbar.Brand href={user.contextUserType === "shelter" ? "/mypets" : "/"}>
           <img src={logoImage} width="150" alt="logo"/>
         </Navbar.Brand>
 
@@ -170,7 +194,7 @@ const LandingHeader = () => {
                 Sign up
               </Link>
           </div>}
-          {isLoggedIn && <div className="ms-auto d-flex" style={{marginRight: "6rem"}}>
+          {isLoggedIn && <><div className="ms-auto d-flex">
               <Dropdown className="my-auto def-nav-item">
                   <Dropdown.Toggle className="d-flex" variant="" type="button" data-bs-toggle="dropdown">
                       {/*https://icons.getbootstrap.com/icons/bell/*/}
@@ -193,8 +217,8 @@ const LandingHeader = () => {
               <div className="vr mx-2 def-nav-item"></div>
               <Dropdown className="my-auto def-nav-item">
                   <Dropdown.Toggle type="button" variant="" data-bs-toggle="dropdown">
-                      <Image className="border rounded-circle" src={userImage}
-                             style={{backgroundColor: "cornsilk", width: "50px"}} alt="user icon"></Image>
+                      <Image className="border rounded-circle" src={userInfo?.profile_picture ? userInfo?.profile_picture : placeholderProfile}
+                             style={{backgroundColor: "cornsilk", width: "50px", height: "50px"}} alt="user icon"></Image>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                       <Dropdown.Item href={profileUrl}>Profile</Dropdown.Item>
@@ -204,7 +228,7 @@ const LandingHeader = () => {
                       <Dropdown.Item onClick={logout}>Log out</Dropdown.Item>
                   </Dropdown.Menu>
               </Dropdown>
-          </div>}
+          </div><div style={{width: "100%", maxWidth: "6rem"}}></div></>}
         </Navbar.Collapse>
       </Container>
     </Navbar>

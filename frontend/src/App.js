@@ -53,6 +53,7 @@ function App() {
           <Route path="/details/:petId" element={<PetDetails />} />
 
           <Route path="/mypets" element={<MyPets />} />
+          <Route path="/pets/:shelterId" element={<MyPets />} />
 
           <Route path="/adoption/:petId" element={<Adoption />} />
 

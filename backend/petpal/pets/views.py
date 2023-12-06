@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticatedOrReadOnly, AllowAny
 from .models import Pet, PetType, Breed
@@ -6,6 +7,11 @@ from .serializers import PetSerializer, PetSearchSerializer, PetTypeSerializer, 
 from accounts.permissions import IsPetShelterOrReadOnly
 
 from drf_yasg.utils import swagger_auto_schema
+
+from notifications.models import Notification
+
+from accounts.models import PetSeeker
+
 
 # Create your views here.
 
@@ -26,7 +32,16 @@ class ListCreatePetView(ListCreateAPIView):
         return super().get(request, *args, **kwargs)
 
     def perform_create(self, serializer):
-        Pet.objects.create(**serializer.validated_data, owner=self.request.user.petshelter)
+        pet = Pet.objects.create(**serializer.validated_data, owner=self.request.user.petshelter)
+        serializer.validated_data['id'] = pet.id
+        for user in PetSeeker.objects.all():
+            Notification.objects.create(
+                user=user,
+                content_type=ContentType.objects.get_for_model(Pet),
+                object_id=pet.id,
+                notification_type='new_pet_listing'
+            )
+
 
     def get_queryset(self):
         serializer = PetSearchSerializer(data=self.request.query_params)

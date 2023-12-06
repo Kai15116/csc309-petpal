@@ -13,7 +13,10 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed, PermissionDenied
 
+from drf_yasg.utils import swagger_serializer_method
+from django.db.models import Avg, Count
 
+from comments.models import Comment
 
 
 class CustomizedTokenObtainSerializer(TokenObtainPairSerializer):
@@ -51,10 +54,15 @@ class PetSeekerSerializer(ModelSerializer):
 
 class PetShelterSerializer(ModelSerializer):
     password = CharField(write_only=True)
+    avg_rating = serializers.SerializerMethodField()
+    review_count = serializers.SerializerMethodField()
+
+
     class Meta:
         model = PetShelter
-        fields = ["id", "username", "password", "phone_number", "email", "first_name", "last_name", "address", \
-                  "description","banner", "profile_picture", "mission_title", "mission_statement", "created_at"]
+        fields = ["id", "username", "password", "phone_number", "email", "first_name", "last_name", "address",
+                  "description","banner", "profile_picture", "mission_title", "mission_statement", "created_at"
+                  , "avg_rating", 'review_count']
 
     def create(self, data):
         password = data.pop("password")
@@ -73,6 +81,15 @@ class PetShelterSerializer(ModelSerializer):
         
         return user
 
+    @swagger_serializer_method(serializer_or_field=serializers.IntegerField(help_text="Average rating of the shelter"))
+    def get_avg_rating(self, obj):
+        if isinstance(obj, PetShelter):
+            return obj.ratings.aggregate(total=Avg('rating')).get('total', 0)
+        return 0
 
-
+    @swagger_serializer_method(serializer_or_field=serializers.IntegerField(help_text="Average rating of the shelter"))
+    def get_review_count(self, obj):
+        if isinstance(obj, PetShelter):
+            return Comment.objects.filter(object_id=obj.id).count()
+        return 0
 
