@@ -40,8 +40,8 @@ class PetSeekerSerializer(ModelSerializer):
     class Meta:
         model = PetSeeker
         fields = ["id","username", "password", "phone_number", "email", "first_name", "last_name", "address", \
-                  "description","banner", "profile_picture", "created_at", 'website']
-    
+                  "description","banner", "profile_picture", "created_at", 'website', 'receive_pet_notification']
+
     def create(self, data):
         password = data.pop("password")
         user = PetSeeker.objects.create_user(**data)

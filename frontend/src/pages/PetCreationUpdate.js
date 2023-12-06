@@ -180,7 +180,13 @@ const PetCreationUpdate = () => {
           } else if (response.status >= 200 && response.status < 300) {
               const data = await response.json();
 
+              if (data.owner !== contextUserId){
+                  console.log(data.owner)
+                  console.log(contextUserId)
+              }
+
               setPetInfo({...data})
+
              
               // set each value based on the data received
               setPetName(data.name || '');
@@ -197,14 +203,17 @@ const PetCreationUpdate = () => {
               const file1 = new File([blob1], extractFileName(data.picture_1), { type: "image/jpeg" });
               setSelectedImage1(file1);
 
-              const blob2 = await fetch(data.picture_2).then((r) => r.blob());
-              const file2 = new File([blob2], extractFileName(data.picture_2), { type: "image/jpeg" });
-              setSelectedImage2(file2);
+              if (data.picture_2){
+                  const blob2 = await fetch(data.picture_2).then((r) => r.blob());
+                  const file2 = new File([blob2], extractFileName(data.picture_2), { type: "image/jpeg" });
+                  setSelectedImage2(file2);
+              }
 
-              const blob3 = await fetch(data.picture_3).then((r) => r.blob());
-              const file3 = new File([blob3], extractFileName(data.picture_3), { type: "image/jpeg" });
-              setSelectedImage3(file3);
-
+              if (data.picture_3) {
+                  const blob3 = await fetch(data.picture_3).then((r) => r.blob());
+                  const file3 = new File([blob3], extractFileName(data.picture_3), {type: "image/jpeg"});
+                  setSelectedImage3(file3);
+              }
               setAdditionalNotes(data.notes || '');
              
               if (petId) {

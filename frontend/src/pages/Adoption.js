@@ -11,9 +11,14 @@ import { userContext } from '../context/userContext';
 const Adoption = () => {
   const {getContextUser} = useContext(userContext);
   const { petId } = useParams();
-  const {accessToken} = getContextUser();
+  const {accessToken, contextUserType} = getContextUser();
   const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
+
+  useEffect(() => {
+      if (contextUserType !== "seeker")
+        navigate("/")
+  }, []);
 
   const handleApplicationSubmit = async (adoptionInputs) => {
     console.log("Form submitted with data:", adoptionInputs);

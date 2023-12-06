@@ -167,7 +167,7 @@ const PetDetails = () => {
               <div className="pet-details ">
                   <div className="d-flex justify-content-center align-items-center">
                       <h1>Get To Know {petName}</h1>
-                      {petInfo?.owner === user?.contextUserId && <a className="btn btn-secondary ms-3 mb-auto" href={`/petCreateUpdate/${petInfo?.owner}`}>
+                      {petInfo?.owner === user?.contextUserId && <a className="btn btn-secondary ms-3 mb-auto" href={`/petCreateUpdate/${petInfo.id}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pen"
                              viewBox="0 0 16 16">
                       <path
@@ -181,11 +181,11 @@ const PetDetails = () => {
                               <tbody>
                               <tr>
                                 <th scope="row"><strong>Sex:</strong></th>
-                                <td>{petSex}</td>
+                                <td>{petSex ? petSex : "Unknown/Others"}</td>
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Breed:</strong></th>
-                                <td>{petBreedName}</td>
+                                <td>{petBreedName ? petBreedName : "Unknown/Others"}</td>
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Age:</strong></th>
@@ -236,7 +236,7 @@ const PetDetails = () => {
                         ))}
                     </ul>
                   </div>
-                  {user?.contextUserType === "seeker" && <Link to={`/adoption/${petId}`} role="button">
+                  {user?.contextUserType === "seeker" && petInfo?.status === "available" && <Link to={`/adoption/${petId}`} role="button">
                     <button class="btn btn-primary btn-lg apply-button" >Apply For Adoption</button>
                   </Link>}
                   </div>

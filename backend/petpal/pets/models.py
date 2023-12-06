@@ -70,7 +70,7 @@ class Pet(models.Model):
     picture_3 = models.ImageField(upload_to='pet_images/', blank=True, null=True, help_text='Picture of the pet.')
 
     last_modified = models.DateTimeField(auto_now=True, help_text='Time when the most recent update was made on pet.')
-    # add created_at if needed
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.name}:{self.pk}'
