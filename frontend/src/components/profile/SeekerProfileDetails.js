@@ -48,7 +48,7 @@ function SeekerProfileDetailsCard(props) {
                 <Collapse in={contactOpen}>
                     <div className="" >
                         <Card className="m-0 p-0" id="shelter-contact-collapse">
-                            <Card.Body>
+                            <Card.Body className="pb-0" >
                                 { (userInfo?.email) && (<p>Email: {userInfo?.email}</p>)}
                                 { (userInfo?.phone_number) && (<p>Phone: {userInfo?.phone_number}</p>)}
                                 { (userInfo?.website) && (<p>Site: {userInfo?.website}</p>)}

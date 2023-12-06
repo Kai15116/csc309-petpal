@@ -88,32 +88,32 @@ footer {
     width: 130px;
 }
 
- #kcarousel .carousel {
+ .carousel {
     /*height: fit-content;*/
     width: 100%;
     /*overflow: hidden;*/
 }
 
- #kcarousel .carousel-item {
+ .carousel-item {
     height: 100%;
     max-width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
- #kcarousel .carousel-control-prev,
- #kcarousel .carousel-control-next {
+ .carousel-control-prev,
+ .carousel-control-next {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 /* adjust the horizontal position as needed */
- #kcarousel .carousel-control-prev {
+ .carousel-control-prev {
     left: 0; /* place the previous button at the left edge */
     margin-top: 50px;
 }
 
- #kcarousel .carousel-control-next {
+ .carousel-control-next {
     right: 0; /* place the next button at the right edge */
 }
 
@@ -129,7 +129,7 @@ footer {
     align-items: center;
 }
 
-#kcarousel .carousel-inner img {
+.carousel-inner img {
     margin-left: 50%;
     transform: translateX(-50%);
     height: 100%;

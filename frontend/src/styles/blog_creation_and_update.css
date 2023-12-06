@@ -103,7 +103,7 @@ header {
   width: 130px;
 }
 
- #kcarousel .carousel {
+ .carousel {
   height: 100%;
   min-height: 600px;
   width: 100%;
@@ -111,12 +111,12 @@ header {
   position: relative;
 }
 
- #kcarousel .carousel-inner {
+ .carousel-inner {
   height: 100%;
   min-height: 600px;
 }
 
- #kcarousel .carousel-item {
+ .carousel-item {
   min-height: 600px;
   height: 100%;
 }
@@ -128,20 +128,20 @@ header {
   height: 100%;
 }
 
- #kcarousel .carousel-control-prev,
- #kcarousel .carousel-control-next {
+ .carousel-control-prev,
+ .carousel-control-next {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 /* adjust the horizontal position as needed */
- #kcarousel .carousel-control-prev {
+ .carousel-control-prev {
   left: 0; /* place the previous button at the left edge */
   margin-top: 50px;
 }
 
- #kcarousel .carousel-control-next {
+ .carousel-control-next {
   right: 0; /* place the next button at the right edge */
 }
 
