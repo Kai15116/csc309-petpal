@@ -17,7 +17,6 @@ class User(AbstractUser):
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True, help_text="user profile picture")
     created_at = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self):
         return str(self.id)
 
@@ -30,7 +29,7 @@ class User(AbstractUser):
 
 
 class PetSeeker(User):
-    pass
+    receive_pet_notification = models.BooleanField(default=True, help_text="whether seeker wants to receive notification for new pet listing.")
 
 
 class PetShelter(User):

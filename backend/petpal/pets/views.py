@@ -34,7 +34,7 @@ class ListCreatePetView(ListCreateAPIView):
     def perform_create(self, serializer):
         pet = Pet.objects.create(**serializer.validated_data, owner=self.request.user.petshelter)
         serializer.validated_data['id'] = pet.id
-        for user in PetSeeker.objects.all():
+        for user in PetSeeker.objects.filter(receive_pet_notification=True):
             Notification.objects.create(
                 user=user,
                 content_type=ContentType.objects.get_for_model(Pet),
