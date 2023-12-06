@@ -90,7 +90,7 @@ function ProfileEdit() {
             }
         }
 
-            navigate('/shelters')
+        navigate('/shelters')
     }
 
     useEffect( function () {
