@@ -393,7 +393,7 @@ const PetCreationUpdate = () => {
             <div class="background-details">
                 <div class="bg-white mt-4 p-4 rounded shadow">
                     <div class="container">
-                        <div class="pet-details">
+                        <div class="pet-change-details">
                             <h4>1. Pet Details</h4>
                             <form class="form-inputs" action="submit_pet_listing.php" method="POST">
                               <div class="form-group">
@@ -515,7 +515,7 @@ const PetCreationUpdate = () => {
                 </div>
                 <div class="bg-white mt-4 p-4 rounded shadow">
                   <div class="container">
-                    <div class="pet-details">
+                    <div class="pet-change-details">
                       <h4>2. Media</h4>
                         <h6>Include photos with different angles and environments</h6>
                         <div className="row">
@@ -582,7 +582,7 @@ const PetCreationUpdate = () => {
                 </div>
                 <div class="bg-white mt-4 p-4 rounded shadow">
                     <div class="container">
-                        <div class="pet-details">
+                        <div class="pet-change-details">
                             <h4 >3. Additional Details</h4>
                             <h6>Include any notable details about the pet's behaviour and traits for the new owner</h6>
 
