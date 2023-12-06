@@ -29,7 +29,7 @@ const BlogCreationUpdate = () => {
 
   const handleImageChange1 = (e) => {
     setSelectedImage1(e.target.files[0]);
-    // Clear any previous error message when a new image is selected
+    // clear any previous error message when a new image is selected
     setImageError1('');
   };
 
