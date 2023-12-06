@@ -426,8 +426,8 @@ function ProfileEdit() {
         }
     }
 
-    const handlePicturePatchSubmit = (e) => {
-
+    const handlePicturePatchSubmit = () => {
+        const formData = new FormData();
     }
 
     return (
@@ -475,15 +475,6 @@ function ProfileEdit() {
                                         value="*********"
                                     />
                                 </Form.Group>
-                                <div key={"reverse-checkbox"}>
-                                    <Form.Check 
-                                        reverse
-                                        label="By checking this box, you agree to recieve notifications about new pet listings"
-                                        name="group1"
-                                        type="checkbox"
-                                        id={'reverse-checkbox-1'}
-                                    />
-                                </div>
                                 <div >
                                     <Button className='me-3' variant="danger" onClick={handleShow}>
                                         Delete Account
@@ -712,7 +703,27 @@ function ProfileEdit() {
                                         value="*********"
                                     />
                                 </Form.Group>
+
+                                <div className='mb-3' key={"reverse-checkbox"}>
+                                    <Form.Check 
+                                        reverse
+                                        label="By checking this box, you agree to recieve notifications about new pet listings"
+                                        name="wantnotifs"
+                                        type="checkbox"
+                                        id={'reverse-checkbox-1'}
+                                    />
+                                </div>
+
                                 <div >
+                                    <div>
+                                        <Button className='me-3' variant="primary" onClick={(e) => handleContactPatchSubmit(e)}>
+                                            Submit
+                                        </Button>
+                                        <Button variant="outline-primary" onClick={ (e) => navigate(`/seekerprofile/${contextUserId}`)} >
+                                            Cancel
+                                        </Button>
+                                    </div>
+
                                     <Button className='me-3' variant="danger" onClick={handleShow}>
                                         Delete Account
                                     </Button>
@@ -734,10 +745,6 @@ function ProfileEdit() {
                                         </Button>
                                         </Modal.Footer>
                                     </Modal>
-
-                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/seekerprofile/${contextUserId}`)} >
-                                        Cancel
-                                    </Button>
                                 </div>
                             </Form>
                         </Card.Body>

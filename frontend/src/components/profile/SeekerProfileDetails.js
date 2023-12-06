@@ -1,5 +1,6 @@
-import { Button, Card, Collapse} from "react-bootstrap";
+import { Button, Card, Collapse, Image } from "react-bootstrap";
 import ExampleBanner from "../../assets/example_images/yosemite_banner.jpg";
+import ExampleMilky from "../../assets/example_images/milky3.jpg";
 import "../../styles/profiles.css"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,9 +13,23 @@ function SeekerProfileDetailsCard(props) {
     const navigate = useNavigate();
 
     return (
-        <Card className="mt-3" style={{ maxWidth: "30rem"}}>
+        <Card className="d-flex column" >
+            <Card.Img variant="top" src={ExampleBanner} alt="Example Banner"/>
+            {/* <Image 
+                src={ExampleMilky}
+                style={{ 
+                    position: "absolute",
+                    left: "calc(50% - 8vh)",
+                    top: "10%",
+                    width: "calc(16vh)",
+                    height: "16vh",
+                    borderRadius: "50%",
+                    backgroundSize: "cover",
+                    border: '3px solid #FFFFFF'
+                }}
+            /> */}
             <Card.Body className="pb-3" >
-                <Card.Title> 
+                <Card.Title className="mt-2" > 
                     <h3> About {userInfo?.username} {' '}
                     {   // Check if viewer is same as page owner
                         (contextUserId === userInfo?.id) && ( 
