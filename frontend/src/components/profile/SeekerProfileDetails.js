@@ -18,7 +18,7 @@ function SeekerProfileDetailsCard(props) {
                     <h3> About {userInfo?.username} {' '}
                     {   // Check if viewer is same as page owner
                         (contextUserId === userInfo?.id) && ( 
-                            <a href="" onClick={() => { navigate("/shelterprofileedit") }}>
+                            <a href="" onClick={() => { navigate("/profileedit") }}>
                                 <i className="bi bi-pencil-square"></i>
                             </a>
                         )
