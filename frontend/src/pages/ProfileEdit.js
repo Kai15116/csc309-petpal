@@ -26,28 +26,84 @@ function CollapseButton({ children, eventKey, callback }) {
   );
 }
 
-function ShelterProfileEdit() {
+function ProfileEdit() {
     const { getContextUser, setGetContextUser} = useContext(userContext);
     const user = getContextUser();
     const {accessToken, refreshToken, contextUserId, contextUserType} = getContextUser();
     const [userInfo, setUserInfo ] = useState(null);
     const navigate = useNavigate();
 
-    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
     const [description, setDescription] = useState('');
     const [website, setWebsite] = useState('');
-    const [mission, setMission] = useState('');
     const [profpic, setProfPic] = useState('');
     const [banner, setBanner] = useState('');
 
-    const [formError, setFormError] = useState(null);
+    // Shelter has these attributes
+    const [mission, setMission] = useState('');
+    const [name, setName] = useState('');
 
+    const [formError, setFormError] = useState(null);
 
     useEffect( function () {
         async function fetchUserInfo() {
+            console.log(contextUserType);
+            if (contextUserType === 'shelter') {
+                try {
+                    const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
+                        method: 'GET'
+                    });
+                    if (response.status >= 400) {
+                        navigate("/");
+                    } else if (response.status >= 200 && response.status < 300) {
+                        const data = await response.json();
+                        setUserInfo({...data});
+                        
+                        setName(data?.mission_title)
+                        setEmail(data?.email);
+                        setPhone(data?.phone_number);
+                        setAddress(data?.address);
+                        setDescription(data?.description);
+                        setWebsite(data?.website);
+                        setMission(data?.mission_statement);
+                    }
+                }
+                catch (e) {
+                    console.log(e);
+                    navigate("/");
+                }
+            } else if (contextUserType === 'seeker') {
+                try {
+                    const response = await fetch(`http://localhost:8000/accounts/seeker/${contextUserId}`, {
+                        method: 'GET'
+                    });
+                    if (response.status >= 400) {
+                        navigate("/");
+                    } else if (response.status >= 200 && response.status < 300) {
+                        const data = await response.json();
+                        setUserInfo({...data});
+                        
+                        setEmail(data?.email);
+                        setPhone(data?.phone_number);
+                        setAddress(data?.address);
+                        setDescription(data?.description);
+                        setWebsite(data?.website);
+                    }
+                }
+                catch (e) {
+                    console.log(e);
+                    navigate("/");
+                }
+            }
+        }
+
+        fetchUserInfo();
+    }, []);
+
+    async function fetchUserInfo() {
+        if (contextUserType === 'shelter') {
             try {
                 const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
                     method: 'GET'
@@ -71,34 +127,28 @@ function ShelterProfileEdit() {
                 console.log(e);
                 navigate("/");
             }
-        }
-
-        fetchUserInfo();
-    }, []);
-
-    async function fetchUserInfo() {
-        try {
-            const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
-                method: 'GET'
-            });
-            if (response.status >= 400) {
-                navigate("/");
-            } else if (response.status >= 200 && response.status < 300) {
-                const data = await response.json();
-                setUserInfo({...data});
-
-                setName(data?.mission_title)
-                setEmail(data?.email);
-                setPhone(data?.phone_number);
-                setAddress(data?.address);
-                setDescription(data?.description);
-                setWebsite(data?.website);
-                setMission(data?.mission_statement);
+        } else if (contextUserType === 'seeker') {
+            try {
+                const response = await fetch(`http://localhost:8000/accounts/seeker/${contextUserId}`, {
+                    method: 'GET'
+                });
+                if (response.status >= 400) {
+                    navigate("/");
+                } else if (response.status >= 200 && response.status < 300) {
+                    const data = await response.json();
+                    setUserInfo({...data});
+                    
+                    setEmail(data?.email);
+                    setPhone(data?.phone_number);
+                    setAddress(data?.address);
+                    setDescription(data?.description);
+                    setWebsite(data?.website);
+                }
             }
-        }
-        catch (e) {
-            console.log(e);
-            navigate("/");
+            catch (e) {
+                console.log(e);
+                navigate("/");
+            }
         }
     }
 
@@ -184,35 +234,63 @@ function ShelterProfileEdit() {
         e.preventDefault();
 
         if (validateEmail(email) && validatePhone(phone)) {
-            fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
-                method: 'PATCH',
-                body: JSON.stringify({
-                    email, 
-                    phone_number: phone, 
-                    website: "https://bruh.com", 
-                    mission_title: name, 
-                    address, 
-                }),
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => {
-                response.json();
-                console.log(response);
-                fetchUserInfo();
-                setFormError(null);
-                console.log(website);
-                console.log(userInfo?.website);
-                // navigate(`/shelterprofile/${contextUserId}`);
-            })
-            .then(data => {
-                console.log("Contacts Updated", data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
+            if (contextUserType === 'shelter'){
+                fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({
+                        email, 
+                        phone_number: phone, 
+                        website: "https://bruh.com", 
+                        mission_title: name, 
+                        address, 
+                    }),
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => {
+                    response.json();
+                    console.log(response);
+                    fetchUserInfo();
+                    setFormError(null);
+                    console.log(website);
+                    console.log(userInfo?.website);
+                    // navigate(`/shelterprofile/${contextUserId}`);
+                })
+                .then(data => {
+                    console.log("Contacts Updated", data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            } else if (contextUserType === 'seeker') {
+                fetch(`http://localhost:8000/accounts/seeker/${contextUserId}/`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({
+                        email, 
+                        phone_number: phone, 
+                        address, 
+                    }),
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => {
+                    response.json();
+                    console.log(response);
+                    fetchUserInfo();
+                    setFormError(null);
+                    navigate(`/seekerprofile/${contextUserId}`);
+                })
+                .then(data => {
+                    console.log("Contacts Updated", data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            }
         } else {
             setFormError('Invalid email or phone number. Please check your inputs.');
         }
@@ -222,30 +300,56 @@ function ShelterProfileEdit() {
         e.preventDefault();
 
         if (validateEmail(email) && validatePhone(phone)) {
-            fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
-                method: 'PATCH',
-                body: JSON.stringify({
-                    mission_statement: mission,
-                    description,
-                }),
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => {
-                response.json();
-                console.log(response);
-                fetchUserInfo();
-                setFormError(null);
-                navigate(`/shelterprofile/${contextUserId}`);
-            })
-            .then(data => {
-                console.log("Description Updated", data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
+            if (contextUserType === 'shelter') {
+                fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({
+                        mission_statement: mission,
+                        description,
+                    }),
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => {
+                    response.json();
+                    console.log(response);
+                    fetchUserInfo();
+                    setFormError(null);
+                    navigate(`/shelterprofile/${contextUserId}`);
+                })
+                .then(data => {
+                    console.log("Description Updated", data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            } else if (contextUserType === 'seeker') {
+                fetch(`http://localhost:8000/accounts/seeker/${contextUserId}/`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({
+                        description,
+                    }),
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => {
+                    response.json();
+                    console.log(response);
+                    fetchUserInfo();
+                    setFormError(null);
+                    navigate(`/seekerprofile/${contextUserId}`);
+                })
+                .then(data => {
+                    console.log("Description Updated", data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            }
         } else {
             setFormError('Invalid inputs.');
         }
@@ -258,7 +362,8 @@ function ShelterProfileEdit() {
     return (
         <div style={{ backgroundColor: "#C8F4FF" }}>
             <LandingHeader />
-<Container className='p-5' fluid style={{ backgroundColor: "#C8F4FF", minHeight: "82vh"}}>
+            <Container className='p-5' fluid style={{ backgroundColor: "#C8F4FF", minHeight: "82vh"}}>
+            { (contextUserType === 'shelter') ? (
     <Accordion defaultActiveKey="contact">
         <Row>
             <Col className="mb-4" xs={12} sm={3}>
@@ -434,15 +539,163 @@ function ShelterProfileEdit() {
           culpa qui officia deserunt mollit anim id est laborum.
         </Accordion.Body>
       </Accordion.Item> */}
-    </Accordion>
+    </Accordion>) : (
+    <Accordion defaultActiveKey="contact">
+        <Row>
+            <Col className="mb-4" xs={12} sm={3}>
+                <ListGroup>
+                    <CollapseButton eventKey="contact">
+                        Seeker Contact
+                    </CollapseButton>
+                    <CollapseButton eventKey="descriptions">
+                        Seeker Descriptions
+                    </CollapseButton>
+                    <CollapseButton eventKey="images">
+                        Profile Images
+                    </CollapseButton>
+                </ListGroup>
+            </Col>
+            <Col xs={12} sm={9}>
+                <Card>
+                    <h1 className='ms-4 mt-3 mb-3'> Edit Profile Information </h1>
+                    <Accordion.Collapse eventKey='contact'>
+                        <Card.Body>
+                            <Form id="contactForm">
+                                <Form.Group className="mb-3" controlId="formEmail">
+                                    <Form.Label>Email Address</Form.Label>
+                                    <Form.Control
+                                        type="email"
+                                        value={email}
+                                        onChange={handleEmailChange}
+                                        placeholder="e.g. seeker.name@example.com"
+                                    />
+                                    {!validateEmail(email) && email !== '' && (
+                                    <Form.Text className="text-danger">Invalid email address</Form.Text>
+                                    )}
+                                </Form.Group>
 
-</Container>
+                                <Form.Group className="mb-3" controlId="formPhone">
+                                    <Form.Label>Phone Number</Form.Label>
+                                    <Form.Control
+                                        type="tel"
+                                        value={phone}
+                                        onChange={handlePhoneChange}
+                                        placeholder="e.g. 1234567890"
+                                    />
+                                    {!validatePhone(phone) && phone !== '' && (
+                                    <Form.Text className="text-danger">Invalid phone number</Form.Text>
+                                    )}
+                                </Form.Group>
+
+                                <Form.Group className="mb-3" controlId="formAddress">
+                                    <Form.Label>Address</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={address}
+                                        onChange={(e) => setAddress(e.target.value)}
+                                        placeholder="e.g. Main Street, Toronto ON"
+                                    />
+                                </Form.Group>
+                                
+                                {formError && <Alert variant="danger">{formError}</Alert>}
+
+                                <div >
+                                    <Button className='me-3' variant="primary" onClick={(e) => handleContactPatchSubmit(e)}>
+                                        Submit
+                                    </Button>
+                                    <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                        Cancel
+                                    </Button>
+                                </div>
+                            </Form>
+                        </Card.Body>
+                    </Accordion.Collapse>
+                    <Accordion.Collapse eventKey='descriptions'>
+                        <Card.Body>
+                            <Form id="descriptionForm">
+                                <Form.Group className="mb-3" controlId="formDescription">
+                                    <Form.Label>Shelter Description</Form.Label>
+                                    <Form.Control
+                                        as="textarea"
+                                        rows={5}
+                                        value={description}
+                                        onChange={(e) => setDescription(e.target.value)}
+                                        placeholder="e.g. I am a ..."
+                                    />
+                                </Form.Group>
+                                
+                                {formError && <Alert variant="danger">{formError}</Alert>}
+
+                                <div >
+                                    <Button className='me-3' variant="primary" onClick={(e) => handleDescriptionPatchSubmit(e)}>
+                                        Submit
+                                    </Button>
+                                    <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                        Cancel
+                                    </Button>
+                                </div>
+                            </Form>
+                        </Card.Body>
+                    </Accordion.Collapse>
+                    <Accordion.Collapse eventKey='images'>
+                        <Card.Body>
+                        <Form id="pictureForm">
+                                <Form.Group className="mb-3" controlId="formBanner">
+                                    <Form.Label> Banner Picture </Form.Label>
+                                    <Form.Control
+                                        type="file"
+                                        value={banner}
+                                        onChange={(e) => setBanner(e.target.value)}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formProfPic">
+                                    <Form.Label> Profile Picture </Form.Label>
+                                    <Form.Control
+                                        type="file"
+                                        value={profpic}
+                                        onChange={(e) => setProfPic(e.target.value)}
+                                    />
+                                </Form.Group>
+                                
+                                {formError && <Alert variant="danger">{formError}</Alert>}
+
+                                <div >
+                                    <Button className='me-3' variant="primary" onClick={(e) => handlePicturePatchSubmit(e)}>
+                                        Submit
+                                    </Button>
+                                    <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                        Cancel
+                                    </Button>
+                                </div>
+                            </Form>
+                        </Card.Body>
+                    </Accordion.Collapse>
+                </Card>
+            </Col>
+        </Row>
+
+      {/* <Accordion.Item eventKey="0">
+        <Accordion.Header>Accordion Item #2</Accordion.Header>
+        <Accordion.Body>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </Accordion.Body>
+      </Accordion.Item> */}
+    </Accordion>
+    )}
+
+            </Container>
             <Footer />
         </div>
     );
 }
 
-export default ShelterProfileEdit;
+export default ProfileEdit;
 
 
 
