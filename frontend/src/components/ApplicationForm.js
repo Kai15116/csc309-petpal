@@ -3,14 +3,15 @@ import React, {useState} from "react";
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (props) {
     console.log(props?.application)
-    const [name, setName] = useState(props.application?.name);
-    const [phone, setPhone] = useState(props.application?.phone_number);
-    const [email, setEmail] = useState(props.application?.email);
+    const [name, setName] = useState(props.application?.name || "");
+    const [phone, setPhone] = useState(props.application?.phone_number|| "");
+    const [email, setEmail] = useState(props.application?.email || "");
     const [isOver18, setIsOver18] = useState(!!props.application);
-    const [address, setAddress] = useState(props.application?.address);
-    const [qualitiesDescription, setDescriptionQualities] = useState(props.application?.qualifications);
-    const [signature, setSignature] = useState(props.application?.digital_signature);
+    const [address, setAddress] = useState(props.application?.address || "");
+    const [qualitiesDescription, setDescriptionQualities] = useState(props.application?.qualifications || "");
+    const [signature, setSignature] = useState(props.application?.digital_signature || "");
     const readonly = props.readOnly;
+    const formErrors = props.formErrors;
 
     return (
         <div className="application-form" style={{textAlign: "left", alignItems: "flex-start"}}>
@@ -65,31 +66,49 @@ export default function (props) {
                 }}>
                   <div className="form-group">
                     <label htmlFor="name">Name:</label>
-                    <input type="text" id="name" name="name" className="form-control" value={name} onChange={(e) => setName(e.target.value)} readOnly={readonly} required />
+                    <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} readOnly={readonly} className={`form-control ${formErrors?.name ? 'is-invalid' : ''}`} />
+                    {formErrors?.name && <div className="invalid-feedback">
+                      {formErrors?.name}
+                    </div>}
                   </div>
                   <div className="form-group">
                     <label htmlFor="phone">Phone Number:</label>
-                    <input type="tel" id="phone" name="phone" className="form-control" value={phone} onChange={(e) => setPhone(e.target.value)} readOnly={readonly} required />
+                    <input type="tel" id="phone" name="phone" className={`form-control ${formErrors?.phone_number ? 'is-invalid' : ''}`} value={phone} onChange={(e) => setPhone(e.target.value)} readOnly={readonly}  />
+                    {formErrors?.phone_number && <div className="invalid-feedback">
+                      {formErrors?.phone_number}
+                    </div>}
                   </div>
                   <div className="form-group">
                     <label htmlFor="email">Email Address:</label>
-                    <input type="email" id="email" name="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} readOnly={readonly} required />
+                    <input type="text" id="email" name="email" className={`form-control ${formErrors?.email ? 'is-invalid' : ''}`} value={email} onChange={(e) => setEmail(e.target.value)} readOnly={readonly}  />
+                    {formErrors?.email && <div className="invalid-feedback">
+                      {formErrors?.email}
+                    </div>}
                   </div>
                   <div className="form-group">
                     <label htmlFor="over18">Are you over 18?</label>
-                    <input type="checkbox" id="over18" name="over18" checked={isOver18} onChange={(e) => setIsOver18(e.target.value)} disabled={readonly} required />
+                    <input type="checkbox" id="over18" name="over18" checked={isOver18} onChange={(e) => setIsOver18(e.target.value)} disabled={readonly} required/>
                   </div>
                   <div className="form-group">
                     <label htmlFor="address">Address:</label>
-                    <input type="text" id="address" name="address" className="form-control" value={address} onChange={(e) => setAddress(e.target.value)} readOnly={readonly} required />
+                    <input type="text" id="address" name="address" className={`form-control ${formErrors?.address ? 'is-invalid' : ''}`} value={address} onChange={(e) => setAddress(e.target.value)} readOnly={readonly} />
+                    {formErrors?.address && <div className="invalid-feedback">
+                      {formErrors?.address}
+                    </div>}
                   </div>
                   <div className="form-group">
                     <label htmlFor="suitability">What qualities or characteristics make you suitable candidates to become pet owners?</label>
-                    <textarea id="suitability" name="suitability" className="form-control" rows="4" value={qualitiesDescription} onChange={(e) => setDescriptionQualities(e.target.value)} readOnly={readonly} required></textarea>
+                    <textarea id="suitability" name="suitability" className={`form-control ${formErrors?.qualifications ? 'is-invalid' : ''}`} rows="4" value={qualitiesDescription} onChange={(e) => setDescriptionQualities(e.target.value)} readOnly={readonly} ></textarea>
+                    {formErrors?.qualifications && <div className="invalid-feedback">
+                      {formErrors?.qualifications}
+                    </div>}
                   </div>
                   <div className="form-group">
                     <label htmlFor="signature">Digital Signature: (I agree to the terms and conditions)</label>
-                    <input type="text" id="signature" name="signature" className="form-control" value={signature} onChange={(e) => setSignature(e.target.value)} readOnly={readonly}  required />
+                    <input type="text" id="signature" name="signature" className={`form-control ${formErrors?.digital_signature ? 'is-invalid' : ''}`} value={signature} onChange={(e) => setSignature(e.target.value)} readOnly={readonly}  />
+                    {formErrors?.digital_signature && <div className="invalid-feedback">
+                      {formErrors?.digital_signature}
+                    </div>}
                   </div>
                     {!readonly && <button type="submit" className="btn btn-primary apply-button btn-lg">Submit Application</button>}
                 </form>
