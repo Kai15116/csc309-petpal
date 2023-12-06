@@ -108,7 +108,7 @@ header {
 /* adjust the horizontal position as needed */
 .kareem-carousel-container .carousel-control-prev {
     left: 0; /* place the previous button at the left edge */
-    margin-top: 50px;
+    /*margin-top: 50px;*/
 }
 
 .kareem-carousel-container .carousel-control-next {
