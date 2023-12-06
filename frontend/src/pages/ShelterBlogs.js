@@ -138,11 +138,11 @@ const ShelterBlogs = () => {
                 <p>{shelter.blogContent}</p>
 
                 {/* image Carousel */}
-                <Carousel>
+                <Carousel id="kareemcarousel" >
                   {shelter.images.map((image, imageIndex) => (
-                    <Carousel.Item key={imageIndex}>
+                    <Carousel.Item key={imageIndex} id="kareemcarousel" >
                       <img className="d-block w-100" src={image} alt={`${shelter.name} ${imageIndex + 1}`} />
-                      <Carousel.Caption></Carousel.Caption>
+                      <Carousel.Caption id="kareemcarousel" ></Carousel.Caption>
                     </Carousel.Item>
                   ))}
                 </Carousel>

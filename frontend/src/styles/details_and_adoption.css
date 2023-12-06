@@ -88,32 +88,32 @@ footer {
     width: 130px;
 }
 
-.carousel {
+#kareemcarousel .carousel {
     /*height: fit-content;*/
     width: 100%;
     /*overflow: hidden;*/
 }
 
-.carousel-item {
+#kareemcarousel .carousel-item {
     height: 100%;
     max-width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.carousel-control-prev,
-.carousel-control-next {
+#kareemcarousel .carousel-control-prev,
+#kareemcarousel .carousel-control-next {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 /* adjust the horizontal position as needed */
-.carousel-control-prev {
+#kareemcarousel .carousel-control-prev {
     left: 0; /* place the previous button at the left edge */
     margin-top: 50px;
 }
 
-.carousel-control-next {
+#kareemcarousel .carousel-control-next {
     right: 0; /* place the next button at the right edge */
 }
 
