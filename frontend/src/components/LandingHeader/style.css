@@ -13,6 +13,14 @@
     display: none !important;
 }
 
+nav hr {
+    max-width: 100vw !important;
+}
+
+nav form {
+    max-width: 90vw !important;
+}
+
 @media only screen and (max-width: 992px) {
     .def-nav-item {
         display: none !important;

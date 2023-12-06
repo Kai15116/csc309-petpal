@@ -44,7 +44,7 @@ const ShelterBlogs = () => {
   const query = useMemo(() => ({
       page : parseInt(searchParams.get("page") ?? 1),
       size: parseInt(searchParams.get("size") ?? blogsPerPage),
-      order_by : searchParams.get("order_by") ?? "likes",
+      order_by : searchParams.get("order_by") ?? "-likes",
       owner : searchParams.get("owner") ?? "",
       title : searchParams.get("title") ?? "",
   }), [searchParams]);
@@ -160,7 +160,7 @@ const ShelterBlogs = () => {
   return (
     <div style={{ backgroundColor: '#f2f8fe'}}>
       <LandingHeader />
-      <div className="d-flex" style={{minHeight: "calc(100vh - 9rem)"}}>
+      <div className="d-flex blogs-container" style={{minHeight: "calc(100vh - 9rem)"}}>
         {/* left-hand sidebar */}
         <div className="bg-white mt-4 p-4 ms-3 rounded shadow" style={{ height: 'fit-content' }}>
           <h4>Search By Blog Title:</h4>
@@ -246,9 +246,9 @@ const ShelterBlogs = () => {
                 </div>
                 <div className="ms-auto">
                   <Link to={`/blogDetails/${blog.id}`}>
-                    <div className="confirm-button">
+                    <div className="confirm-button me-4">
                       <button className="btn btn-primary btn-lg btn-xl post-button">
-                        Show More
+                        View
                       </button>
                     </div>
                   </Link>
@@ -270,13 +270,12 @@ const ShelterBlogs = () => {
                     style={{padding: "20px"}}
                   >
                     {/* users who are not owner of tweet can't edit it */}
-                    <button
+                      {user.contextUserId === blog.owner && <button
                       className="btn btn-secondary ms-auto align-self-end"
                       onClick={() => handleEditClick(blog)}
-                      disabled={user.userContextId !== blog.ownerId}
                     >
                       Edit
-                    </button>
+                    </button>}
                   </div>
                 </div>
               </div>
