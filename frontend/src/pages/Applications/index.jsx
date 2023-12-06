@@ -56,7 +56,7 @@ const Applications = () => {
         async function fetchApplications() {
             const urlParams = to_url_params(query);
             try {
-                const response = await fetch(`http://localhost:8000/applications?${urlParams}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/applications?${urlParams}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${user.accessToken}`,
@@ -77,7 +77,7 @@ const Applications = () => {
 
         async function fetchUserInfo() {
             try {
-                const response = await fetch(`http://localhost:8000/accounts/shelter/${user?.contextUserId}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${user?.contextUserId}`, {
                     method: 'GET'
                 }
             );

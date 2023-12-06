@@ -34,7 +34,7 @@ const Adoption = () => {
   
     // Make a POST request to your server with the FormData
     try {
-      const response = await fetch(`http://localhost:8000/applications/`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/applications/`, {
         method: 'POST',
         body: formData,
         headers: {
@@ -64,7 +64,7 @@ const Adoption = () => {
       console.log(error)
     }
 
-    // fetch(`http://localhost:8000/applications/`, {
+    // fetch(`${process.env.REACT_APP_API_URL}/applications/`, {
     //   method: 'POST',
     //   body: formData,
     //   headers: {

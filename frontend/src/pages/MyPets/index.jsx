@@ -60,7 +60,7 @@ const MyPets = () => {
         const urlParams = to_url_params({...query, owner: id});
         async function fetchPets() {
             try {
-                const response = await fetch(`http://localhost:8000/pets?${urlParams}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/pets?${urlParams}`, {
                     method: 'GET',
                 });
 
@@ -81,7 +81,7 @@ const MyPets = () => {
         async function fetchUserInfo() {
 
             try {
-                const response = await fetch(`http://localhost:8000/accounts/shelter/${id}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${id}`, {
                     method: 'GET'
                 }
             );

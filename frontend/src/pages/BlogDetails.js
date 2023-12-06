@@ -31,7 +31,7 @@ const BlogDetails = () => {
   useEffect(function() {
     async function fetchUserInfo() {
         try {
-            const response = await fetch(`http://localhost:8000/blogs/${blogId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/blogs/${blogId}`, {
             method: 'GET',
         });
         if (response.status === 403) {

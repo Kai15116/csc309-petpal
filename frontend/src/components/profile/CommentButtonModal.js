@@ -30,7 +30,7 @@ function CommentButtonModal(props) {
         console.log(commentText);
         console.log(userContext?.contextUserId);
         try {
-            const response = await fetch(`http://localhost:8000/comments/shelter/${objectId}/`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/comments/shelter/${objectId}/`, {
                 method: 'POST',
                 body: JSON.stringify({
                     text: commentText,

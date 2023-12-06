@@ -44,7 +44,7 @@ const SignUp = () => {
       setFormErrors({userType: ["This field may not be blank."]});
       
     } else {
-        const response = await fetch(`http://localhost:8000/accounts/${userType}/`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/${userType}/`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

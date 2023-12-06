@@ -30,7 +30,7 @@ const LandingHeader = () => {
     useEffect(function () {
       async function fetchNotifications() {
           try {
-              const response = await fetch(`http://localhost:8000/notifications?read=False&size=3&page=1`, {
+              const response = await fetch(`${process.env.REACT_APP_API_URL}/notifications?read=False&size=3&page=1`, {
                   method: 'GET',
                   headers: {
                         'Authorization': `Bearer ${user.accessToken}`,
@@ -56,7 +56,7 @@ const LandingHeader = () => {
             } : {}
 
             try {
-                const response = await fetch(`http://localhost:8000/accounts/${user.contextUserType}/${user.contextUserId}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/${user.contextUserType}/${user.contextUserId}`, {
                     method: 'GET',
                     headers: headers
                 }

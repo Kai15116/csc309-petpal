@@ -40,7 +40,7 @@ function NotificationPage() {
 
     async function fetchNoteInfo() {
         try { 
-            const response = await fetch(`http://localhost:8000/notifications?${to_url_params(query)}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/notifications?${to_url_params(query)}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -76,7 +76,7 @@ function NotificationPage() {
     // delete Notifications
     const deleteNotification = async (id) => {
         try { 
-            const response = await fetch(`http://localhost:8000/notifications/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/notifications/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -102,7 +102,7 @@ function NotificationPage() {
 
     async function readNotification(id) {
         try { 
-            const response = await fetch(`http://localhost:8000/notifications/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/notifications/${id}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${accessToken}`,

@@ -25,7 +25,7 @@ function ShelterList() {
         const urlParams = to_url_params(query);
         async function fetchShelters() {
             try { 
-                const response = await fetch(`http://localhost:8000/accounts/shelter?${urlParams}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter?${urlParams}`);
             
                 if (response.status >= 200 && response.status < 302) {
                     const data = await response.json();

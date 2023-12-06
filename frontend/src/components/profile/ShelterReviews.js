@@ -37,7 +37,7 @@ function ShelterReviewsCard(props) {
     //     try {
     //         let actualpage;
     //         (reset) ? (actualpage = 1) : (actualpage = page);
-    //         const response = await fetch(`http://localhost:8000/comments/shelter/${shelterId}?size=6&page=${actualpage}`, {
+    //         const response = await fetch(`${process.env.REACT_APP_API_URL}/comments/shelter/${shelterId}?size=6&page=${actualpage}`, {
     //             method: 'GET',
     //             headers: {
     //                 'Authorization': `Bearer ${user.accessToken}`,
@@ -72,7 +72,7 @@ function ShelterReviewsCard(props) {
     //     e.preventDefault();
     //     if (messageType !== "comment") {
     //         try {
-    //             const response = await fetch(`http://localhost:8000/shelters/${contextUserId}/`, {
+    //             const response = await fetch(`${process.env.REACT_APP_API_URL}/shelters/${contextUserId}/`, {
     //                 method: 'PUT',
     //                 body: JSON.stringify({
     //                   status: messageType
@@ -102,7 +102,7 @@ function ShelterReviewsCard(props) {
     //     }
     //      if (e.target.chatInput.value || messageType === "comment"){
     //         try {
-    //             const response = await fetch(`http://localhost:8000/comments/application/${applicationId}/`, {
+    //             const response = await fetch(`${process.env.REACT_APP_API_URL}/comments/application/${applicationId}/`, {
     //                 method: 'POST',
     //                 body: JSON.stringify({
     //                   text: e.target.chatInput.value
@@ -136,7 +136,7 @@ function ShelterReviewsCard(props) {
         e.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:8000/comments/shelter/${shelterId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/comments/shelter/${shelterId}`, {
                 method: 'POST',
                 body: JSON.stringify({
                     user: user?.id,

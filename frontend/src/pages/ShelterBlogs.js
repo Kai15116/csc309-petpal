@@ -55,7 +55,7 @@ const ShelterBlogs = () => {
   async function fetchBlogs() {
       const urlParams = to_url_params(query);
       try {
-          const response = await fetch(`http://localhost:8000/blogs?${urlParams}`, {
+          const response = await fetch(`${process.env.REACT_APP_API_URL}/blogs?${urlParams}`, {
           method: 'GET',
       });
       if (response.status === 403) {
@@ -76,7 +76,7 @@ const ShelterBlogs = () => {
   useEffect(() => {
     async function fetchShelters() {
         try {
-            const response = await fetch(`http://localhost:8000/accounts/shelter`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter`);
 
             if (response.status >= 200 && response.status < 302) {
                 const data = await response.json();
@@ -117,7 +117,7 @@ const ShelterBlogs = () => {
     const formData = new FormData();
     formData.append('likes', blog.likes + 1);
     // make a PUT request to update the blog
-    fetch(`http://localhost:8000/blogs/${blog.id}/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/blogs/${blog.id}/`, {
       method: 'PATCH',
       body: formData,
       headers: {

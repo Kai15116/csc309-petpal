@@ -120,7 +120,7 @@ const PetCreationUpdate = () => {
   useEffect(function() {
       async function fetchPetTypes() {
           try {
-              const response = await fetch(`http://localhost:8000/pets/pettype/`, {
+              const response = await fetch(`${process.env.REACT_APP_API_URL}/pets/pettype/`, {
               method: 'GET',
           });
           if (response.status === 403) {
@@ -145,7 +145,7 @@ const PetCreationUpdate = () => {
   useEffect(function() {
       async function fetchBreeds() {
           try {
-              const response = await fetch(`http://localhost:8000/pets/pettype/${petType}/breed`, {
+              const response = await fetch(`${process.env.REACT_APP_API_URL}/pets/pettype/${petType}/breed`, {
               method: 'GET',
           });
           if (response.status === 403) {
@@ -169,7 +169,7 @@ const PetCreationUpdate = () => {
   useEffect(function() {
       async function fetchUserInfo() {
           try {
-              const response = await fetch(`http://localhost:8000/pets/${petId}`, {
+              const response = await fetch(`${process.env.REACT_APP_API_URL}/pets/${petId}`, {
               method: 'GET',
           });
           if (response.status === 403) {
@@ -255,7 +255,7 @@ const PetCreationUpdate = () => {
         formData.append('picture_3', selectedImage3);
   
     // Make a POST request to your server with the FormData
-    fetch(`http://localhost:8000/pets/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/pets/`, {
       method: 'POST',
       body: formData,
       headers: {
@@ -292,7 +292,7 @@ const PetCreationUpdate = () => {
     formData.append('picture_3', selectedImage3);
   
     // make a PUT request to update the pet
-    fetch(`http://localhost:8000/pets/${petId}/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/pets/${petId}/`, {
       method: 'PUT', 
       body: formData,
       headers: {

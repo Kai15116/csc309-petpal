@@ -22,7 +22,7 @@ function ShelterProfile() {
 
     async function deleteShelter() {
         try { 
-            const response = await fetch(`http://localhost:8000/accounts/shelter/${userId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${userId}`, {
                 method: 'DELETE',
                 headers: {
 
@@ -55,7 +55,7 @@ function ShelterProfile() {
     useEffect(function() {
         async function fetchUserInfo() {
             try { 
-                const response = await fetch(`http://localhost:8000/accounts/shelter/${userId}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${userId}`, {
                     method: 'GET'
                 }
             );

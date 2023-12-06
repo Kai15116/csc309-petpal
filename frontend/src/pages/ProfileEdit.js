@@ -55,7 +55,7 @@ function ProfileEdit() {
     async function deleteAccount() {
         if (contextUserType === 'shelter') {
             try { 
-                const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}`, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${accessToken}`,
@@ -73,7 +73,7 @@ function ProfileEdit() {
             }
         } else if (contextUserType === 'seeker') {
             try { 
-                const response = await fetch(`http://localhost:8000/accounts/seeker/${contextUserId}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/seeker/${contextUserId}`, {
                     method: 'DELETE',
                     headers: {
 
@@ -100,7 +100,7 @@ function ProfileEdit() {
         async function fetchUserInfo() {
             if (contextUserType === 'shelter') {
                 try {
-                    const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
+                    const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}`, {
                         method: 'GET', 
                         headers: {
 
@@ -130,7 +130,7 @@ function ProfileEdit() {
                 }
             } else if (contextUserType === 'seeker') {
                 try {
-                    const response = await fetch(`http://localhost:8000/accounts/seeker/${contextUserId}`, {
+                    const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/seeker/${contextUserId}`, {
                         method: 'GET', 
                         headers: {
 
@@ -166,7 +166,7 @@ function ProfileEdit() {
     async function fetchUserInfo() {
         if (contextUserType === 'shelter') {
             try {
-                const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}`, {
                     method: 'GET', 
                     headers: {
 
@@ -196,7 +196,7 @@ function ProfileEdit() {
             }
         } else if (contextUserType === 'seeker') {
             try {
-                const response = await fetch(`http://localhost:8000/accounts/seeker/${contextUserId}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/seeker/${contextUserId}`, {
                     method: 'GET',
                     headers: {
 
@@ -247,7 +247,7 @@ function ProfileEdit() {
 
     //     if (validateEmail(email) && validatePhone(phone)) {
     //         try {
-    //             const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
+    //             const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}/`, {
     //                 method: 'PATCH',
     //                 headers: {
     //                     "Content-Type": "application/json",
@@ -284,7 +284,7 @@ function ProfileEdit() {
     //     contactFormData.append("mission_statement", contactInputs.statement);
     //     console.log(email);
 
-    //     fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
+    //     fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}`, {
     //         method: 'PATCH',
     //         body: contactFormData,
     //         headers: {
@@ -308,7 +308,7 @@ function ProfileEdit() {
 
         if (validateEmail(email) && validatePhone(phone)) {
             if (contextUserType === 'shelter') {
-                fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
+                fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}/`, {
                     method: 'PATCH',
                     body: JSON.stringify({
                         email, 
@@ -336,7 +336,7 @@ function ProfileEdit() {
                     console.error(error);
                 });
             } else if (contextUserType === 'seeker') {
-                fetch(`http://localhost:8000/accounts/seeker/${contextUserId}/`, {
+                fetch(`${process.env.REACT_APP_API_URL}/accounts/seeker/${contextUserId}/`, {
                     method: 'PATCH',
                     body: JSON.stringify({
                         email, 
@@ -372,7 +372,7 @@ function ProfileEdit() {
 
         if (validateEmail(email) && validatePhone(phone)) {
             if (contextUserType === 'shelter') {
-                fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
+                fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}/`, {
                     method: 'PATCH',
                     body: JSON.stringify({
                         mission_statement: mission,
@@ -397,7 +397,7 @@ function ProfileEdit() {
                     console.error(error);
                 });
             } else if (contextUserType === 'seeker') {
-                fetch(`http://localhost:8000/accounts/seeker/${contextUserId}/`, {
+                fetch(`${process.env.REACT_APP_API_URL}/accounts/seeker/${contextUserId}/`, {
                     method: 'PATCH',
                     body: JSON.stringify({
                         description,

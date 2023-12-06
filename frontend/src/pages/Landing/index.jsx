@@ -22,7 +22,7 @@ const Landing = () => {
 
         async function fetchPets(type) {
             try {
-                const response = await fetch(`http://localhost:8000/pets?size=5&page=1&pet_type=${type}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/pets?size=5&page=1&pet_type=${type}`, {
                     method: 'GET',
                 });
 

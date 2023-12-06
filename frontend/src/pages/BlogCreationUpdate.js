@@ -116,7 +116,7 @@ const BlogCreationUpdate = () => {
   useEffect(function() {
     async function fetchUserInfo() {
         try {
-            const response = await fetch(`http://localhost:8000/blogs/${blogId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/blogs/${blogId}`, {
             method: 'GET',
         });
         if (response.status === 403) {
@@ -176,7 +176,7 @@ const BlogCreationUpdate = () => {
     formData.append('picture_3', selectedImage3);
   
     // Make a POST request to your server with the FormData
-    fetch(`http://localhost:8000/blogs/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/blogs/`, {
       method: 'POST',
       body: formData,
       headers: {
@@ -203,7 +203,7 @@ const BlogCreationUpdate = () => {
     formData.append('picture_3', selectedImage3);
   
     // make a PUT request to update the blog
-    fetch(`http://localhost:8000/blogs/${blogId}/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/blogs/${blogId}/`, {
       method: 'PUT', // TODO: put and patch is not allowed
       body: formData,
       headers: {

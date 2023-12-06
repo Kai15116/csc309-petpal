@@ -31,7 +31,7 @@ export default function Application(props) {
                 actualpage = 1
             else
                 actualpage = page
-            const response = await fetch(`http://localhost:8000/comments/application/${applicationId}?size=6&page=${actualpage}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/comments/application/${applicationId}?size=6&page=${actualpage}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${user.accessToken}`,
@@ -62,7 +62,7 @@ export default function Application(props) {
 
         async function fetchApplication() {
             try {
-                const response = await fetch(`http://localhost:8000/applications/${applicationId}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/applications/${applicationId}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${user.accessToken}`,
@@ -90,7 +90,7 @@ export default function Application(props) {
         e.preventDefault();
         if (messageType !== "comment") {
             try {
-                const response = await fetch(`http://localhost:8000/applications/${applicationId}/`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/applications/${applicationId}/`, {
                     method: 'PUT',
                     body: JSON.stringify({
                       status: messageType
@@ -120,7 +120,7 @@ export default function Application(props) {
         }
          if (e.target.chatInput.value || messageType === "comment"){
             try {
-                const response = await fetch(`http://localhost:8000/comments/application/${applicationId}/`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/comments/application/${applicationId}/`, {
                     method: 'POST',
                     body: JSON.stringify({
                       text: e.target.chatInput.value

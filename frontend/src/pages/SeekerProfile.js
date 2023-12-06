@@ -19,7 +19,7 @@ function SeekerProfile() {
     useEffect(function() {
         async function fetchUserInfo() {
             try { 
-                const response = await fetch(`http://localhost:8000/accounts/seeker/${userId}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/seeker/${userId}`, {
                 method: 'GET',
                 headers: {
 

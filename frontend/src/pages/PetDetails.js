@@ -47,7 +47,7 @@ const PetDetails = () => {
   useEffect(function() {
       async function fetchPet() {
           try {
-              const response = await fetch(`http://localhost:8000/pets/${petId}`, {
+              const response = await fetch(`${process.env.REACT_APP_API_URL}/pets/${petId}`, {
               method: 'GET',
           });
           if (response.status === 403) {
@@ -99,7 +99,7 @@ const PetDetails = () => {
     useEffect(function () {
         async function fetchUserInfo() {
             try {
-                const response = await fetch(`http://localhost:8000/accounts/shelter/${petInfo?.owner}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${petInfo?.owner}`, {
                     method: 'GET'
                 }
             );
@@ -167,7 +167,7 @@ const PetDetails = () => {
               <div className="pet-details ">
                   <div className="d-flex justify-content-center align-items-center">
                       <h1>Get To Know {petName}</h1>
-                      {petInfo?.owner === user?.contextUserId && <a className="btn btn-secondary ms-3 mb-auto" href={`/petCreateUpdate/${petInfo.id}`}>
+                      {petInfo?.owner === user?.contextUserId && <a className="btn btn-secondary ms-3 mb-auto" href={`/petCreateUpdate/${petInfo?.id}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pen"
                              viewBox="0 0 16 16">
                       <path
@@ -220,7 +220,7 @@ const PetDetails = () => {
                       </div>
                       <div className="pet_details_and_shelter shelter-card-wrapper" style={{marginLeft: "32px"}}>
                         {/* Replace the existing shelter card code with the Shelter component */}
-                        <ShelterCard name={userInfo?.username} profileLink={`shelterprofile/${userInfo?.id}`} stars={userInfo?.avg_rating}
+                        <ShelterCard name={userInfo?.username} profileLink={`/shelterprofile/${userInfo?.id}`} stars={userInfo?.avg_rating}
                                      reviewCount={userInfo?.review_count}
                                      joinDate={new Date(Date.parse(userInfo?.created_at))}
                                      profilePicUrl={userInfo?.profile_picture} bannerPicUrl={userInfo?.banner}>

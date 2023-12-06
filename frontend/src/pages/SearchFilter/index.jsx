@@ -84,7 +84,7 @@ function SearchFilter() {
     useEffect(function() {
         async function fetchPetTypes() {
             try {
-                const response = await fetch(`http://localhost:8000/pets/pettype/`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/pets/pettype/`, {
                 method: 'GET',
             });
             if (response.status === 403) {
@@ -108,7 +108,7 @@ function SearchFilter() {
     useEffect(function () {
         async function fetchShelters() {
             try { 
-                const response = await fetch(`http://localhost:8000/accounts/shelter`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter`);
             
                 if (response.status >= 200 && response.status < 302) {
                     const data = await response.json();
@@ -136,7 +136,7 @@ function SearchFilter() {
     useEffect(function() {
         async function fetchBreeds() {
             try {
-                const response = await fetch(`http://localhost:8000/pets/pettype/${petType}/breed`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/pets/pettype/${petType}/breed`, {
                 method: 'GET',
             });
             if (response.status === 403) {
@@ -300,7 +300,7 @@ function SearchFilter() {
         const urlParams = to_url_params(query);
         async function fetchPets() {
             try { 
-                const response = await fetch(`http://localhost:8000/pets?${urlParams}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/pets?${urlParams}`, {
                 method: 'GET',
             });
             
