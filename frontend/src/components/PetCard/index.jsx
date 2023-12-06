@@ -18,7 +18,7 @@ function PetCard(props) {
             <br></br>
             Size: {weight}
             <br></br>
-            <Card.Link href={`/details/${id}`}>Learn More</Card.Link>
+            <Card.Link href={`/details/${id}`} className="stretched-link">Learn More</Card.Link>
 
             
             </Card.Text>
