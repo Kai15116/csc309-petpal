@@ -29,12 +29,18 @@ const BlogCreationUpdate = () => {
 
   const handleImageChange1 = (e) => {
     setSelectedImage1(e.target.files[0]);
+    // Clear any previous error message when a new image is selected
+    setImageError1('');
   };
+
   const handleImageChange2 = (e) => {
     setSelectedImage2(e.target.files[0]);
+    setImageError2('');
   };
+
   const handleImageChange3 = (e) => {
     setSelectedImage3(e.target.files[0]);
+    setImageError3('');
   };
 
   const extractFileName = (url) => {
@@ -44,6 +50,13 @@ const BlogCreationUpdate = () => {
 
   // title must be entred 
   const [titleError, setTitleError] = useState('');
+  // image upload error states
+  const [imageError1, setImageError1] = useState('');
+  const [imageError2, setImageError2] = useState('');
+  const [imageError3, setImageError3] = useState('');
+
+  // success message
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -54,12 +67,35 @@ const BlogCreationUpdate = () => {
   };
 
   const validateForm = () => {
+    let formIsValid = true;
+
+    // validate title
     if (title.trim() === '') {
       setTitleError('Title is required.');
-      return false;
+      setSuccessMessage('');
+      formIsValid = false;
     }
 
-    return true;
+    // validate images
+    if (!selectedImage1) {
+      setImageError1('Image 1 is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
+    if (!selectedImage2) {
+      setImageError2('Image 2 is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
+    if (!selectedImage3) {
+      setImageError3('Image 3 is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
+    return formIsValid;
   };
 
   useEffect(function() {
@@ -173,11 +209,13 @@ const BlogCreationUpdate = () => {
       if (editMode) {
         // edit the blog
         editBlog();
+        setSuccessMessage('Blog edited successfully!');
       } else {
         // create a new blog
         createBlog();
+        setSuccessMessage('Blog created successfully!');
       }
-  }
+    }
   };
 
   return (
@@ -311,7 +349,29 @@ const BlogCreationUpdate = () => {
                       onClick={()=>{handleButtonClick()}}
                     >
                       {editMode ? "Edit Blog" : "Post Blog"}
-                    </button>   
+                    </button>
+                    {imageError1 && (
+                      <div className="alert alert-danger mt-4" role="alert">
+                        {imageError1}
+                      </div>
+                    )}
+
+                    {imageError2 && (
+                      <div className="alert alert-danger mt-4" role="alert">
+                        {imageError2}
+                      </div>
+                    )}
+
+                    {imageError3 && (
+                      <div className="alert alert-danger mt-4" role="alert">
+                        {imageError3}
+                      </div>
+                    )}
+                    {successMessage && (
+                      <div className="alert alert-success mt-4" role="alert">
+                        {successMessage}
+                      </div>
+                    )} 
                   <div>
                 </div>
             </div> 
@@ -335,7 +395,7 @@ const BlogCreationUpdate = () => {
                 blog can bring to potential pet seekers.
                 </p>
               </div>;
-            </div>      
+            </div>   
       </main>
       <Footer />
     </div>
