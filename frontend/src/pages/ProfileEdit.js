@@ -1,6 +1,6 @@
 import LandingHeader from '../components/LandingHeader';
 import Footer from '../components/Footer';
-import { Alert, Container, Accordion, useAccordionButton, Button, ListGroup, Card, Row, Col, AccordionContext, Form} from 'react-bootstrap';
+import { Alert, Container, Accordion, useAccordionButton, Button, ListGroup, Card, Row, Col, AccordionContext, Form, Modal, AccordionCollapse} from 'react-bootstrap';
 import { useContext, useEffect, useState } from 'react';
 import { userContext } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
@@ -33,6 +33,8 @@ function ProfileEdit() {
     const [userInfo, setUserInfo ] = useState(null);
     const navigate = useNavigate();
 
+    // Accounts have these attributes
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
@@ -40,14 +42,17 @@ function ProfileEdit() {
     const [website, setWebsite] = useState('');
     const [profpic, setProfPic] = useState('');
     const [banner, setBanner] = useState('');
-
     // Shelter has these attributes
     const [mission, setMission] = useState('');
     const [name, setName] = useState('');
 
     const [formError, setFormError] = useState(null);
 
-    async function deleteShelter() {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    async function deleteAccount() {
         if (contextUserType === 'shelter') {
             try { 
                 const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
@@ -107,7 +112,8 @@ function ProfileEdit() {
                         const data = await response.json();
                         setUserInfo({...data});
                         
-                        setName(data?.mission_title)
+                        setUsername(data?.username);
+                        setName(data?.mission_title);
                         setEmail(data?.email);
                         setPhone(data?.phone_number);
                         setAddress(data?.address);
@@ -131,6 +137,7 @@ function ProfileEdit() {
                         const data = await response.json();
                         setUserInfo({...data});
                         
+                        setUsername(data?.username);
                         setEmail(data?.email);
                         setPhone(data?.phone_number);
                         setAddress(data?.address);
@@ -160,7 +167,8 @@ function ProfileEdit() {
                     const data = await response.json();
                     setUserInfo({...data});
                     
-                    setName(data?.mission_title)
+                    setUsername(data?.username);
+                    setName(data?.mission_title);
                     setEmail(data?.email);
                     setPhone(data?.phone_number);
                     setAddress(data?.address);
@@ -184,6 +192,7 @@ function ProfileEdit() {
                     const data = await response.json();
                     setUserInfo({...data});
                     
+                    setUsername(data?.username);
                     setEmail(data?.email);
                     setPhone(data?.phone_number);
                     setAddress(data?.address);
@@ -414,6 +423,9 @@ function ProfileEdit() {
         <Row>
             <Col className="mb-4" xs={12} sm={3}>
                 <ListGroup>
+                    <CollapseButton eventKey="account">
+                        Account Info
+                    </CollapseButton>
                     <CollapseButton eventKey="contact">
                         Shelter Contact
                     </CollapseButton>
@@ -428,6 +440,55 @@ function ProfileEdit() {
             <Col xs={12} sm={9}>
                 <Card>
                     <h1 className='ms-4 mt-3 mb-3'> Edit Profile Information </h1>
+                    <Accordion.Collapse eventKey='account'>
+                        <Card.Body>
+                            <Form id="accountForm">
+                                <Form.Group className='mb-3' >
+                                    <Form.Label>Username</Form.Label>
+                                    <Form.Control 
+                                        type="text"
+                                        disabled
+                                        value={username}
+                                    />
+                                </Form.Group>
+                                <Form.Group className='mb-3' >
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control 
+                                        type="text"
+                                        disabled
+                                        value="*********"
+                                    />
+                                </Form.Group>
+                                <div >
+                                    <Button className='me-3' variant="danger" onClick={handleShow}>
+                                        Delete Account
+                                    </Button>
+
+                                    <Modal show={show} onHide={handleClose}>
+                                        <Modal.Header closeButton>
+                                        <Modal.Title>Delete Account</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            Are you sure you want to delete this account?
+                                            You will not be able to get it back.
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                        <Button variant="danger" onClick={handleClose}>
+                                            Delete Forever
+                                        </Button>
+                                        <Button variant="primary" onClick={handleClose}>
+                                            Keep Account
+                                        </Button>
+                                        </Modal.Footer>
+                                    </Modal>
+
+                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                        Cancel
+                                    </Button>
+                                </div>
+                            </Form>
+                        </Card.Body>
+                    </Accordion.Collapse>
                     <Accordion.Collapse eventKey='contact'>
                         <Card.Body>
                             <Form id="contactForm">
@@ -492,7 +553,7 @@ function ProfileEdit() {
                                     <Button className='me-3' variant="primary" onClick={(e) => handleContactPatchSubmit(e)}>
                                         Submit
                                     </Button>
-                                    <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
                                         Cancel
                                     </Button>
                                 </div>
@@ -529,7 +590,7 @@ function ProfileEdit() {
                                     <Button className='me-3' variant="primary" onClick={(e) => handleDescriptionPatchSubmit(e)}>
                                         Submit
                                     </Button>
-                                    <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
                                         Cancel
                                     </Button>
                                 </div>
@@ -562,7 +623,7 @@ function ProfileEdit() {
                                     <Button className='me-3' variant="primary" onClick={(e) => handlePicturePatchSubmit(e)}>
                                         Submit
                                     </Button>
-                                    <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
                                         Cancel
                                     </Button>
                                 </div>
@@ -590,6 +651,9 @@ function ProfileEdit() {
         <Row>
             <Col className="mb-4" xs={12} sm={3}>
                 <ListGroup>
+                    <CollapseButton eventKey="account">
+                        Account Info
+                    </CollapseButton>
                     <CollapseButton eventKey="contact">
                         Seeker Contact
                     </CollapseButton>
@@ -604,6 +668,55 @@ function ProfileEdit() {
             <Col xs={12} sm={9}>
                 <Card>
                     <h1 className='ms-4 mt-3 mb-3'> Edit Profile Information </h1>
+                    <Accordion.Collapse eventKey='account'>
+                        <Card.Body>
+                            <Form id="accountForm">
+                                <Form.Group className='mb-3' >
+                                    <Form.Label>Username</Form.Label>
+                                    <Form.Control 
+                                        type="text"
+                                        disabled
+                                        value={username}
+                                    />
+                                </Form.Group>
+                                <Form.Group className='mb-3' >
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control 
+                                        type="text"
+                                        disabled
+                                        value="*********"
+                                    />
+                                </Form.Group>
+                                <div >
+                                    <Button className='me-3' variant="danger" onClick={handleShow}>
+                                        Delete Account
+                                    </Button>
+
+                                    <Modal show={show} onHide={handleClose}>
+                                        <Modal.Header closeButton>
+                                        <Modal.Title>Delete Account</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            Are you sure you want to delete this account?
+                                            You will not be able to get it back.
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                        <Button variant="danger" onClick={handleClose}>
+                                            Delete Forever
+                                        </Button>
+                                        <Button variant="primary" onClick={handleClose}>
+                                            Keep Account
+                                        </Button>
+                                        </Modal.Footer>
+                                    </Modal>
+
+                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                        Cancel
+                                    </Button>
+                                </div>
+                            </Form>
+                        </Card.Body>
+                    </Accordion.Collapse>
                     <Accordion.Collapse eventKey='contact'>
                         <Card.Body>
                             <Form id="contactForm">
@@ -649,7 +762,7 @@ function ProfileEdit() {
                                     <Button className='me-3' variant="primary" onClick={(e) => handleContactPatchSubmit(e)}>
                                         Submit
                                     </Button>
-                                    <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
                                         Cancel
                                     </Button>
                                 </div>
@@ -676,7 +789,7 @@ function ProfileEdit() {
                                     <Button className='me-3' variant="primary" onClick={(e) => handleDescriptionPatchSubmit(e)}>
                                         Submit
                                     </Button>
-                                    <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
                                         Cancel
                                     </Button>
                                 </div>
@@ -709,7 +822,7 @@ function ProfileEdit() {
                                     <Button className='me-3' variant="primary" onClick={(e) => handlePicturePatchSubmit(e)}>
                                         Submit
                                     </Button>
-                                    <Button variant="default" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
                                         Cancel
                                     </Button>
                                 </div>
