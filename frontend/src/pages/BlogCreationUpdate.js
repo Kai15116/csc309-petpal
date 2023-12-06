@@ -42,13 +42,25 @@ const BlogCreationUpdate = () => {
     return parts[parts.length - 1];
   };
 
+  // title must be entred 
+  const [titleError, setTitleError] = useState('');
+
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
+
+    if (event.target.value !== '') {
+      setTitleError('');
+    }
   };
 
-  // const handleContentChange = (event) => {
-  //   setBlogContent(event.target.value);
-  // };
+  const validateForm = () => {
+    if (title.trim() === '') {
+      setTitleError('Title is required.');
+      return false;
+    }
+
+    return true;
+  };
 
   useEffect(function() {
     async function fetchUserInfo() {
@@ -156,13 +168,16 @@ const BlogCreationUpdate = () => {
 
   // handle button click 
   const handleButtonClick = () => {
-    if (editMode) {
-      // edit the blog
-      editBlog();
-    } else {
-      // create a new blog
-      createBlog();
-    }
+    // form needs to be valid before changes
+    if (validateForm()) {
+      if (editMode) {
+        // edit the blog
+        editBlog();
+      } else {
+        // create a new blog
+        createBlog();
+      }
+  }
   };
 
   return (
@@ -183,23 +198,30 @@ const BlogCreationUpdate = () => {
                         display: 'flex',
                         justifyContent: 'flex-start',
                       }}>
-                          <h4>1. Blog Content</h4>
-                            <div style={{minWidth:"100%"}}>
+                            <h4>1. Blog Content</h4>
+                            <div style={{ minWidth: "100%" }}>
                               <div className="form-group">
-                                <label htmlFor="blogTitle" className="form-label"
-                                style={{ 
-                                display: 'flex',
-                                justifyContent: 'flex-start',
-                                fontWeight: 'bold'}}>
+                                <label
+                                  htmlFor="blogTitle"
+                                  className="form-label"
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "flex-start",
+                                    fontWeight: "bold",
+                                  }}
+                                >
                                   Title
                                 </label>
                                 <input
                                   type="text"
                                   id="blogTitle"
-                                  className="form-control"
+                                  className={`form-control ${titleError ? 'is-invalid' : ''}`}
                                   value={title}
                                   onChange={handleTitleChange}
                                 />
+                                {titleError && (
+                                  <div className="invalid-feedback">{titleError}</div>
+                                )}
                               </div>
                               <div className="form-group">
                                 <label htmlFor="blogContent" className="form-label" 
