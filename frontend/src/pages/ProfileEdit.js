@@ -307,13 +307,13 @@ function ProfileEdit() {
         e.preventDefault();
 
         if (validateEmail(email) && validatePhone(phone)) {
-            if (contextUserType === 'shelter'){
+            if (contextUserType === 'shelter') {
                 fetch(`http://localhost:8000/accounts/shelter/${contextUserId}/`, {
                     method: 'PATCH',
                     body: JSON.stringify({
                         email, 
                         phone_number: phone, 
-                        website: "https://bruh.com", 
+                        website: website, 
                         mission_title: name, 
                         address, 
                     }),

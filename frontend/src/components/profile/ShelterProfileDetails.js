@@ -15,7 +15,13 @@ function ShelterProfileDetailsCard(props) {
         <Card style={{ position: "relative", bottom: "9rem", maxWidth: "30rem"}}>
             <Card.Body className="pb-2" >
                 <Card.Title> 
-                    <h3>{userInfo?.mission_title} </h3>
+                    <h4> 
+                        {
+                            (userInfo?.mission_title !== null && userInfo?.mission_title !== '') ? 
+                            userInfo?.mission_title : 
+                            "Example Shelter Name"
+                        }
+                    </h4>
                 </Card.Title>
                 <Card.Subtitle className="text-muted" style={{ fontSize: "14px" }}> 
                     {userInfo?.address} 
@@ -25,6 +31,13 @@ function ShelterProfileDetailsCard(props) {
                     {/* Since you have no small description of the shelter Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                     Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci 
                     facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis. */}
+
+                    {
+                        (userInfo?.description !== null && userInfo?.description !== '') ? 
+                        userInfo?.description : 
+                        "It looks like you do not have a description. Here is some filler text to simulate what it would be like. You may set one up in the edit profile section by clicking the icon next to the banner title. This instruction text is meant to fill the space so you can see what it is like to have a description!"
+                    }
+
                 </Card.Text>
                 <div className="mb-2" style={{ display: "flex", justifyContent: "space-evenly"}}>
                     <Button variant="primary" onClick={() => navigate(`/mypets/`)}>
@@ -43,9 +56,9 @@ function ShelterProfileDetailsCard(props) {
                     <div className="" >
                         <Card className="m-0 p-0" id="shelter-contact-collapse">
                             <Card.Body>
-                                <p>Email: {userInfo?.email}</p>
-                                <p>Phone: {userInfo?.phone_number}</p>
-                                <p>Site: {userInfo?.website}</p>
+                                { (userInfo?.email) && (<p>Email: {userInfo?.email}</p>)}
+                                { (userInfo?.phone_number) && (<p>Phone: {userInfo?.phone_number}</p>)}
+                                { (userInfo?.website) && (<p>Site: {userInfo?.website}</p>)}
                             </Card.Body>
                         </Card>
                     </div>
