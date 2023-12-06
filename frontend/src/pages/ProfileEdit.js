@@ -313,7 +313,7 @@ function ProfileEdit() {
                     body: JSON.stringify({
                         email, 
                         phone_number: phone, 
-                        website: website, 
+                        website, 
                         mission_title: name, 
                         address, 
                     }),
@@ -327,8 +327,6 @@ function ProfileEdit() {
                     console.log(response);
                     fetchUserInfo();
                     setFormError(null);
-                    console.log(website);
-                    console.log(userInfo?.website);
                     navigate(`/shelterprofile/${contextUserId}`);
                 })
                 .then(data => {
