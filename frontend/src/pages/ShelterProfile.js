@@ -16,6 +16,7 @@ function ShelterProfile() {
     // current user profile's user id.
     const {userId} = useParams(); 
     const {accessToken, refreshToken, contextUserId, contextUserType} = getContextUser();
+    const user = getContextUser();
     // const [allowAccess, setAllowAccess] = useState(false)
     const navigate = useNavigate();
 
@@ -109,7 +110,11 @@ function ShelterProfile() {
                         </Stack>
                     </Col>
                     <Col xs={12} sm={3}>
-                        <ShelterReviewsCard />
+                        <ShelterReviewsCard 
+                            userContext={user}
+                            objectId={userId}
+                            for={'shelter'}
+                        />
                     </Col>
                 </Row>
 
