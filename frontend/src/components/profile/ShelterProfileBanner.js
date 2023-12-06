@@ -24,7 +24,7 @@ function ShelterProfileBanner(props) {
 
                     {   // Check if viewer is same as page owner
                         (props.contextUserId === userInfo?.id) && (
-                            <a href="" onClick={() => { navigate("/shelterprofileedit") }}>
+                            <a href="" onClick={() => { navigate("/profileedit") }}>
                                 <i className="bi bi-pencil-square shelter-profile-edit-icon"></i>
                             </a>
                         )

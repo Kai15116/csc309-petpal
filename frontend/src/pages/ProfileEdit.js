@@ -47,6 +47,52 @@ function ProfileEdit() {
 
     const [formError, setFormError] = useState(null);
 
+    async function deleteShelter() {
+        if (contextUserType === 'shelter') {
+            try { 
+                const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
+                    method: 'DELETE',
+                    headers: {
+
+                        'Authorization': `Bearer ${accessToken}`,
+                        
+                    }
+                }
+            );
+            if (response.status >= 400) {
+                navigate('/');
+                
+            } else if (response.status >= 200 && response.status < 300) {
+                return;
+            }} catch (e) {
+                console.log(e)
+                navigate('/');
+            }
+        } else if (contextUserType === 'seeker') {
+            try { 
+                const response = await fetch(`http://localhost:8000/accounts/seeker/${contextUserId}`, {
+                    method: 'DELETE',
+                    headers: {
+
+                        'Authorization': `Bearer ${accessToken}`,
+                        
+                    }
+                }
+            );
+            if (response.status >= 400) {
+                navigate('/');
+                
+            } else if (response.status >= 200 && response.status < 300) {
+                return;
+            }} catch (e) {
+                console.log(e)
+                navigate('/');
+            }
+        }
+
+            navigate('/shelters')
+    }
+
     useEffect( function () {
         async function fetchUserInfo() {
             console.log(contextUserType);
