@@ -73,7 +73,7 @@ header {
     width: 130px;
 }
 
-#kareemcarousel .carousel {
+#kcarousel .carousel {
     height: 100%;
     min-height: 600px;
     width: 100%;
@@ -81,37 +81,37 @@ header {
     position: relative;
 }
 
-#kareemcarousel .carousel-inner {
+#kcarousel .carousel-inner {
     height: 100%;
     min-height: 600px;
 }
 
-#kareemcarousel .carousel-item {
+#kcarousel .carousel-item {
     min-height: 600px;
     height: 100%;
 }
 
-#kareemcarousel .pet-main-img {
+.pet-main-img {
     object-fit: cover;
     width: 100%;
     min-height: 600px;
     height: 100%;
 }
 
-#kareemcarousel .carousel-control-prev,
-#kareemcarousel .carousel-control-next {
+#kcarousel .carousel-control-prev,
+#kcarousel .carousel-control-next {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 /* adjust the horizontal position as needed */
-#kareemcarousel .carousel-control-prev {
+#kcarousel .carousel-control-prev {
     left: 0; /* place the previous button at the left edge */
     margin-top: 50px;
 }
 
-#kareemcarousel .carousel-control-next {
+#kcarousel .carousel-control-next {
     right: 0; /* place the next button at the right edge */
 }
 

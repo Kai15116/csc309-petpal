@@ -88,32 +88,32 @@ footer {
     width: 130px;
 }
 
-#kareemcarousel .carousel {
+ #kcarousel .carousel {
     /*height: fit-content;*/
     width: 100%;
     /*overflow: hidden;*/
 }
 
-#kareemcarousel .carousel-item {
+ #kcarousel .carousel-item {
     height: 100%;
     max-width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-#kareemcarousel .carousel-control-prev,
-#kareemcarousel .carousel-control-next {
+ #kcarousel .carousel-control-prev,
+ #kcarousel .carousel-control-next {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 /* adjust the horizontal position as needed */
-#kareemcarousel .carousel-control-prev {
+ #kcarousel .carousel-control-prev {
     left: 0; /* place the previous button at the left edge */
     margin-top: 50px;
 }
 
-#kareemcarousel .carousel-control-next {
+ #kcarousel .carousel-control-next {
     right: 0; /* place the next button at the right edge */
 }
 
@@ -129,7 +129,7 @@ footer {
     align-items: center;
 }
 
-.carousel-inner img {
+#kcarousel .carousel-inner img {
     margin-left: 50%;
     transform: translateX(-50%);
     height: 100%;

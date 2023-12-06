@@ -43,14 +43,14 @@ const BlogImagesCarousel = ({ blog }) => {
     }, [blog]);
   
     return (
-      <Carousel style={{ height: "40vh" }}>
-        <Carousel.Item>
+      <Carousel id="kcarousel" style={{ height: "40vh" }}>
+        <Carousel.Item id="kcarousel" >
           <img src={imageUrls[0]} alt="1" className="d-block" />
         </Carousel.Item>
-        <Carousel.Item>
+        <Carousel.Item id="kcarousel" >
           <img src={imageUrls[1]} alt="2" className="d-block" />
         </Carousel.Item>
-        <Carousel.Item>
+        <Carousel.Item id="kcarousel" >
           <img src={imageUrls[2]} alt="3" className="d-block" />
         </Carousel.Item>
       </Carousel>

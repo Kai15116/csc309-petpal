@@ -54,12 +54,12 @@ function SeekerProfile() {
                     <div className="d-flex mx-auto" id="my-pets-main-container">
 
                         <div className="d-flex flex-column justify-content-center align-items-e" id="profile-container">
-                            <ShelterCard 
+                            {/* <ShelterCard 
                                 name={userInfo?.username} 
                                 profileLink={`/seekerprofile/${contextUserId}`} 
                                 reviewCount={123} 
-                                joinDate="2023, Jan. 1" 
-                            />
+                                joinDate={new Date(Date.parse(userInfo?.created_at))}
+                            /> */}
                             <SeekerProfileDetailsCard 
                                 contextUserId={contextUserId}
                                 userInfo={userInfo}

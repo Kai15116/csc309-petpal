@@ -130,34 +130,34 @@ const PetDetails = () => {
     <div className="wrapper">
       <LandingHeader />
       <main class="page-content">
-      <Carousel id="kareemcarousel" style={{height: "40vh"}}>
-          <Carousel.Item id="kareemcarousel" >
+      <Carousel id="kcarousel" style={{height: "40vh"}}>
+          <Carousel.Item id="kcarousel">
             <img
               src={selectedImage1 ? URL.createObjectURL(selectedImage1) : noImage}
               alt="Image 1"
               className="d-block"
             />
-            <Carousel.Caption id="kareemcarousel" >
+            <Carousel.Caption id="kcarousel" >
               <h2>Meet {petName}!</h2>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item id="kareemcarousel" >
+          <Carousel.Item id="kcarousel" >
             <img
               src={selectedImage2 ? URL.createObjectURL(selectedImage2) : noImage}
               alt="Image 2"
               className="d-block"
             />
-            <Carousel.Caption id="kareemcarousel" >
+            <Carousel.Caption id="kcarousel" >
               <h5>Give {petName} A Loving Home</h5>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item id="kareemcarousel" >
+          <Carousel.Item id="kcarousel" >
             <img
               src={selectedImage3 ? URL.createObjectURL(selectedImage3) : noImage}
               alt="Image 3"
               className="d-block"
             />
-            <Carousel.Caption id="kareemcarousel" >
+            <Carousel.Caption id="kcarousel" >
               <h5>{petName} Is Waiting For Wonderful Parents </h5>
             </Carousel.Caption>
           </Carousel.Item>
