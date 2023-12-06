@@ -58,9 +58,7 @@ function ProfileEdit() {
                 const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
                     method: 'DELETE',
                     headers: {
-
                         'Authorization': `Bearer ${accessToken}`,
-                        
                     }
                 }
             );
@@ -95,16 +93,20 @@ function ProfileEdit() {
             }
         }
 
-        navigate('/shelters')
+        navigate('/');
     }
 
     useEffect( function () {
         async function fetchUserInfo() {
-            console.log(contextUserType);
             if (contextUserType === 'shelter') {
                 try {
                     const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
-                        method: 'GET'
+                        method: 'GET', 
+                        headers: {
+
+                            'Authorization': `Bearer ${accessToken}`,
+                            
+                        }
                     });
                     if (response.status >= 400) {
                         navigate("/");
@@ -129,10 +131,16 @@ function ProfileEdit() {
             } else if (contextUserType === 'seeker') {
                 try {
                     const response = await fetch(`http://localhost:8000/accounts/seeker/${contextUserId}`, {
-                        method: 'GET'
+                        method: 'GET', 
+                        headers: {
+
+                            'Authorization': `Bearer ${accessToken}`,
+                            
+                        }
                     });
                     if (response.status >= 400) {
-                        navigate("/");
+                        // navigate("/");
+                        console.log(contextUserId, userInfo);
                     } else if (response.status >= 200 && response.status < 300) {
                         const data = await response.json();
                         setUserInfo({...data});
@@ -159,7 +167,12 @@ function ProfileEdit() {
         if (contextUserType === 'shelter') {
             try {
                 const response = await fetch(`http://localhost:8000/accounts/shelter/${contextUserId}`, {
-                    method: 'GET'
+                    method: 'GET', 
+                    headers: {
+
+                        'Authorization': `Bearer ${accessToken}`,
+                        
+                    }
                 });
                 if (response.status >= 400) {
                     navigate("/");
@@ -184,7 +197,12 @@ function ProfileEdit() {
         } else if (contextUserType === 'seeker') {
             try {
                 const response = await fetch(`http://localhost:8000/accounts/seeker/${contextUserId}`, {
-                    method: 'GET'
+                    method: 'GET',
+                    headers: {
+
+                        'Authorization': `Bearer ${accessToken}`,
+                        
+                    }
                 });
                 if (response.status >= 400) {
                     navigate("/");
@@ -213,7 +231,7 @@ function ProfileEdit() {
     };
 
     const validatePhone = (value) => {
-        return value.length >= 10;
+        return value.length === 10;
     };
 
     const handleEmailChange = (e) => {
@@ -311,7 +329,7 @@ function ProfileEdit() {
                     setFormError(null);
                     console.log(website);
                     console.log(userInfo?.website);
-                    // navigate(`/shelterprofile/${contextUserId}`);
+                    navigate(`/shelterprofile/${contextUserId}`);
                 })
                 .then(data => {
                     console.log("Contacts Updated", data);
@@ -473,7 +491,7 @@ function ProfileEdit() {
                                             You will not be able to get it back.
                                         </Modal.Body>
                                         <Modal.Footer>
-                                        <Button variant="danger" onClick={handleClose}>
+                                        <Button variant="danger" onClick={deleteAccount}>
                                             Delete Forever
                                         </Button>
                                         <Button variant="primary" onClick={handleClose}>
@@ -701,7 +719,7 @@ function ProfileEdit() {
                                             You will not be able to get it back.
                                         </Modal.Body>
                                         <Modal.Footer>
-                                        <Button variant="danger" onClick={handleClose}>
+                                        <Button variant="danger" onClick={deleteAccount}>
                                             Delete Forever
                                         </Button>
                                         <Button variant="primary" onClick={handleClose}>
@@ -710,7 +728,7 @@ function ProfileEdit() {
                                         </Modal.Footer>
                                     </Modal>
 
-                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/seekerprofile/${contextUserId}`)} >
                                         Cancel
                                     </Button>
                                 </div>
@@ -762,7 +780,7 @@ function ProfileEdit() {
                                     <Button className='me-3' variant="primary" onClick={(e) => handleContactPatchSubmit(e)}>
                                         Submit
                                     </Button>
-                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/seekerprofile/${contextUserId}`)} >
                                         Cancel
                                     </Button>
                                 </div>
@@ -773,11 +791,11 @@ function ProfileEdit() {
                         <Card.Body>
                             <Form id="descriptionForm">
                                 <Form.Group className="mb-3" controlId="formDescription">
-                                    <Form.Label>Shelter Description</Form.Label>
+                                    <Form.Label>Seeker Description</Form.Label>
                                     <Form.Control
                                         as="textarea"
                                         rows={5}
-                                        value={description}
+                                        value={description === null ? '' : description}
                                         onChange={(e) => setDescription(e.target.value)}
                                         placeholder="e.g. I am a ..."
                                     />
@@ -789,7 +807,7 @@ function ProfileEdit() {
                                     <Button className='me-3' variant="primary" onClick={(e) => handleDescriptionPatchSubmit(e)}>
                                         Submit
                                     </Button>
-                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/seekerprofile/${contextUserId}`)} >
                                         Cancel
                                     </Button>
                                 </div>
@@ -822,7 +840,7 @@ function ProfileEdit() {
                                     <Button className='me-3' variant="primary" onClick={(e) => handlePicturePatchSubmit(e)}>
                                         Submit
                                     </Button>
-                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/seekerprofile/${contextUserId}`)} >
                                         Cancel
                                     </Button>
                                 </div>
