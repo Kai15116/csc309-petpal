@@ -29,10 +29,13 @@ class ListCreateBlogView(ListCreateAPIView):
         serializer = BlogSearchSerializer(data=self.request.query_params)
         serializer.is_valid(raise_exception=True)
         order_by = serializer.validated_data.pop('order_by', None)
+        title = serializer.validated_data.pop("title", None)
 
         search_result = Blog.objects.all().filter(**serializer.validated_data)
         if order_by:
             search_result = search_result.order_by(order_by)
+        if title:
+            search_result = search_result.filter(title__icontains=title)
         return search_result
 
 
