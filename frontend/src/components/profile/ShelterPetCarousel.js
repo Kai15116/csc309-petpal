@@ -23,7 +23,7 @@ function ShelterPetCarouselCard() {
   ];
 
   return (
-    <Carousel indicators={false} >
+    <Carousel className="mb-3" indicators={false} >
         {petInformation.map((pet) => (
             <Carousel.Item key={pet.id}>
                 <Card style={{ minWidth: "20rem", maxWidth: "40rem"}}>

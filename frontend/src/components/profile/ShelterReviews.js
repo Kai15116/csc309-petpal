@@ -1,12 +1,12 @@
 import { Modal, Button, Card, Col, Container, Row, Stack, Form} from "react-bootstrap";
-import LandingHeader from "../../components/LandingHeader";
-import Footer from "../../components/Footer";
-import React, {useContext, useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {userContext} from "../../context/userContext";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import CommentButtonModal from "./CommentButtonModal";
 
 
+// Pass in objectId, userContext, and what the comment is for
 function ShelterReviewsCard(props) {
     const commentInformation = [
         {
@@ -19,14 +19,13 @@ function ShelterReviewsCard(props) {
         }, 
     ]
 
-    const { getContextUser, setContextUser} = useContext(userContext);
-    const user = props.user;
+    const user = props.userContext;
     const [comments, setComments] = useState([]);
     const [formErrors, setFormErrors] = useState({});
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const [messageType, setMessageType] = useState("comment");
-    const { shelterId } = props.objectId;
+    const shelterId = props.objectId;
     const navigate = useNavigate();
 
     const [show, setShow] = useState(false);
@@ -140,12 +139,12 @@ function ShelterReviewsCard(props) {
             const response = await fetch(`http://localhost:8000/comments/shelter/${shelterId}`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    user,
+                    user: user?.id,
                     text: 'testing comment feature',
                 }),
                 headers: {
                     'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${user.accessToken}`,
+                    'Authorization': `Bearer ${user.accessToken}`,
                 }
             });
 
@@ -167,39 +166,15 @@ function ShelterReviewsCard(props) {
 
     return (
         <Card>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Write a Review</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form> 
-                        <Form.Group>
-                            <Form.Label> Review Content </Form.Label>
-                            <Form.Control 
-                                as="textarea" 
-                                rows="5" 
-                                name="chatInput"
-                                isInvalid={formErrors?.status || formErrors?.text} 
-                                controlId="chat-input"
-                            />
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleCommentCreate}>
-                        Submit
-                    </Button>
-                    <Button variant="outline-primary" onClick={handleClose}>
-                        Cancel
-                    </Button>
-                </Modal.Footer>
-            </Modal>
             <Card.Body>
                 <Card.Title className="d-flex flex-row justify-content-between" > 
-                    <h3 className="mb-0" >Reviews</h3> 
-                    <Button className='me-3' variant="primary" onClick={handleShow}>
-                        Write A Review!
-                    </Button>
+                    <h3 className="mb-0 mt-1" >Reviews</h3> 
+                    <CommentButtonModal 
+                        label="Write Review"
+                        userContext={user}
+                        objectId={shelterId}
+                        for="shelter"
+                    />
                 </Card.Title>
                 <Stack gap={1}>
                     { commentInformation.map((comment) => (
