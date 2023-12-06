@@ -62,7 +62,7 @@ function SeekerProfile() {
                                 joinDate="2023, Jan. 1" 
                             />
                             <SeekerProfileDetailsCard 
-                                userId={userId}
+                                contextUserId={contextUserId}
                                 userInfo={userInfo}
                             />
                         </div>

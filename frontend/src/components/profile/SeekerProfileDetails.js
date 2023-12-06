@@ -4,9 +4,9 @@ import "../../styles/profiles.css"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Props should be userInfo and userId object to display appropriate information
+// Props should be userInfo and contextUserId object to display appropriate information
 function SeekerProfileDetailsCard(props) {
-    const userId = props.userId;
+    const contextUserId = props.contextUserId;
     const userInfo = props.userInfo;
     const [contactOpen, setContactOpen] = useState(false);
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ function SeekerProfileDetailsCard(props) {
                 <Card.Title> 
                     <h3> About {userInfo?.username} {' '}
                     {   // Check if viewer is same as page owner
-                        (true) && (
+                        (contextUserId === userInfo?.id) && ( 
                             <a href="" onClick={() => { navigate("/shelterprofileedit") }}>
                                 <i className="bi bi-pencil-square"></i>
                             </a>
