@@ -475,6 +475,15 @@ function ProfileEdit() {
                                         value="*********"
                                     />
                                 </Form.Group>
+                                <div key={"reverse-checkbox"}>
+                                    <Form.Check 
+                                        reverse
+                                        label="By checking this box, you agree to recieve notifications about new pet listings"
+                                        name="group1"
+                                        type="checkbox"
+                                        id={'reverse-checkbox-1'}
+                                    />
+                                </div>
                                 <div >
                                     <Button className='me-3' variant="danger" onClick={handleShow}>
                                         Delete Account
