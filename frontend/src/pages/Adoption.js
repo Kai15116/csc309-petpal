@@ -12,9 +12,10 @@ const Adoption = () => {
   const {getContextUser} = useContext(userContext);
   const { petId } = useParams();
   const {accessToken} = getContextUser();
+  const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
 
-  const handleApplicationSubmit = (adoptionInputs) => {
+  const handleApplicationSubmit = async (adoptionInputs) => {
     console.log("Form submitted with data:", adoptionInputs);
     // append fields
     const formData = new FormData();
@@ -27,21 +28,52 @@ const Adoption = () => {
     formData.append('pet', petId);
   
     // Make a POST request to your server with the FormData
-    fetch(`http://localhost:8000/applications/`, {
-      method: 'POST',
-      body: formData,
-      headers: {
+    try {
+      const response = await fetch(`http://localhost:8000/applications/`, {
+        method: 'POST',
+        body: formData,
+        headers: {
         'Authorization': `Bearer ${accessToken}`,
-      }
-    }).then(response => response.json())
-      .then(data => {
-        // Handle the response from the server
+      }});
+
+    
+    const data = await response.json();
+    if (response.status === 500) {
+      console.log("Network Error")
+      return 
+    } else if (response.status === 400) {
+
+        setFormErrors({...data});
+        console.log(data);
+        // resetFields();
+      return
+    } else if (response.status >= 200 && response.status < 300) {
         console.log('Upload successful:', data);
-        navigate(`/application/${data.id}`)
-      })
-      .catch(error => {
-        console.error('Error uploading image:', error);
-      });
+        navigate(`/application/${data.id}`);
+    } else {
+      alert(response.status)
+    }
+    
+
+    } catch(error) {
+      console.log(error)
+    }
+
+    // fetch(`http://localhost:8000/applications/`, {
+    //   method: 'POST',
+    //   body: formData,
+    //   headers: {
+    //     'Authorization': `Bearer ${accessToken}`,
+    //   }
+    // }).then(response => response.json())
+    //   .then(data => {
+    //     // Handle the response from the server
+        // console.log('Upload successful:', data);
+        // navigate(`/application/${data.id}`)
+    //   })
+    //   .catch(error => {
+    //     console.error('Error uploading image:', error);
+    //   });
   };
 
   return (
@@ -50,7 +82,7 @@ const Adoption = () => {
       <main className="page-content">
         <div className="background-adoption">
           <div className="container" id="pet-details-container">
-            <ApplicationForm onSubmit={handleApplicationSubmit} />
+            <ApplicationForm onSubmit={handleApplicationSubmit} formErrors={formErrors}/>
           </div>
         </div>
       </main>
