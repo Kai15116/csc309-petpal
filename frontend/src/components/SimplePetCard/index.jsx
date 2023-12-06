@@ -1,5 +1,4 @@
 import { Card, Badge} from "react-bootstrap";
-import "../styles/petCardStyles.css";
 
 
 function SimplePetCard(props) {

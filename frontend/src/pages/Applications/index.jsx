@@ -1,13 +1,12 @@
 import React, {useContext, useEffect, useMemo, useState} from 'react';
-import '../styles/shelterManagement.css'
-import LandingHeader from "../components/LandingHeader";
-import Footer from "../components/Footer";
-import {userContext} from "../context/userContext";
-import ShelterCard from "../components/ShelterCard";
+import LandingHeader from "../../components/LandingHeader";
+import Footer from "../../components/Footer";
+import {userContext} from "../../context/userContext";
+import ShelterCard from "../../components/ShelterCard";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import Form from 'react-bootstrap/Form';
-import CPagination from "../components/CPagination";
-
+import CPagination from "../../components/CPagination";
+import "./style.css"
 
 // Reference Lecture example: URL parser.
 function to_url_params(object) {
@@ -68,13 +67,11 @@ const Applications = () => {
                     const data = await response.json();
                     console.log(data)
                     setMyApplications({...data})
-                } else if (response.status === 404) {
-                    alert(404);
                 } else {
-                    console.log(response.status)
+                    navigate("/")
                 }
             } catch (e) {
-                console.log(e);
+                navigate("/")
             }
         }
 
@@ -107,8 +104,11 @@ const Applications = () => {
         <div className="d-flex mx-auto" id="my-pets-main-container">
           {user.contextUserType === "shelter" &&
           <div className="d-flex flex-column justify-content-center" id="profile-container">
-              <ShelterCard name={userInfo?.username} profileLink={`shelterprofile/${user?.contextUserId}`} stars={3.5} reviewCount={123} joinDate="2023, Jan. 1"></ShelterCard>
-
+            <ShelterCard name={userInfo?.username} profileLink={`shelterprofile/${user?.contextUserId}`} stars={userInfo?.avg_rating}
+                         reviewCount={userInfo?.review_count}
+                         joinDate={new Date(Date.parse(userInfo?.created_at))}
+                         profilePicUrl={userInfo?.profile_picture} bannerPicUrl={userInfo?.banner}>
+            </ShelterCard>
             <ul className="list-group flex-column mt-5" style={{width: "100%"}}>
               <li className="list-group-item">
                 <a className="nav-link" href="/mypets">My Pets</a>

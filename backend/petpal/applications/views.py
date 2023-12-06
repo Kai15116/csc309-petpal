@@ -5,8 +5,10 @@ from drf_yasg.utils import swagger_auto_schema
 
 from .models import Application
 from accounts.permissions import IsPetSeekerOrReadOnly
+from notifications.models import Notification
 
 from .serializers import CreateApplicationSerializer, FilterApplicationSerializer, UpdateApplicationSerializer
+from django.contrib.contenttypes.models import ContentType
 
 # Create your views here.
 
@@ -57,6 +59,12 @@ class ListCreateApplicationView(ListCreateAPIView):
             raise ValidationError({'pet': 'The pet you specified isn\'t available.'})
         application = Application.objects.create(**validated_data, user=pet_seeker)
         serializer.validated_data['id'] = application.id
+        Notification.objects.create(
+            content_type=ContentType.objects.get_for_model(Application),
+            object_id=application.id,
+            user=application.pet.owner,
+            notification_type='application_creation'
+        )
 
 
 class RetrieveUpdateApplicationView(RetrieveUpdateAPIView):
@@ -102,14 +110,26 @@ class RetrieveUpdateApplicationView(RetrieveUpdateAPIView):
 
         if user.is_pet_seeker():
             if old_status not in {'pending', 'accepted'}:
-                raise ValidationError(f'Pet seeker cannot update {old_status} to {new_status}')
+                raise ValidationError({'status': f'Pet seeker cannot update {old_status} to {new_status}'})
             if new_status != 'withdrawn':
                 raise ValidationError({'status': f'Pet seeker cannot update {old_status} to {new_status}'})
+            Notification.objects.create(
+                content_type=ContentType.objects.get_for_model(Application),
+                object_id=application.id,
+                user=application.pet.owner,
+                notification_type='status_update'
+            )
         elif user.is_pet_shelter():
             if old_status != 'pending':
-                raise ValidationError(f'Pet shelter cannot update {old_status} to {new_status}')
+                raise ValidationError({'status': f'Pet shelter cannot update {old_status} to {new_status}'})
             if new_status not in {'accepted', 'denied'}:
                 raise ValidationError({'status': f'Pet shelter cannot update {old_status} to {new_status}'})
+            Notification.objects.create(
+                content_type=ContentType.objects.get_for_model(Application),
+                object_id=application.id,
+                user=application.user,
+                notification_type='status_update'
+            )
         else:
             raise PermissionDenied()
 

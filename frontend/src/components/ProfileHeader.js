@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/headerStyles.css';
 import logoImage from '../assets/images/logo-1.png';
 import profile_image from '../assets/example_images/shelter_portrait.jpg';
 
