@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React from 'react';
+import React, {useContext} from 'react';
 import LandingHeader from '../components/LandingHeader';
 import Footer from '../components/Footer';
 import '../styles/details_and_adoption.css';
@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import {useEffect, useState} from 'react';
+import {userContext} from "../context/userContext";
 
 
 const PetDetails = () => {
@@ -34,7 +35,8 @@ const PetDetails = () => {
   const [selectedImage3, setSelectedImage3] = useState(null);
   const [additionalNotes, setAdditionalNotes] = useState('');
   const [userInfo, setUserInfo] = useState(null);
-
+  const { getContextUser } = useContext(userContext);
+  const user = getContextUser()
   const extractFileName = (url) => {
     if (!url)
         return noImage
@@ -162,8 +164,17 @@ const PetDetails = () => {
       </Carousel>
       <div class="background-details">
           <div class="container" id="pet-details-container">
-              <div class="pet-details">
-                  <h1>Get To Know {petName}</h1>
+              <div className="pet-details">
+                  <div className="d-flex justify-content-center align-items-center">
+                      <h1>Get To Know {petName}</h1>
+                      {petInfo?.owner === user?.contextUserId && <a className="btn btn-secondary ms-3 mb-auto" href={`/petCreateUpdate/${petInfo?.owner}`}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pen"
+                             viewBox="0 0 16 16">
+                      <path
+                        d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                    </svg>
+                  </a>}
+                  </div>
                   <div class="d-flex pet_details_and_shelter">
                       <div class="col-lg-6" style={{"marginRight": "20px"}}>
                           <table class="table">
@@ -190,7 +201,7 @@ const PetDetails = () => {
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Posted Date:</strong></th>
-                                <td>{formatDate(petLocation)}</td>
+                                <td>{formatDate(petInfo?.created_at)}</td>
                               </tr>
                               <tr>
                                 <th scope="row"><strong>Location:</strong></th>
@@ -225,9 +236,9 @@ const PetDetails = () => {
                         ))}
                     </ul>
                   </div>
-                  <Link to={`/adoption/${petId}`} role="button">
+                  {user?.contextUserType === "seeker" && <Link to={`/adoption/${petId}`} role="button">
                     <button class="btn btn-primary btn-lg apply-button" >Apply For Adoption</button>
-                  </Link>
+                  </Link>}
                   </div>
                 </div>
             </div>
