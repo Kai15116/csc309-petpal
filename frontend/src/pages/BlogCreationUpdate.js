@@ -48,8 +48,9 @@ const BlogCreationUpdate = () => {
     return parts[parts.length - 1];
   };
 
-  // title must be entred 
+  // title and content must be entred 
   const [titleError, setTitleError] = useState('');
+  const [contentError, setContentError] = useState('');
   // image upload error states
   const [imageError1, setImageError1] = useState('');
   const [imageError2, setImageError2] = useState('');
@@ -66,12 +67,26 @@ const BlogCreationUpdate = () => {
     }
   };
 
+  const handleBlogContent = (newContent) => {
+    setBlogContent(newContent);
+
+    if (newContent.trim() !== '') {
+      setContentError('');
+    }
+  };
+  
   const validateForm = () => {
     let formIsValid = true;
 
-    // validate title
+    // validate title and content
     if (title.trim() === '') {
       setTitleError('Title is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
+    if (blogContent.trim() === '') {
+      setContentError('Blog content is required.');
       setSuccessMessage('');
       formIsValid = false;
     }
@@ -269,7 +284,7 @@ const BlogCreationUpdate = () => {
                                 fontWeight: 'bold'}}>
                                   Body
                                 </label>
-                                <MDEditor height={200} value={blogContent} onChange={setBlogContent} style={{width: "100%"}}/>
+                                <MDEditor height={200} value={blogContent} onChange={handleBlogContent} style={{width: "100%"}}/>
                               </div>
                             </div>
                           </div>
@@ -350,6 +365,13 @@ const BlogCreationUpdate = () => {
                     >
                       {editMode ? "Edit Blog" : "Post Blog"}
                     </button>
+
+                    {contentError && (
+                      <div className="alert alert-danger mt-4" role="alert">
+                        {contentError}
+                      </div>
+                    )}
+
                     {imageError1 && (
                       <div className="alert alert-danger mt-4" role="alert">
                         {imageError1}
