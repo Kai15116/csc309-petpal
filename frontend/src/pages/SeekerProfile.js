@@ -2,7 +2,7 @@ import {useContext, useState, useEffect} from "react";
 import { userContext } from "../context/userContext";
 import { useParams, useNavigate } from "react-router-dom";
 import LandingHeader from "../components/LandingHeader";
-import '../styles/shelterManagement.css';
+import './MyPets/style.css';
 import Footer from "../components/Footer";
 import ShelterCard from "../components/ShelterCard";
 import SeekerProfileDetailsCard from "../components/profile/SeekerProfileDetails";
