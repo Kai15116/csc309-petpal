@@ -90,3 +90,13 @@ Then, set the environment variables appropriately in the browser.
 
 This will deploy the website. 
 
+### PostgreSQL
+We used PostgreSQL database provided from vercel to get the keys we use for `.env` in backend. 
+
+![image](https://github.com/Kai15116/csc309-petpal/assets/65318176/30e3c2eb-539a-4d2a-ae82-41b1da9302a1)
+
+### Cloudinary
+You can signup to https://cloudinary.com/ to get the keys we use for `.env` in backend. 
+
+
+
