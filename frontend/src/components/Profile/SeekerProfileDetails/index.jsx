@@ -13,12 +13,12 @@ function SeekerProfileDetailsCard(props) {
 
     return (
         <Card className="d-flex column" >
-            <Card.Img variant="top" src={userInfo?.banner ? userInfo?.banner : ExampleBanner} alt="Example Banner"/>
+            <Card.Img style={{ height: '15rem' }} variant="top" src={userInfo?.banner ? userInfo?.banner : ExampleBanner} alt="Example Banner"/>
             <Image 
                 className="m-0 p-0"
                 style={{
                     position: 'absolute',
-                    top: '5rem',
+                    top: '10rem',
                     left: 'calc(50% - 4rem)',
                     backgroundColor: 'yellow',
                     borderRadius: '4rem',
