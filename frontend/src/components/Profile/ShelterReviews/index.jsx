@@ -6,6 +6,12 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import CommentButtonModal from "../../Comments/CommentButtonModal";
 import CommentCard from "../../Comments/CommentCard";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
+import ShelterRating from "../ShelterRating";
+
+
 
 // Pass in objectId, userContext, and what the comment is for
 function ShelterReviewsCard(props) {
@@ -104,8 +110,11 @@ function ShelterReviewsCard(props) {
                     </Stack>
                 </InfiniteScroll>
             </Card.Body>
-            <Card.Footer>
-                Rate this shelter!
+            <Card.Footer className="pb-0" >
+                <ShelterRating 
+                    userContext={user}
+                    shelterId={shelterId}
+                />
             </Card.Footer>
         </Card>
     );

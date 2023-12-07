@@ -32,3 +32,6 @@ class Rating(models.Model):
     user = models.ForeignKey('accounts.User', null=True, on_delete=models.SET_NULL, help_text='User who gave the rating') # Rating value stays after delete
     shelter = models.ForeignKey('accounts.PetShelter', on_delete=models.CASCADE, related_name='ratings', help_text='Shelter that the rating is for')
     rating = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(limit_value=5)], help_text='Integer value between 0-5 that depicts the rating of the shelter by the user')
+
+    class Meta:
+        unique_together = ('user', 'shelter',)

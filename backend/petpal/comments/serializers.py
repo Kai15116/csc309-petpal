@@ -32,8 +32,12 @@ class CommentSerializer(ModelSerializer):
 
     def get_profile_picture(self, obj):
         if isinstance(obj, Comment):
-            request = self.context.get("request")
-            return request.build_absolute_uri(obj.user.profile_picture.url)
+            try:
+                request = self.context.get("request")
+                return request.build_absolute_uri(obj.user.profile_picture.url)
+            except Exception as e:
+                print(e)
+                return
         return
 
 class RatingSerializer(ModelSerializer):
@@ -46,4 +50,19 @@ class RatingSerializer(ModelSerializer):
         ]
         read_only_fields = ['user']
         extra_kwargs = {'shelter': {'required': True}}
+        
+    def create(self, validated_data):
+        user = validated_data['user']
+        shelter = validated_data['shelter']
+
+        # Check if the user has already rated the shelter
+        existing_rating = Rating.objects.filter(user=user, shelter=shelter).first()
+        if existing_rating:
+            # Update the existing rating
+            existing_rating.rating = validated_data['rating']
+            existing_rating.save()
+            return existing_rating
+        else:
+            # Create a new rating
+            return Rating.objects.create(**validated_data)
 
