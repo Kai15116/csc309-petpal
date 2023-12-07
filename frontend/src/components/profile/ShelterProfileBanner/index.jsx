@@ -1,6 +1,5 @@
 import { Image } from "react-bootstrap";
-import "../../styles/profiles.css";
-import ExampleBanner from "../../assets/example_images/yosemite_banner.jpg";
+import ExampleBanner from "../../../assets/example_images/yosemite_banner.jpg";
 import { useNavigate } from "react-router-dom";
 
 /**

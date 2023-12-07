@@ -1,10 +1,10 @@
 import {useContext, useState, useEffect} from "react";
-import { userContext } from "../context/userContext";
+import { userContext } from "../../context/userContext";
 import { useParams, useNavigate } from "react-router-dom";
-import LandingHeader from "../components/LandingHeader";
-import Footer from "../components/Footer";
-import ShelterCard from "../components/ShelterCard";
-import SeekerProfileDetailsCard from "../components/profile/SeekerProfileDetails";
+import LandingHeader from "../../components/LandingHeader";
+import Footer from "../../components/Footer";
+import ShelterCard from "../../components/ShelterCard";
+import SeekerProfileDetailsCard from "../../components/Profile/SeekerProfileDetails";
 
 
 function SeekerProfile() {

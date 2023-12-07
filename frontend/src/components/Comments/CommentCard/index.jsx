@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Card, Image } from "react-bootstrap";
-import { formatTimeGap } from "../../utils";
-import ExampleMilky from "../../assets/example_images/milky3.jpg";
-import CommentButtonModal from "./CommentButtonModal";
+import { formatTimeGap } from "../../../utils";
+import ExampleMilky from "../../../assets/example_images/milky3.jpg";
+import CommentButtonModal from "../CommentButtonModal";
 
 /**
  * 

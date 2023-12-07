@@ -1,5 +1,5 @@
 import { Carousel, Card, Container} from "react-bootstrap";
-import ExampleBean from "../../assets/example_images/bean1.jpg";
+import ExampleBean from "../../../assets/example_images/bean1.jpg";
 
 function ShelterPetCarouselCard() {
   const petInformation = [
