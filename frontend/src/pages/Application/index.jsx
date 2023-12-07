@@ -194,14 +194,14 @@ export default function Application(props) {
                             if (item.user === user.contextUserId){
                                 return <div key={index} className="user-message  message-shelter align-self-end rounded bg-dark-subtle p-3 my-3 d-flex flex-row-reverse align-items-center"
                                             style={{height: "auto", "maxWidth": "80%"}}>
-                                            <img src={shelterImage} className="rounded-circle border ms-3 me-1 align-self-start"
+                                            <img src={item?.profile_picture} className="rounded-circle border ms-3 me-1 align-self-start"
                                                 style={{width: "50px", aspectRatio: "1 / 1"}} alt="Pet shelter icon"></img>
                                             <div className="text-wrap w-100">{item.text}</div>
                                         </div>
                             } else {
                                 return <div key={index} className="user-message message-seeker align-self-start rounded bg-body-tertiary p-3 my-3 d-flex align-items-center"
                                             style={{height: "auto", "maxWidth": "80%"}}>
-                                            <img src={seekerImage} className="rounded-circle border me-3 ms-1 align-self-start"
+                                            <img src={item?.profile_picture} className="rounded-circle border me-3 ms-1 align-self-start"
                                                  style={{width: "50px", aspectRatio: "1 / 1"}} alt="Pet seeker icon"></img>
                                             <div className="text-wrap w-100">{item.text}</div>
                                         </div>
