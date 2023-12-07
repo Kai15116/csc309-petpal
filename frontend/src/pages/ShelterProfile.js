@@ -88,9 +88,16 @@ function ShelterProfile() {
                     <Col className="shelter-profile-col" xs={12} sm={3}>
                         {/* <div className="test-div"></div> */}
                         <Image 
-                            className="rounded-circle test-div" 
+                            className="test-div" 
                             src={userInfo?.profile_picture ? userInfo?.profile_picture : ExampleMilky}
-                            style={{backgroundColor: "cornsilk", width: "15rem", height: "15rem"}} 
+                            style={{
+                                backgroundColor: "#FAAF75", 
+                                minWidth: "15rem", 
+                                maxWidth: "15rem",
+                                minHeight: "15rem", 
+                                maxHeight: '15rem',
+                                borderRadius: '7.5rem',
+                            }} 
                             alt="Profile Picture"
                         />
                         <ShelterProfileDetailsCard

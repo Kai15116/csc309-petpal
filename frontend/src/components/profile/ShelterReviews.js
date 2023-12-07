@@ -71,7 +71,7 @@ function ShelterReviewsCard(props) {
             <Card.Title className="pt-3 px-4 d-flex flex-row justify-content-between" > 
                 <h3 className="mb-0 mt-1" >Reviews</h3> 
                 <CommentButtonModal 
-                    label="Write Review"
+                    label="Comment"
                     userContext={user}
                     objectId={shelterId}
                     for="shelter"
@@ -83,17 +83,19 @@ function ShelterReviewsCard(props) {
                     hasMore={hasMore} 
                     next={fetchComments(false)} 
                     inverse={true}
-                    loader={<p>Loading...</p>}
+                    loader={<p className="mt-3 mb-0" style={{ textAlign: "center" }}>Loading...</p>}
                     scrollableTarget="review-container"
                     endMessage={
                         <p className="mt-3 mb-0" style={{ textAlign: "center" }}>
-                            No more comments to load
+                            No more comments
                         </p>
                     }
                 >
                     <Stack gap={3}>
                         { comments.map((comment) => (
                             <CommentCard 
+                                viewer={user}
+                                ownerId={shelterId}
                                 key={comment.id}
                                 comment={comment}
                                 allowReply={true}
