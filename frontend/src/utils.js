@@ -19,7 +19,9 @@ export function to_url_params(object) {
 }
 
 export function formatTimeGap(created_at) {
-    var secAgo = ((new Date).getTime() - created_at.getTime()) / 1000;
+    const createdDate = new Date(Date.parse(created_at));
+    var secAgo = ((new Date).getTime() - createdDate.getTime()) / 1000;
+
     if (secAgo < 60) {
       return 'Just now';
     }
@@ -30,6 +32,6 @@ export function formatTimeGap(created_at) {
       return parseInt(Math.ceil(secAgo / 3600)) + 'h ago';
     }
     else {
-      return new Date(Date.parse(created_at)).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })
+      return createdDate.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric' })
     }
   }
