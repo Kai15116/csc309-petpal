@@ -239,7 +239,7 @@ function ProfileEdit() {
     };
 
     const validatePhone = (value) => {
-        return value.length === 10;
+        return value?.length === 10;
     };
 
     const handleEmailChange = (e) => {

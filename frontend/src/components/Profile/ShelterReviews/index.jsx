@@ -87,8 +87,7 @@ function ShelterReviewsCard(props) {
                 <InfiniteScroll 
                     dataLength={comments.length} 
                     hasMore={hasMore} 
-                    next={fetchComments(false)} 
-                    inverse={true}
+                    next={() => fetchComments(false)}
                     loader={<p className="mt-3 mb-0" style={{ textAlign: "center" }}>Loading...</p>}
                     scrollableTarget="review-container"
                     endMessage={
