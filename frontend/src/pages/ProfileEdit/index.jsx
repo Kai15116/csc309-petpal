@@ -222,7 +222,6 @@ function ProfileEdit() {
                     setAddress(data?.address);
                     setDescription(data?.description);
                     setWebsite(data?.website);
-                    setProfPic(data?.profile_picture);
                 }
             }
             catch (e) {

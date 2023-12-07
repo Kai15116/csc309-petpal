@@ -10,6 +10,8 @@ import ShelterProfileDetailsCard from "../../components/Profile/ShelterProfileDe
 import ShelterReviewsCard from "../../components/Profile/ShelterReviews";
 import ShelterProfileBanner from "../../components/Profile/ShelterProfileBanner";
 import ExampleMilky from "../../assets/example_images/milky3.jpg";
+import PlaceHolder from "../../assets/images/placeholderprofile.png"
+
 
 function ShelterProfile() {
     const {getContextUser} = useContext(userContext);
@@ -90,7 +92,7 @@ function ShelterProfile() {
                         {/* <div className="test-div"></div> */}
                         <Image 
                             className="test-div" 
-                            src={userInfo?.profile_picture ? userInfo?.profile_picture : ExampleMilky}
+                            src={userInfo?.profile_picture ? userInfo?.profile_picture : PlaceHolder}
                             style={{
                                 backgroundColor: "#FAAF75", 
                                 minWidth: "15rem", 
