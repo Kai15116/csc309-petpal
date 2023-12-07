@@ -1,4 +1,4 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveAPIView
 from .models import Comment, Rating
 from .serializers import CommentSerializer, RatingSerializer
 from django.apps import apps
@@ -194,7 +194,7 @@ class CommentRetrieveView(RetrieveAPIView):
         except Comment.DoesNotExist:
             raise Http404('Comment does not exist.')
         
-class RatingRetrieveView(RetrieveAPIView):
+class RatingRetrieveView(RetrieveUpdateAPIView):
     """
     get: Retrieves a single rating given the primary key in URL.
     """

@@ -20,7 +20,7 @@ function CommentButtonModal(props) {
     const [commentText, setCommentText] = useState('');
     const handleCommentChange = (e) => {
         if (isReply) {
-            setCommentText(`@${replyTo.username} ${e.target.value}`);
+            setCommentText(`@${replyTo?.username} ${e.target.value}`);
         } else {
             setCommentText(e.target.value);
         }
@@ -34,10 +34,10 @@ function CommentButtonModal(props) {
         e.preventDefault();
 
         if (isReply) {
-            setCommentText(`@${replyTo.username} ${commentText}`);
+            setCommentText(`@${replyTo?.username} ${commentText}`);
         }
         console.log(commentFor);
-        console.log(replyTo.username);
+        console.log(replyTo?.username);
         console.log(isReply);
         console.log(objectId);
         console.log(commentText);
