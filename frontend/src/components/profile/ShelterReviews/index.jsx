@@ -1,10 +1,10 @@
 import { Modal, Button, Card, Col, Container, Row, Stack, Form} from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {userContext} from "../../context/userContext";
+import {userContext} from "../../../context/userContext";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import CommentButtonModal from "./CommentButtonModal";
-import CommentCard from "./CommentCard";
+import CommentButtonModal from "../../Comments/CommentButtonModal";
+import CommentCard from "../../Comments/CommentCard";
 
 
 // Pass in objectId, userContext, and what the comment is for

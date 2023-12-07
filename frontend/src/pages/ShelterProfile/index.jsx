@@ -1,14 +1,15 @@
 import {useContext, useState, useEffect} from "react";
-import { userContext } from "../context/userContext";
+import "./style.css";
+import { userContext } from "../../context/userContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Stack, Image, Card } from "react-bootstrap";
-import LandingHeader from "../components/LandingHeader";
-import Footer from "../components/Footer";
-import ShelterPetCarouselCard from "../components/profile/ShelterPetCarousel";
-import ShelterProfileDetailsCard from "../components/profile/ShelterProfileDetails";
-import ShelterReviewsCard from "../components/profile/ShelterReviews";
-import ExampleMilky from "../assets/example_images/milky3.jpg";
-import ShelterProfileBanner from "../components/profile/ShelterProfileBanner";
+import LandingHeader from "../../components/LandingHeader";
+import Footer from "../../components/Footer";
+import ShelterPetCarouselCard from "../../components/Profile/ShelterPetCarousel";
+import ShelterProfileDetailsCard from "../../components/Profile/ShelterProfileDetails";
+import ShelterReviewsCard from "../../components/Profile/ShelterReviews";
+import ShelterProfileBanner from "../../components/Profile/ShelterProfileBanner";
+import ExampleMilky from "../../assets/example_images/milky3.jpg";
 
 function ShelterProfile() {
     const {getContextUser} = useContext(userContext);

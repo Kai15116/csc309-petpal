@@ -1,6 +1,5 @@
 import { Button, Card, Collapse} from "react-bootstrap";
-import ExampleBanner from "../../assets/example_images/yosemite_banner.jpg";
-import "../../styles/profiles.css"
+import ExampleBanner from "../../../assets/example_images/yosemite_banner.jpg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

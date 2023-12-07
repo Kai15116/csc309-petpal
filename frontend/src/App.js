@@ -24,7 +24,6 @@ import Application from './pages/Application';
 import BlogCreationUpdate from './pages/BlogCreationUpdate';
 import ShelterBlogs from './pages/ShelterBlogs';
 import BlogDetails from './pages/BlogDetails';
-import ViewShelterPets from './pages/ViewShelterPets';
 import ProfileEdit from './pages/ProfileEdit';
 
 
@@ -44,7 +43,6 @@ function App() {
           <Route path="/searchpage" element={<SearchFilter/>}/>
           <Route path="/seekerprofile/:userId" element={<SeekerProfile />} />
           <Route path="/shelterprofile/:userId" element={<ShelterProfile />} />
-          <Route path="/viewshelterpets/:userId" element={<ViewShelterPets />} />
           <Route path="/profileedit" element={<ProfileEdit />} />
 
           <Route path='/shelters' element={<ShelterList/>}/>

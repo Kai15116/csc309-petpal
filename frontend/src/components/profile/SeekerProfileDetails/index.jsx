@@ -1,7 +1,6 @@
 import { Button, Card, Collapse, Image } from "react-bootstrap";
-import ExampleBanner from "../../assets/example_images/yosemite_banner.jpg";
-import ExampleMilky from "../../assets/example_images/milky3.jpg";
-import "../../styles/profiles.css"
+import ExampleBanner from "../../../assets/example_images/yosemite_banner.jpg";
+import ExampleMilky from "../../../assets/example_images/milky3.jpg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

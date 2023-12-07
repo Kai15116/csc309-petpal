@@ -1,8 +1,8 @@
-import LandingHeader from '../components/LandingHeader';
-import Footer from '../components/Footer';
+import LandingHeader from '../../components/LandingHeader';
+import Footer from '../../components/Footer';
 import { Alert, Container, Accordion, useAccordionButton, Button, ListGroup, Card, Row, Col, AccordionContext, Form, Modal, AccordionCollapse} from 'react-bootstrap';
 import { useContext, useEffect, useState } from 'react';
-import { userContext } from '../context/userContext';
+import { userContext } from '../../context/userContext';
 import { useNavigate } from 'react-router-dom';
 
 function CollapseButton({ children, eventKey, callback }) {
