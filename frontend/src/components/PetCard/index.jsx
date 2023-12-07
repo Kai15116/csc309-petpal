@@ -14,9 +14,9 @@ function PetCard(props) {
             <Card.Text>
             Breed: {breed_name}
             <br></br>
-            Age: {age}
+            Age: {age} years
             <br></br>
-            Size: {weight}
+            Size: {weight} lbs
             <br></br>
             <Card.Link href={`/details/${id}`} className="stretched-link">Learn More</Card.Link>
 
