@@ -137,6 +137,7 @@ footer {
     margin-left: 50%;
     transform: translateX(-50%);
     height: 100%;
+    min-height: 600px;
 }
 
 .background-adoption {
