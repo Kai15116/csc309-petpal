@@ -137,15 +137,15 @@ const BlogCreationUpdate = () => {
             setBlogContent(data.content || '');
 
             const blob1 = await fetch(data.picture_1).then((r) => r.blob());
-            const file1 = new File([blob1], extractFileName(data.picture_1), { type: "image/*" });
+            const file1 = new File([blob1], extractFileName(data.picture_1) + ".jpeg", { type: "image/*" });
             setSelectedImage1(file1);
 
             const blob2 = await fetch(data.picture_2).then((r) => r.blob());
-            const file2 = new File([blob2], extractFileName(data.picture_2), { type: "image/*" });
+            const file2 = new File([blob2], extractFileName(data.picture_2) + ".jpeg", { type: "image/*" });
             setSelectedImage2(file2);
 
             const blob3 = await fetch(data.picture_3).then((r) => r.blob());
-            const file3 = new File([blob3], extractFileName(data.picture_3), { type: "image/*" });
+            const file3 = new File([blob3], extractFileName(data.picture_3) + ".jpeg", { type: "image/*" });
             setSelectedImage3(file3);
            
             if (blogId) {

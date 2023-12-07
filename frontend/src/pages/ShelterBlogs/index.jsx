@@ -263,7 +263,7 @@ const ShelterBlogs = () => {
               <div className="blog-card d-flex align-items-center">
                 <div>
                   <h2 className="me-3">{blog.title}</h2>
-                  <h5 className="me-3">Owner: {blog.owner}</h5>
+                  <h5 className="me-3">Owner: {blog.ownername}</h5>
                 </div>
                 <div className="ms-auto">
                   <Link to={`/blogDetails/${blog.id}`}>
