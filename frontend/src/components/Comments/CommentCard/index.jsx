@@ -24,7 +24,7 @@ function CommentCard(props) {
     if (poster === viewerId) {
         commentColor = "#000000";
     }
-    if (comment.object_id == ownerId) {
+    if (comment.user == ownerId) {
         sideColor = '#A0A29A';
     }
 
