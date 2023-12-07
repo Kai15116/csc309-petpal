@@ -71,7 +71,7 @@ function ShelterReviewsCard(props) {
             <Card.Title className="pt-3 px-4 d-flex flex-row justify-content-between" > 
                 <h3 className="mb-0 mt-1" >Reviews</h3> 
                 <CommentButtonModal 
-                    label="Write Review"
+                    label="Comment"
                     userContext={user}
                     objectId={shelterId}
                     for="shelter"
@@ -94,6 +94,8 @@ function ShelterReviewsCard(props) {
                     <Stack gap={3}>
                         { comments.map((comment) => (
                             <CommentCard 
+                                viewer={user}
+                                ownerId={shelterId}
                                 key={comment.id}
                                 comment={comment}
                                 allowReply={true}

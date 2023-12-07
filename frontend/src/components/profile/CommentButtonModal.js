@@ -13,26 +13,38 @@ function CommentButtonModal(props) {
     const userContext = props.userContext;
     const objectId = props.objectId;
     const commentFor = props.for;
+    const replyTo = props.replyTo;
+    const isReply = (commentFor === 'reply');
 
     const [formErrors, setFormErrors] = useState({});
     const [commentText, setCommentText] = useState('');
     const handleCommentChange = (e) => {
-        setCommentText(e.target.value);
+        if (isReply) {
+            setCommentText(`@${replyTo.username} ${e.target.value}`);
+        } else {
+            setCommentText(e.target.value);
+        }
     }
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
     const handleShelterCommentCreate = async (e) => {
         e.preventDefault();
 
+        if (isReply) {
+            setCommentText(`@${replyTo.username} ${commentText}`);
+        }
+        console.log(commentFor);
+        console.log(replyTo.username);
+        console.log(isReply);
         console.log(objectId);
         console.log(commentText);
         console.log(userContext?.contextUserId);
+
         try {
-            const response = await fetch(`http://localhost:8000/comments/shelter/${objectId}/`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/comments/shelter/${objectId}/`, {
                 method: 'POST',
                 body: JSON.stringify({
                     text: commentText,
@@ -64,9 +76,15 @@ function CommentButtonModal(props) {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                {props.label ? props.label : "Add Comment"}
-            </Button>
+            { isReply ? 
+                <a href="#" style={{ textDecoration: 'none', fontSize: '12px', color: '#000000'}} onClick={handleShow}>
+                    Reply
+                </a> :
+                <Button variant="primary" onClick={handleShow}>
+                    {props.label ? props.label : "Add Comment"}
+                </Button>
+            }
+
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title> {props.label} </Modal.Title>
@@ -74,13 +92,13 @@ function CommentButtonModal(props) {
                 <Modal.Body>
                     <Form> 
                         <Form.Group>
-                            <Form.Label> Comment Content </Form.Label>
+                            <Form.Label> Content </Form.Label>
                             <Form.Control 
                                 as="textarea" 
                                 rows="5" 
                                 onChange={(e) => handleCommentChange(e)}
                                 isInvalid={formErrors?.status || formErrors?.text} 
-                                placeholder="Enter comment here"
+                                placeholder='Enter content here'
                             />
                         </Form.Group>
                     </Form>
