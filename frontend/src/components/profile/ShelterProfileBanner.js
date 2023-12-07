@@ -13,8 +13,21 @@ function ShelterProfileBanner(props) {
     const navigate = useNavigate();
     
     return (
-        <div id="shelter-profile-banner">
-            <div id="banner-overlay">
+        <div style={{
+            backgroundImage: `url(${ userInfo?.banner ? userInfo?.banner : ExampleBanner})`,
+            backgroundSize: "cover",
+            width: "100%",
+            height: "20rem",
+        }}>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                position: "relative",
+                width: "100%",
+                height: "20rem",
+                background: "rgba(0, 0, 0, 0.45)"
+            }}>
                 <h1 id="banner-title">
                     {
                         (userInfo?.mission_title !== null && userInfo?.mission_title !== '') ? 

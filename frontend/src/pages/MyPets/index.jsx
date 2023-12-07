@@ -107,7 +107,7 @@ const MyPets = () => {
         <div className="d-flex mx-auto" id="my-pets-main-container">
 
           <div className="d-flex flex-column justify-content-center" id="profile-container">
-            <ShelterCard name={userInfo?.username} profileLink={`shelterprofile/${id}`} stars={userInfo?.avg_rating}
+            <ShelterCard name={userInfo?.username} profileLink={`/shelterprofile/${id}`} stars={userInfo?.avg_rating}
                          reviewCount={userInfo?.review_count}
                          joinDate={new Date(Date.parse(userInfo?.created_at))}
                          profilePicUrl={userInfo?.profile_picture} bannerPicUrl={userInfo?.banner}>

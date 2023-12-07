@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 import ShelterPetCarouselCard from "../components/profile/ShelterPetCarousel";
 import ShelterProfileDetailsCard from "../components/profile/ShelterProfileDetails";
 import ShelterReviewsCard from "../components/profile/ShelterReviews";
-import ExampleBanner from "../assets/example_images/yosemite_banner.jpg"
+import ExampleMilky from "../assets/example_images/milky3.jpg";
 import ShelterProfileBanner from "../components/profile/ShelterProfileBanner";
 
 function ShelterProfile() {
@@ -86,7 +86,13 @@ function ShelterProfile() {
             <Container className="pt-3 pb-5" style={{ backgroundColor: "#C8F4FF"}}>
                 <Row style={{ width: "100%" }}>
                     <Col className="shelter-profile-col" xs={12} sm={3}>
-                        <div className="test-div"></div>
+                        {/* <div className="test-div"></div> */}
+                        <Image 
+                            className="rounded-circle test-div" 
+                            src={userInfo?.profile_picture ? userInfo?.profile_picture : ExampleMilky}
+                            style={{backgroundColor: "cornsilk", width: "15rem", height: "15rem"}} 
+                            alt="Profile Picture"
+                        />
                         <ShelterProfileDetailsCard
                             userInfo={userInfo}
                             userId={userId}

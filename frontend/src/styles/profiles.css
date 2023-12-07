@@ -29,10 +29,10 @@
 .shelter-profile-edit-icon {
     margin-left: 1rem;
     color: white;
-  }
-  .shelter-profile-edit-icon:hover {
+}
+.shelter-profile-edit-icon:hover {
     color: #00aab6;
-  }
+}
   
 /* Profile Banner and Circle*/
 /* .profile-banner {
@@ -60,10 +60,7 @@
     position: relative;
     bottom: 10rem;
     left: calc(50% - 7rem);
-    background-image: url('../assets/example_images/milky3.jpg');
-    background-size: cover;
     width: 15rem;
     height: 15rem;
-    border-radius: 50%;
     border: 5px solid #C8F4FF;
 }
