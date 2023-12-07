@@ -27,7 +27,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = env.bool('DEBUG')
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
@@ -52,8 +52,11 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_extensions',
     'corsheaders',
-    'cloudinary'
 ]
+
+if not DEBUG:
+    INSTALLED_APPS = [] + INSTALLED_APPS + ['cloudinary']
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -69,11 +72,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': env('CLOUDINARY_NAME'),
-    'API_KEY': env('CLOUDINARY_API_KEY'),
-    'API_SECRET': env('CLOUDINARY_API_SECRET')
-}
+if not DEBUG:
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': env('CLOUDINARY_NAME'),
+        'API_KEY': env('CLOUDINARY_API_KEY'),
+        'API_SECRET': env('CLOUDINARY_API_SECRET')
+    }
+
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -107,6 +112,11 @@ WSGI_APPLICATION = 'petpal.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+} if DEBUG else {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': env("POSTGRES_DATABASE"),
@@ -171,7 +181,8 @@ AUTH_USER_MODEL = "accounts.User"
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "media/"
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # REST framework
 REST_FRAMEWORK = {
