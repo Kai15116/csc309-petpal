@@ -35,6 +35,7 @@ function ProfileEdit() {
 
     // Accounts have these attributes
     const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
@@ -42,11 +43,16 @@ function ProfileEdit() {
     const [website, setWebsite] = useState('');
     const [profpic, setProfPic] = useState(null);
     const [banner, setBanner] = useState(null);
+    // Seeker has these attributes
+    const [allowNotifs, setAllowNotifs] = useState(false);
+    const handleNotifCheck = (e) => {
+        setAllowNotifs(!allowNotifs);
+    }
     // Shelter has these attributes
     const [mission, setMission] = useState('');
     const [name, setName] = useState('');
 
-    const [formError, setFormError] = useState(null);
+    const [formError, setFormError] = useState({});
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -100,74 +106,6 @@ function ProfileEdit() {
         }
     }
 
-    useEffect( function () {
-        async function fetchUserInfo() {
-            if (contextUserType === 'shelter') {
-                try {
-                    const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}`, {
-                        method: 'GET', 
-                        headers: {
-
-                            'Authorization': `Bearer ${accessToken}`,
-                            
-                        }
-                    });
-                    if (response.status >= 400) {
-                        navigate("/");
-                    } else if (response.status >= 200 && response.status < 300) {
-                        const data = await response.json();
-                        setUserInfo({...data});
-                        
-                        setUsername(data?.username);
-                        setName(data?.mission_title);
-                        setEmail(data?.email);
-                        setPhone(data?.phone_number);
-                        setAddress(data?.address);
-                        setDescription(data?.description);
-                        setWebsite(data?.website);
-                        setMission(data?.mission_statement);
-                    }
-                }
-                catch (e) {
-                    console.log(e);
-                    navigate("/");
-                }
-            } else if (contextUserType === 'seeker') {
-                try {
-                    const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/seeker/${contextUserId}`, {
-                        method: 'GET', 
-                        headers: {
-
-                            'Authorization': `Bearer ${accessToken}`,
-                            
-                        }
-                    });
-                    if (response.status >= 400) {
-                        navigate("/");
-                        console.log(contextUserId, userInfo);
-                    } else if (response.status >= 200 && response.status < 300) {
-                        const data = await response.json();
-                        setUserInfo({...data});
-                        
-                        setUsername(data?.username);
-                        setEmail(data?.email);
-                        setPhone(data?.phone_number);
-                        setAddress(data?.address);
-                        setDescription(data?.description);
-                        setWebsite(data?.website);
-                        setProfPic(data?.profile_picture);
-                    }
-                }
-                catch (e) {
-                    console.log(e);
-                    navigate("/");
-                }
-            }
-        }
-
-        fetchUserInfo();
-    }, []);
-
     async function fetchUserInfo() {
         if (contextUserType === 'shelter') {
             try {
@@ -185,6 +123,7 @@ function ProfileEdit() {
                     const data = await response.json();
                     setUserInfo({...data});
                     
+                    setPassword(data?.password);
                     setUsername(data?.username);
                     setName(data?.mission_title);
                     setEmail(data?.email);
@@ -216,12 +155,14 @@ function ProfileEdit() {
                     const data = await response.json();
                     setUserInfo({...data});
                     
+                    setPassword(data?.password);
                     setUsername(data?.username);
                     setEmail(data?.email);
                     setPhone(data?.phone_number);
                     setAddress(data?.address);
                     setDescription(data?.description);
                     setWebsite(data?.website);
+                    setAllowNotifs(data?.receive_pet_notification);
                 }
             }
             catch (e) {
@@ -230,6 +171,74 @@ function ProfileEdit() {
             }
         }
     }
+
+    useEffect( function () {
+        // async function fetchUserInfo() {
+        //     if (contextUserType === 'shelter') {
+        //         try {
+        //             const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}`, {
+        //                 method: 'GET', 
+        //                 headers: {
+
+        //                     'Authorization': `Bearer ${accessToken}`,
+                            
+        //                 }
+        //             });
+        //             if (response.status >= 400) {
+        //                 navigate("/");
+        //             } else if (response.status >= 200 && response.status < 300) {
+        //                 const data = await response.json();
+        //                 setUserInfo({...data});
+                        
+        //                 setUsername(data?.username);
+        //                 setName(data?.mission_title);
+        //                 setEmail(data?.email);
+        //                 setPhone(data?.phone_number);
+        //                 setAddress(data?.address);
+        //                 setDescription(data?.description);
+        //                 setWebsite(data?.website);
+        //                 setMission(data?.mission_statement);
+        //             }
+        //         }
+        //         catch (e) {
+        //             console.log(e);
+        //             navigate("/");
+        //         }
+        //     } else if (contextUserType === 'seeker') {
+        //         try {
+        //             const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/seeker/${contextUserId}`, {
+        //                 method: 'GET', 
+        //                 headers: {
+
+        //                     'Authorization': `Bearer ${accessToken}`,
+                            
+        //                 }
+        //             });
+        //             if (response.status >= 400) {
+        //                 navigate("/");
+        //                 console.log(contextUserId, userInfo);
+        //             } else if (response.status >= 200 && response.status < 300) {
+        //                 const data = await response.json();
+        //                 setUserInfo({...data});
+                        
+        //                 setUsername(data?.username);
+        //                 setEmail(data?.email);
+        //                 setPhone(data?.phone_number);
+        //                 setAddress(data?.address);
+        //                 setDescription(data?.description);
+        //                 setWebsite(data?.website);
+        //                 setProfPic(data?.profile_picture);
+        //             }
+        //         }
+        //         catch (e) {
+        //             console.log(e);
+        //             navigate("/");
+        //         }
+        //     }
+        // }
+
+        fetchUserInfo();
+    }, []);
 
     const validateEmail = (value) => {
         const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -248,66 +257,62 @@ function ProfileEdit() {
         setPhone(e.target.value);
     };
 
-    // const handleContactPatchSubmit = async (inputs, e) => {
-    //     e.preventDefault();
+    const handleAccountPatchSubmit = (e) => {
+        e.preventDefault();
 
-    //     if (validateEmail(email) && validatePhone(phone)) {
-    //         try {
-    //             const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}/`, {
-    //                 method: 'PATCH',
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                     'Authorization': `Bearer ${accessToken}`,
-    //                 },
-    //                 body: JSON.stringify({
-    //                     email: "hans@gmail.com"
-    //                 }),
-    //             });
-
-    //             if (response.ok) {
-    //                 console.log('Information Updated');
-    //                 setFormError(null);
-    //             } else {
-    //                 const errorData = await response.json();
-    //                 console.error('Failed to update information', errorData);
-    //                 console.log(contactFormData);
-
-    //                 setFormError(errorData.message || 'Failed to update information');
-    //             }
-    //         } catch (error) {
-    //             console.error(error);
-    //             setFormError('An unexpected error occurred');
-    //         }
-    //     } else {
-    //         setFormError('Invalid email or phone number. Please check your inputs.');
-    //     }
-    // };
-
-    // const handleDescriptionPatchSubmit = (contactInputs) => {
-    //     const contactFormData = new FormData();
-    //     contactFormData.append("description", contactInputs.email);
-    //     contactFormData.append("mission_title", contactInputs.name);
-    //     contactFormData.append("mission_statement", contactInputs.statement);
-    //     console.log(email);
-
-    //     fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}`, {
-    //         method: 'PATCH',
-    //         body: contactFormData,
-    //         headers: {
-    //             'Authorization': `Bearer ${accessToken}`,
-    //         }
-    //     })
-    //     .then(response => {
-    //         response.j();
-    //         console.log(response);
-    //     })
-    //     .then(data => {
-    //         console.log("Information Updated", data);
-    //     })
-    //     .catch(error => {
-    //         console.error(error);
-    //     });
-    // }
+        if (contextUserType === 'shelter') {
+            fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}/`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    username,
+                    password,
+                }),
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                }
+            }).then(response => {
+                if (response.status >= 200 && response.status < 300) {
+                    fetchUserInfo();
+                    setFormError({});
+                    navigate(`/shelterprofile/${contextUserId}`);
+                } else if (response.status === 400) {
+                    response.json().then( data => {
+                        setFormError({...data});
+                        console.log({...data});
+                    })
+                }
+            }).catch(error => {
+                console.error(error, "");
+            });
+        } else if (contextUserType === 'seeker') {
+            fetch(`${process.env.REACT_APP_API_URL}/accounts/seeker/${contextUserId}/`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    username,
+                    password,
+                    receive_pet_notification: allowNotifs,
+                }),
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                }
+            }).then(response => {
+                if (response.status >= 200 && response.status < 300) {
+                    fetchUserInfo();
+                    setFormError({});
+                    navigate(`/seekerprofile/${contextUserId}`);
+                } else if (response.status === 400) {
+                    response.json().then( data => {
+                        setFormError({...data});
+                        console.log({...data});
+                    })
+                }
+            }).catch(error => {
+                console.error(error, "");
+            });
+        }
+    }
     
     const handleContactPatchSubmit = (e) => {
         e.preventDefault();
@@ -332,7 +337,7 @@ function ProfileEdit() {
                     response.json();
                     console.log(response);
                     fetchUserInfo();
-                    setFormError(null);
+                    setFormError({});
                     navigate(`/shelterprofile/${contextUserId}`);
                 })
                 .then(data => {
@@ -358,7 +363,7 @@ function ProfileEdit() {
                     response.json();
                     console.log(response);
                     fetchUserInfo();
-                    setFormError(null);
+                    setFormError({});
                     navigate(`/seekerprofile/${contextUserId}`);
                 })
                 .then(data => {
@@ -369,66 +374,62 @@ function ProfileEdit() {
                 });
             }
         } else {
-            setFormError('Invalid email or phone number. Please check your inputs.');
+            setFormError({contactForm: 'Invalid email or phone number. Please check your inputs.'});
         }
     }
 
     const handleDescriptionPatchSubmit = (e) => {
         e.preventDefault();
 
-        if (validateEmail(email) && validatePhone(phone)) {
-            if (contextUserType === 'shelter') {
-                fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}/`, {
-                    method: 'PATCH',
-                    body: JSON.stringify({
-                        mission_statement: mission,
-                        description,
-                    }),
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`,
-                        'Content-Type': 'application/json',
-                    }
-                })
-                .then(response => {
-                    response.json();
-                    console.log(response);
-                    fetchUserInfo();
-                    setFormError(null);
-                    navigate(`/shelterprofile/${contextUserId}`);
-                })
-                .then(data => {
-                    console.log("Description Updated", data);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-            } else if (contextUserType === 'seeker') {
-                fetch(`${process.env.REACT_APP_API_URL}/accounts/seeker/${contextUserId}/`, {
-                    method: 'PATCH',
-                    body: JSON.stringify({
-                        description,
-                    }),
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`,
-                        'Content-Type': 'application/json',
-                    }
-                })
-                .then(response => {
-                    response.json();
-                    console.log(response);
-                    fetchUserInfo();
-                    setFormError(null);
-                    navigate(`/seekerprofile/${contextUserId}`);
-                })
-                .then(data => {
-                    console.log("Description Updated", data);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-            }
-        } else {
-            setFormError('Invalid inputs.');
+        if (contextUserType === 'shelter') {
+            fetch(`${process.env.REACT_APP_API_URL}/accounts/shelter/${contextUserId}/`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    mission_statement: mission,
+                    description,
+                }),
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                response.json();
+                console.log(response);
+                fetchUserInfo();
+                setFormError({});
+                navigate(`/shelterprofile/${contextUserId}`);
+            })
+            .then(data => {
+                console.log("Description Updated", data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        } else if (contextUserType === 'seeker') {
+            fetch(`${process.env.REACT_APP_API_URL}/accounts/seeker/${contextUserId}/`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    description,
+                }),
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                response.json();
+                console.log(response);
+                fetchUserInfo();
+                setFormError({});
+                navigate(`/seekerprofile/${contextUserId}`);
+            })
+            .then(data => {
+                console.log("Description Updated", data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
         }
     }
 
@@ -469,7 +470,7 @@ function ProfileEdit() {
     return (
         <div style={{ backgroundColor: "#C8F4FF" }}>
             <LandingHeader />
-            <Container className='p-5' fluid style={{ backgroundColor: "#C8F4FF", minHeight: "82vh"}}>
+            <Container className='p-5' fluid style={{ backgroundColor: "#C8F4FF", minHeight: "100vh"}}>
             { (contextUserType === 'shelter') ? (
     <Accordion defaultActiveKey="contact">
         <Row>
@@ -499,16 +500,19 @@ function ProfileEdit() {
                                     <Form.Label>Username</Form.Label>
                                     <Form.Control 
                                         type="text"
-                                        disabled
                                         value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
                                     />
+                                    {formError?.username && (
+                                    <Form.Text className="text-danger"> {formError?.username} </Form.Text>
+                                    )}
                                 </Form.Group>
                                 <Form.Group className='mb-3' >
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control 
                                         type="text"
-                                        disabled
-                                        value="*********"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </Form.Group>
                                 <div >
@@ -600,7 +604,7 @@ function ProfileEdit() {
                                     />
                                 </Form.Group>
                                 
-                                {formError && <Alert variant="danger">{formError}</Alert>}
+                                {formError?.contactForm && <Alert variant="danger">{formError?.contactForm}</Alert>}
 
                                 <div >
                                     <Button className='me-3' variant="primary" onClick={(e) => handleContactPatchSubmit(e)}>
@@ -637,7 +641,7 @@ function ProfileEdit() {
                                     />
                                 </Form.Group>
                                 
-                                {formError && <Alert variant="danger">{formError}</Alert>}
+                                {formError?.descriptionForm && <Alert variant="danger">{formError?.descriptionForm}</Alert>}
 
                                 <div >
                                     <Button className='me-3' variant="primary" onClick={(e) => handleDescriptionPatchSubmit(e)}>
@@ -668,7 +672,7 @@ function ProfileEdit() {
                                     />
                                 </Form.Group>
                                 
-                                {formError && <Alert variant="danger">{formError}</Alert>}
+                                {formError?.pictureForm && <Alert variant="danger">{formError?.pictureForm}</Alert>}
 
                                 <div >
                                     <Button className='me-3' variant="primary" onClick={handlePictureSubmit}>
@@ -726,31 +730,36 @@ function ProfileEdit() {
                                     <Form.Label>Username</Form.Label>
                                     <Form.Control 
                                         type="text"
-                                        disabled
                                         value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
                                     />
+                                    {formError?.username && (
+                                    <Form.Text className="text-danger"> {formError?.username} </Form.Text>
+                                    )}
                                 </Form.Group>
                                 <Form.Group className='mb-3' >
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control 
                                         type="text"
-                                        disabled
-                                        value="*********"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </Form.Group>
 
-                                <div className='mb-3' key={"reverse-checkbox"}>
+                                <Form.Group className='mb-3' key={"reverse-checkbox"}>
                                     <Form.Check 
                                         label="By checking this box, you agree to recieve notifications about new pet listings"
                                         name="wantnotifs"
                                         type="checkbox"
                                         id={'reverse-checkbox-1'}
+                                        checked={allowNotifs}
+                                        onChange={handleNotifCheck}
                                     />
-                                </div>
+                                </Form.Group>
 
                                 <div className='d-flex flex-row justify-content-between align-items-center' >
                                     <div>
-                                        <Button className='me-3' variant="primary" onClick={(e) => handleContactPatchSubmit(e)}>
+                                        <Button className='me-3' variant="primary" onClick={(e) => handleAccountPatchSubmit(e)}>
                                             Submit
                                         </Button>
                                         <Button variant="outline-primary" onClick={ (e) => navigate(`/seekerprofile/${contextUserId}`)} >
@@ -822,7 +831,7 @@ function ProfileEdit() {
                                     />
                                 </Form.Group>
                                 
-                                {formError && <Alert variant="danger">{formError}</Alert>}
+                                {formError?.contactForm && <Alert variant="danger">{formError?.contactForm}</Alert>}
 
                                 <div >
                                     <Button className='me-3' variant="primary" onClick={(e) => handleContactPatchSubmit(e)}>
@@ -849,7 +858,7 @@ function ProfileEdit() {
                                     />
                                 </Form.Group>
                                 
-                                {formError && <Alert variant="danger">{formError}</Alert>}
+                                {formError?.descriptionForm && <Alert variant="danger">{formError?.descriptionForm}</Alert>}
 
                                 <div >
                                     <Button className='me-3' variant="primary" onClick={(e) => handleDescriptionPatchSubmit(e)}>
@@ -880,7 +889,7 @@ function ProfileEdit() {
                                     />
                                 </Form.Group>
                                 
-                                {formError && <Alert variant="danger">{formError}</Alert>}
+                                {formError?.pictureForm && <Alert variant="danger">{formError?.pictureForm}</Alert>}
 
                                 <div >
                                     <Button className='me-3' variant="primary" onClick={handlePictureSubmit}>

@@ -18,7 +18,7 @@ function SeekerProfileDetailsCard(props) {
                 className="m-0 p-0"
                 style={{
                     position: 'absolute',
-                    top: '6rem',
+                    top: '5rem',
                     left: 'calc(50% - 4rem)',
                     backgroundColor: 'yellow',
                     borderRadius: '4rem',
