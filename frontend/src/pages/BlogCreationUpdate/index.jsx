@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ReactMarkdown from 'react-markdown';
-import LandingHeader from '../components/LandingHeader';
-import Footer from '../components/Footer';
-import image1 from "../assets/images/image1.jpg"
-import image2 from "../assets/images/image2.jpg"
-import image3 from "../assets/images/image3.jpg"
-import noImage from '../assets/images/no_image_icon.png'; 
-import '../styles/blog_creation_and_update.css'; 
+import LandingHeader from '../../components/LandingHeader';
+import Footer from '../../components/Footer';
+import image1 from "../../assets/images/image1.jpg"
+import image2 from "../../assets/images/image2.jpg"
+import image3 from "../../assets/images/image3.jpg"
+import noImage from '../../assets/images/no_image_icon.png'; 
+import './style.css'; 
 import MDEditor, { selectWord } from "@uiw/react-md-editor";
 import { useNavigate, useParams } from 'react-router-dom';
-import { userContext } from '../context/userContext';
+import { userContext } from '../../context/userContext';
 
 const BlogCreationUpdate = () => {
   const {getContextUser} = useContext(userContext);
@@ -239,7 +239,7 @@ const BlogCreationUpdate = () => {
     <div className="wrapper">
       <LandingHeader />
       <main class="page-content">  
-        <div>
+        <div className="text-center mx-auto">
           {editMode ? (
             <h3>Edit Shelter Blog</h3>
           ) : (
@@ -247,8 +247,8 @@ const BlogCreationUpdate = () => {
           )}
         </div>
             <div class="background-details">
-                <div class="bg-white mt-4 p-4 rounded shadow">
-                    <div class="container">
+                <div class="bg-white mt-4 p-4 rounded shadow mx-auto">
+                    <div class="blog-container">
                       <div class="blog-details" style={{ overflow: 'hidden', wordWrap: 'break-word', maxWidth: '100%',
                         display: 'flex',
                         justifyContent: 'flex-start',
@@ -293,8 +293,8 @@ const BlogCreationUpdate = () => {
                       </div>
                   </div>    
                 </div>
-                <div class="bg-white mt-4 p-4 rounded shadow">
-                  <div class="container">
+                <div class="bg-white mt-4 p-4 rounded shadow mx-auto">
+                  <div class="blog-container">
                     <div class="blog-details">
                       <h4>2. Media</h4>
                         <h6>Include photos with different angles and environments</h6>
@@ -360,7 +360,7 @@ const BlogCreationUpdate = () => {
                     </div>
                   </div>
                 </div>
-                <div class="confirm-button"> 
+                <div class="confirm-button mx-auto"> 
                     <button
                       className="btn btn-primary btn-lg btn-xl post-button"
                       onClick={()=>{handleButtonClick()}}

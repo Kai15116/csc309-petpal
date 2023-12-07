@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect, useContext } from 'react';
-import LandingHeader from '../components/LandingHeader';
-import Footer from '../components/Footer';
-import '../styles/details_and_adoption.css'; 
+import LandingHeader from '../../components/LandingHeader';
+import Footer from '../../components/Footer';
+import './style.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ApplicationForm from "../components/ApplicationForm";
+import ApplicationForm from "../../components/ApplicationForm/index";
 import { useNavigate, useParams } from 'react-router-dom';
-import { userContext } from '../context/userContext';
+import { userContext } from '../../context/userContext';
 
 const Adoption = () => {
   const {getContextUser} = useContext(userContext);
