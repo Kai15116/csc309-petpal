@@ -114,6 +114,8 @@ We used PostgreSQL database provided from vercel to get the keys we use for `.en
 
 ![image](https://github.com/Kai15116/csc309-petpal/assets/65318176/30e3c2eb-539a-4d2a-ae82-41b1da9302a1)
 
+Before deployment, you might have to migrate if the database is brand new. 
+
 ### Cloudinary
 You can signup to https://cloudinary.com/ to get the keys we use for `.env` in backend. 
 
