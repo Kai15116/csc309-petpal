@@ -1,14 +1,15 @@
 import React, {useState, useEffect, useContext, useMemo} from 'react';
 import { Carousel, Pagination } from 'react-bootstrap';
 import {Link, useSearchParams} from 'react-router-dom';
-import LandingHeader from '../components/LandingHeader';
-import Footer from '../components/Footer';
-import noImage from "../assets/images/image-not-found-scaled.png"
-import '../styles/blog_shelters.css'; 
+import LandingHeader from '../../components/LandingHeader';
+import Footer from '../../components/Footer';
+import noImage from "../../assets/images/image-not-found-scaled.png"
+import './style.css'; 
 import { useNavigate, useParams } from 'react-router-dom';
-import { userContext } from '../context/userContext';
-import BlogImagesCarousel from '../components/BlogImagesCarousel';
-import CPagination from "../components/CPagination";
+import { userContext } from '../../context/userContext';
+import BlogImagesCarousel from '../../components/BlogImagesCarousel';
+import CPagination from "../../components/CPagination";
+import { BsTrash } from 'react-icons/bs';
 
 
 function to_url_params(object) {
@@ -133,7 +134,27 @@ const ShelterBlogs = () => {
         setAllBlogs({...allBlogs, results: updatedBlogs})
       })
       .catch(error => {
-        console.error('Error editing pet:', error);
+        console.error('Error editing blog:', error);
+      });
+  };
+
+  // delete a blog
+  const handleDelete = async (blog, blogIdx) => {
+    const formData = new FormData();
+    // make a PUT request to delete the blog
+    fetch(`${process.env.REACT_APP_API_URL}/blogs/${blog.id}/`, {
+      method: 'DELETE',
+      body: formData,
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      }
+    }).then(data => {
+        // delete local blog that was removed
+        const updatedBlogs = allBlogs?.results.filter((blog2, index) => blog2.id !== blog.id);
+        setAllBlogs({ ...allBlogs, results: updatedBlogs });
+      })
+      .catch(error => {
+        console.error('Error deleting blog:', error);
       });
   };
 
@@ -242,7 +263,7 @@ const ShelterBlogs = () => {
               <div className="blog-card d-flex align-items-center">
                 <div>
                   <h2 className="me-3">{blog.title}</h2>
-                  <h5 className="me-3">Owner: {blog.owner}</h5>
+                  <h5 className="me-3">Owner: {blog.ownername}</h5>
                 </div>
                 <div className="ms-auto">
                   <Link to={`/blogDetails/${blog.id}`}>
@@ -275,6 +296,12 @@ const ShelterBlogs = () => {
                       onClick={() => handleEditClick(blog)}
                     >
                       Edit
+                    </button>}
+                    {user.contextUserId === blog.owner && <button className="ms-1 btn btn-secondary"
+                      variant="danger"
+                      onClick={() => handleDelete(blog, index)}
+                    >
+                      <BsTrash />
                     </button>}
                   </div>
                 </div>

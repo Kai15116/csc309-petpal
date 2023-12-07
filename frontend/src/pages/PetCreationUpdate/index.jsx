@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect, useContext } from 'react';
-import LandingHeader from '../components/LandingHeader';
-import Footer from '../components/Footer';
-import '../styles/pet_creation_and_update.css';
+import LandingHeader from '../../components/LandingHeader';
+import Footer from '../../components/Footer';
+import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import image1 from "../assets/images/image1.jpg"
-import image2 from "../assets/images/image2.jpg"
-import image3 from "../assets/images/image3.jpg"
-import noImage from '../assets/images/no_image_icon.png';
+import image1 from "../../assets/images/image1.jpg"
+import image2 from "../../assets/images/image2.jpg"
+import image3 from "../../assets/images/image3.jpg"
+import noImage from '../../assets/images/no_image_icon.png';
 import { useNavigate, useParams } from 'react-router-dom';
-import { userContext } from '../context/userContext';
+import { userContext } from '../../context/userContext';
 
 const PetCreationUpdate = () => {
   const {getContextUser} = useContext(userContext);
@@ -32,6 +32,7 @@ const PetCreationUpdate = () => {
   const [petMedicalHistory, setPetMedicalHistory] = useState('');
   const [additionalNotes, setAdditionalNotes] = useState('');
   const [editMode, setEditMode] = useState(false);
+  const [petStatus, setPetStatus] = useState('available');
 
   const [petNameError, setPetNameError] = useState('')
   const [petAgeError, setPetAgeError] = useState('');
@@ -210,20 +211,21 @@ const PetCreationUpdate = () => {
               setPetFee(data.adoption_fee || null);
               setPetLocation(data.adoption_location || '');
               setPetMedicalHistory(data.medical_history || '');
+              setPetStatus(data.status);
 
               const blob1 = await fetch(data.picture_1).then((r) => r.blob());
-              const file1 = new File([blob1], extractFileName(data.picture_1), { type: "image/*" });
+              const file1 = new File([blob1], extractFileName(data.picture_1) + ".jpeg", { type: "image/*" });
               setSelectedImage1(file1);
 
               if (data.picture_2){
                   const blob2 = await fetch(data.picture_2).then((r) => r.blob());
-                  const file2 = new File([blob2], extractFileName(data.picture_2), { type: "image/*" });
+                  const file2 = new File([blob2], extractFileName(data.picture_2) + ".jpeg", { type: "image/*" });
                   setSelectedImage2(file2);
               }
 
               if (data.picture_3) {
                   const blob3 = await fetch(data.picture_3).then((r) => r.blob());
-                  const file3 = new File([blob3], extractFileName(data.picture_3), {type: "image/*"});
+                  const file3 = new File([blob3], extractFileName(data.picture_3) + ".jpeg", {type: "image/*"});
                   setSelectedImage3(file3);
               }
               setAdditionalNotes(data.notes || '');
@@ -302,7 +304,9 @@ const PetCreationUpdate = () => {
     formData.append('picture_1', selectedImage1);
     formData.append('picture_2', selectedImage2);
     formData.append('picture_3', selectedImage3);
-  
+
+    formData.append('status', petStatus);
+
     // make a PUT request to update the pet
     fetch(`${process.env.REACT_APP_API_URL}/pets/${petId}/`, {
       method: 'PUT', 
@@ -410,7 +414,7 @@ const PetCreationUpdate = () => {
     <div className="wrapper">
       <LandingHeader />
       <main class="page-content"> 
-        <div>
+        <div className="text-center mx-auto">
           {editMode ? (
             <h3>Edit Pet Listing</h3>
           ) : (
@@ -418,8 +422,8 @@ const PetCreationUpdate = () => {
           )}
         </div>
             <div class="background-details">
-                <div class="bg-white mt-4 p-4 rounded shadow">
-                    <div class="container">
+                <div class="bg-white mt-4 p-4 rounded shadow mx-auto">
+                    <div class="pet-container">
                         <div class="pet-change-details">
                             <h4>1. Pet Details</h4>
                             <form class="form-inputs" action="submit_pet_listing.php" method="POST">
@@ -535,13 +539,31 @@ const PetCreationUpdate = () => {
                                   </div>
                               </div>
 
+
+                                {editMode && <div className="form-group">
+                                  <label htmlFor="status">Status:</label>
+                                  <select
+                                    className="form-control"
+                                    id="status" name="status"
+                                    onChange={(e) => setPetStatus(e.target.value)}
+                                    defaultValue={petStatus}
+                                    required
+                                  >
+                                      <option value="available">Available</option>
+                                      <option value="adopted">Adopted</option>
+                                      <option value="pending">Pending</option>
+                                      <option value="withdrawn">Withdrawn</option>
+
+                                  </select>
+                                </div>}
+
                             </form>
                             </div>
                         </div>
                     </div>   
                 </div>
-                <div class="bg-white mt-4 p-4 rounded shadow">
-                  <div class="container">
+                <div class="bg-white mt-4 p-4 rounded shadow mx-auto">
+                  <div class="pet-container">
                     <div class="pet-change-details">
                       <h4>2. Media</h4>
                         <h6>Include photos with different angles and environments</h6>
@@ -607,8 +629,8 @@ const PetCreationUpdate = () => {
                     </div>
                   </div>
                 </div>
-                <div class="bg-white mt-4 p-4 rounded shadow">
-                    <div class="container">
+                <div class="bg-white mt-4 p-4 rounded shadow mx-auto">
+                    <div class="pet-container">
                           <div class="pet-change-details">
                             <h4 >3. Additional Details</h4>
                             <h6>Include any notable details about the pet's behaviour and traits for the new owner</h6>
@@ -630,39 +652,34 @@ const PetCreationUpdate = () => {
                           </div>
                         </div>
                     </div>
-                    <div class="confirm-button"> 
-                      <button
-                        className="btn btn-primary btn-lg btn-xl post-button"
-                        // href={editMode ? "edit_pets.html" : "my_pets.html"}
-                        onClick={()=>{handleButtonClick()}}
-                      >
-                        {editMode ? "Edit Pet Listing" : "Post Pet Listing"}
-                      </button>
-                      {imageError1 && (
-                      <div className="alert alert-danger mt-4" role="alert">
-                        {imageError1}
+                      <div class="confirm-button text-center mx-auto">
+                        <button
+                          className="btn btn-primary btn-lg btn-xl post-button"
+                          onClick={() => { handleButtonClick() }}
+                        >
+                          {editMode ? "Edit Pet Listing" : "Post Pet Listing"}
+                        </button>
+                        {imageError1 && (
+                          <div className="alert alert-danger mt-4" role="alert">
+                            {imageError1}
+                          </div>
+                        )}
+                        {imageError2 && (
+                          <div className="alert alert-danger mt-4" role="alert">
+                            {imageError2}
+                          </div>
+                        )}
+                        {imageError3 && (
+                          <div className="alert alert-danger mt-4" role="alert">
+                            {imageError3}
+                          </div>
+                        )}
+                        {successMessage && (
+                          <div className="alert alert-success mt-4" role="alert">
+                            {successMessage}
+                          </div>
+                        )}
                       </div>
-                    )}
-
-                    {imageError2 && (
-                      <div className="alert alert-danger mt-4" role="alert">
-                        {imageError2}
-                      </div>
-                    )}
-
-                    {imageError3 && (
-                      <div className="alert alert-danger mt-4" role="alert">
-                        {imageError3}
-                      </div>
-                    )}
-                    {successMessage && (
-                      <div className="alert alert-success mt-4" role="alert">
-                        {successMessage}
-                      </div>
-                    )}    
-                    <div>
-                </div>
-            </div> 
             <div class="d-flex pet-creation-graphic" id="post-pet">
               <div
                 className="ms-5 p-2 my-auto"

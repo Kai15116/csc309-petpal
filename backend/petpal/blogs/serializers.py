@@ -1,14 +1,21 @@
-from rest_framework.serializers import ModelSerializer, FloatField, DecimalField, DateTimeField, ChoiceField, IntegerField
+from rest_framework.serializers import ModelSerializer, FloatField, DecimalField, DateTimeField, ChoiceField, IntegerField, SerializerMethodField
 
 from .models import Blog
 import copy
 
 class BlogSerializer(ModelSerializer):
+    ownername = SerializerMethodField()
+
     class Meta:
         model = Blog
         fields = '__all__'
         read_only_fields = ['id', 'last_modified', 'owner']
         extra_kwargs = {'id': {'help_text': 'Id of the blog.'}}
+
+    def get_ownername(self, obj):
+        if isinstance(obj, Blog):
+            return obj.owner.username
+        return
 
 class BlogSearchSerializer(ModelSerializer):
     ORDER_BY_CHOICES = [

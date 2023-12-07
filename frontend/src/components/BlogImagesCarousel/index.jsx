@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Carousel, Pagination } from 'react-bootstrap';
-import ProfileHeader from '../components/ProfileHeader';
-import Footer from '../components/Footer';
-import shelterPortrait from '../assets/example_images/shelter_portrait.jpg';
-import image1 from '../assets/images/image1.jpg';
-import image2 from '../assets/images/image2.jpg';
-import image3 from '../assets/images/image3.jpg';
-import noImage from "../assets/images/image-not-found-scaled.png"
+import ProfileHeader from '../../components/ProfileHeader';
+import Footer from '../../components/Footer';
+import shelterPortrait from '../../assets/example_images/shelter_portrait.jpg';
+import image1 from '../../assets/images/image1.jpg';
+import image2 from '../../assets/images/image2.jpg';
+import image3 from '../../assets/images/image3.jpg';
+import noImage from "../../assets/images/image-not-found-scaled.png"
 import { useNavigate, useParams } from 'react-router-dom';
-import { userContext } from '../context/userContext';
+import { userContext } from '../../context/userContext';
 
 const BlogImagesCarousel = ({ blog }) => {
     const [imageUrls, setImageUrls] = useState([noImage, noImage, noImage]);

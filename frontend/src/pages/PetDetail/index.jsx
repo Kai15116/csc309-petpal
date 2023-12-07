@@ -1,19 +1,19 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, {useContext} from 'react';
-import LandingHeader from '../components/LandingHeader';
-import Footer from '../components/Footer';
-import '../styles/details_and_adoption.css';
-import image1 from "../assets/images/image1.jpg"
-import image2 from "../assets/images/image2.jpg"
-import image3 from "../assets/images/image3.jpg"
-import noImage from "../assets/images/image-not-found-scaled.png"
-import ShelterCard from '../components/ShelterCard';
+import LandingHeader from '../../components/LandingHeader';
+import Footer from '../../components/Footer';
+import './style.css';
+import image1 from "../../assets/images/image1.jpg"
+import image2 from "../../assets/images/image2.jpg"
+import image3 from "../../assets/images/image3.jpg"
+import noImage from "../../assets/images/image-not-found-scaled.png"
+import ShelterCard from '../../components/ShelterCard';
 import { Carousel } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import {useEffect, useState} from 'react';
-import {userContext} from "../context/userContext";
+import {userContext} from "../../context/userContext";
 
 
 const PetDetails = () => {
@@ -73,15 +73,15 @@ const PetDetails = () => {
               setPetStatus(data.status || '');
 
               const blob1 = await fetch(data.picture_1).then((r) => r.blob());
-              const file1 = new File([blob1], extractFileName(data.picture_1), { type: "image/*" });
+              const file1 = new File([blob1], extractFileName(data.picture_1) + ".jpeg", { type: "image/*" });
               setSelectedImage1(file1);
 
               const blob2 = await fetch(data.picture_2).then((r) => r.blob());
-              const file2 = new File([blob2], extractFileName(data.picture_2), { type: "image/*" });
+              const file2 = new File([blob2], extractFileName(data.picture_2) + ".jpeg", { type: "image/*" });
               setSelectedImage2(file2);
 
               const blob3 = await fetch(data.picture_3).then((r) => r.blob());
-              const file3 = new File([blob3], extractFileName(data.picture_3), { type: "image/*" });
+              const file3 = new File([blob3], extractFileName(data.picture_3) + ".jpeg", { type: "image/*" });
               setSelectedImage3(file3);
 
               setAdditionalNotes(data.notes || '');
@@ -130,7 +130,7 @@ const PetDetails = () => {
     <div className="wrapper pet-details-page">
       <LandingHeader />
       <main className="page-content kareem-carousel-container">
-      <Carousel id="kcarousel" style={{height: "40vh"}}>
+      <Carousel className="kcarousel">
           <Carousel.Item id="kcarousel">
             <img
               src={selectedImage1 ? URL.createObjectURL(selectedImage1) : noImage}
@@ -164,7 +164,7 @@ const PetDetails = () => {
       </Carousel>
       <div class="background-details">
           <div class="container" id="pet-details-container">
-              <div className="pet-details ">
+              <div className="pet-details-k ">
                   <div className="d-flex justify-content-center align-items-center">
                       <h1>Get To Know {petName}</h1>
                       {petInfo?.owner === user?.contextUserId && <a className="btn btn-secondary ms-3 mb-auto" href={`/petCreateUpdate/${petInfo?.id}`}>

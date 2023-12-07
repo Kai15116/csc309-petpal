@@ -1,8 +1,8 @@
 import React from 'react';
-import '../styles/details_and_adoption.css';
+import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-import placeholderProfile from "../assets/images/placeholderprofile.png"
+import placeholderProfile from "../../assets/images/placeholderprofile.png"
 
 
 const ShelterCard = ({ name, profileLink, stars, reviewCount, joinDate, profilePicUrl, bannerPicUrl}) => {

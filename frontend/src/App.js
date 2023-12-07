@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
-import PetDetails from './pages/PetDetails';
+import PetDetails from './pages/PetDetail';
 import SignUp from './pages/SignUp';
 import { userContext, useUserContext } from './context/userContext';
 import SeekerProfile from './pages/SeekerProfile';
