@@ -212,6 +212,7 @@ class RatingRetrieveView(RetrieveAPIView):
         except Rating.DoesNotExist:
             raise Http404('Rating does not exist.')
 
+
 class RatingListCreateView(ListCreateAPIView):
     """
     get: Returns all the ratings for a given shelter.
@@ -231,5 +232,8 @@ class RatingListCreateView(ListCreateAPIView):
 
     def perform_create(self, serializer):
         user = self.request.user
+        if Rating.objects.filter(user=user, shelter=serializer.validated_data.get('shelter')).exists():
+            raise ValidationError(
+                {'error': 'f1 and f2 should be unique together'})
         Rating.objects.create(**serializer.validated_data, user=user)
         serializer.save(user=user)
