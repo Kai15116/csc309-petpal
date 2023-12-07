@@ -194,7 +194,23 @@ class CommentRetrieveView(RetrieveAPIView):
         except Comment.DoesNotExist:
             raise Http404('Comment does not exist.')
         
+class RatingRetrieveView(RetrieveAPIView):
+    """
+    get: Retrieves a single rating given the primary key in URL.
+    """
+    queryset = Rating.objects.all()
+    serializer_class = RatingSerializer
+
+    def get_object(self):
+        user = self.kwargs.get('user')
+        shelter = self.kwargs.get('shelter')
+
+        try:
+            rating = Rating.objects.get(user=user, shelter=shelter)
+            return rating
         
+        except Rating.DoesNotExist:
+            raise Http404('Rating does not exist.')
 
 class RatingListCreateView(ListCreateAPIView):
     """
