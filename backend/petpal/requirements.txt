@@ -7,5 +7,6 @@ django-extensions
 django
 django-cors-headers
 django-environ
+urllib3==1.26.6
 psycopg2-binary
 django-cloudinary-storage
