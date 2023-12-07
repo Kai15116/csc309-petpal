@@ -1,5 +1,6 @@
 import { Modal, Button, Form } from "react-bootstrap";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 /**
@@ -23,6 +24,7 @@ function CommentButtonModal(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
     const handleShelterCommentCreate = async (e) => {
         e.preventDefault();
 
@@ -30,7 +32,7 @@ function CommentButtonModal(props) {
         console.log(commentText);
         console.log(userContext?.contextUserId);
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/comments/shelter/${objectId}/`, {
+            const response = await fetch(`http://localhost:8000/comments/shelter/${objectId}/`, {
                 method: 'POST',
                 body: JSON.stringify({
                     text: commentText,
@@ -45,6 +47,8 @@ function CommentButtonModal(props) {
             if (response.status >= 200 && response.status < 300) {
                 console.log("succeess!!!!");
                 setFormErrors({});
+                handleClose();
+                window.location.reload(false);
             } else if (response.status === 400) {
                 setFormErrors({...data});
             } else if (response.status === 404) {
@@ -61,7 +65,7 @@ function CommentButtonModal(props) {
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                {props.label ? props.label : "Add Review"}
+                {props.label ? props.label : "Add Comment"}
             </Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>

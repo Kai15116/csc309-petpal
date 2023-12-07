@@ -83,11 +83,11 @@ function ShelterReviewsCard(props) {
                     hasMore={hasMore} 
                     next={fetchComments(false)} 
                     inverse={true}
-                    loader={<p>Loading...</p>}
+                    loader={<p className="mt-3 mb-0" style={{ textAlign: "center" }}>Loading...</p>}
                     scrollableTarget="review-container"
                     endMessage={
                         <p className="mt-3 mb-0" style={{ textAlign: "center" }}>
-                            No more comments to load
+                            No more comments
                         </p>
                     }
                 >
