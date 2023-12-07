@@ -155,6 +155,7 @@ const Applications = () => {
                     </li>
                 </>)}
             </ul>
+            {noResult && <h3 className="ms-2 text-secondary">No results found...</h3>}
             {!noResult && <CPagination setcurrentActivePage={setcurrentActivePage} currentActivePage={query?.page} pagesCount={pagesCount}/>}
           </div>
         </div>
