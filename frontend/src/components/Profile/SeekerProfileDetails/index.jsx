@@ -13,7 +13,7 @@ function SeekerProfileDetailsCard(props) {
 
     return (
         <Card className="d-flex column" >
-            <Card.Img variant="top" src={ExampleBanner} alt="Example Banner"/>
+            <Card.Img variant="top" src={userInfo?.banner ? userInfo?.banner : ExampleBanner} alt="Example Banner"/>
             <Image 
                 className="m-0 p-0"
                 style={{
