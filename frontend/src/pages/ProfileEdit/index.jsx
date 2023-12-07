@@ -870,7 +870,6 @@ function ProfileEdit() {
                                     <Form.Label> Banner Picture </Form.Label>
                                     <Form.Control
                                         type="file" accept="image/*"
-                                        value={banner}
                                         onChange={handleBannerChange}
                                     />
                                 </Form.Group>
