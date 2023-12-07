@@ -48,10 +48,13 @@ class ListCreatePetView(ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
         order_by = serializer.validated_data.pop('order_by', None)
         name = serializer.validated_data.pop("name", None)
+        status = serializer.validated_data.pop("status", None)
 
         search_result = Pet.objects.all().filter(**serializer.validated_data)
         if name:
             search_result = search_result.filter(name__icontains=name)
+        if status != "all":
+            search_result = search_result.filter(status=status)
         if order_by:
             search_result = search_result.order_by(order_by)
         return search_result

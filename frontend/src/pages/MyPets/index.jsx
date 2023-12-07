@@ -57,7 +57,7 @@ const MyPets = () => {
     }
 
     useEffect(function () {
-        const urlParams = to_url_params({...query, owner: id});
+        const urlParams = to_url_params({...query, owner: id, status: "all"});
         async function fetchPets() {
             try {
                 const response = await fetch(`${process.env.REACT_APP_API_URL}/pets?${urlParams}`, {

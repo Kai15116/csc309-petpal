@@ -38,7 +38,7 @@ class PetSearchSerializer(ModelSerializer):
     ]
     order_by = ChoiceField(choices=ORDER_BY_CHOICES, required=False,
                            help_text='Options for sorting. Negative sign (-) indicates descending order.')
-    status = ChoiceField(choices=Pet.STATUS_CHOICES, default="available")
+    status = ChoiceField(choices=["available", "pending", "adopted", "withdrawn", "all"], default="available")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

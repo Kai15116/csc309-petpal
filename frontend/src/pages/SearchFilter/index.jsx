@@ -59,7 +59,7 @@ function SearchFilter() {
     const [ searchParams, setSearchParams ] = useSearchParams();
     const query = useMemo(() => ({
         page : parseInt(searchParams.get("page") ?? 1),
-        size: parseInt(searchParams.get("size") ?? 10),
+        size: parseInt(searchParams.get("size") ?? 12),
         age__gte : searchParams.get("age__gte") ?? "",
         age__lte : searchParams.get("age__lte") ?? "",
         weight__gte : searchParams.get("weight__gte") ?? "",
