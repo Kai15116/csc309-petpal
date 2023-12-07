@@ -148,10 +148,9 @@ const ShelterBlogs = () => {
       headers: {
         'Authorization': `Bearer ${accessToken}`,
       }
-    }).then(response => response.json())
-      .then(data => {
+    }).then(data => {
         // delete local blog that was removed
-        const updatedBlogs = allBlogs.results.filter((_, index) => index !== blogIdx);
+        const updatedBlogs = allBlogs?.results.filter((blog2, index) => blog2.id !== blog.id);
         setAllBlogs({ ...allBlogs, results: updatedBlogs });
       })
       .catch(error => {
@@ -298,7 +297,7 @@ const ShelterBlogs = () => {
                     >
                       Edit
                     </button>}
-                    {user.contextUserId === blog.owner && <button
+                    {user.contextUserId === blog.owner && <button className="ms-1 btn btn-secondary"
                       variant="danger"
                       onClick={() => handleDelete(blog, index)}
                     >
