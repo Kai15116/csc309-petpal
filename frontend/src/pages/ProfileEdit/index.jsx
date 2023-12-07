@@ -238,7 +238,7 @@ function ProfileEdit() {
     };
 
     const validatePhone = (value) => {
-        return value?.length === 10;
+        return value?.length === 10 || !value;
     };
 
     const handleEmailChange = (e) => {
