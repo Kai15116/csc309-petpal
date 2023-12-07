@@ -377,6 +377,12 @@ const PetCreationUpdate = () => {
       formIsValid = false;
     }
 
+    if (additionalNotes.trim() === '') {
+      setAdditionalNotesError('Additional Notes is required.');
+      setSuccessMessage('');
+      formIsValid = false;
+    }
+
     return formIsValid;
   };
   
