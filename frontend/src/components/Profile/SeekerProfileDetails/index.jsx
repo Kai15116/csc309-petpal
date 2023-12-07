@@ -1,8 +1,8 @@
 import { Button, Card, Collapse, Image } from "react-bootstrap";
 import ExampleBanner from "../../../assets/example_images/yosemite_banner.jpg";
-import ExampleMilky from "../../../assets/example_images/milky3.jpg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PlaceholderProfile from "../../../assets/images/placeholderprofile.png";
 
 // Props should be userInfo and contextUserId object to display appropriate information
 function SeekerProfileDetailsCard(props) {
@@ -28,7 +28,7 @@ function SeekerProfileDetailsCard(props) {
                     minHeight: '8rem',
                     maxHeight: '8rem',
                 }}
-                src={userInfo?.profile_picture ? userInfo?.profile_picture : ExampleMilky}
+                src={userInfo?.profile_picture ? userInfo?.profile_picture : PlaceholderProfile}
                 alt='Profile Picture'
             />
             {/* <Image 
