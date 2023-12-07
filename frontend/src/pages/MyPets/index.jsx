@@ -98,7 +98,7 @@ const MyPets = () => {
         }
         fetchUserInfo();
         fetchPets();
-    }, []);
+    }, [query]);
 
     return (
         <div className="bg-body-tertiary my-0 ">
