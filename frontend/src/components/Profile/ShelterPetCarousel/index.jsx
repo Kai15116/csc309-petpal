@@ -66,7 +66,7 @@ function ShelterPetCarouselCard(props) {
                             alt={pet?.name}
                             style={{
                                 objectFit: 'cover',
-                                maxHeight: '70vh',
+                                height: '60vh',
                                 maxWidth: '40rem',
                             }}
                         />
