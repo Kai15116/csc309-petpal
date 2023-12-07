@@ -64,7 +64,7 @@ const BlogDetails = () => {
       {blogInfo && <BlogImagesCarousel blog={blogInfo} />}
       <div class="background-details">
           <div class="container" id="pet-details-container">
-                <div className="pet-details">
+                <div className="blog-details">
                   <h1>{title}</h1>
                   <div style={{textAlign: "left !important"}}>
                       <Markdown>{blogContent}</Markdown>

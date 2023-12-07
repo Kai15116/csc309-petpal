@@ -45,7 +45,7 @@ footer {
 
 /* page styles */
 .page-container {
-    background-color: #F5F5F5; 
+    background-color: #ffffff; 
     /* position: fixed;
     top: 0; 
     left: 0; */
@@ -122,11 +122,15 @@ footer {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    background-color: #f2f8fe;
+    background-color: #f0eeec;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.container{
+    background-color: #f0eeec;
 }
 
 .kareem-carousel-container .carousel-inner img {
@@ -172,8 +176,8 @@ footer {
       white-space: pre-wrap !important;
 }
 
-.pet-details {
-    background-color: #f2f8fe; /* gray background color */
+.blog-details {
+    background-color: #ffffff; 
     padding: 30px;
     gap: 10px;
     /* width: 900px; */

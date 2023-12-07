@@ -172,7 +172,7 @@ header {
   align-items: center;
 }
 
-.container {
+.blog-container {
   background-color: #ffffff;
   display: flex;
   justify-content: center;

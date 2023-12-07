@@ -130,7 +130,7 @@ const PetDetails = () => {
     <div className="wrapper pet-details-page">
       <LandingHeader />
       <main className="page-content kareem-carousel-container">
-      <Carousel id="kcarousel" style={{height: "40vh"}}>
+      <Carousel className="kcarousel">
           <Carousel.Item id="kcarousel">
             <img
               src={selectedImage1 ? URL.createObjectURL(selectedImage1) : noImage}
@@ -164,7 +164,7 @@ const PetDetails = () => {
       </Carousel>
       <div class="background-details">
           <div class="container" id="pet-details-container">
-              <div className="pet-details ">
+              <div className="pet-details-k ">
                   <div className="d-flex justify-content-center align-items-center">
                       <h1>Get To Know {petName}</h1>
                       {petInfo?.owner === user?.contextUserId && <a className="btn btn-secondary ms-3 mb-auto" href={`/petCreateUpdate/${petInfo?.id}`}>

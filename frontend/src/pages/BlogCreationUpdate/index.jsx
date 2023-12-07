@@ -239,7 +239,7 @@ const BlogCreationUpdate = () => {
     <div className="wrapper">
       <LandingHeader />
       <main class="page-content">  
-        <div>
+        <div className="text-center mx-auto">
           {editMode ? (
             <h3>Edit Shelter Blog</h3>
           ) : (
@@ -247,8 +247,8 @@ const BlogCreationUpdate = () => {
           )}
         </div>
             <div class="background-details">
-                <div class="bg-white mt-4 p-4 rounded shadow">
-                    <div class="container">
+                <div class="bg-white mt-4 p-4 rounded shadow mx-auto">
+                    <div class="blog-container">
                       <div class="blog-details" style={{ overflow: 'hidden', wordWrap: 'break-word', maxWidth: '100%',
                         display: 'flex',
                         justifyContent: 'flex-start',
@@ -293,8 +293,8 @@ const BlogCreationUpdate = () => {
                       </div>
                   </div>    
                 </div>
-                <div class="bg-white mt-4 p-4 rounded shadow">
-                  <div class="container">
+                <div class="bg-white mt-4 p-4 rounded shadow mx-auto">
+                  <div class="blog-container">
                     <div class="blog-details">
                       <h4>2. Media</h4>
                         <h6>Include photos with different angles and environments</h6>
@@ -360,7 +360,7 @@ const BlogCreationUpdate = () => {
                     </div>
                   </div>
                 </div>
-                <div class="confirm-button"> 
+                <div class="confirm-button mx-auto"> 
                     <button
                       className="btn btn-primary btn-lg btn-xl post-button"
                       onClick={()=>{handleButtonClick()}}

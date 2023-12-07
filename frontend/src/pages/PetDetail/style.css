@@ -43,6 +43,11 @@ footer {
     margin-top: 100px;
 } */
 
+.kcarousel {
+    height: 40vh;
+    margin-top: -20px;
+}
+
 /* page styles */
 .page-container {
     background-color: #F5F5F5; 
@@ -86,6 +91,11 @@ footer {
 .pet-side-img {
     max-height: 100px;
     width: 130px;
+}
+
+.pet-details-k {
+    background-color: #f2f8fe;
+    padding: 40px;
 }
 
  .kareem-carousel-container .carousel {
