@@ -1,10 +1,12 @@
 from rest_framework.exceptions import ValidationError
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from django.contrib.contenttypes.models import ContentType
 from .models import Comment, Rating
 
 
 class CommentSerializer(ModelSerializer):
+    username = SerializerMethodField()
+    profile_picture = SerializerMethodField()
 
     class Meta:
         model = Comment
@@ -16,37 +18,23 @@ class CommentSerializer(ModelSerializer):
             'reply_to',
             'content_type',
             'object_id',
+            'username',
+            'profile_picture'
             # 'content_object',
         ]
 
-        read_only_fields = ['id', 'user', 'content_type', 'created_at', 'object_id']
+        read_only_fields = ['id', 'user', 'content_type', 'created_at', 'object_id', 'username', 'profile_picture']
 
-    # def validate(self, attrs):
-    #     # content_type = get_object_or_404(ContentType, pk=attrs.get('content_type'))
-    #     reply_to = attrs.get('reply_to')
-    #     if reply_to:
-    #         if reply_to.content_type.id != attrs.get('content_type').id:
-    #             raise ValidationError('You have to reply to the comment of same type.')
+    def get_username(self, obj):
+        if isinstance(obj, Comment):
+            return obj.user.username
+        return
 
-        
-    # def create(self, validated_data):
-    #
-    #     content_type = validated_data['content_type']
-    #     object_id = validated_data['object_id']
-    #
-    #     content_type_instance = ContentType.objects.get(model=content_type)
-    #
-    #     comment = Comment.objects.create(
-    #         user=self.context['request'].user,
-    #         text=validated_data['text'],
-    #         reply_to=validated_data.get('reply_to'),
-    #         content_type=content_type_instance,
-    #         object_id=object_id,
-    #     )
-    #
-    #     return comment
-    
-    
+    def get_profile_picture(self, obj):
+        if isinstance(obj, Comment):
+            request = self.context.get("request")
+            return request.build_absolute_uri(obj.user.profile_picture.url)
+        return
 
 class RatingSerializer(ModelSerializer):
     class Meta:
