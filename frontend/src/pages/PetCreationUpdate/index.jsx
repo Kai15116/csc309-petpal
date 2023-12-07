@@ -32,6 +32,7 @@ const PetCreationUpdate = () => {
   const [petMedicalHistory, setPetMedicalHistory] = useState('');
   const [additionalNotes, setAdditionalNotes] = useState('');
   const [editMode, setEditMode] = useState(false);
+  const [petStatus, setPetStatus] = useState('available');
 
   const [petNameError, setPetNameError] = useState('')
   const [petAgeError, setPetAgeError] = useState('');
@@ -210,20 +211,21 @@ const PetCreationUpdate = () => {
               setPetFee(data.adoption_fee || null);
               setPetLocation(data.adoption_location || '');
               setPetMedicalHistory(data.medical_history || '');
+              setPetStatus(data.status);
 
               const blob1 = await fetch(data.picture_1).then((r) => r.blob());
-              const file1 = new File([blob1], extractFileName(data.picture_1), { type: "image/*" });
+              const file1 = new File([blob1], extractFileName(data.picture_1) + ".jpeg", { type: "image/*" });
               setSelectedImage1(file1);
 
               if (data.picture_2){
                   const blob2 = await fetch(data.picture_2).then((r) => r.blob());
-                  const file2 = new File([blob2], extractFileName(data.picture_2), { type: "image/*" });
+                  const file2 = new File([blob2], extractFileName(data.picture_2) + ".jpeg", { type: "image/*" });
                   setSelectedImage2(file2);
               }
 
               if (data.picture_3) {
                   const blob3 = await fetch(data.picture_3).then((r) => r.blob());
-                  const file3 = new File([blob3], extractFileName(data.picture_3), {type: "image/*"});
+                  const file3 = new File([blob3], extractFileName(data.picture_3) + ".jpeg", {type: "image/*"});
                   setSelectedImage3(file3);
               }
               setAdditionalNotes(data.notes || '');
@@ -302,7 +304,9 @@ const PetCreationUpdate = () => {
     formData.append('picture_1', selectedImage1);
     formData.append('picture_2', selectedImage2);
     formData.append('picture_3', selectedImage3);
-  
+
+    formData.append('status', petStatus);
+
     // make a PUT request to update the pet
     fetch(`${process.env.REACT_APP_API_URL}/pets/${petId}/`, {
       method: 'PUT', 
@@ -534,6 +538,24 @@ const PetCreationUpdate = () => {
                                       )}
                                   </div>
                               </div>
+
+
+                                {editMode && <div className="form-group">
+                                  <label htmlFor="status">Status:</label>
+                                  <select
+                                    className="form-control"
+                                    id="status" name="status"
+                                    onChange={(e) => setPetStatus(e.target.value)}
+                                    defaultValue={petStatus}
+                                    required
+                                  >
+                                      <option value="available">Available</option>
+                                      <option value="adopted">Adopted</option>
+                                      <option value="pending">Pending</option>
+                                      <option value="withdrawn">Withdrawn</option>
+
+                                  </select>
+                                </div>}
 
                             </form>
                             </div>
