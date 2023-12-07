@@ -154,23 +154,27 @@ const PetCreationUpdate = () => {
       async function fetchBreeds() {
           try {
               const response = await fetch(`${process.env.REACT_APP_API_URL}/pets/pettype/${petType}/breed`, {
-              method: 'GET',
-          });
-          if (response.status === 403) {
-              navigate('/');
+                  method: 'GET',
+              });
+              if (response.status === 403) {
+                  navigate('/');
 
-              // setAllowAccess(false);
-          } else if (response.status >= 200 && response.status < 300) {
-              const data = await response.json();
-              setBreeds([...data])
-              console.log(data)
+                  // setAllowAccess(false);
+              } else if (response.status >= 200 && response.status < 300) {
+                  const data = await response.json();
+                  setBreeds([...data])
+                  console.log(data)
 
-          }} catch (e) {
+              }
+          } catch (e) {
               console.log(e);
               navigate('/');
           }
       }
-      fetchBreeds();
+
+      if (petType === 0 || petType) {
+          fetchBreeds();
+      }
 
   }, [petType])
 
