@@ -594,6 +594,7 @@ function ProfileEdit() {
                                     <Form.Label>Website</Form.Label>
                                     <Form.Control 
                                         type="url"
+                                        pattern="https?://.+"
                                         value={website}
                                         onChange={(e) => setWebsite(e.target.value)}
                                         placeholder="e.g. example.com"
@@ -741,7 +742,6 @@ function ProfileEdit() {
 
                                 <div className='mb-3' key={"reverse-checkbox"}>
                                     <Form.Check 
-                                        reverse
                                         label="By checking this box, you agree to recieve notifications about new pet listings"
                                         name="wantnotifs"
                                         type="checkbox"
@@ -749,7 +749,7 @@ function ProfileEdit() {
                                     />
                                 </div>
 
-                                <div >
+                                <div className='d-flex flex-row justify-content-between align-items-center' >
                                     <div>
                                         <Button className='me-3' variant="primary" onClick={(e) => handleContactPatchSubmit(e)}>
                                             Submit
