@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect, useContext } from 'react';
-import LandingHeader from '../components/LandingHeader';
-import Footer from '../components/Footer';
-import '../styles/pet_creation_and_update.css';
+import LandingHeader from '../../components/LandingHeader';
+import Footer from '../../components/Footer';
+import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import image1 from "../assets/images/image1.jpg"
-import image2 from "../assets/images/image2.jpg"
-import image3 from "../assets/images/image3.jpg"
-import noImage from '../assets/images/no_image_icon.png';
+import image1 from "../../assets/images/image1.jpg"
+import image2 from "../../assets/images/image2.jpg"
+import image3 from "../../assets/images/image3.jpg"
+import noImage from '../../assets/images/no_image_icon.png';
 import { useNavigate, useParams } from 'react-router-dom';
-import { userContext } from '../context/userContext';
+import { userContext } from '../../context/userContext';
 
 const PetCreationUpdate = () => {
   const {getContextUser} = useContext(userContext);

@@ -237,7 +237,7 @@ header {
 }
 
 #post-pet{
-    background-image: url('../assets/images/pet-creation-image.jpg');
+    background-image: url('../../assets/images/pet-creation-image.jpg');
     background-blend-mode: overlay;
     background-size: cover; 
     background-repeat: no-repeat;

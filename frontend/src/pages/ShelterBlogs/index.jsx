@@ -1,14 +1,14 @@
 import React, {useState, useEffect, useContext, useMemo} from 'react';
 import { Carousel, Pagination } from 'react-bootstrap';
 import {Link, useSearchParams} from 'react-router-dom';
-import LandingHeader from '../components/LandingHeader';
-import Footer from '../components/Footer';
-import noImage from "../assets/images/image-not-found-scaled.png"
-import '../styles/blog_shelters.css'; 
+import LandingHeader from '../../components/LandingHeader';
+import Footer from '../../components/Footer';
+import noImage from "../../assets/images/image-not-found-scaled.png"
+import './style.css'; 
 import { useNavigate, useParams } from 'react-router-dom';
-import { userContext } from '../context/userContext';
-import BlogImagesCarousel from '../components/BlogImagesCarousel';
-import CPagination from "../components/CPagination";
+import { userContext } from '../../context/userContext';
+import BlogImagesCarousel from '../../components/BlogImagesCarousel';
+import CPagination from "../../components/CPagination";
 import { BsTrash } from 'react-icons/bs';
 
 

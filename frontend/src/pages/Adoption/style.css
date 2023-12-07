@@ -1,0 +1,285 @@
+/*
+ * style.css
+ *
+ * CSC309 P3
+ * 
+ * University of Toronto
+ * Fall 2023
+ *
+ */
+
+/* header and footer styles */
+header {
+    display: flex;
+    justify-content: space-between; /* distribute content evenly between logo and buttons */
+    align-items: center; /* center items vertically within the header */
+    background-color: #C8F4FF;
+    color: #ffffff;
+    padding: 20px;
+    border-bottom: 2px solid #000000;
+}
+
+.logo-container {
+    display: flex; /* allow logo to align horizontally */
+    align-items: center; /* center logo vertically */
+}
+
+.button-container {
+    display: flex; /* allow buttons to align horizontally */
+    gap: 30px; /* add some spacing between buttons */
+}
+
+/* 
+footer {
+    background-color: #000000; 
+    color: #ffffff; 
+    padding: 10px;
+    text-align: center; 
+    position: absolute;
+    bottom: 0; 
+    width: 100%;
+    position: absolute;
+    height: 2.5rem;
+    margin-top: 100px;
+} */
+
+/* page styles */
+.page-container {
+    background-color: #F5F5F5; 
+    /* position: fixed;
+    top: 0; 
+    left: 0; */
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.page-content {
+    font-family: sans-serif;
+    flex: 1; 
+    justify-content: flex-start; 
+    text-align: left; 
+    align-items: flex-start; 
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.logo-img {
+    max-height: 80px;
+    width: auto;
+}
+
+
+.pet-main-img {
+    object-fit: cover;
+    width: 100%;
+    height: 700px;
+}
+
+.pet-details h1 {
+    font-weight: bold;
+}
+
+.pet-side-img {
+    max-height: 100px;
+    width: 130px;
+}
+
+ .kareem-carousel-container .carousel {
+    /*height: fit-content;*/
+    width: 100%;
+    /*overflow: hidden;*/
+}
+
+ .kareem-carousel-container .carousel-item {
+    height: 100%;
+    max-width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+ .kareem-carousel-container .carousel-control-prev,
+ .kareem-carousel-container .carousel-control-next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* adjust the horizontal position as needed */
+ .kareem-carousel-container .carousel-control-prev {
+    left: 0; /* place the previous button at the left edge */
+    /*margin-top: 50px;*/
+}
+
+ .kareem-carousel-container .carousel-control-next {
+    right: 0; /* place the next button at the right edge */
+}
+
+.background-details {
+    /* background-image: url('images/backgroundImage1.jpg');  */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #f2f8fe;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kareem-carousel-container .carousel-inner img {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+}
+
+.background-adoption {
+    /* background-image: url('images/backgroundImage1.jpg');  */
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center center;
+    background-color: #f0eeec;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#pet-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0eeec;
+
+}
+
+.application-form {
+    background-color: #f2f8fe; /* gray background color */
+    padding: 30px;
+    gap: 10px;
+    width: 900px;
+    max-width: 100vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.application-form label {
+      white-space: pre-wrap !important;
+}
+
+.pet-details {
+    background-color: #f2f8fe; /* gray background color */
+    padding: 30px;
+    gap: 10px;
+    /* width: 900px; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    max-width: 100vw;
+}
+
+#owner-notes ul {
+    list-style-type: disc !important; /* add bullet points */
+    margin-left: 20px; /* adjust the margin for proper spacing */
+}
+
+.pet-details h2, .application-form h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.pet-details ul, .application-form ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.pet-details ul li, .application-form ul li{
+    margin-bottom: 10px;
+}
+
+/* add spacing between the table and the image */
+/*.col-lg-6 {*/
+/*    margin-right: 20px; !* adjust this value as needed for spacing *!*/
+/*}*/
+
+/* Apply Button Styles */
+.apply-button {
+    background-color: #007bff; /* blue color for primary button */
+    color: #fff;
+    border: none;
+    margin-bottom: 2.5rem;
+}
+
+.apply-button:hover {
+    background-color: #0056b3; /* darker blue on hover */
+}
+
+.form-group {
+    margin-bottom: 20px;
+    /* padding: 10px; */
+}
+
+
+/*#profile-card {*/
+/*    margin-left: 32px;*/
+/*}*/
+
+/*.banner {*/
+/*    background-image: url("../assets/example_images/yosemite_banner.jpg");*/
+/*    background-size: cover;*/
+/*}*/
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+  
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+  
+/*.footer {*/
+/*    background-color: #96ceea; */
+/*    color: #ffffff; */
+/*    padding: 10px;*/
+/*    text-align: center;*/
+/*    position: relative;*/
+/*    bottom: 0;*/
+/*    min-height: 5rem;*/
+/*    width: 100%;*/
+/*}*/
+
+
+
+  
+
+/* responsive design */
+@media (max-width: 800px) {
+    .pet-details-page .shelter-card-wrapper {
+        margin-left: 0 !important;
+    }
+
+    .pet-details-page .pet-details {
+        align-items: center;
+    }
+    .pet_details_and_shelter {
+        flex-direction: column-reverse; /* change to column layout */
+        align-items: center; 
+    }
+
+    #profile-card {
+        margin-bottom: 16px;
+        margin-left: 0;
+    }
+}

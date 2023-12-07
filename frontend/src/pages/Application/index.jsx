@@ -1,4 +1,4 @@
-import ApplicationForm from "../../components/ApplicationForm";
+import ApplicationForm from "../../components/ApplicationForm/index";
 import "./style.css"
 import LandingHeader from "../../components/LandingHeader";
 import Footer from "../../components/Footer";
