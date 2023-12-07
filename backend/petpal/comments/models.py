@@ -34,4 +34,6 @@ class Rating(models.Model):
     rating = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(limit_value=5)], help_text='Integer value between 0-5 that depicts the rating of the shelter by the user')
 
     class Meta:
-        unique_together = ('user', 'shelter',)
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'shelter'], name="user-shelter-unique")
+        ]

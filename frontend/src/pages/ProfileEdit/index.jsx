@@ -126,7 +126,6 @@ function ProfileEdit() {
                         setDescription(data?.description);
                         setWebsite(data?.website);
                         setMission(data?.mission_statement);
-                        setProfPic(data?.profile_picture);
                     }
                 }
                 catch (e) {
@@ -239,7 +238,7 @@ function ProfileEdit() {
     };
 
     const validatePhone = (value) => {
-        return value.length === 10;
+        return value?.length === 10;
     };
 
     const handleEmailChange = (e) => {
@@ -446,7 +445,6 @@ function ProfileEdit() {
         const formData = new FormData();
         profpic && formData.append('profile_picture', profpic);
         banner && formData.append('banner', banner);
-
         // You can add additional fields to the FormData if needed
         // formData.append('field1', 'value1');
 
@@ -458,7 +456,7 @@ function ProfileEdit() {
                 'Authorization': `Bearer ${user.accessToken}`,
             }
         }).then(response => {
-            response.json();
+            console.log(response)
             navigate(`/${contextUserType}profile/${contextUserId}`);
         })
         .then(data => {
@@ -872,7 +870,6 @@ function ProfileEdit() {
                                     <Form.Label> Banner Picture </Form.Label>
                                     <Form.Control
                                         type="file" accept="image/*"
-                                        value={banner}
                                         onChange={handleBannerChange}
                                     />
                                 </Form.Group>
@@ -880,7 +877,6 @@ function ProfileEdit() {
                                     <Form.Label> Profile Picture </Form.Label>
                                     <Form.Control
                                         type="file" accept="image/*"
-                                        value={profpic}
                                         onChange={handleProfPicChange}
                                     />
                                 </Form.Group>

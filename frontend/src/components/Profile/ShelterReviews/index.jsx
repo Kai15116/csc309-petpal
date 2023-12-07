@@ -87,8 +87,7 @@ function ShelterReviewsCard(props) {
                 <InfiniteScroll 
                     dataLength={comments.length} 
                     hasMore={hasMore} 
-                    next={fetchComments(false)} 
-                    inverse={true}
+                    next={() => fetchComments(false)}
                     loader={<p className="mt-3 mb-0" style={{ textAlign: "center" }}>Loading...</p>}
                     scrollableTarget="review-container"
                     endMessage={
@@ -110,12 +109,13 @@ function ShelterReviewsCard(props) {
                     </Stack>
                 </InfiniteScroll>
             </Card.Body>
+            {user.contextUserId !== shelterId &&  (
             <Card.Footer className="pb-0" >
                 <ShelterRating 
                     userContext={user}
                     shelterId={shelterId}
-                />
-            </Card.Footer>
+                />)
+            </Card.Footer>)}
         </Card>
     );
 }

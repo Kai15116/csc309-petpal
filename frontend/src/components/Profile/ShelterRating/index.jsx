@@ -12,13 +12,26 @@ const ShelterRating = (props) => {
     const userId = userContext.contextUserId;
     const shelterId = props.shelterId;
 
-    async function createRating() {
+    async function updateRating(selectedRating) {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/comments/rating/${shelterId}/${userId}`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                rating: selectedRating,
+            }),
+            headers: {
+                'Authorization': `Bearer ${userContext?.accessToken}`,
+                'Content-Type': 'application/json',
+            }
+        });
+    }
+
+    async function createRating(selectedRating) {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/comments/rating/`, {
             method: 'POST',
             body: JSON.stringify({
                 user: userId,
                 shelter: shelterId,
-                rating: rating,
+                rating: selectedRating,
             }),
             headers: {
                 'Authorization': `Bearer ${userContext?.accessToken}`,
@@ -34,6 +47,7 @@ const ShelterRating = (props) => {
             setRated(true);
         } else if (response.status >= 400) {
             console.log({...data});
+            updateRating(selectedRating)
             setRated(false);
         } else if (response.status === 404) {
             alert(404);
@@ -71,7 +85,7 @@ const ShelterRating = (props) => {
 
     const handleStarClick = (selectedRating) => {
         setRating(selectedRating);
-        createRating();
+        createRating(selectedRating);
     };
 
     return (

@@ -1,4 +1,4 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveAPIView
 from .models import Comment, Rating
 from .serializers import CommentSerializer, RatingSerializer
 from django.apps import apps
@@ -9,6 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 from accounts.models import User, PetShelter
 from django.http import Http404
 from notifications.models import Notification
+from django.db import IntegrityError
 
 class CommentListCreateView(ListCreateAPIView):
     """
@@ -194,7 +195,7 @@ class CommentRetrieveView(RetrieveAPIView):
         except Comment.DoesNotExist:
             raise Http404('Comment does not exist.')
         
-class RatingRetrieveView(RetrieveAPIView):
+class RatingRetrieveView(RetrieveUpdateAPIView):
     """
     get: Retrieves a single rating given the primary key in URL.
     """
@@ -211,6 +212,7 @@ class RatingRetrieveView(RetrieveAPIView):
         
         except Rating.DoesNotExist:
             raise Http404('Rating does not exist.')
+
 
 class RatingListCreateView(ListCreateAPIView):
     """
@@ -231,5 +233,8 @@ class RatingListCreateView(ListCreateAPIView):
 
     def perform_create(self, serializer):
         user = self.request.user
-        Rating.objects.create(**serializer.validated_data, user=user)
-        serializer.save(user=user)
+        try:
+            Rating.objects.create(**serializer.validated_data, user=user)
+            serializer.save(user=user)
+        except IntegrityError as e:
+            raise ValidationError({'error': 'user and shelter should be unique together'})
