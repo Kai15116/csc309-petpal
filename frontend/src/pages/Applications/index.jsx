@@ -145,7 +145,7 @@ const Applications = () => {
             <ul className="list-group mb-4">
                 {myApplications?.results?.map((application, index) => <>
                     <li className="list-group-item" key={index}>
-                        <b>Happy Dog</b>
+                        <b>{application?.petname}</b>
                         <div className="d-flex">
                             <div className="text-muted">From: {application.name}</div>
                             <div className="px-2"></div>
