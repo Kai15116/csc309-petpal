@@ -120,7 +120,9 @@ function ShelterProfile() {
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
-                            <ShelterPetCarouselCard />
+                            <ShelterPetCarouselCard 
+                                shelterId={userId}
+                            />
                         </Stack>
                     </Col>
                     <Col xs={12} sm={3}>
