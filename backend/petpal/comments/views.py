@@ -9,6 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 from accounts.models import User, PetShelter
 from django.http import Http404
 from notifications.models import Notification
+from django.db import IntegrityError
 
 class CommentListCreateView(ListCreateAPIView):
     """
@@ -232,8 +233,8 @@ class RatingListCreateView(ListCreateAPIView):
 
     def perform_create(self, serializer):
         user = self.request.user
-        if Rating.objects.filter(user=user, shelter=serializer.validated_data.get('shelter')).exists():
-            raise ValidationError(
-                {'error': 'f1 and f2 should be unique together'})
-        Rating.objects.create(**serializer.validated_data, user=user)
-        serializer.save(user=user)
+        try:
+            Rating.objects.create(**serializer.validated_data, user=user)
+            serializer.save(user=user)
+        except IntegrityError as e:
+            raise ValidationError({'error': 'user and shelter should be unique together'})
