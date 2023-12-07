@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/userContext';
 import BlogImagesCarousel from '../components/BlogImagesCarousel';
 import CPagination from "../components/CPagination";
+import { BsTrash } from 'react-icons/bs';
 
 
 function to_url_params(object) {
@@ -133,7 +134,28 @@ const ShelterBlogs = () => {
         setAllBlogs({...allBlogs, results: updatedBlogs})
       })
       .catch(error => {
-        console.error('Error editing pet:', error);
+        console.error('Error editing blog:', error);
+      });
+  };
+
+  // delete a blog
+  const handleDelete = async (blog, blogIdx) => {
+    const formData = new FormData();
+    // make a PUT request to delete the blog
+    fetch(`${process.env.REACT_APP_API_URL}/blogs/${blog.id}/`, {
+      method: 'DELETE',
+      body: formData,
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      }
+    }).then(response => response.json())
+      .then(data => {
+        // delete local blog that was removed
+        const updatedBlogs = allBlogs.results.filter((_, index) => index !== blogIdx);
+        setAllBlogs({ ...allBlogs, results: updatedBlogs });
+      })
+      .catch(error => {
+        console.error('Error deleting blog:', error);
       });
   };
 
@@ -275,6 +297,12 @@ const ShelterBlogs = () => {
                       onClick={() => handleEditClick(blog)}
                     >
                       Edit
+                    </button>}
+                    {user.contextUserId === blog.owner && <button
+                      variant="danger"
+                      onClick={() => handleDelete(blog, index)}
+                    >
+                      <BsTrash />
                     </button>}
                   </div>
                 </div>
