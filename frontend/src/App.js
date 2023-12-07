@@ -28,7 +28,7 @@ import ProfileEdit from './pages/ProfileEdit';
 
 
 function App() {
-
+  document.title = "PetPal"
   return (
     <userContext.Provider value={useUserContext()}>
     <Router>
