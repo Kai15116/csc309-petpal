@@ -84,6 +84,7 @@ Run the follwoing commands:
 2. ``vercel``
 
 Then follow the below image: 
+
 ![image](https://github.com/Kai15116/csc309-petpal/assets/65318176/70fee878-9aac-4d11-964d-5ef6e07cad55)
 
 You can replace the project name with any other name. 
@@ -94,7 +95,9 @@ First, change the `.env` in frontend folder so `REACT_APP_API_URL=<Deployed URL 
 Then, run the follwoing commands: 
 1. ``cd frontend``
 2. ``vercel``
+
 Then follow the belowe image:
+
 ![image](https://github.com/Kai15116/csc309-petpal/assets/65318176/e22ec443-1ad6-46d4-aaa8-02cb6aaee04d)
 
 You can replace the project name with any other name. 
