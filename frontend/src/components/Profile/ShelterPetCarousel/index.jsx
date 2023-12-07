@@ -14,7 +14,6 @@ function ShelterPetCarouselCard(props) {
             breed: "Cat", 
             picture_1: ExampleBean,
             notes: "Loves to play with toys, especially ones that look like fish!",
-            last_modified: "Today",
         },
         { 
             id: 2, 
@@ -22,7 +21,6 @@ function ShelterPetCarouselCard(props) {
             breed: "Dog", 
             picture_1: ExampleMilky,
             notes: "Has a big heart, almost as big as his appetite.",
-            last_modified: "Today",
         },
         // Add more pet information as needed
     ];
@@ -57,15 +55,15 @@ function ShelterPetCarouselCard(props) {
 
     return (
         <Carousel className="mb-3" indicators={false}>
-            {pets.map((pet) => (
+            { pets.length >= 1 ? pets.map((pet) => (
                 <Carousel.Item key={pet.id}>
                     <Card 
                         style={{ minWidth: "20rem", maxWidth: "40rem"}}
                     >
                         <Card.Img 
                             variant="top" 
-                            src={pet.picture_1} 
-                            alt={pet.name}
+                            src={pet?.picture_1 ? pet?.picture_1 : ExampleBean } 
+                            alt={pet?.name}
                             style={{
                                 objectFit: 'cover',
                                 maxHeight: '70vh',
@@ -73,20 +71,51 @@ function ShelterPetCarouselCard(props) {
                             }}
                         />
                         <Card.Body >
-                            <Card.Title>{pet.name}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">{pet.breed_name}</Card.Subtitle>
+                            <Card.Title>{pet?.name}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">{pet?.breed_name}</Card.Subtitle>
                             <Card.Text>
                                 <b>Notes: </b> 
-                                <p className="mb-0" >{pet.notes}</p>
-                                <Card.Link href={`/details/${pet.id}`} className="stretched-link">Learn More</Card.Link>
+                                <p className="mb-0" >{pet?.notes}</p>
+                                <Card.Link href={`/details/${pet?.id}`} className="stretched-link">Learn More</Card.Link>
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            {formatTimeGap(pet.last_modified)}
+                            {pet?.last_modified ? formatTimeGap(pet?.last_modified) : 'Today'}
                         </Card.Footer>
                     </Card>
                 </Carousel.Item>
-            ))}
+            )) : (
+                petInformation.map((pet) => (
+                    <Carousel.Item key={pet.id}>
+                        <Card 
+                            style={{ minWidth: "20rem", maxWidth: "40rem"}}
+                        >
+                            <Card.Img 
+                                variant="top" 
+                                src={pet?.picture_1 ? pet?.picture_1 : ExampleBean } 
+                                alt={pet?.name}
+                                style={{
+                                    objectFit: 'cover',
+                                    maxHeight: '70vh',
+                                    maxWidth: '40rem',
+                                }}
+                            />
+                            <Card.Body >
+                                <Card.Title>{pet?.name}</Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted">{pet?.breed_name}</Card.Subtitle>
+                                <Card.Text>
+                                    <b>Notes: </b> 
+                                    <p className="mb-0" >{pet?.notes}</p>
+                                    <Card.Link href={`/details/${pet?.id}`} className="stretched-link">Learn More</Card.Link>
+                                </Card.Text>
+                            </Card.Body>
+                            <Card.Footer>
+                                {pet?.last_modified ? formatTimeGap(pet?.last_modified) : 'Today'}
+                            </Card.Footer>
+                        </Card>
+                    </Carousel.Item>
+                ))
+            )}
         </Carousel>
     );
 }
