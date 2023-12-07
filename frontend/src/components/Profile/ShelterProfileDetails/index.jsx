@@ -26,8 +26,7 @@ function ShelterProfileDetailsCard(props) {
                     {userInfo?.address} 
                 </Card.Subtitle>
                 <Card.Text className="mt-2"> 
-                    {userInfo?.description}
-                    {/* Since you have no small description of the shelter Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    {/* Since you have no small description of the shelter Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Natus aliquam dignissimos officia, ducimus voluptatem blanditiis in, ullam neque adipisci 
                     facere delectus aut nisi porro, nemo nihil quidem autem laudantium? Perspiciatis. */}
 
