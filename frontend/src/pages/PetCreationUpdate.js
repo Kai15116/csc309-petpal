@@ -39,6 +39,7 @@ const PetCreationUpdate = () => {
   const [petFeeError, setPetFeeError] = useState('');
   const [petLocationError, setPetLocationError] = useState('');
   const [petMedicalHistoryError, setPetMedicalHistoryError] = useState('');
+  const [additionalNotesError, setAdditionalNotesError] = useState('');
 
   const [selectedImage1, setSelectedImage1] = useState(null);
   const [selectedImage2, setSelectedImage2] = useState(null);
@@ -110,6 +111,13 @@ const PetCreationUpdate = () => {
     setSelectedImage3(e.target.files[0]);
     // clear any previous error message when a new image is selected
     setImageError3('');
+  };
+
+  const handleAdditionalNotesChange = (e) => {
+    setAdditionalNotes(e.target.value);
+    if (e.target.value !== '') {
+      setAdditionalNotesError('');
+    }
   };
 
   const extractFileName = (url) => {
@@ -591,17 +599,25 @@ const PetCreationUpdate = () => {
                 </div>
                 <div class="bg-white mt-4 p-4 rounded shadow">
                     <div class="container">
-                        <div class="pet-change-details">
+                          <div class="pet-change-details">
                             <h4 >3. Additional Details</h4>
                             <h6>Include any notable details about the pet's behaviour and traits for the new owner</h6>
-
                             <form class="form-inputs" action="submit_pet_listing.php" method="POST">
-                                <div class="form-group">
-                                    <label for="additional_notes">Additional Notes:</label>
-                                    <textarea class="form-control" id="additional_notes" name="additional_notes" rows="4" value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)} required></textarea>
+                              {/* <div class="form-group">
+                                  <label for="additional_notes">Additional Notes:</label>
+                                  <textarea class={`form-control ${additionalNotesError ? 'is-invalid' : ''}`} id="additional_notes" name="additional_notes" rows="4" value={additionalNotes} onChange={handleAdditionalNotesChange} required></textarea>
+                              </div> */}
+                              <div class="form-group">
+                                <label for="additional_notes" class="col-sm-2 col-form-label">Additional Notes:</label>
+                                <div class="col-sm-10">
+                                <textarea class={`form-control ${additionalNotesError ? 'is-invalid' : ''}`} id="additional_notes" name="additional_notes" rows="4" value={additionalNotes} onChange={handleAdditionalNotesChange} required></textarea>
+                                    {additionalNotesError && (
+                                        <div class="invalid-feedback">{additionalNotesError}</div>
+                                    )}
                                 </div>
+                              </div>
                             </form>
-                            </div>
+                          </div>
                         </div>
                     </div>
                     <div class="confirm-button"> 
