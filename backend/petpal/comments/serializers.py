@@ -32,8 +32,12 @@ class CommentSerializer(ModelSerializer):
 
     def get_profile_picture(self, obj):
         if isinstance(obj, Comment):
-            request = self.context.get("request")
-            return request.build_absolute_uri(obj.user.profile_picture.url)
+            try:
+                request = self.context.get("request")
+                return request.build_absolute_uri(obj.user.profile_picture.url)
+            except Exception as e:
+                print(e)
+                return
         return
 
 class RatingSerializer(ModelSerializer):
