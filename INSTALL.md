@@ -39,6 +39,7 @@ After setting up the environement variables, you can run the following command i
 cd backend 
 ./startup.sh
 ```
+If you get Permission Denied, do `chomd +x startup.sh`.
 
 ## Setting up frontend
 
@@ -50,6 +51,24 @@ To set up the frontend, run the following command from the project directory:
 ```
 cd frontend
 npm i
+```
+
+## Running the code locally
+After following the above steps, you can run our codes locally. 
+
+First put `REACT_APP_API_URL=http://localhost:8000` in `.env` for frontend folder, and put DEBUG=True for `.env` in backend folder. 
+
+Then, you can run the code for backend by running the following commands: 
+```
+cd backend/petpal
+./run.sh
+```
+If you get Permission Denied, do `chomd +x run.sh`.
+
+You can run the code for frontend by running the following commands: 
+```
+cd frontend
+npm start
 ```
 
 ## Deployment
