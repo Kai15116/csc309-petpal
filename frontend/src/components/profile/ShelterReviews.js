@@ -87,7 +87,7 @@ function ShelterReviewsCard(props) {
                     scrollableTarget="review-container"
                     endMessage={
                         <p className="mt-3 mb-0" style={{ textAlign: "center" }}>
-                          No more comments to load.
+                            No more comments to load
                         </p>
                     }
                 >

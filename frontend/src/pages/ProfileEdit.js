@@ -27,7 +27,7 @@ function CollapseButton({ children, eventKey, callback }) {
 }
 
 function ProfileEdit() {
-    const { getContextUser, setGetContextUser} = useContext(userContext);
+    const { getContextUser, setContextUser} = useContext(userContext);
     const user = getContextUser();
     const {accessToken, refreshToken, contextUserId, contextUserType} = getContextUser();
     const [userInfo, setUserInfo ] = useState(null);
@@ -40,8 +40,8 @@ function ProfileEdit() {
     const [address, setAddress] = useState('');
     const [description, setDescription] = useState('');
     const [website, setWebsite] = useState('');
-    const [profpic, setProfPic] = useState('');
-    const [banner, setBanner] = useState('');
+    const [profpic, setProfPic] = useState(null);
+    const [banner, setBanner] = useState(null);
     // Shelter has these attributes
     const [mission, setMission] = useState('');
     const [name, setName] = useState('');
@@ -51,6 +51,12 @@ function ProfileEdit() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+
+    const logout = () => {
+        setContextUser({});
+        navigate("/");
+    }
 
     async function deleteAccount() {
         if (contextUserType === 'shelter') {
@@ -66,7 +72,7 @@ function ProfileEdit() {
                 navigate('/');
                 
             } else if (response.status >= 200 && response.status < 300) {
-                return;
+                logout();
             }} catch (e) {
                 console.log(e)
                 navigate('/');
@@ -86,14 +92,12 @@ function ProfileEdit() {
                 navigate('/');
                 
             } else if (response.status >= 200 && response.status < 300) {
-                return;
+                logout();
             }} catch (e) {
                 console.log(e)
                 navigate('/');
             }
         }
-
-        navigate('/');
     }
 
     useEffect( function () {
@@ -122,6 +126,7 @@ function ProfileEdit() {
                         setDescription(data?.description);
                         setWebsite(data?.website);
                         setMission(data?.mission_statement);
+                        setProfPic(data?.profile_picture);
                     }
                 }
                 catch (e) {
@@ -139,7 +144,7 @@ function ProfileEdit() {
                         }
                     });
                     if (response.status >= 400) {
-                        // navigate("/");
+                        navigate("/");
                         console.log(contextUserId, userInfo);
                     } else if (response.status >= 200 && response.status < 300) {
                         const data = await response.json();
@@ -151,6 +156,7 @@ function ProfileEdit() {
                         setAddress(data?.address);
                         setDescription(data?.description);
                         setWebsite(data?.website);
+                        setProfPic(data?.profile_picture);
                     }
                 }
                 catch (e) {
@@ -188,6 +194,7 @@ function ProfileEdit() {
                     setDescription(data?.description);
                     setWebsite(data?.website);
                     setMission(data?.mission_statement);
+                    setProfPic(data?.profile_picture);
                 }
             }
             catch (e) {
@@ -216,6 +223,7 @@ function ProfileEdit() {
                     setAddress(data?.address);
                     setDescription(data?.description);
                     setWebsite(data?.website);
+                    setProfPic(data?.profile_picture);
                 }
             }
             catch (e) {
@@ -426,9 +434,40 @@ function ProfileEdit() {
         }
     }
 
-    const handlePicturePatchSubmit = () => {
-        const formData = new FormData();
+    const handleProfPicChange = (e) => {
+        setProfPic(e.target.files[0]);
+    };
+
+    const handleBannerChange = (e) => {
+        setBanner(e.target.files[0]);
     }
+
+    const handlePictureSubmit = () => {
+        const formData = new FormData();
+        profpic && formData.append('profile_picture', profpic);
+        banner && formData.append('banner', banner);
+
+        // You can add additional fields to the FormData if needed
+        // formData.append('field1', 'value1');
+
+        // Make a POST request to your server with the FormData
+        fetch(`${process.env.REACT_APP_API_URL}/accounts/${contextUserType}/${contextUserId}/`, {
+            method: 'PATCH',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${user.accessToken}`,
+            }
+        }).then(response => {
+            response.json();
+            navigate(`/${contextUserType}profile/${contextUserId}`);
+        })
+        .then(data => {
+            console.log('Upload successful:', data);
+        })
+        .catch(error => {
+            console.error('Error uploading image:', error);
+        });
+    };
 
     return (
         <div style={{ backgroundColor: "#C8F4FF" }}>
@@ -615,28 +654,26 @@ function ProfileEdit() {
                     </Accordion.Collapse>
                     <Accordion.Collapse eventKey='images'>
                         <Card.Body>
-                        <Form id="pictureForm">
+                            <Form id="pictureForm">
                                 <Form.Group className="mb-3" controlId="formBanner">
                                     <Form.Label> Banner Picture </Form.Label>
                                     <Form.Control
-                                        type="file"
-                                        value={banner}
-                                        onChange={(e) => setBanner(e.target.value)}
+                                        type="file" accept="image/*"
+                                        onChange={handleBannerChange}
                                     />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formProfPic">
                                     <Form.Label> Profile Picture </Form.Label>
                                     <Form.Control
-                                        type="file"
-                                        value={profpic}
-                                        onChange={(e) => setProfPic(e.target.value)}
+                                        type="file" accept="image/*"
+                                        onChange={handleProfPicChange}
                                     />
                                 </Form.Group>
                                 
                                 {formError && <Alert variant="danger">{formError}</Alert>}
 
                                 <div >
-                                    <Button className='me-3' variant="primary" onClick={(e) => handlePicturePatchSubmit(e)}>
+                                    <Button className='me-3' variant="primary" onClick={handlePictureSubmit}>
                                         Submit
                                     </Button>
                                     <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
@@ -834,24 +871,24 @@ function ProfileEdit() {
                                 <Form.Group className="mb-3" controlId="formBanner">
                                     <Form.Label> Banner Picture </Form.Label>
                                     <Form.Control
-                                        type="file"
+                                        type="file" accept="image/*"
                                         value={banner}
-                                        onChange={(e) => setBanner(e.target.value)}
+                                        onChange={handleBannerChange}
                                     />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formProfPic">
                                     <Form.Label> Profile Picture </Form.Label>
                                     <Form.Control
-                                        type="file"
+                                        type="file" accept="image/*"
                                         value={profpic}
-                                        onChange={(e) => setProfPic(e.target.value)}
+                                        onChange={handleProfPicChange}
                                     />
                                 </Form.Group>
                                 
                                 {formError && <Alert variant="danger">{formError}</Alert>}
 
                                 <div >
-                                    <Button className='me-3' variant="primary" onClick={(e) => handlePicturePatchSubmit(e)}>
+                                    <Button className='me-3' variant="primary" onClick={handlePictureSubmit}>
                                         Submit
                                     </Button>
                                     <Button variant="outline-primary" onClick={ (e) => navigate(`/seekerprofile/${contextUserId}`)} >
@@ -988,11 +1025,11 @@ export default ProfileEdit;
 //                     <div className="collapse" id="collapseShelterImages" data-bs-parent="#editInfoAccordion">
 //                         <div className="form-group">
 //                             <label for="shelterImagesBanner">Banner Picture</label>
-//                             <input type="file" className="form-control" id="shelterImagesBanner" />
+//                             <input type="file" accept="image/*" className="form-control" id="shelterImagesBanner" />
 //                         </div>
 //                         <div className="form-group mt-4">
 //                             <label for="shelterImagesCircle">Profile Picture</label>
-//                             <input type="file" className="form-control" id="shelterImagesCircle" />
+//                             <input type="file" accept="image/*" accept="image/*" className="form-control" id="shelterImagesCircle" />
 //                         </div>
 //                         <div className="d-flex flex-row-reverse align-items-end mt-4 w-100">
 //                             <a href="shelter_profile_view.html" type="submit" className="btn btn-primary ms-4">
