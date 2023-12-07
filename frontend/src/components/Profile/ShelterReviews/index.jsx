@@ -109,12 +109,13 @@ function ShelterReviewsCard(props) {
                     </Stack>
                 </InfiniteScroll>
             </Card.Body>
+            {user.contextUserType !== 'shelter' &&  (
             <Card.Footer className="pb-0" >
                 <ShelterRating 
                     userContext={user}
                     shelterId={shelterId}
-                />
-            </Card.Footer>
+                />)
+            </Card.Footer>)}
         </Card>
     );
 }
