@@ -62,9 +62,7 @@ function SeekerProfileDetailsCard(props) {
                     {userInfo?.address} 
                 </Card.Subtitle>
                 <Card.Text className="mt-2"> 
-                    {/* {userInfo?.description} */}
-                    Since you have no small description of your profile, here is a placeholder description to show what it is 
-                    like to have a description. You can modify this description however you like.
+                    {userInfo?.description ? userInfo?.description : "Since you have no small description of your profile, here is a placeholder description to show what it is like to have a description. You can modify this description however you like."}
                 </Card.Text>
                 <div className="mb-2">
                     <Button 
