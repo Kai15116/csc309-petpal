@@ -574,8 +574,8 @@ function ProfileEdit() {
                                         onChange={handleEmailChange}
                                         placeholder="e.g. shelter.name@example.com"
                                     />
-                                    {!validateEmail(email) && email !== '' && (
-                                    <Form.Text className="text-danger">Invalid email address</Form.Text>
+                                    {formError?.email && (
+                                        <Form.Text className="text-danger">{formError?.email}</Form.Text>
                                     )}
                                 </Form.Group>
 
@@ -609,8 +609,11 @@ function ProfileEdit() {
                                         pattern="https?://.+"
                                         value={website}
                                         onChange={(e) => setWebsite(e.target.value)}
-                                        placeholder="e.g. example.com"
+                                        placeholder="e.g. https://example.com"
                                     />
+                                    {formError?.website && (
+                                        <Form.Text className="text-danger">{formError?.website}. Make sur</Form.Text>
+                                    )}
                                 </Form.Group>
                                 
                                 {formError?.contactForm && <Alert variant="danger">{formError?.contactForm}</Alert>}
