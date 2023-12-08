@@ -334,16 +334,17 @@ function ProfileEdit() {
                     }
                 })
                 .then(response => {
-                    response.json();
-                    console.log(response);
-                    fetchUserInfo();
-                    setFormError({});
-                    navigate(`/shelterprofile/${contextUserId}`);
-                })
-                .then(data => {
-                    console.log("Contacts Updated", data);
-                })
-                .catch(error => {
+                    if (response.status >= 200 && response.status < 300) {
+                        fetchUserInfo();
+                        setFormError({});
+                        navigate(`/shelterprofile/${contextUserId}`);
+                    } else if (response.status === 400) {
+                        response.json().then( data => {
+                            setFormError({...data});
+                            console.log({...data});
+                        })
+                    }
+                }) .catch(error => {
                     console.error(error);
                 });
             } else if (contextUserType === 'seeker') {
@@ -360,16 +361,17 @@ function ProfileEdit() {
                     }
                 })
                 .then(response => {
-                    response.json();
-                    console.log(response);
-                    fetchUserInfo();
-                    setFormError({});
-                    navigate(`/seekerprofile/${contextUserId}`);
-                })
-                .then(data => {
-                    console.log("Contacts Updated", data);
-                })
-                .catch(error => {
+                    if (response.status >= 200 && response.status < 300) {
+                        fetchUserInfo();
+                        setFormError({});
+                        navigate(`/seekerprofile/${contextUserId}`);
+                    } else if (response.status === 400) {
+                        response.json().then( data => {
+                            setFormError({...data});
+                            console.log({...data});
+                        })
+                    }
+                }) .catch(error => {
                     console.error(error);
                 });
             }
@@ -394,16 +396,17 @@ function ProfileEdit() {
                 }
             })
             .then(response => {
-                response.json();
-                console.log(response);
-                fetchUserInfo();
-                setFormError({});
-                navigate(`/shelterprofile/${contextUserId}`);
-            })
-            .then(data => {
-                console.log("Description Updated", data);
-            })
-            .catch(error => {
+                if (response.status >= 200 && response.status < 300) {
+                    fetchUserInfo();
+                    setFormError({});
+                    navigate(`/shelterprofile/${contextUserId}`);
+                } else if (response.status === 400) {
+                    response.json().then( data => {
+                        setFormError({...data});
+                        console.log({...data});
+                    })
+                }
+            }) .catch(error => {
                 console.error(error);
             });
         } else if (contextUserType === 'seeker') {
@@ -418,16 +421,17 @@ function ProfileEdit() {
                 }
             })
             .then(response => {
-                response.json();
-                console.log(response);
-                fetchUserInfo();
-                setFormError({});
-                navigate(`/seekerprofile/${contextUserId}`);
-            })
-            .then(data => {
-                console.log("Description Updated", data);
-            })
-            .catch(error => {
+                if (response.status >= 200 && response.status < 300) {
+                    fetchUserInfo();
+                    setFormError({});
+                    navigate(`/seekerprofile/${contextUserId}`);
+                } else if (response.status === 400) {
+                    response.json().then( data => {
+                        setFormError({...data});
+                        console.log({...data});
+                    })
+                }
+            }) .catch(error => {
                 console.error(error);
             });
         }
@@ -808,8 +812,8 @@ function ProfileEdit() {
                                         onChange={handleEmailChange}
                                         placeholder="e.g. seeker.name@example.com"
                                     />
-                                    {!validateEmail(email) && email !== '' && (
-                                    <Form.Text className="text-danger">Invalid email address</Form.Text>
+                                    {formError?.email && (
+                                        <Form.Text className="text-danger">{formError?.email}</Form.Text>
                                     )}
                                 </Form.Group>
 
