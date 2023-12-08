@@ -515,7 +515,16 @@ function ProfileEdit() {
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </Form.Group>
-                                <div >
+                                <div className='d-flex flex-row justify-content-between align-items-center' >
+                                    <div>
+                                        <Button className='me-3' variant="primary" onClick={(e) => handleAccountPatchSubmit(e)}>
+                                            Submit
+                                        </Button>
+                                        <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
+                                            Cancel
+                                        </Button>
+                                    </div>
+
                                     <Button className='me-3' variant="danger" onClick={handleShow}>
                                         Delete Account
                                     </Button>
@@ -537,10 +546,6 @@ function ProfileEdit() {
                                         </Button>
                                         </Modal.Footer>
                                     </Modal>
-
-                                    <Button variant="outline-primary" onClick={ (e) => navigate(`/shelterprofile/${contextUserId}`)} >
-                                        Cancel
-                                    </Button>
                                 </div>
                             </Form>
                         </Card.Body>
