@@ -24,6 +24,8 @@ class NotificationSerializer(serializers.ModelSerializer):
     @swagger_serializer_method(serializer_or_field=serializers.IntegerField(help_text="Object Id of the comment, if notification is for comment."))
     def get_comment_object_id(self, obj):
         if hasattr(obj, 'content_type') and obj.content_type.model == "comment":
+            if obj.content_object is None:
+                return None
             return obj.content_object.object_id
         return None
 
